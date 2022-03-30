@@ -1,0 +1,78 @@
+# users
+- name
+- email
+- phone
+- password
+- type  // Admin, Manager // traveler
+- maneger_type // null, resto_cafe touris_attrac, etc..,
+- subcribed_at - timestamp, null
+- image
+
+# business 
+- name
+- type
+- manager_id
+- logo
+
+#category
+- business_id
+- name
+- image (optional)
+
+#services
+- business_id
+- name
+- remarks
+- price
+- image
+- status // approved | waiting for approval
+- category (string)
+
+
+# reservation 
+- user_id // traveler id
+- business_id
+- status
+- notes
+- reserved_at // timestamp
+
+
+# packages
+-name 
+-days
+-price
+
+
+#advertisement
+- image // provided by manager, should have specific size. 
+- manager_id
+- status // running, pending, ended.
+- package_id
+- pop // proof of payment
+- schedule_at // 
+
+
+# chats
+-user1_id
+-user2_id // business_id, user_id
+
+
+# chat_messages
+-chat_id
+-sender_id
+-message
+
+
+#reviews
+-user_id
+-business_id
+-service_id // optional
+-start // 1 - 5
+-message
+-status // hide of show
+
+#notifications
+-user_id// manager, travelers
+-message
+-read_at // null, timestamp
+- url // link, '#'
