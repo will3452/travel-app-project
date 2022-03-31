@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2022 at 11:02 AM
+-- Generation Time: Mar 31, 2022 at 12:53 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.28
 
@@ -89,6 +89,19 @@ CREATE TABLE `chat_messages` (
   `message` longtext NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT current_timestamp(),
   `status` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `manager_pop`
+--
+
+CREATE TABLE `manager_pop` (
+  `id` int(255) NOT NULL,
+  `img` varchar(255) NOT NULL,
+  `manager_email` varchar(255) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -189,6 +202,13 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `first_name`, `middle_name`, `last_name`, `email`, `phone`, `password`, `type`, `maneger_type`, `subcribed_at`, `image`, `status`) VALUES
+(16, 'admin', 'admin', 'admin', 'superadmin@travel.com', '09992221234', '$2y$10$vyVj99v7.tzXtYgl0tzAmeKSh/HQJCopdg6z8j1gb2feS8sRHEka.', 'administrator', '', '2022-03-31 09:55:23', '', 'active');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -220,6 +240,12 @@ ALTER TABLE `chats`
 -- Indexes for table `chat_messages`
 --
 ALTER TABLE `chat_messages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `manager_pop`
+--
+ALTER TABLE `manager_pop`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -293,6 +319,12 @@ ALTER TABLE `chat_messages`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `manager_pop`
+--
+ALTER TABLE `manager_pop`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
@@ -326,7 +358,7 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

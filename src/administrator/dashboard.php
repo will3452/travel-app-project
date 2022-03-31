@@ -1,5 +1,6 @@
 <?php 
-    include_once '../vendor/autoload.php';
+     include_once '../../vendor/autoload.php';
+     include_once 'process/LoginStatus.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +11,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Home Page</h1>
-    <a href="user/login">login</a>
+    <?php
+        echo $_SESSION['administrator'];
+    ?>
+    <a href="process/logout"><button>Logout</button></a>
 </body>
 </html>

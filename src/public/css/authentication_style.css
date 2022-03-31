@@ -340,3 +340,159 @@
         top:3px;
     }
   }
+
+  /*style for sign up */
+  .containter-signup{
+    width:100%;
+    height: auto;
+    margin: 85px 0;
+  }
+  .logo_cont-signup{
+    text-align: center;
+    position:relative;
+    top:11%;
+  }
+  .logo_cont-signup img{
+    object-fit: cover;
+    min-height:auto;
+    width:150px;
+    height: auto;
+    border-radius: 5px;
+
+  }
+  .signup-containers{
+    box-shadow:0px 0px 0px 1px rgba(233, 231, 231, 0.3);
+    width:97%;
+    padding:20px;  
+    margin-left:auto;
+    margin-right:auto;
+    background:#fff;
+    border-radius:10px;
+    position:relative;
+    top:12%;
+  }
+
+
+
+  .input-container-signup{
+    width:100%;
+    }
+    
+    .input-container-signup .input-container input{
+      width:100%;
+      font-size:16px;
+      margin-top:9px;
+      padding:12px 14px;
+      border-radius:8px;
+      border:rgb(223, 223, 223) 2px solid;
+      outline:none;
+      transition: all ease 1s;
+  
+    }
+    .input-container-signup .input-container input:focus{
+      border:#0095a4 2px solid;
+    }
+    .input-container-signup .input-container{
+      margin-bottom:20px;
+    }
+    
+    .input-container-signup .input-container select{
+      width:100%;
+      font-size:16px;
+      margin-top:9px;
+      padding:12px 14px;
+      border-radius:2px;
+      border:rgb(223, 223, 223) 1px solid;
+      outline:none;
+      border-radius:8px;
+    }
+    .payment_ .logo_gcash{
+      text-align: center;
+      position:relative;
+      top:10%;
+    }
+
+    .payment_{
+      padding:2px 10px;
+      border-radius: 5px;
+      background-color: #f8f9fc;
+      box-shadow:0px 0px 0px 1px #f8f9fc;
+    }
+    .payment_ h3{
+      text-align: center;
+      letter-spacing: 1px;
+    }
+    .payment_ .rowss #id_div p{
+      font-weight: 600;
+      text-align: center;
+    }
+    .payment_ .rowss{
+      margin: 0 0 30px 0;
+    }
+    .payment_ .logo_gcash img{
+      object-fit: cover;
+      min-height:auto;
+      width:100px;
+      height: auto;
+      border-radius: 5px;
+    }
+    .payment_ .input-container {
+      text-align: center;
+    }    .payment_ .input-container span{
+      font-size: 16px;
+    }
+    .input-container-signup .submit-container button{
+      width:100%;
+      font-size:16px;
+      margin-top:8px;
+      margin-bottom:10px;
+      cursor:pointer;
+      padding:10px;
+      border-radius:5px;
+      border:none;
+      outline:none;
+      transition:all ease-in 1s;
+      background: #0095a4;
+      color:white;
+    }   .input-container-signup .submit-container button:hover{
+      background: #203d51;
+    }
+
+    @media(min-width:450px){
+      .signup-containers{
+      width:90%;
+      }
+      }
+      @media(min-width:779px){
+        .signup-containers{
+          width:70%;
+          }
+      }
+      @media(min-width:984px){
+      .signup-containers{
+      width:60%;
+      }
+      }
+      @media(min-width:1100px){
+      .signup-containers{
+      width:60%;
+      }
+      }@media(min-width:1220px){
+      .signup-containers{
+      width:60%;padding:20px 40px;
+      }
+      }@media(min-width:1400px){
+      .signup-containers{
+      width:60%;
+      }
+      }
+
+      .input-container .success-message-content{
+        text-align: center;
+        padding: 5px 20px;
+        margin-bottom: 10px;
+      }
+      .input-container .success-message-content h1{
+        color:#0095a4;
+      }
+    
