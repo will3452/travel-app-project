@@ -1,0 +1,19 @@
+<?php
+
+require "../bootstrap.php";
+
+
+use Illuminate\Database\Capsule\Manager as Capsule;
+
+Capsule::schema()->create('table_name', function ($table) {
+    $table->increments('id');
+
+    $table->timestamps();
+});
+
+
+
+// $table->string()
+//$table->integer()
+//$table->text()
+$table->datetime()->nullable()
