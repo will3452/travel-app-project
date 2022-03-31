@@ -1,7 +1,7 @@
 <?php
-namespace App;
 
-class User
+use Illuminate\Database\Eloquent\Model as Eloquent;
+class User extends Eloquent
 {
     const TYPE_MANAGER = 'Manager';
     const TYPE_TRAVELER = 'Traveler';
