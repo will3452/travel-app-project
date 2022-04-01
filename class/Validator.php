@@ -3,7 +3,6 @@
 
 class Validator
 {
-
     const VALID_MANAGER_TYPE = [
         "Resort manager",
         "Bed and breakfast manager",
@@ -24,7 +23,6 @@ class Validator
 
     public function ValidateSignUpForm( ...$args)
     {
-
         foreach ($args as $arg) {
             if (empty($arg)) {
                 return false;
