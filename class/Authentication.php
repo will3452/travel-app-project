@@ -5,14 +5,12 @@ class Authentication extends User{
         session_start();
         return true;
     }
-    public function UserLoginStatus($email){
-        $email = $this->email=$email;
-       if(!isset($email)){
-           return true;
-       }else{
-           return false;
-       }
+
+    public function UserLoginStatus( $email )
+    {
+        return !isset($email);
     }
+
     public function CheckIfLogin(){
         session_start();
         if(isset($_SESSION['administrator'])){

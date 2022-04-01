@@ -1,12 +1,14 @@
 <?php
 
 
-Class User extends Connection {
+class User extends Connection
+{
     const USER_TYPE_ADMIN = "administrator";
     const USER_TYPE_TRAVELLER = "traveller";
     const USER_TYPE_MANAGER = "manager";
     const STATUS = "active";
     const PENDING = "pending";
+
     public function Create($type, $first_name, $middle_name, $last_name, $email, $phone, $password, $file,  $manage_type){ // create acc
         $con = $this->con();
         $fname = $this->first_name=$first_name;
@@ -21,15 +23,19 @@ Class User extends Connection {
         $filename = $this->file=$file['name'];
         $filetmp =  $this->file=$file['tmp_name'];
 
-        $fileext = explode('.',$filename);
+        $fileext = explode('.', $filename);
         $fileactex = strtolower(end($fileext));
 
-        $finlenamenew = uniqid('',true).".".date("ymdhis").".".$fileactex;
-        $filedesti = '../../images/users/'.$finlenamenew;
+        $uniq = uniqid('',true);
+        $date = date("ymdhis");
+
+        $finlenamenew = "$uniq.$date.$fileactex";
+
+        $filedesti = "../../images/users/$finlenamenew";
 
         if($this->type=$type==self::USER_TYPE_ADMIN){
             $stmt = $con->prepare("INSERT INTO `users`(`first_name`, `middle_name`, `last_name`, `email`
-            , `phone`, `password`, `type`, `maneger_type`, `image`, `status`) 
+            , `phone`, `password`, `type`, `maneger_type`, `image`, `status`)
             VALUE(?, ?, ?, ?, ?, ?, ?, ?, ? ,?)");
             $true = $stmt->execute(array($fname, $mname, $lname, $email, $phone, $password, $this->type=$type, '', '', self::STATUS));
             if($true){
@@ -40,7 +46,7 @@ Class User extends Connection {
         }
         elseif($this->type=$type==self::USER_TYPE_MANAGER){
             $stmt = $con->prepare("INSERT INTO `users`(`first_name`, `middle_name`, `last_name`, `email`
-            , `phone`, `password`, `type`, `maneger_type`, `image`, `status`) 
+            , `phone`, `password`, `type`, `maneger_type`, `image`, `status`)
             VALUE(?, ?, ?, ?, ?, ?, ?, ?, ? ,?)");
             $true = $stmt->execute(array($fname, $mname, $lname, $email, $phone, $password, $this->type=$type, $manage_type, $finlenamenew, self::PENDING));
             if($true){
@@ -70,7 +76,7 @@ Class User extends Connection {
         $finlenamenew = uniqid('',true).".".date("ymdhis").".".$fileactex;
         $filedesti = '../../images/pop/'.$finlenamenew;
 
-        $stmt = $con->prepare("INSERT INTO `manager_pop`(`img`, `manager_email`) 
+        $stmt = $con->prepare("INSERT INTO `manager_pop`(`img`, `manager_email`)
         VALUE(?, ?)");
         $true = $stmt->execute(array($finlenamenew, $email));
         if($true){
