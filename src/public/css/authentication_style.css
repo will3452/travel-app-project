@@ -109,8 +109,8 @@
   .logo_cont img{
     object-fit: cover;
     min-height:auto;
-    width:150px;
-    height: auto;
+    width:auto;
+    height: 70px;
     border-radius: 5px;
   }
   .login-containers{
@@ -351,12 +351,13 @@
     text-align: center;
     position:relative;
     top:11%;
+    margin-bottom: 15px;
   }
   .logo_cont-signup img{
     object-fit: cover;
     min-height:auto;
-    width:150px;
-    height: auto;
+    width:auto;
+    height: 70px;
     border-radius: 5px;
 
   }

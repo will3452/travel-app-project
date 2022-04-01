@@ -10,14 +10,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manager Registration</title>
-    <link rel="stylesheet" href="../public/css/authentication_style.css?v=3">
+    <link rel="stylesheet" href="../public/css/authentication_style.css?v=5">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <body>
   
     <div class="containter-signup">
         <div class="logo_cont-signup">
-            <img src="assets/logo/samp.png" alt="">
+        <img src="assets/logo/logo6.jpg" alt="">
         </div>
         <div class="signup-containers">
             <div class="header-container">
@@ -44,7 +44,7 @@
                         <input type="text" id="last_name" name="last_name" placeholder="Last Names">
                     </div>
                     <div class="input-container">
-                        <input type="text" id="email" name="email" placeholder="example@gmail...">
+                        <input type="email" id="email" name="email" placeholder="example@gmail...">
                     </div>
                     <div class="input-container">
                         <input type="number" id="phone" name="phone" placeholder="0999...">

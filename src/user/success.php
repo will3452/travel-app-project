@@ -11,13 +11,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="../public/css/authentication_style.css?v=3">
+    <link rel="stylesheet" href="../public/css/authentication_style.css?v=5">
 </head>
 <body>
   
     <div class="containter-login">
         <div class="logo_cont">
-            <img src="assets/logo/samp.png" alt="">
+        <img src="assets/logo/logo6.jpg" alt="">
         </div>
         <div class="login-containers">
             <div class="header-container">

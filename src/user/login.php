@@ -20,14 +20,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="../public/css/authentication_style.css?v=2">
+    <link rel="stylesheet" href="../public/css/authentication_style.css?v=5">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
     <div class="containter-login">
         <div class="logo_cont">
-            <img src="assets/logo/samp.png" alt="">
+            <img src="assets/logo/logo6.jpg" alt="">
         </div>
         <div class="login-containers">
             <div class="header-container">
@@ -45,7 +45,7 @@
                 <input type="hidden" id="token_authentication_login" name="token_authentication_login" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>"> 
                 <div class="email-container">
                     <label for="">Email</label>
-                    <input type="text" id="email" name="email" required value="<?php echo $emails; ?>">
+                    <input type="email" id="email" name="email" required value="<?php echo $emails; ?>">
                 </div>
                 <div class="password-container">
                     <label for="">Password</label>

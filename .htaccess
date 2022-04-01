@@ -11,5 +11,8 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php [NC,L] 
-
+RedirectMatch 403 ^/class/
+RedirectMatch 403 ^/database/
+RedirectMatch 403 ^/vendor/
+RedirectMatch 403 ^/src/administrator/_UI
 Options -Indexes
