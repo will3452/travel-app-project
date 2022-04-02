@@ -31,18 +31,11 @@ class User extends Connection
         return [$fileName, $fileTmp, $fileExt, $fileDest, $fileNewName];
     }
 
-    public function GetFileTemporaryAndFileDestination($file)
-    {
-        [$fileName, $fileTemp, $fileExt, $fileDest, $fileNewName] = $this->ExtractFileData($file);
-
-        return [$fileTemp, $fileDest];
-    }
-
     public function Create($type, $first_name, $middle_name, $last_name, $email, $phone, $password, $file,  $manage_type)
     {
         $con = $this->GetConnection();
 
-        [$filetmp, $filedesti] = $this->GetFileTemporaryAndFileDestination($file);
+        [$fileName, $filetmp, $fileExt, $filedesti, $finlenamenew] = $this->ExtractFileData($file);
 
 
         $prepareStatement  = "INSERT INTO `users`(`first_name`, `middle_name`, `last_name`, `email`, `phone`, `password`, `type`, `maneger_type`, `image`,`status`) VALUE(?, ?, ?, ?, ?, ?, ?, ?, ? ,?)";
@@ -77,16 +70,16 @@ class User extends Connection
     public function ManagerPOP($email, $file)
     {
         $con = $this->GetConnection();
-        // [$fileName, $fileTemp, $fileExt, $fileDest, $fileNewName]
-        [$fileName, $filetmp, $fileExt ,$filedesti, $finlenamenew] = $this->GetFileTemporaryAndFileDestination($file);
+
+        [$fileName, $filetmp, $fileExt ,$filedesti, $finlenamenew] = $this->ExtractFileData($file);
 
 
         $stmt = $con->prepare("INSERT INTO `manager_pop`(`img`, `manager_email`) VALUE(?, ?)");
 
-        $executeResult = $stmt->execute(array($finlenamenew, $email));
+        $executeResult = $stmt->execute([$finlenamenew, $email]);
 
-        if($executeResult) {
-            move_uploaded_file($filetmp,$filedesti);
+        if ($executeResult) {
+            move_uploaded_file($filetmp, $filedesti);
             return true;
         }
 
