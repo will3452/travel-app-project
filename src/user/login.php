@@ -45,11 +45,11 @@
                 <input type="hidden" id="token_authentication_login" name="token_authentication_login" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>"> 
                 <div class="email-container">
                     <label for="">Email</label>
-                    <input type="email" id="email" name="email" required value="<?php echo $emails; ?>">
+                    <input type="email" id="email" name="email" value="<?php echo $emails; ?>" required>
                 </div>
                 <div class="password-container">
                     <label for="">Password</label>
-                    <input type="password" id="password" name="password" required value="<?php echo $passwords; ?>">
+                    <input type="password" id="password" name="password" value="<?php echo $passwords; ?>" required>
                 </div>
                 <input type="checkbox" id="checkbox" name="checkbox"
                 <?php if(isset($_COOKIE['travel_guide_email']) && isset($_COOKIE['travel_guide_password'])) {echo "checked";}else{echo "";} ?>> <span>Remember Me</span>
@@ -70,6 +70,6 @@
             </div>
         </div>
     </div>
-    <script src="js/login.js?v=1"></script>
+    <script src="js/login.js?v=3"></script>
 </body>
 </html>

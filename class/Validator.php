@@ -18,10 +18,10 @@ class Validator
         $lowercase = preg_match('@[a-z]@', $password);
         $number = preg_match('@[0-9]@', $password);
         $specialChars = preg_match('@[^\W_]*[\W_]@', $password);
-        return $uppercase && $lowercase && $number && $specialChars && (strlen($password) < 10 );
+        return $uppercase && $lowercase && $number && $specialChars && (strlen($password) > 10 );
     }
 
-    public function ValidateSignUpForm( ...$args)
+    public function ValidateFields( ...$args)
     {
         foreach ($args as $arg) {
             if (empty($arg)) {
@@ -33,7 +33,7 @@ class Validator
 
     public function ValidateLogin($email, $password)
     {
-        return $this->ValidateSignUpForm($email, $password);
+        return $this->ValidateFields($email, $password);
     }
 
     public function ValidateContact($phone)
@@ -48,7 +48,7 @@ class Validator
 
     public function ValidateToken($token)
     {
-        if ($this->ValidateSignUpForm($token)) {
+        if ($this->ValidateFields($token)) {
 
             date_default_timezone_set('Asia/Manila');
 

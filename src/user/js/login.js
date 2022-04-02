@@ -44,7 +44,7 @@ $("#submitForm").on("submit", function(e){
                 window.location.href="../manager/dashboard";
             }
             else{
-                swal("Error!", d, "error");
+                swal("Error!", "Process Failed", "error");
                 $(".center-loading").hide();
                 $('#span').show();
                 $("#submit").attr("disabled",false);

@@ -17,7 +17,7 @@ if(isset($_POST['token_authentication_login'])){
         $field = $Validator->ValidateLogin($email, $password);
         if($field==1){
             $emailact = $Authentication->CheckUserForLogin($email); //check email active
-            if($emailact==1){
+            if($emailact>0){
                 $UserLogin = $Authentication->UserLogin($email, $password, $checkbox);
                 if($UserLogin){
                     session_start();

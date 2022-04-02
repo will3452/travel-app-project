@@ -15,4 +15,5 @@ RedirectMatch 403 ^/class/
 RedirectMatch 403 ^/database/
 RedirectMatch 403 ^/vendor/
 RedirectMatch 403 ^/src/administrator/_UI
+RedirectMatch 403 ^/src/administrator/_TABLE_UI
 Options -Indexes

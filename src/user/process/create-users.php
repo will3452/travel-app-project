@@ -38,22 +38,22 @@ if(isset($_POST['token_register_manager'])){
             }elseif($Validator->ValidateImage($file2)==='fileoversize'){
                 echo "FOSPOP";
             }else{
-                $Fields = $Validator->ValidateSignUpForm($first_name, $middle_name, $last_name, $email, $phone, $password, $manager_type);
+                $Fields = $Validator->ValidateFields($first_name, $middle_name, $last_name, $email, $phone, $password, $manager_type);
                 if($Fields){
                     $valphone = $Validator->ValidateContact($phone);
                     if($valphone==1){
                         $valemail = $Validator->ValidateEmail($email);
-                        if($valemail==1){
-                            $valpassword = $Validator->ValidatePassword($password);
-                            if($valpassword==1){
+                        if($valemail==$email){
+                             $valpassword = $Validator->ValidatePassword($password);
+                            if($valpassword==$password){
                                 $hashpassword = $User->dcrypt($password);
                                 //here validate type of manager
                                 $valtypemanage = $Validator->ManagerTypeValidator($manager_type);
                                 if($valtypemanage==1){
                                     $valemailexist = $User->EmailExist($email);
-                                    if($valemailexist==1){
+                                    if($valemailexist<1){
                                         $valephoneexist = $User->PhoneExist($phone);
-                                        if($valephoneexist==1){
+                                        if($valephoneexist<1){
                                            $insert = $User->Create($User::USER_TYPE_MANAGER, $first_name, $middle_name, $last_name, $email, $phone, $hashpassword, $file1, $manager_type);
                                             if($insert==1){
                                                 $insertpop = $User->ManagerPOP($email, $file2);

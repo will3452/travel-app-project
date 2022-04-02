@@ -1,6 +1,15 @@
 <?php
 
 class Authentication extends User{
+    
+    public function UserLogoutAdmin(){
+        unset($_SESSION['administrator']);
+        return true;
+    }
+    public function UserLogoutManager(){
+        unset($_SESSION['manager']);
+        return true;
+    }
     public function session(){
         session_start();
         return true;
@@ -28,56 +37,40 @@ class Authentication extends User{
             return false;
         }
     }
-    public function UserLogoutAdmin(){
-        unset($_SESSION['administrator']);
-        return true;
-    }
-    public function UserLogoutManager(){
-        unset($_SESSION['manager']);
-        return true;
-    }
     public function CheckUserForLogin($email){ //validate email exist
         $con = $this->con();
         $stmt = $con->prepare("SELECT email, subcribed_at, status FROM users WHERE email=? && subcribed_at!=? && status=?");
-        $stmt->execute(array($this->email=$email, '', self::STATUS));
-        $numwors = $stmt->rowCount();
-        if($numwors>0){
-            return true;
-        }else{
-            return false;
-        }
+        $stmt->execute(array($email, '', self::STATUS));
+        return $numwors = $stmt->rowCount();
     }
     public function UserLogin($email, $password, $check){
         $con = $this->con();
-        $emailuser = $this->email=$email;
-        $passworduser = $this->password=$password;
-        $checkuser = $this->check=$check;
         $stmt = $con->prepare("SELECT * FROM users WHERE email=?");
-        $stmt->execute(array($emailuser));
+        $stmt->execute(array($email));
         $r = $stmt->fetch(PDO::FETCH_OBJ);
         $passwordhas = $r->password;
         $typeofuser = $r->type;
-        if(password_verify($passworduser, $passwordhas)){
-            if($checkuser=="on"){
+        if(password_verify($password, $passwordhas)){
+            if($check=="on"){
                 $name = 'travel_guide_email';
                 $expireTime = 2147483647;
                 $path = '/';
-                $secret= base64_encode($emailuser);
+                $secret= base64_encode($email);
                 setcookie($name,$secret,$expireTime,$path);
 
                 $name_ps = 'travel_guide_password';
                 $expireTime_ps = 2147483647;
                 $path_ps = '/';
-                $secret_ps= base64_encode($passworduser);
+                $secret_ps= base64_encode($password);
                 setcookie($name_ps,$secret_ps,$expireTime_ps,$path_ps);
                 if($typeofuser==self::USER_TYPE_ADMIN){
-                    $_SESSION['administrator'] = $emailuser;
+                    $_SESSION['administrator'] = $email;
                     return self::USER_TYPE_ADMIN;
                 }elseif($typeofuser==self::USER_TYPE_TRAVELLER){
-                    $_SESSION['traveller'] = $emailuser;
+                    $_SESSION['traveller'] = $email;
                     return self::USER_TYPE_TRAVELLER;
                 }elseif($typeofuser==self::USER_TYPE_MANAGER){
-                    $_SESSION['manager'] = $emailuser;
+                    $_SESSION['manager'] = $email;
                     return self::USER_TYPE_MANAGER;
                 }else{
                     return false;
@@ -86,13 +79,13 @@ class Authentication extends User{
                 setcookie("travel_guide_email",null, -1, "/");
                 setcookie("travel_guide_password",null, -1, "/");
                 if($typeofuser==self::USER_TYPE_ADMIN){
-                    $_SESSION['administrator'] = $emailuser;
+                    $_SESSION['administrator'] = $email;
                     return self::USER_TYPE_ADMIN;
                 }elseif($typeofuser==self::USER_TYPE_TRAVELLER){
-                    $_SESSION['traveller'] = $emailuser;
+                    $_SESSION['traveller'] = $email;
                     return self::USER_TYPE_TRAVELLER;
                 }elseif($typeofuser==self::USER_TYPE_MANAGER){
-                    $_SESSION['manager'] = $emailuser;
+                    $_SESSION['manager'] = $email;
                     return self::USER_TYPE_MANAGER;
                 }else{
                     return false;

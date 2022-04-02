@@ -55,7 +55,7 @@
                 </div>
                 <div class="submit-container">
                     <button id="submit">
-                        <span id="span">Login</span>
+                        <span id="span">Register</span>
                         <div class="center-loading">
                             <div class="span1load"></div>
                             <div class="span2load"></div>

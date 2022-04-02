@@ -86,7 +86,7 @@
                 </div>
                 <div class="submit-container">
                     <button id="submit">
-                        <span id="span">Login</span>
+                        <span id="span">Register</span>
                         <div class="center-loading">
                             <div class="span1load"></div>
                             <div class="span2load"></div>
@@ -101,6 +101,6 @@
             </div>
         </div>
     </div>
-    <script src="js/register_manager.js"></script>
+    <script src="js/register_manager.js?v=2"></script>
 </body>
 </html>
