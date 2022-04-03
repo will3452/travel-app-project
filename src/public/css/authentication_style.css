@@ -379,8 +379,24 @@
     width:100%;
     }
     
+    .input-container-signup .input-container2 input{
+      width: 100%;
+      font-size:16px;
+      margin-top:9px;
+      margin-bottom:9px;
+      padding:12px 14px;
+      border-radius:8px;
+      border:rgb(223, 223, 223) 2px solid;
+      outline:none;
+      transition: all ease 1s;
+      
+    }
+    .input-container-signup .input-container span, .input-container-signup .input-container2 span{
+      font-weight: 600;
+      color:#0095a4;
+    }
     .input-container-signup .input-container input{
-      width:100%;
+      width: 100%;
       font-size:16px;
       margin-top:9px;
       padding:12px 14px;
@@ -398,7 +414,7 @@
     }
     
     .input-container-signup .input-container select{
-      width:100%;
+      width: 100%;
       font-size:16px;
       margin-top:9px;
       padding:12px 14px;
@@ -422,6 +438,7 @@
     .payment_ h3{
       text-align: center;
       letter-spacing: 1px;
+      color:#0095a4;
     }
     .payment_ .rowss #id_div p{
       font-weight: 600;
@@ -472,6 +489,15 @@
       @media(min-width:984px){
       .signup-containers{
       width:60%;
+      }
+      .input-container-signup .signdis{
+        margin-top: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      .input-container-signup .input-container{
+        width: calc(100% / 2 - 20px);
       }
       }
       @media(min-width:1100px){

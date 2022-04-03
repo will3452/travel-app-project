@@ -12,6 +12,13 @@
          $emails = '';
          $passwords ='';
      }
+
+     $logo = new logo;
+     $Getlogo = $logo->Getlogo();
+     $logoimage = '';
+     if($Getlogo){
+        $logoimage = $Getlogo->image;
+     }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +34,7 @@
 <body>
     <div class="containter-login">
         <div class="logo_cont">
-            <img src="assets/logo/logo6.jpg" alt="">
+            <img src="assets/logo/<?php echo $logoimage; ?>" alt="">
         </div>
         <div class="login-containers">
             <div class="header-container">
@@ -66,10 +73,10 @@
             </form>
             <div class="sign_up">
                 <p>or</p>
-                <a href="register_manager">Register as Manager</a> / <a href="registration_traveller">Register as Traveller</a>
+                <a href="register_manager">Register as Manager</a> / <a href="register_traveler">Register as Traveler</a>
             </div>
         </div>
     </div>
-    <script src="js/login.js?v=3"></script>
+    <script src="js/login.js?v=5"></script>
 </body>
 </html>

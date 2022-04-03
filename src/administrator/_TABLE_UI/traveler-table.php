@@ -4,8 +4,8 @@
                         $userdata = $User->GetUserID($email);
                         $admin_id = $userdata->id;
                         $status = $User::STATUS_ACTIVE;
-                        $type = $User::USER_TYPE_MANAGER;
-                        include '_UI_SORTING_FETCHING/manager-fetch.php';
+                        $type = $User::USER_TYPE_TRAVELER;
+                        include '_UI_SORTING_FETCHING/traveler-fetch.php';
                     ?>
                     <!-- search -->
                     <span class="clearable">
@@ -22,14 +22,14 @@
                     <!-- table -->
                     <div class="card mb-4">
                         <div class="card-header">
-                            <div>Approved Manager</div>
+                            <div>Traveler Table</div>
                             <div class="dropdown-per-page">
                                 <button class="btn titleperpage-bn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 </button>
                                 <div class="dropdown-menu" id="dropdown" aria-labelledby="dropdownMenuButton1">
                                         <p class="titleperpage">Per Page</p>
                                         <?php 
-                                            include '_UI_SORTING_FETCHING/limit-sort-manage-approved.php';
+                                            include '_UI_SORTING_FETCHING/limit-sort-traveler.php';
                                         ?> 
                                 </div>
                             </div>
@@ -60,6 +60,15 @@
                                             </div>
                                         </th>
                                         <th scope="col">Name</th>
+                                        <th scope="col">
+                                            <div class="d-flex">
+                                                <span>Date Registered</span>
+                                                <div class="sorted-table">
+                                                    <div><a href="?search=<?php echo $_GET['search'] ?>&date=asc"><i class="fas fa-chevron-up"></i></a></div>
+                                                    <div><a href="?search=<?php echo $_GET['search'] ?>&date=desc"><i class="fas fa-chevron-down"></i></a></div>
+                                                </div>
+                                            </div>
+                                        </th>
                                         <th scope="col">Account Status</th>
                                         <th scope="col"></th>
                                     <?php else: ?>
@@ -83,6 +92,15 @@
                                             </div>
                                         </th>
                                         <th scope="col">Name</th>
+                                        <th scope="col">
+                                            <div class="d-flex">
+                                                <span>Date Registered</span>
+                                                <div class="sorted-table">
+                                                    <div><a href="?date=asc"><i class="fas fa-chevron-up"></i></a></div>
+                                                    <div><a href="?date=desc"><i class="fas fa-chevron-down"></i></a></div>
+                                                </div>
+                                            </div>
+                                        </th>
                                         <th scope="col">Account Status</th>
                                         <th scope="col"></th>
                                     <?php endif; ?>
@@ -99,13 +117,13 @@
                                             </td>
                                             <td><a href="#"><?php echo $dis['email']; ?></a></td>
                                             <td data-target="name"><?php echo $dis['first_name'].' '.$dis['last_name']; ?></td>
+                                            <td><?php echo $dis['subcribed_at']; ?></td>
                                             <td>active</td>
                                             <td id="btn">
                                             <td id="btn">
                                                 <div class="d-flex">
                                                     <i class="fa-solid fa-eye btns" id="showinfo" data-id="<?php echo $dis['id']; ?>"></i>
                                                     <i class="far fa-edit btns" id="updateuser" data-id="<?php echo $dis['id']; ?>"></i>
-                                                    <i class="fa-solid fa-message btns" id="message" data-id="<?php echo $dis['id']; ?>"></i>
                                                     <i class="fas fa-toggle-off btns"  id="blockuser" data-id="<?php echo $dis['id']; ?>"></i>
                                                     <i class="fas fa-user-slash" id="deleteuser" data-id="<?php echo $dis['id']; ?>"></i>
                                                 </div>
@@ -130,7 +148,7 @@
                             <div class='bottomtable overflowtables'>
                                 <div class="pre-nex">
                                     <?php 
-                                        include '_UI_SORTING_FETCHING/manager-approved-pagination-fetch.php';    
+                                        include '_UI_SORTING_FETCHING/traveler-pagination-fetch.php';    
                                     ?>
                                 </div>
                             </div>

@@ -147,7 +147,7 @@ if($Getlogo){
  <div class="vl"></div>
 <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
     <li class="nav-item dropdown">
-        <a class="colorblack" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span id="titlenamess">Administrator</span> <span><i class="fas fa-angle-down fa-fw mt-1"></i></span></a>
+        <a class="colorblack" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span id="titlenamess">Manager User</span> <span><i class="fas fa-angle-down fa-fw mt-1"></i></span></a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
             <li><a class="dropdown-item" href="profile">Profile</a></li>
             <li><hr class="dropdown-divider" /></li>

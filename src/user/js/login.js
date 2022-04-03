@@ -37,8 +37,8 @@ $("#submitForm").on("submit", function(e){
             else if($.trim(d)==='administrator'){
                 window.location.href="../administrator/dashboard";
             }
-            else if($.trim(d)==='traveller'){
-                window.location.href="../traveller/dashboard";
+            else if($.trim(d)==='traveler'){
+                window.location.href="../traveler/dashboard";
             }
             else if($.trim(d)==='manager'){
                 window.location.href="../manager/dashboard";

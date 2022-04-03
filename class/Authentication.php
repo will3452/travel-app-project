@@ -10,6 +10,10 @@ class Authentication extends User{
         unset($_SESSION['manager']);
         return true;
     }
+    public function UserLogoutTraveler(){
+        unset($_SESSION['traveler']);
+        return true;
+    }
     public function session(){
         session_start();
         return true;
@@ -24,8 +28,8 @@ class Authentication extends User{
         session_start();
         if(isset($_SESSION['administrator'])){
             header("location:../administrator/dashboard");
-        }elseif(isset($_SESSION['traveller'])){
-            header("location:../traveller/dashboard");
+        }elseif(isset($_SESSION['traveler'])){
+            header("location:../traveler/dashboard");
         }elseif(isset($_SESSION['manager'])){
             header("location:../manager/dashboard");
         }
@@ -38,15 +42,15 @@ class Authentication extends User{
         }
     }
     public function CheckUserForLogin($email){ //validate email exist
-        $con = $this->con();
+        $con = $this->GetConnection();
         $stmt = $con->prepare("SELECT email, subcribed_at, status FROM users WHERE email=? && subcribed_at!=? && status=?");
-        $stmt->execute(array($email, '', self::STATUS));
+        $stmt->execute([$email, '', self::STATUS_ACTIVE]);
         return $numwors = $stmt->rowCount();
     }
     public function UserLogin($email, $password, $check){
-        $con = $this->con();
+        $con = $this->GetConnection();
         $stmt = $con->prepare("SELECT * FROM users WHERE email=?");
-        $stmt->execute(array($email));
+        $stmt->execute([$email]);
         $r = $stmt->fetch(PDO::FETCH_OBJ);
         $passwordhas = $r->password;
         $typeofuser = $r->type;
@@ -66,9 +70,9 @@ class Authentication extends User{
                 if($typeofuser==self::USER_TYPE_ADMIN){
                     $_SESSION['administrator'] = $email;
                     return self::USER_TYPE_ADMIN;
-                }elseif($typeofuser==self::USER_TYPE_TRAVELLER){
-                    $_SESSION['traveller'] = $email;
-                    return self::USER_TYPE_TRAVELLER;
+                }elseif($typeofuser==self::USER_TYPE_TRAVELER){
+                    $_SESSION['traveler'] = $email;
+                    return self::USER_TYPE_TRAVELER;
                 }elseif($typeofuser==self::USER_TYPE_MANAGER){
                     $_SESSION['manager'] = $email;
                     return self::USER_TYPE_MANAGER;
@@ -81,9 +85,9 @@ class Authentication extends User{
                 if($typeofuser==self::USER_TYPE_ADMIN){
                     $_SESSION['administrator'] = $email;
                     return self::USER_TYPE_ADMIN;
-                }elseif($typeofuser==self::USER_TYPE_TRAVELLER){
-                    $_SESSION['traveller'] = $email;
-                    return self::USER_TYPE_TRAVELLER;
+                }elseif($typeofuser==self::USER_TYPE_TRAVELER){
+                    $_SESSION['traveler'] = $email;
+                    return self::USER_TYPE_TRAVELER;
                 }elseif($typeofuser==self::USER_TYPE_MANAGER){
                     $_SESSION['manager'] = $email;
                     return self::USER_TYPE_MANAGER;

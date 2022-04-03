@@ -1,13 +1,13 @@
 <?php 
      include_once '../../vendor/autoload.php';
      include_once 'process/LoginStatus.php';
-     $Branding = new Branding;
-     $GetBranding = $Branding->GetBranding();
-     $brandname = '';
-     $branddesciption = '';
-     if($GetBranding){
-        $brandname = $GetBranding->name;
-        $branddesciption = $GetBranding->description;
+     $Gcash = new Gcash;
+     $GetGcash = $Gcash->GetGcash();
+     $accountname = '';
+     $accountnum = '';
+     if($GetGcash){
+        $accountname = $GetGcash->name;
+        $accountnum = $GetGcash->number;
      }
 ?>
 <!DOCTYPE html>
@@ -23,7 +23,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://kit.fontawesome.com/a66db60870.js" crossorigin="anonymous"></script>
-    <title>Admin - Branding</title>
+    <title>Admin - Gcash</title>
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bgnav shadow-sm p-3 mb-5 rounded">
@@ -41,7 +41,7 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <p class="mt-4 edit-title">Branding</p>
+                    <p class="mt-4 edit-title">Gcash</p>
                     <!--loading here !-->
                     <div class="loadingforallcontent">
                         <div class="loading-icon">
@@ -54,47 +54,47 @@
                     </div>
 
 
-                    <!--branding content -->
-                    <div class="hide-dash">
+                      <!--gcash content -->
+                      <div class="hide-dash">
                         <div class="form-container-user">
                             <form id="submitForm">  
                                 <div class="rowss">
                                     <div id="id_div">
-                                        <p style="font-size:20px;">Brand Form</p>
+                                        <p style="font-size:20px;">Gcash Form</p>
                                     </div>
                                     <?php 
                                         date_default_timezone_set('Asia/Manila');   
                                     ?> 
-                                    <input type="hidden" id="token_brand_submit" name="token_brand_submit" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>"> 
+                                    <input type="hidden" id="token_gcash_submit" name="token_gcash_submit" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>"> 
                                 </div>
                                 <div class="rowss">
                                     <div id="id_div">
-                                        <?php if($GetBranding): ?>
-                                            <p>Update Brand Name <span style="color:red;">*</span></p>
+                                        <?php if($GetGcash): ?>
+                                            <p>Update Account Name <span style="color:red;">*</span></p>
                                         <?php else: ?>
-                                            <p>Brand Name <span style="color:red;">*</span></p>
+                                            <p>Account Name <span style="color:red;">*</span></p>
                                         <?php endif; ?>
                                     </div>
                                     <div id="idcontent">
-                                        <input type="text" name="brand"  id="brand" required value="<?php echo $brandname; ?>" class="focusinput">
+                                            <input type="text" name="name" required  id="name" value="<?php echo $accountname; ?>" class="focusinput">
                                     </div>
                                     <div id="id_div">
-                                        <?php if($GetBranding): ?>
-                                            <p>Update Brand Description <span style="color:red;">*</span></p>
+                                        <?php if($GetGcash): ?>
+                                            <p>Update Account Number <span style="color:red;">*</span></p>
                                         <?php else: ?>
-                                            <p>Brand Description <span style="color:red;">*</span></p>
+                                            <p>Account Number <span style="color:red;">*</span></p>
                                         <?php endif; ?>
                                     </div>
                                     <div id="idcontent">
-                                        <textarea name="description" id="description" required class="description"><?php echo $branddesciption; ?></textarea>
+                                        <input type="number" name="number" required id="number" value="<?php echo $accountnum; ?>" class="focusinput">
                                     </div>
                                 </div>
                                 <div class="button-add-emp" id="logo-btn">
                                     <button type="submit" id="buttonss">
-                                            <?php if($GetBranding): ?>
-                                                <span id="spansubmit">Update Brand</span>
+                                            <?php if($GetGcash): ?>
+                                                <span id="spansubmit">Update</span>
                                             <?php else: ?>
-                                                <span id="spansubmit">Add Brand</span>
+                                                <span id="spansubmit">Update</span>
                                             <?php endif; ?>
                                             <div class="center-loading-2">
                                                 <div class="span5load"></div>
@@ -110,6 +110,6 @@
             </main>
         </div>
     </div>
-    <script src="js/branding.js"></script>
+    <script src="js/gcash.js?v=1"></script>
 </body>
 </html>

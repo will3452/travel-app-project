@@ -92,3 +92,67 @@ if(isset($_POST['token_register_manager'])){
         echo "invalidtoken";
     }
 }
+elseif(isset($_POST['token_register_traveler'])){
+    $file1 = $_FILES['profile_image'];
+    $first_name = $_POST['first_name'];
+    $middle_name = $_POST['middle_name'];
+    $last_name = $_POST['last_name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $password = $_POST['password'];
+    $manager_type = '';
+    $token_register_traveler = $_POST['token_register_traveler'];
+    if($Validator->ValidateToken($token_register_traveler)){
+        $validateimage = $Validator->ValidateImage($file1);
+        if($Validator->ValidateImage($file1)==='emp'){
+            echo "EMPPROFILE";
+        }elseif($Validator->ValidateImage($file1)==='fileexterror'){
+            echo "FNAPROFILE";
+        }
+        elseif($Validator->ValidateImage($file1)==='fileeror'){
+            echo "FEPROFILE";
+        }elseif($Validator->ValidateImage($file1)==='fileoversize'){
+            echo "FOSPROFILE";
+        }else{
+            $Fields = $Validator->ValidateFields($first_name, $middle_name, $last_name, $email, $phone, $password);
+            if($Fields){
+                $valphone = $Validator->ValidateContact($phone);
+                if($valphone==1){
+                    $valemail = $Validator->ValidateEmail($email);
+                    if($valemail==$email){
+                        $valpassword = $Validator->ValidatePassword($password);
+                        if($valpassword==$password){
+                            $hashpassword = $User->dcrypt($password);
+                            $valemailexist = $User->EmailExist($email);
+                            if($valemailexist<1){
+                                $valephoneexist = $User->PhoneExist($phone);
+                                if($valephoneexist<1){
+                                    $insert = $User->Create($User::USER_TYPE_TRAVELER, $first_name, $middle_name, $last_name, $email, $phone, $hashpassword, $file1, $manager_type);
+                                    if($insert==1){
+                                        echo "success";
+                                    }else{
+                                        echo "error1";
+                                    }
+                                }else{
+                                    echo "phoneexist";
+                                }
+                            }else{
+                                echo "emailexist";
+                            }
+                        }else{
+                            echo "invalidpassword";
+                         }
+                    }else{
+                        echo "invalidemail";
+                    }
+                }else{
+                    echo "invalidphone";
+                }
+            }else{
+                echo "emptyfields";
+            }
+        }
+    }else{
+        echo "invalidtoken";
+    }
+}

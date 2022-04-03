@@ -14,7 +14,7 @@ class User extends Connection
         return $con;
     }
 
-    public function ExtractFileData($file)
+    public function ExtractFileData($file, $type)
     {
         $fileName = $file['name'];
         $fileTmp = $file['tmp_name'];
@@ -26,19 +26,28 @@ class User extends Connection
 
         $fileNewName ="$uniq.$date.$fileExt";
 
-        $fileDest = "../../images/users/$fileNewName";
-
-        return [$fileName, $fileTmp, $fileExt, $fileDest, $fileNewName];
+        if($type=='user'){
+            $fileDest = "../../images/users/$fileNewName";
+            return [$fileName, $fileTmp, $fileExt, $fileDest, $fileNewName];
+        }if($type=='pop'){
+            $fileDest = "../../images/pop/$fileNewName";
+            return [$fileName, $fileTmp, $fileExt, $fileDest, $fileNewName];
+        }if($type=='logo'){
+            $fileDest = "../../user/assets/logo/$fileNewName";
+            return [$fileName, $fileTmp, $fileExt, $fileDest, $fileNewName];
+        }
+        return false;
     }
 
     public function Create($type, $first_name, $middle_name, $last_name, $email, $phone, $password, $file,  $manage_type)
     {
         $con = $this->GetConnection();
 
-        [$fileName, $filetmp, $fileExt, $filedesti, $finlenamenew] = $this->ExtractFileData($file);
+        [$fileName, $filetmp, $fileExt, $filedesti, $finlenamenew] = $this->ExtractFileData($file, 'user');
 
+        $subcribed_at = null;
 
-        $prepareStatement  = "INSERT INTO `users`(`first_name`, `middle_name`, `last_name`, `email`, `phone`, `password`, `type`, `maneger_type`, `image`,`status`) VALUE(?, ?, ?, ?, ?, ?, ?, ?, ? ,?)";
+        $prepareStatement  = "INSERT INTO `users`(`first_name`, `middle_name`, `last_name`, `email`, `phone`, `password`, `type`, `maneger_type`, `subcribed_at`, `image`,`status`) VALUE(?, ?, ?, ?, ?, ?, ?, ?, ?, ? ,?)";
 
         if ($type == self::USER_TYPE_ADMIN) {
 
@@ -52,7 +61,7 @@ class User extends Connection
         if ($type==self::USER_TYPE_MANAGER) {
             $stmt = $con->prepare($prepareStatement);
 
-            $param = [$first_name, $middle_name, $last_name, $email, $phone, $password, $type, $manage_type, $finlenamenew, self::STATUS_PENDING];
+            $param = [$first_name, $middle_name, $last_name, $email, $phone, $password, $type, $manage_type, $subcribed_at, $finlenamenew, self::STATUS_PENDING];
 
             $executeResult = $stmt->execute($param);
 
@@ -64,14 +73,30 @@ class User extends Connection
             return false;
         }
 
-        return $type == self::USER_TYPE_TRAVELER ? $type : false;
+        if ($type==self::USER_TYPE_TRAVELER) {
+            $date_sub = date('Y-m-d H:i:s');
+            $stmt = $con->prepare($prepareStatement);
+
+            $param = [$first_name, $middle_name, $last_name, $email, $phone, $password, $type, $manage_type, $date_sub, $finlenamenew, self::STATUS_ACTIVE];
+
+            $executeResult = $stmt->execute($param);
+
+            if ($executeResult) {
+                 move_uploaded_file($filetmp, $filedesti);
+                 return true;
+            }
+
+            return false;
+        }
+
+        return false;
     }
 
     public function ManagerPOP($email, $file)
     {
         $con = $this->GetConnection();
 
-        [$fileName, $filetmp, $fileExt ,$filedesti, $finlenamenew] = $this->ExtractFileData($file);
+        [$fileName, $filetmp, $fileExt ,$filedesti, $finlenamenew] = $this->ExtractFileData($file, 'pop');
 
 
         $stmt = $con->prepare("INSERT INTO `manager_pop`(`img`, `manager_email`) VALUE(?, ?)");
@@ -97,7 +122,7 @@ class User extends Connection
 
         $stmt = $con->prepare("SELECT email FROM users WHERE email=?");
 
-        $stmt->execute(array($email));
+        $stmt->execute([$email]);
 
         return $stmt->rowCount();
     }
@@ -205,7 +230,7 @@ class User extends Connection
 
         $stmt = $con->prepare("UPDATE users SET status=?, subcribed_at=? WHERE id=? && type=?");
 
-        $result = $stmt->execute(array(self::STATUS_ACTIVE, $date, $id, $type));
+        $result = $stmt->execute([self::STATUS_ACTIVE, $date, $id, $type]);
 
         return $result;
     }
@@ -214,26 +239,26 @@ class User extends Connection
         $con = $this->GetConnection();
         $date = date('Y-m-d H:i:s');
         $stmt = $con->prepare("SELECT id, image,email, type, status FROM users WHERE id=? && type=? && status=?");
-         $executeResult = $stmt->execute(array($id, $type, self::STATUS_PENDING));
+         $executeResult = $stmt->execute([$id, $type, self::STATUS_PENDING]);
         if ($executeResult) {
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             $img =  $result['image'];
             $email =  $result['email'];
 
             $stmt = $con->prepare("SELECT * FROM manager_pop WHERE manager_email=?");
-            $true = $stmt->execute(array($email));
+            $true = $stmt->execute([$email]);
             if ($true) {
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
                 $img2 =  $result['img'];
                 $olddist2 = "../../images/pop/$img2"; //old profile
                 unlink($olddist2); //deleting pass profile
                 $stmt = $con->prepare("DELETE FROM `manager_pop` WHERE manager_email=?");
-                $true = $stmt->execute(array($email));
+                $true = $stmt->execute([$email]);
                 if ($true) {
                     $olddist = "../../images/users/$img"; //old profile
                     unlink($olddist); //deleting pass profile
                     $stmt = $con->prepare("DELETE FROM `users` WHERE type=? && id=?");
-                    $true = $stmt->execute(array($type, $id));
+                    $true = $stmt->execute([$type, $id]);
                     return $true;
                 }
             }

@@ -79,7 +79,7 @@ $("#submitForm").on("submit", function(e){
                 $("#submit").attr("disabled",false);
             }
             else if($.trim(d)=='success'){
-                window.location.href="success";
+                window.location.href="success_traveler";
             }else{
                 swal("Error!", "Process Failed", "error");
                 $(".center-loading").hide();

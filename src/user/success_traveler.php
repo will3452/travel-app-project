@@ -36,16 +36,16 @@
            <div class="input-container">
             <div class="success-message-content">
                             <h1>Success</h1>
-                            <p>System will verify your account, wait for Confirmation in to your email account!</p>
+                            <p>You Can Now Login You're Credentials</p>
                             <span>thanks for cooperation </span>
                             <br>
                             <span>- Travel Guide for Cebu Province</span>
                         
                 </div>
                 <div class="submit-container">
-                   <a href="../">
+                   <a href="login">
                         <button id="submit">
-                                <span id="span">Back</span>
+                                <span id="span">Login</span>
                         </button>
                    </a>
                 </div>

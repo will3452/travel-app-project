@@ -9,9 +9,9 @@ $sidebaroutside ='
                             Dashboard
                         </a>
                         <div class="sb-sidenav-menu-heading">Resources</div>
-                        <a class="nav-link" href="traveller">
+                        <a class="nav-link" href="traveler">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
-                            Traveller Users
+                            Traveler Users
                         </a>
                         <a class="nav-link" href="manager">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-people-roof"></i></div>
@@ -49,6 +49,10 @@ $sidebaroutside ='
                         <a class="nav-link" href="terms&condition">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-book-atlas"></i></div>
                             T&D
+                        </a>
+                        <a class="nav-link" href="gcash">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-money-check-dollar"></i></div>
+                            Gcash Account
                         </a>
                         <a class="nav-link" href="profile">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>

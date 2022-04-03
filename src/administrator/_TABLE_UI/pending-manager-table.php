@@ -3,7 +3,7 @@
                         $email = $_SESSION['administrator'];
                         $userdata = $User->GetUserID($email);
                         $admin_id = $userdata->id;
-                        $status = $User::PENDING;
+                        $status = $User::STATUS_PENDING;
                         $type = $User::USER_TYPE_MANAGER;
                         include '_UI_SORTING_FETCHING/manager-fetch.php';
                     ?>
