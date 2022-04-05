@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2022 at 10:03 AM
+-- Generation Time: Apr 05, 2022 at 10:35 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.28
 
@@ -69,6 +69,13 @@ CREATE TABLE `business` (
   `manager_id` int(255) NOT NULL,
   `logo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `business`
+--
+
+INSERT INTO `business` (`id`, `name`, `type`, `manager_id`, `logo`) VALUES
+(1, 'WalWal Resort Mas', 'Resort Business', 41, '624be2b048ef85.18180712.220405023320.jpg');
 
 -- --------------------------------------------------------
 
@@ -165,10 +172,7 @@ CREATE TABLE `manager_pop` (
 --
 
 INSERT INTO `manager_pop` (`id`, `img`, `manager_email`, `date`) VALUES
-(22, '624911a03b40a2.04977669.220403111648.png', 'leocorpuz@gmail.com', '2022-04-03 03:16:48'),
-(25, '624912ed779388.24071035.220403112221.png', 'jemflores@gmail.com', '2022-04-03 03:22:21'),
-(26, '624913ef8a2622.79523911.220403112639.png', 'williamgalas@gmail.com', '2022-04-03 03:26:39'),
-(27, '624945b6191f40.95729275.220403025902.', 'davebamba@gmail.com', '2022-04-03 06:59:02');
+(29, '624bd8a5b1f015.66812437.220405015029.png', 'leojr.corpuz@gmail.com', '2022-04-05 05:50:29');
 
 -- --------------------------------------------------------
 
@@ -264,20 +268,17 @@ CREATE TABLE `users` (
   `maneger_type` varchar(255) DEFAULT NULL,
   `subcribed_at` timestamp NULL DEFAULT NULL,
   `image` varchar(255) NOT NULL,
-  `status` varchar(255) NOT NULL
+  `status` varchar(255) NOT NULL,
+  `block_status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `middle_name`, `last_name`, `email`, `phone`, `password`, `type`, `maneger_type`, `subcribed_at`, `image`, `status`) VALUES
-(16, 'admin', 'admin', 'admin', 'superadmin@travel.com', '09992221234', '$2y$10$vyVj99v7.tzXtYgl0tzAmeKSh/HQJCopdg6z8j1gb2feS8sRHEka.', 'administrator', '', '2022-03-31 09:55:23', '', 'active'),
-(31, 'leo', 'd', 'corpuz', 'leocorpuz@gmail.com', '09992221222', '$2y$10$hXMN2e4.lgFukXtLsiFbpeTc0GYGMKgOJn3/1zk/pTsRMgmggL7ea', 'manager', 'Bed and breakfast manager', '2022-04-03 03:19:08', '624911a02e6e90.98136322.220403111648.jpg', 'active'),
-(34, 'jem', 'd', 'flores', 'jemflores@gmail.com', '09995676967', '$2y$10$7VpzBNikJ0m9GcXDgzeXwOn0Lk6sAcDH4l4Vx4dGIeq/Itt2AXitS', 'manager', 'Resto and cafe manager', '2022-04-03 03:22:28', '624912ed5ec0a3.23503822.220403112221.png', 'active'),
-(35, 'william', 'g', 'galas', 'williamgalas@gmail.com', '09992224567', '$2y$10$0g.AccG2ubRq6UYb6MZuWu54vRt0a9OxKMYE2wC2/IDDuVgmJEmIC', 'manager', 'Bed and breakfast manager', '2022-04-03 03:27:01', '624913ef7e6ef1.56779567.220403112639.png', 'active'),
-(36, 'dave', 'b', 'bamba', 'davebamba@gmail.com', '09992221212', '$2y$10$QV/WaRk3tnT8WF7JJPnHPeWEckClLr6pFUHs.2A3bODOJl/zv841W', 'traveler', '', '2022-04-03 07:08:52', '624945b60d42f3.37207121.220403025902.jpg', 'active'),
-(37, 'xavier', 'a', 'cruz', 'xaviercruz@gmail.com', '09995554567', '$2y$10$5dFQsBYu83fQHJ3h1nRDRecxSgE2qSrPmrh/sXPcO5q2eK768bkga', 'traveler', '', '2022-04-03 07:08:57', '6249463fee33a0.66552473.220403030119.jpg', 'active');
+INSERT INTO `users` (`id`, `first_name`, `middle_name`, `last_name`, `email`, `phone`, `password`, `type`, `maneger_type`, `subcribed_at`, `image`, `status`, `block_status`) VALUES
+(16, 'admin', 'admin', 'admin', 'superadmin@travel.com', '09992221234', '$2y$10$vyVj99v7.tzXtYgl0tzAmeKSh/HQJCopdg6z8j1gb2feS8sRHEka.', 'administrator', '', '2022-03-31 09:55:23', '', 'active', ''),
+(41, 'leo', 'd', 'corpuz', 'leojr.corpuz@gmail.com', '0999222121', '$2y$10$hhIR0Z09c2eyy.UfgSxyMOPEHis/tjjmzFfhZli7Y0HkmYtakDpoC', 'manager', 'Resort manager', '2022-04-05 05:50:44', '624bd8a5915584.20701837.220405015029.png', 'active', '');
 
 --
 -- Indexes for dumped tables
@@ -393,7 +394,7 @@ ALTER TABLE `branding`
 -- AUTO_INCREMENT for table `business`
 --
 ALTER TABLE `business`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -429,7 +430,7 @@ ALTER TABLE `logo`
 -- AUTO_INCREMENT for table `manager_pop`
 --
 ALTER TABLE `manager_pop`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -465,7 +466,7 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

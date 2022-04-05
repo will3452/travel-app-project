@@ -6,7 +6,9 @@ class User extends Connection
     const USER_TYPE_MANAGER = "manager";
     const STATUS_ACTIVE = "active";
     const STATUS_PENDING = "pending";
-
+    const BLOCK_STATUS_TEMPORARY = "temporary";
+    const BLOCK_STATUS_PERMANENTLY = "permanently";
+    const BLOCK_STATUS_UNBAN = "";
     public function GetConnection()
     {
         $con = $this->con();
@@ -264,6 +266,53 @@ class User extends Connection
             }
         }
 
+        return false;
+    }
+    public function BanAndUnbanAccount($id, $type){
+        $con = $this->GetConnection();
+        $stmt = $con->prepare("SELECT id, status, block_status FROM users WHERE id=? && status=? && block_status=?");
+        $executeResult = $stmt->execute([$id, self::STATUS_ACTIVE, self::BLOCK_STATUS_PERMANENTLY]);
+        $numwors = $stmt->rowCount();
+        if ($numwors>0) {
+            return "perma";
+        }
+        $stmt = $con->prepare("UPDATE users SET block_status=? WHERE id=?");
+        $result = $stmt->execute([$type, $id]);
+        return $result;
+    }
+    public function GetBusinessManager(){
+        $con = $this->GetConnection();
+        $stmt = $con->prepare("SELECT * FROM business");
+        $executeResult = $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+    public function InsertBusinessManager($file, $businessname, $id, $businesstype){
+        $con = $this->GetConnection();
+        [$fileName, $filetmp, $fileExt, $filedesti, $finlenamenew] = $this->ExtractFileData($file, 'logo');
+        $stmt = $con->prepare("SELECT * FROM business WHERE manager_id=?");
+        $executeResult = $stmt->execute([$id]);
+        $numwors = $stmt->rowCount();
+        if($numwors>0){
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $img =  $result['logo'];
+            $olddist = "../../user/assets/logo/$img"; //old logo
+            unlink($olddist); 
+            $prepareStatement  = "UPDATE `business` SET `name`=?, `logo`=?, type=? WHERE manager_id=?";
+            $stmt = $con->prepare($prepareStatement);
+            $executeResult = $stmt->execute([$businessname, $finlenamenew, $businesstype, $id]);
+            if ($executeResult){
+                move_uploaded_file($filetmp, $filedesti);
+                return true;
+            }
+            return false;
+        }
+        $prepareStatement  = "INSERT INTO `business`(`name`, `type`, `manager_id`, `logo`) VALUE(?, ?, ?, ?)";
+        $stmt = $con->prepare($prepareStatement);
+        $executeResult = $stmt->execute([$businessname, $businesstype, $id, $finlenamenew]);
+        if ($executeResult){
+            move_uploaded_file($filetmp, $filedesti);
+            return true;
+        }
         return false;
     }
 }

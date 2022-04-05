@@ -69,7 +69,7 @@
                                                 </div>
                                             </div>
                                         </th>
-                                        <th scope="col">Account Status</th>
+                                        <th scope="col">Ban Status</th>
                                         <th scope="col"></th>
                                     <?php else: ?>
                                         <th scope="col">
@@ -101,7 +101,7 @@
                                                 </div>
                                             </div>
                                         </th>
-                                        <th scope="col">Account Status</th>
+                                        <th scope="col">Ban Status</th>
                                         <th scope="col"></th>
                                     <?php endif; ?>
                                     </tr>
@@ -118,14 +118,54 @@
                                             <td><a href="#"><?php echo $dis['email']; ?></a></td>
                                             <td data-target="name"><?php echo $dis['first_name'].' '.$dis['last_name']; ?></td>
                                             <td><?php echo $dis['subcribed_at']; ?></td>
-                                            <td>active</td>
+                                            <td><?php
+                                                if($dis['block_status']==$User::BLOCK_STATUS_TEMPORARY){
+                                                    echo "TEMPORARY BAN";
+                                                }elseif($dis['block_status']==$User::BLOCK_STATUS_PERMANENTLY){
+                                                    echo "PERMANENTLY BAN";
+                                                }else{
+                                                    echo "------------";
+                                                }
+                                            ?></td>
                                             <td id="btn">
                                             <td id="btn">
                                                 <div class="d-flex">
-                                                    <i class="fa-solid fa-eye btns" id="showinfo" data-id="<?php echo $dis['id']; ?>"></i>
-                                                    <i class="far fa-edit btns" id="updateuser" data-id="<?php echo $dis['id']; ?>"></i>
-                                                    <i class="fas fa-toggle-off btns"  id="blockuser" data-id="<?php echo $dis['id']; ?>"></i>
-                                                    <i class="fas fa-user-slash" id="deleteuser" data-id="<?php echo $dis['id']; ?>"></i>
+                                                <span class="tip_view_container">
+                                                        <i class="fa-solid fa-eye btns" id="showinfo" data-id="<?php echo $dis['id']; ?>"></i>
+                                                        <span class="tip_view">View</span>
+                                                    </span>
+
+                                                    <?php if($dis['block_status']==$User::BLOCK_STATUS_PERMANENTLY): ?>
+                                                        
+                                                        <?php else: ?>
+                                                        <?php if($dis['block_status']==$User::BLOCK_STATUS_TEMPORARY): ?>
+                                                            <span class="tip_update_container">
+                                                                <i class="far fa-edit btns" id="updateuser" data-id="<?php echo $dis['id']; ?>"></i>
+                                                                <span class="tip_update">Update</span>
+                                                            </span>
+                                                            <span class="tip_unban_container">
+                                                                <i class="fas fa-toggle-on btns" id="unblockuser" data-id="<?php echo $dis['id'] ?>"></i>
+                                                                <span class="tip_unban">Unban</span>
+                                                            </span>
+                                                            <span class="tip_perma_container">
+                                                                <i class="fas fa-user-slash" id="deleteuser" data-id="<?php echo $dis['id']; ?>"></i>
+                                                                <span class="tip_perma">Permanently Ban</span>
+                                                            </span>
+                                                        <?php else: ?>
+                                                            <span class="tip_update_container">
+                                                                <i class="far fa-edit btns" id="updateuser" data-id="<?php echo $dis['id']; ?>"></i>
+                                                                <span class="tip_update">Update</span>
+                                                            </span>
+                                                            <span class="tip_temp_container">
+                                                                <i class="fas fa-toggle-off btns"  id="blockuser" data-id="<?php echo $dis['id']; ?>"></i>
+                                                                <span class="tip_temp">Temporary Ban</span>
+                                                            </span>
+                                                            <span class="tip_perma_container">
+                                                                <i class="fas fa-user-slash" id="deleteuser" data-id="<?php echo $dis['id']; ?>"></i>
+                                                                <span class="tip_perma">Permanently Ban</span>
+                                                            </span>
+                                                        <?php endif; ?>
+                                                    <?php endif; ?>
                                                 </div>
                                             </td>
                                         </tr>

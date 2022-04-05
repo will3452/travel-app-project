@@ -40,3 +40,166 @@ $(document).on('click','.clearable__clear',function(){
     $(".clearable__clear").hide();
     $("#search").val("");
 });
+
+$(document).on('click','#blockuser',function(){
+    var manager = $(this).attr("data-id");
+    var name = $('#'+manager).children('td[data-target=name]').text();
+    $(".name_here").text(name);
+    $(".bantemp").fadeIn();
+    $("#id_get").val(manager);
+});
+$(document).on('click','#deleteuser',function(){
+    var manager = $(this).attr("data-id");
+    var name = $('#'+manager).children('td[data-target=name]').text();
+    $(".name_here").text(name);
+    $(".banperm").fadeIn();
+    $("#id_get_2").val(manager);
+});
+$(document).on('click','#unblockuser',function(){
+    var manager = $(this).attr("data-id");
+    var name = $('#'+manager).children('td[data-target=name]').text();
+    $(".name_here").text(name);
+    $(".unbantemp").fadeIn();
+    $("#id_get_un").val(manager);
+});
+
+$(document).on('click','.close_modal',function(){
+    $(".name_here").text("");
+    $(".bantemp").fadeOut();
+    $(".banperm").fadeOut();
+    $("#id_get_cancel").val("");
+    $("#id_get").val("");
+    $("#id_get_2").val("");
+    $(".unbantemp").fadeOut();
+    $("#id_get_un").val("");
+});
+ //ban temp
+ $("#submitmodal_temp").on("submit", function(e){
+    e.preventDefault(e);
+    var formData = new FormData(this);
+    $(".center-loading-3").show();
+    $('.span_modal').hide();
+    $("#bantempbtn").attr("disabled",true);
+    $(".close_modal").css({'pointer-events': 'none'});
+        $.ajax({
+            url  : "process/_traveler.php",
+            type : "POST",
+            cache:false,
+            data :formData,
+            contentType : false, // you can also use multipart/form-data replace of false
+            processData: false,
+            success:function(d){
+                if($.trim(d)=='success'){
+                    $(".center-loading-3").hide();
+                    $('.span_modal').show();
+                    $("#bantempbtn").attr("disabled",false);
+                    $(".close_modal").css({'pointer-events': 'auto'});
+                    $(".name_here").text("");
+                    $(".bantemp").fadeOut();
+                    $("#id_get").val("");
+                    swal("Success!", "", "success", {
+                        button: "Close",
+                    });
+                    setTimeout(function(){
+                        location.reload();
+                    }, 1500);
+                }else{
+                    swal("Error!", "Process Failed", "error");
+                    $(".center-loading-3").hide();
+                    $('.span_modal').show();
+                    $("#bantempbtn").attr("disabled",false);
+                    $(".close_modal").css({'pointer-events': 'auto'});
+                    $(".name_here").text("");
+                    $(".bantemp").fadeOut();
+                    $("#id_get").val("");
+                }
+            }
+        });
+});
+   //ban temp
+   $("#submitmodal_perm").on("submit", function(e){
+    e.preventDefault(e);
+    var formData = new FormData(this);
+    $(".center-loading-3").show();
+    $('.span_modal').hide();
+    $("#banpermbtn").attr("disabled",true);
+    $(".close_modal").css({'pointer-events': 'none'});
+        $.ajax({
+            url  : "process/_manager.php",
+            type : "POST",
+            cache:false,
+            data :formData,
+            contentType : false, // you can also use multipart/form-data replace of false
+            processData: false,
+            success:function(d){
+                if($.trim(d)=='success'){
+                    $(".center-loading-3").hide();
+                    $('.span_modal').show();
+                    $("#banpermbtn").attr("disabled",false);
+                    $(".close_modal").css({'pointer-events': 'auto'});
+                    $(".name_here").text("");
+                    $(".banperm").fadeOut();
+                    $("#id_get").val("");
+                    swal("Success!", "", "success", {
+                        button: "Close",
+                    });
+                    setTimeout(function(){
+                        location.reload();
+                    }, 1500);
+                }else{
+                    swal("Error!", "Process Failed", "error");
+                    $(".center-loading-3").hide();
+                    $('.span_modal').show();
+                    $("#banpermbtn").attr("disabled",false);
+                    $(".close_modal").css({'pointer-events': 'auto'});
+                    $(".name_here").text("");
+                    $(".banperm").fadeOut();
+                    $("#id_get").val("");
+                }
+            }
+        });
+    });
+
+      //ban temp
+$("#submitmodal_unban").on("submit", function(e){
+    e.preventDefault(e);
+    var formData = new FormData(this);
+    $(".center-loading-3").show();
+    $('.span_modal').hide();
+    $("#unbantempbtn").attr("disabled",true);
+    $(".close_modal").css({'pointer-events': 'none'});
+        $.ajax({
+            url  : "process/_manager.php",
+            type : "POST",
+            cache:false,
+            data :formData,
+            contentType : false, // you can also use multipart/form-data replace of false
+            processData: false,
+            success:function(d){
+                if($.trim(d)=='success'){
+                    $(".center-loading-3").hide();
+                    $('.span_modal').show();
+                    $("#unbantempbtn").attr("disabled",false);
+                    $(".close_modal").css({'pointer-events': 'auto'});
+                    $(".name_here").text("");
+                    $(".unbantemp").fadeOut();
+                    $("#id_get").val("");
+                    swal("Success!", "", "success", {
+                        button: "Close",
+                    });
+                    setTimeout(function(){
+                        location.reload();
+                    }, 1500);
+                }else{
+                    swal("Error!", "Process Failed", "error");
+                    $(".center-loading-3").hide();
+                    $('.span_modal').show();
+                    $("#unbantempbtn").attr("disabled",false);
+                    $(".close_modal").css({'pointer-events': 'auto'});
+                    $(".name_here").text("");
+                    $(".unbantemp").fadeOut();
+                    $("#id_get").val("");
+                }
+            }
+        });
+    });

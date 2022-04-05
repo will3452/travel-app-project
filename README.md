@@ -3,4 +3,6 @@
 -- superadmin@travel.com 
 -- password
 -- manager password 
--- Password_27
+-- Password_01
+-- client password
+-- Password_01

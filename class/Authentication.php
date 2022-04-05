@@ -43,9 +43,21 @@ class Authentication extends User{
     }
     public function CheckUserForLogin($email){ //validate email exist
         $con = $this->GetConnection();
-        $stmt = $con->prepare("SELECT email, subcribed_at, status FROM users WHERE email=? && subcribed_at!=? && status=?");
+        $stmt = $con->prepare("SELECT email, subcribed_at, status, block_status FROM users WHERE email=? && subcribed_at!=? && status=?");
         $stmt->execute([$email, '', self::STATUS_ACTIVE]);
-        return $numwors = $stmt->rowCount();
+        $numwors = $stmt->rowCount();
+        if($numwors>0){
+            $r = $stmt->fetch(PDO::FETCH_OBJ);
+            $block_status = $r->block_status;
+            if($block_status==self::BLOCK_STATUS_TEMPORARY){
+                return 'temp';
+            }
+            if($block_status==self::BLOCK_STATUS_PERMANENTLY){
+                return 'perm';
+            }
+            return true;
+        }
+        return false;
     }
     public function UserLogin($email, $password, $check){
         $con = $this->GetConnection();

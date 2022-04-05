@@ -26,6 +26,10 @@ if(isset($_POST['token_authentication_login'])){
                 }else{
                     echo "INVALIDACC";
                 }
+            }elseif($emailact=='temp'){
+                echo "TEMP";
+            }elseif($emailact=='perm'){
+                echo "PERM";
             }else{
                 echo "USERINVALID";
             }

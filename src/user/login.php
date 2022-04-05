@@ -71,12 +71,13 @@
                     </button>
                 </div>
             </form>
+            <a href="" style="color:#0095a4;">Forgot Password</a>
             <div class="sign_up">
                 <p>or</p>
                 <a href="register_manager">Register as Manager</a> / <a href="register_traveler">Register as Traveler</a>
             </div>
         </div>
     </div>
-    <script src="js/login.js?v=5"></script>
+    <script src="js/login.js?v=6"></script>
 </body>
 </html>

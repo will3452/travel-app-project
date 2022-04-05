@@ -108,9 +108,18 @@
                                             </td>
                                             <td id="btn">
                                                 <div class="d-flex">
-                                                    <i class="fa-solid fa-eye btns" id="showinfo" data-id="<?php echo $dis['id']; ?>"></i>
-                                                    <i class="fas fa-check-circle btns" id="accept" data-id="<?php echo $dis['id']; ?>"></i>
-                                                    <i class="far fa-trash-alt" id="cancel" data-id="<?php echo $dis['id']; ?>"></i>
+                                                    <span class="tip_view_container">
+                                                        <i class="fa-solid fa-eye btns" id="showinfo" data-id="<?php echo $dis['id']; ?>"></i>
+                                                        <span class="tip_view">View</span>
+                                                    </span>
+                                                    <span class="tip_accept_container">
+                                                        <i class="fas fa-check-circle btns" id="accept" data-id="<?php echo $dis['id']; ?>"></i>
+                                                        <span class="tip_accept">Accept</span>
+                                                    </span>
+                                                    <span class="tip_delete_container">
+                                                        <i class="far fa-trash-alt" id="cancel" data-id="<?php echo $dis['id']; ?>"></i>
+                                                        <span class="tip_delete">Cancel</span>
+                                                    </span>
                                                 </div>
                                             </td>
                                         </tr>

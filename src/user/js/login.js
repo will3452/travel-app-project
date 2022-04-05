@@ -27,6 +27,16 @@ $("#submitForm").on("submit", function(e){
                 $(".center-loading").hide();
                 $('#span').show();
                 $("#submit").attr("disabled",false);
+            }else if($.trim(d)==='TEMP'){
+                swal("Error!", "Email Temporary Ban", "error");
+                $(".center-loading").hide();
+                $('#span').show();
+                $("#submit").attr("disabled",false);
+            }else if($.trim(d)==='PERM'){
+                swal("Error!", "Email Permanently Ban", "error");
+                $(".center-loading").hide();
+                $('#span').show();
+                $("#submit").attr("disabled",false);
             }
             else if($.trim(d)==='INVALIDACC'){
                 swal("Error!", "Credentials Not Valid", "error");
@@ -44,7 +54,7 @@ $("#submitForm").on("submit", function(e){
                 window.location.href="../manager/dashboard";
             }
             else{
-                swal("Error!", "Process Failed", "error");
+                swal("Error!", d, "error");
                 $(".center-loading").hide();
                 $('#span').show();
                 $("#submit").attr("disabled",false);
