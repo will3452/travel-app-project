@@ -1,7 +1,6 @@
 <?php
-
 class Authentication extends User{
-    
+
     public function UserLogoutAdmin(){
         unset($_SESSION['administrator']);
         return true;
