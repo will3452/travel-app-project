@@ -1,6 +1,6 @@
 
-<?php 
-$logo = new logo;
+<?php
+$logo = new Logo;
 $Getlogo = $logo->Getlogo();
 $logoimage = '';
 if($Getlogo){
@@ -28,7 +28,7 @@ if($Getlogo){
                             <div class="span2load"></div>
                             <div class="span3load"></div>
                     </div>
-            </div> 
+            </div>
     </div>
     <div class="dropdown-content" id="fetchglobalsearch">
     </div>
@@ -56,7 +56,7 @@ if($Getlogo){
                             <div class="span2load"></div>
                             <div class="span3load"></div>
                     </div>
-            </div> 
+            </div>
     </div>
     <div class="dropdown-content-moba" id="fetchglobalsearch-moba">
     </div>
@@ -83,7 +83,7 @@ if($Getlogo){
                             <div class="span2load"></div>
                             <div class="span3load"></div>
                         </div>
-            </div> 
+            </div>
     </div>
     <div class="dropdown-content-notification" id="fetchnotification">
             <div class="bgserachtitle-notif">
@@ -95,7 +95,7 @@ if($Getlogo){
                                 <span id="notifmessage"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, rerum!</span>
                     </div>
             </a>
-            
+
     </div>
     <div class="noresult-content-notif">
                 <div class="bgserachtitle-notif">
@@ -116,7 +116,7 @@ if($Getlogo){
                             <div class="span2load"></div>
                             <div class="span3load"></div>
                     </div>
-            </div> 
+            </div>
     </div>
     <div class="dropdown-content-message" id="fetchmessage">
         <div class="bgserachtitle-notif">
@@ -125,7 +125,7 @@ if($Getlogo){
         <a href="view/message?id_cli='.$iduserun.'" class="loop_link_mess">
             <div class="mess_loop">
                 <div class="_cont">
-                    <div class="circular--landscape--mess"> 
+                    <div class="circular--landscape--mess">
                         <img id="vievimage" src="#" alt="">
                     </div>
                     <div class="head_mess">
@@ -136,7 +136,7 @@ if($Getlogo){
                         <span id="notifmessage_mess"> <i class="fas fa-circle"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, obcaecati.</span>
                 </div>
             </div>
-        </a>     
+        </a>
     </div>
     <div class="noresult-content-mess">
                 <div class="bgserachtitle-mess">

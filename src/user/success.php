@@ -1,8 +1,8 @@
-<?php 
+<?php
      include_once '../../vendor/autoload.php';
      $Authentication = new Authentication;
      $Authentication->CheckIfLogin();
-     $logo = new logo;
+     $logo = new Logo;
      $Getlogo = $logo->Getlogo();
      $logoimage = '';
      if($Getlogo){
@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="../public/css/authentication_style.css?v=5">
 </head>
 <body>
-  
+
     <div class="containter-login">
         <div class="logo_cont">
         <img src="assets/logo/<?php echo $logoimage; ?>" alt="">
@@ -40,7 +40,7 @@
                             <span>thanks for cooperation </span>
                             <br>
                             <span>- Travel Guide for Cebu Province</span>
-                        
+
                 </div>
                 <div class="submit-container">
                    <a href="../">

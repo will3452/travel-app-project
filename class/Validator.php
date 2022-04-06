@@ -1,6 +1,4 @@
 <?php
-
-
 class Validator
 {
     const VALID_MANAGER_TYPE = [

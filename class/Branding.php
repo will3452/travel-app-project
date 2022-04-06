@@ -1,11 +1,15 @@
 <?php
 
 class Branding extends User{
-    public function CheckBranding($name, $description){
+    public function CheckBranding($name, $description) { // why u pass param and yet you don't using it ?
+
         $con = $this->GetConnection();
+
         $stmt = $con->prepare("SELECT * FROM branding");
-        $executeResult = $stmt->execute();
-        return $numwors = $stmt->rowCount();
+
+        $stmt->execute();
+
+        return $stmt->rowCount();
     }
     public function BrandingProcess($name, $description){
         $con = $this->GetConnection();

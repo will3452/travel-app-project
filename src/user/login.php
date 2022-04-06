@@ -1,11 +1,12 @@
-<?php 
+<?php
+
     include_once '../../vendor/autoload.php';
     $Authentication = new Authentication;
     $Authentication->CheckIfLogin();
     if($Authentication->Cookies()){
         $code =  $_COOKIE['travel_guide_email'];
          $emails= base64_decode($code);
-             
+
          $code2 =  $_COOKIE['travel_guide_password'];
          $passwords= base64_decode($code2);
      }else{
@@ -13,7 +14,7 @@
          $passwords ='';
      }
 
-     $logo = new logo;
+     $logo = new Logo;
      $Getlogo = $logo->Getlogo();
      $logoimage = '';
      if($Getlogo){
@@ -46,10 +47,10 @@
                 <hr class="hr">
            </div>
            <form id="submitForm" class="input-container">
-                <?php 
-                    date_default_timezone_set('Asia/Manila');   
-                ?> 
-                <input type="hidden" id="token_authentication_login" name="token_authentication_login" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>"> 
+                <?php
+                    date_default_timezone_set('Asia/Manila');
+                ?>
+                <input type="hidden" id="token_authentication_login" name="token_authentication_login" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>">
                 <div class="email-container">
                     <label for="">Email</label>
                     <input type="email" id="email" name="email" value="<?php echo $emails; ?>" required>

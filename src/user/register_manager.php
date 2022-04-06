@@ -1,4 +1,4 @@
-<?php 
+<?php
      include_once '../../vendor/autoload.php';
      $Authentication = new Authentication;
      $Gcash = new Gcash;
@@ -10,7 +10,7 @@
         $accountname = $GetGcash->name;
         $accountnum = $GetGcash->number;
      }
-     $logo = new logo;
+     $logo = new Logo;
      $Getlogo = $logo->Getlogo();
      $logoimage = '';
      if($Getlogo){
@@ -29,7 +29,7 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
-  
+
     <div class="containter-signup">
         <div class="logo_cont-signup">
             <img src="assets/logo/<?php echo $logoimage; ?>" alt="">
@@ -45,10 +45,10 @@
            </div>
            <form id="submitForm" class="input-container-signup">
                 <div class="signdis">
-                    <?php 
-                        date_default_timezone_set('Asia/Manila');   
-                    ?> 
-                    <input type="hidden" id="token_register_manager" name="token_register_manager" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>"> 
+                    <?php
+                        date_default_timezone_set('Asia/Manila');
+                    ?>
+                    <input type="hidden" id="token_register_manager" name="token_register_manager" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>">
                     <div class="input-container">
                         <span>Select Profile</span>
                         <input type="file" id="profile_image" name="profile_image" required placeholder="Select Profile">
