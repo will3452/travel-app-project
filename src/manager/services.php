@@ -15,7 +15,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://kit.fontawesome.com/a66db60870.js" crossorigin="anonymous"></script>
-    <title>Manager - Dashboard</title>
+    <title>Manager - Services</title>
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bgnav shadow-sm p-3 mb-5 rounded">
@@ -33,22 +33,19 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <p class="mt-4 edit-title">Dashboard</p>
-                    <!--loading here !-->
-                    <div class="loadingforallcontent">
-                        <div class="loading-icon">
-                            <div class="center">
-                                <div class="span1load"></div>
-                                <div class="span2load"></div>
-                                <div class="span3load"></div>
-                            </div>
-                        </div> 
+                    <p class="mt-4 edit-title">Services</p>
+                    <div class="button-add-emp-g">
+                        <a href="create/create-service"> <button id="addbtnuser">Create Service</button></a>
                     </div>
-
+                    <?php
+                        include '_UI/modal.php';
+                        echo $deleteservice;
+                        include '_TABLE_UI/service-table.php'; 
+                    ?>
                 </div>
             </main>
         </div>
     </div>
-    <script src="js/load.js?v=5"></script>
+    <script src="js/services.js?v=3"></script>
 </body>
 </html>

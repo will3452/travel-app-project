@@ -9,13 +9,47 @@ class User extends Connection
     const BLOCK_STATUS_TEMPORARY = "temporary";
     const BLOCK_STATUS_PERMANENTLY = "permanently";
     const BLOCK_STATUS_UNBAN = "";
+    const SERVICE_CATEGORY_RESORT_MANAGER = [
+        "Room And Accomodation",
+        "Package Tours",
+    ];
+    const SERVICE_CATEGORY_BEDANDBREAKFAST_MANAGER = [
+        "Room And Accomodation",
+    ];
+    const SERVICE_CATEGORY_RENTALVEHICLE_MANAGER = [
+        "Vehicles",
+    ];
+    const SERVICE_CATEGORY_TOURISTATTRACTION_MANAGER = [
+        "Activities",
+    ];
+    const SERVICE_CATEGORY_RESTOCAFE_MANAGER = [
+        "Food and Menu",
+    ];
     public function GetConnection()
     {
         $con = $this->con();
         date_default_timezone_set('Asia/Manila');
         return $con;
     }
-
+    public function ServiceCategory($category)
+    {
+        if(in_array($category, self::SERVICE_CATEGORY_RESORT_MANAGER)){
+            return true;
+        }
+        if(in_array($category, self::SERVICE_CATEGORY_BEDANDBREAKFAST_MANAGER)){
+            return true;
+        }
+        if(in_array($category, self::SERVICE_CATEGORY_RENTALVEHICLE_MANAGER)){
+            return true;
+        }
+        if(in_array($category, self::SERVICE_CATEGORY_TOURISTATTRACTION_MANAGER)){
+            return true;
+        }
+        if(in_array($category, self::SERVICE_CATEGORY_RESTOCAFE_MANAGER)){
+            return true;
+        }
+        return false;
+    }
     public function ExtractFileData($file, $type)
     {
         $fileName = $file['name'];
@@ -36,6 +70,9 @@ class User extends Connection
             return [$fileName, $fileTmp, $fileExt, $fileDest, $fileNewName];
         }if($type=='logo'){
             $fileDest = "../../user/assets/logo/$fileNewName";
+            return [$fileName, $fileTmp, $fileExt, $fileDest, $fileNewName];
+        }if($type=='service'){
+            $fileDest = "../../images/services/$fileNewName";
             return [$fileName, $fileTmp, $fileExt, $fileDest, $fileNewName];
         }
         return false;
@@ -241,7 +278,7 @@ class User extends Connection
         $con = $this->GetConnection();
         $date = date('Y-m-d H:i:s');
         $stmt = $con->prepare("SELECT id, image,email, type, status FROM users WHERE id=? && type=? && status=?");
-         $executeResult = $stmt->execute([$id, $type, self::STATUS_PENDING]);
+        $executeResult = $stmt->execute([$id, $type, self::STATUS_PENDING]);
         if ($executeResult) {
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             $img =  $result['image'];
@@ -280,10 +317,10 @@ class User extends Connection
         $result = $stmt->execute([$type, $id]);
         return $result;
     }
-    public function GetBusinessManager(){
+    public function GetBusinessManager($id){
         $con = $this->GetConnection();
-        $stmt = $con->prepare("SELECT * FROM business");
-        $executeResult = $stmt->execute();
+        $stmt = $con->prepare("SELECT * FROM business WHERE manager_id=?");
+        $executeResult = $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
     public function InsertBusinessManager($file, $businessname, $id, $businesstype){
@@ -315,4 +352,15 @@ class User extends Connection
         }
         return false;
     }
+    public function GetUserData($id, $type)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM users WHERE id=? && type=?");
+
+        $stmt->execute([$id, $type]);
+
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+
 }

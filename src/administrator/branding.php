@@ -110,6 +110,7 @@
             </main>
         </div>
     </div>
+    <script src="js/load.js"></script>
     <script src="js/branding.js"></script>
 </body>
 </html>

@@ -49,5 +49,6 @@
             </main>
         </div>
     </div>
+    <script src="js/load.js"></script>
 </body>
 </html>

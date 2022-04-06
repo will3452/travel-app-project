@@ -3,7 +3,7 @@ class Connection{
     private $servername = "127.0.0.1";
     private $username = "root";
     private $password = "";
-    private $dbname = "sample";
+    private $dbname = "travel_guide";
 
     public function con(){
         try {

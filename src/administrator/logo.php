@@ -100,6 +100,7 @@
             </main>
         </div>
     </div>
+    <script src="js/load.js"></script>
     <script src="js/logo.js"></script>
 </body>
 </html>

@@ -2,7 +2,9 @@
      include_once '../../vendor/autoload.php';
      include_once 'process/LoginStatus.php';
      $User = new User;
-     $GetBusinessManager = $User->GetBusinessManager();
+     $GetUserID = $User->GetUserID($email);
+     $iduser = $GetUserID->id;
+     $GetBusinessManager = $User->GetBusinessManager($iduser);
      $businessname = '';
      $businesslogo = '';  
      $businesstype = '';  

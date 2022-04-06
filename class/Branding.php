@@ -1,7 +1,8 @@
 <?php
 
 class Branding extends User{
-    public function CheckBranding($name, $description) { // why u pass param and yet you don't using it ?
+    public function CheckBranding() { // why u pass param and yet you don't using it ?
+                                      //okays na bro
 
         $con = $this->GetConnection();
 
@@ -13,7 +14,7 @@ class Branding extends User{
     }
     public function BrandingProcess($name, $description){
         $con = $this->GetConnection();
-        $check = $this->CheckBranding($name, $description);
+        $check = $this->CheckBranding();
         if($check>0){
             $prepareStatement  = "UPDATE `branding` SET `name`=?, `description`=?";
             $stmt = $con->prepare($prepareStatement);

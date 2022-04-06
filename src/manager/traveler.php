@@ -34,10 +34,13 @@
             <main>
                 <div class="container-fluid px-4">
                     <p class="mt-4 edit-title">Traveler</p>
-
+                    <?php
+                        include '_TABLE_UI/traveler-table.php'; 
+                    ?>
                 </div>
             </main>
         </div>
     </div>
+    <script src="js/traveler.js?v=6"></script>
 </body>
 </html>
