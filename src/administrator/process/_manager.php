@@ -2,6 +2,7 @@
     include_once '../../../vendor/autoload.php';
     $User = new User;
     $Validator = new Validator;
+    $Payment = new Payment;
     if(isset($_POST['token_accept_manager'])){
         $token_accept_manager = $_POST['token_accept_manager'];
         $id_get = $_POST['id_get'];
@@ -112,6 +113,27 @@
             if($ValidateFields==1){
                 $BanAccount = $User->BanAndUnbanAccount($id_get_un, $User::BLOCK_STATUS_UNBAN);
                 if($BanAccount==1){
+                    echo "success";
+                }else{
+                    echo "error";
+                }
+            }else{
+                echo "empty";
+            }
+        }else{
+            echo "invalidtoken";
+        }
+    }
+    //delete pop
+    elseif(isset($_POST['token_Delete_POP_manager'])){
+        $token = $_POST['token_Delete_POP_manager'];
+        $pop = $_POST['pop'];
+        $ValidateToken = $Validator->ValidateToken($token);
+        if($ValidateToken==1){
+            $ValidateFields = $Validator->ValidateFields($pop, $token);
+            if($ValidateFields==1){
+                $Delete = $Payment->DeletePayment($pop);
+                if($Delete==1){
                     echo "success";
                 }else{
                     echo "error";

@@ -34,6 +34,10 @@ $sidebaroutside ='
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-copyright"></i></div>
                             Business
                         </a>
+                        <a class="nav-link" href="payment-history">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-money-bill"></i></div>
+                            Payment History
+                        </a>
                         <a class="nav-link" href="profile">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
                             Profile
@@ -76,6 +80,10 @@ $sidebarinside ='
                         <a class="nav-link" href="../business">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-copyright"></i></div>
                             Business
+                        </a>
+                        <a class="nav-link" href="../payment-history">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-money-bill"></i></div>
+                            Payment History
                         </a>
                         <a class="nav-link" href="../profile">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>

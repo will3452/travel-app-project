@@ -7,7 +7,6 @@
     $email = $_SESSION['manager'];
     $GetUserID = $User->GetUserID($email);
     $userid = $GetUserID->id;
-    $userid = $GetUserID->id;
     if(isset($_POST['token_business_submit'])){
         $token_business_submit = $_POST['token_business_submit'];
         $logofile = $_FILES['logofilename'];

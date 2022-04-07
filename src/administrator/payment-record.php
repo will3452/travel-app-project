@@ -15,7 +15,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://kit.fontawesome.com/a66db60870.js" crossorigin="anonymous"></script>
-    <title>Admin - Traveler</title>
+    <title>Admin - Payment Record</title>
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bgnav shadow-sm p-3 mb-5 rounded">
@@ -33,19 +33,17 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <p class="mt-4 edit-title">Traveler</p>
+                    <p class="mt-4 edit-title">Payment Record</p>
 
                     <?php  
                      include '_UI/modal.php';
-                     echo $bantemp;
-                     echo $banperm;
-                     echo $unbantemp;
-                     include '_TABLE_UI/traveler-table.php'; 
+                     echo $deletepop;
+                     include '_TABLE_UI/payment-record-main-table.php'; 
                     ?>
                 </div>
             </main>
         </div>
     </div>
-    <script src="js/traveler.js?v=6"></script>
+    <script src="js/payment-record.js?v=2"></script>
 </body>
 </html>

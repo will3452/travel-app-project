@@ -7,8 +7,11 @@ class Connection{
 
     public function con(){
         try {
+
           $this->pdo = new PDO("mysql:host=$this->servername;port='';dbname=$this->dbname", $this->username, $this->password);
+        
         } catch(PDOException $e) {
+            
             die($e->getMessage());
         }
         return $this->pdo;

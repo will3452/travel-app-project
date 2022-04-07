@@ -115,7 +115,7 @@
                                                     <img id="vievimage" src="../images/users/<?php echo $dis['image']; ?>" alt="">
                                                 </div>
                                             </td>
-                                            <td><a href="#"><?php echo $dis['email']; ?></a></td>
+                                            <td><a href="view/traveler-data?traveler_id=<?php  echo $dis['id']; ?>"><?php echo $dis['email']; ?></a></td>
                                             <td data-target="name"><?php echo $dis['first_name'].' '.$dis['last_name']; ?></td>
                                             <td><?php echo $dis['subcribed_at']; ?></td>
                                             <td><?php

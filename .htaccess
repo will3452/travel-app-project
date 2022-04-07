@@ -18,3 +18,5 @@ RedirectMatch 403 ^/src/administrator/_UI
 RedirectMatch 403 ^/src/administrator/_TABLE_UI
 # RewriteRule .*\.(wav|swf|jpg|jpeg|gif|png|bmp|js|css)$ - [F,NC,L]
 Options -Indexes
+
+

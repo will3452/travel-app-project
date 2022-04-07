@@ -2,7 +2,10 @@
 include_once '../../../vendor/autoload.php';
 $User = new User;
 $Validator = new Validator;
+$Payment = new Payment;
 if(isset($_POST['token_register_manager'])){
+    date_default_timezone_set('Asia/Manila');
+    $date = date("Y-m-d");
     $file1 = $_FILES['profile_image'];
     $file2 = $_FILES['pop'];
 
@@ -56,12 +59,17 @@ if(isset($_POST['token_register_manager'])){
                                         if($valephoneexist<1){
                                            $insert = $User->Create($User::USER_TYPE_MANAGER, $first_name, $middle_name, $last_name, $email, $phone, $hashpassword, $file1, $manager_type);
                                             if($insert==1){
-                                                $insertpop = $User->ManagerPOP($email, $file2);
-                                                if($insertpop==1){
-                                                    echo "success";
-                                                }else{
-                                                    echo "error2";
+                                                $GetUserID = $User->GetUserID($email);
+                                                if($GetUserID){
+                                                    $newid = $GetUserID->id;
+                                                    $insertpop = $Payment->ManagerPOP($newid, $file2, $User::ACCOUNT_PAYMENT, $date);
+                                                    if($insertpop==1){
+                                                        echo "success";
+                                                    }else{
+                                                        echo "error2";
+                                                    }
                                                 }
+                                               
                                             }else{
                                                 echo "error1";
                                             }

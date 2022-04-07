@@ -81,7 +81,7 @@ $("#submitForm").on("submit", function(e){
             else if($.trim(d)=='success'){
                 window.location.href="success";
             }else{
-                swal("Error!", "Process Failed", "error");
+                swal("Error!", d, "error");
                 $(".center-loading").hide();
                 $('#span').show();
                 $("#submit").attr("disabled",false);

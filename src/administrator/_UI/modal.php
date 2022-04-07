@@ -125,3 +125,28 @@ $banperm= '<div class="modal banperm" id="exampleModal" tabindex="-1" role="dial
     </div>
   </form>
 </div>';
+$deletepop= '<div class="modal deletepop" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog closemodal" role="document">
+    <form id="submitmodal_POP" class="modal-content">
+      <input type="hidden" id="token_Delete_POP_manager" name="token_Delete_POP_manager" value='.password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT).'> 
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Proof of Payment</h5>
+        <p class="close_modal">+</p>
+      </div>
+      <div class="modal-body">
+        <p id="name_title">Date: <span class="name_here"></span></p>
+        <input type="hidden" name="pop" id="pop" class="service_id">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" id="popbtn" class="colorbtn width_btn">
+            <span class="span_modal">Process</span>
+            <div class="center-loading-3">
+                        <div class="span5load2"></div>
+                        <div class="span6load2"></div>
+                        <div class="span7load2"></div>
+                    </div>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>';

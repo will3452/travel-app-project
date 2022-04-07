@@ -15,6 +15,7 @@ class Logo extends User
         $numwors = $stmt->rowCount();
 
         if ($numwors>0) {
+
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
             $img =  $result['image'];
@@ -30,7 +31,9 @@ class Logo extends User
             $executeResult = $stmt->execute([$finlenamenew]);
 
             if ($executeResult) {
+
                 move_uploaded_file($filetmp, $filedesti);
+                
                 return true;
             }
             return false;
@@ -40,8 +43,11 @@ class Logo extends User
         $stmt = $con->prepare($prepareStatement);
 
         $executeResult = $stmt->execute([$finlenamenew]);
+
         if ($executeResult){
+
             move_uploaded_file($filetmp, $filedesti);
+
             return true;
         }
         return false;

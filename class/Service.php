@@ -3,7 +3,9 @@
 class Service extends User{
 
     public function Insert($category, $file, $name, $price, $description, $business_id){
+
         $con = $this->GetConnection();
+
         [$fileName, $filetmp, $fileExt, $filedesti, $finlenamenew] = $this->ExtractFileData($file, 'service');
 
         $prepareStatement  = "INSERT INTO `services`(`business_id`, `name`, `remarks`, `price`, `image`, `category`) VALUE(?, ?, ?, ?, ?, ?)";
@@ -16,6 +18,7 @@ class Service extends User{
 
         if ($executeResult) {
              move_uploaded_file($filetmp, $filedesti);
+
              return true;
         }
     }
@@ -37,9 +40,13 @@ class Service extends User{
         $stmt = $con->prepare($qs);
 
         $stmt->execute([$businessid]);
+
         $numwors = $stmt->rowCount();
+
         if ($numwors > 0) {
+
             while($r = $stmt->fetchAll()){
+
                 return $r;
             }
         }
@@ -52,6 +59,7 @@ class Service extends User{
         name LIKE ? && business_id=? ||
         price LIKE ? && business_id=? ||
         category LIKE ? && business_id=?");
+
         $stmt->execute(["%$search%", $businessid, "%$search%", $businessid, "%$search%", $businessid]);
 
         return $stmt->rowCount();
@@ -65,21 +73,31 @@ class Service extends User{
         price LIKE ? && business_id=? ||
         category LIKE ? && business_id=?
         ORDER by $sortName $namesort LIMIT $start, $limit");
-         $stmt->execute(["%$search%", $businessid, "%$search%", $businessid, "%$search%", $businessid]);
+
+        $stmt->execute(["%$search%", $businessid, "%$search%", $businessid, "%$search%", $businessid]);
         $numwors = $stmt->rowCount();
+
         if ($numwors > 0) {
+            
             while($r = $stmt->fetchAll()){
+
                 return $r;
             }
         }
     }
 
     public function CheckServiceExist($service_id, $businessid){
+
         $con = $this->GetConnection();
+
         $stmt = $con->prepare("SELECT * FROM services WHERE id=? && business_id=?");
+
         $executeResult = $stmt->execute([$service_id, $businessid]);
+
         $check = $stmt->rowCount();
+
         if ($check>0) {
+
             return $stmt->fetch(PDO::FETCH_OBJ);
         }
         return false;
@@ -87,15 +105,23 @@ class Service extends User{
     public function Delete($service_id, $businessid)
     {
         $con = $this->GetConnection();
+
         $result = $this->CheckServiceExist($service_id, $businessid);
+
         if($result){
+
             $img =  $result->image;
 
             $olddist = "../../images/services/$img"; //old profile
+
             unlink($olddist);
+
             $stmt = $con->prepare("DELETE FROM `services` WHERE id=? && business_id=?");
+
             $true = $stmt->execute([$service_id, $businessid]);
+
             if ($true) {
+
                 return $true;
             }
         }return false;
@@ -104,23 +130,39 @@ class Service extends User{
     public function Update($category, $file, $name, $price, $description, $businessid, $service_id)
     {
         $con = $this->GetConnection();
+
         $result = $this->CheckServiceExist($service_id, $businessid);
+
         if($result){
+
             $img =  $result->image;
+
             if(empty($file['name'])){
+
                 $stmt = $con->prepare("UPDATE `services` SET name=?, remarks=?, price=?, category=? WHERE id=? && business_id=?");
+                
                 $true = $stmt->execute([$name, $description, $price, $category, $service_id, $businessid]);
+                
                 if ($true) {
+                   
                     return $true;
                 }
             }else{
+                
                 $olddist = "../../images/services/$img"; //old profile
+                
                 unlink($olddist);
+                
                 [$fileName, $filetmp, $fileExt, $filedesti, $finlenamenew] = $this->ExtractFileData($file, 'service');
+                
                 $stmt = $con->prepare("UPDATE `services` SET name=?, remarks=?, price=?, category=?, image=? WHERE id=? && business_id=?");
+                
                 $true = $stmt->execute([$name, $description, $price, $category, $finlenamenew, $service_id, $businessid]);
+                
                 if ($true) {
+
                     move_uploaded_file($filetmp, $filedesti);
+
                     return $true;
                 }
             }

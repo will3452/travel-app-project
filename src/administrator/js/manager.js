@@ -116,6 +116,14 @@ $(document).on('click','#unblockuser',function(){
     $(".unbantemp").fadeIn();
     $("#id_get_un").val(manager);
 });
+$(document).on('click','#showinfo',function(){
+    var id = $(this).attr("data-id");
+    window.location.href="view/manager-data?manager_id="+id;
+});
+$(document).on('click','#updateuser',function(){
+    var id = $(this).attr("data-id");
+    window.location.href="update/update-manager?manager_id="+id;
+});
 $(document).on('click','.close_modal',function(){
     $(".name_here").text("");
     $(".acceptpendingmanager").fadeOut();

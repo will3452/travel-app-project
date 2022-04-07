@@ -73,6 +73,14 @@ $(document).on('click','.close_modal',function(){
     $(".unbantemp").fadeOut();
     $("#id_get_un").val("");
 });
+$(document).on('click','#showinfo',function(){
+    var id = $(this).attr("data-id");
+    window.location.href="view/traveler-data?traveler_id="+id;
+});
+$(document).on('click','#updateuser',function(){
+    var id = $(this).attr("data-id");
+    window.location.href="update/update-traveler?traveler_id="+id;
+});
  //ban temp
  $("#submitmodal_temp").on("submit", function(e){
     e.preventDefault(e);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2022 at 11:16 AM
+-- Generation Time: Apr 07, 2022 at 11:06 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.28
 
@@ -167,7 +167,8 @@ INSERT INTO `logo` (`id`, `image`) VALUES
 CREATE TABLE `manager_pop` (
   `id` int(255) NOT NULL,
   `img` varchar(255) NOT NULL,
-  `manager_email` varchar(255) NOT NULL,
+  `manager_id` int(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -175,12 +176,11 @@ CREATE TABLE `manager_pop` (
 -- Dumping data for table `manager_pop`
 --
 
-INSERT INTO `manager_pop` (`id`, `img`, `manager_email`, `date`) VALUES
-(29, '624bd8a5b1f015.66812437.220405015029.png', 'leojr.corpuz@gmail.com', '2022-04-05 05:50:29'),
-(30, '624d23ca0523e4.57057638.220406012322.png', 'williamgalas@gmail.com', '2022-04-06 05:23:22'),
-(31, '624d23fa2e9a20.53312099.220406012410.png', 'jemflores@gmail.com', '2022-04-06 05:24:10'),
-(32, '624d2422a4eab5.19281588.220406012450.png', 'davebamba@gmail.com', '2022-04-06 05:24:50'),
-(33, '624d2438e79087.74969502.220406012512.png', 'xaviercruz@gmail.com', '2022-04-06 05:25:12');
+INSERT INTO `manager_pop` (`id`, `img`, `manager_id`, `type`, `date`) VALUES
+(29, '624bd8a5b1f015.66812437.220405015029.png', 41, 'account payment', '2022-04-05 05:50:29'),
+(30, '624d23ca0523e4.57057638.220406012322.png', 43, 'account payment', '2022-04-06 05:23:22'),
+(31, '624d23fa2e9a20.53312099.220406012410.png', 44, 'account payment', '2022-04-06 05:24:10'),
+(41, '624ea5aae133b0.43546182.220407044946.jpg', 41, 'account payment', '2022-04-07 08:49:46');
 
 -- --------------------------------------------------------
 
@@ -209,6 +209,27 @@ CREATE TABLE `packages` (
   `days` varchar(255) NOT NULL,
   `price` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pricing`
+--
+
+CREATE TABLE `pricing` (
+  `id` int(255) NOT NULL,
+  `account_pricing` decimal(10,2) NOT NULL,
+  `account_details` longtext NOT NULL,
+  `promotion_pricing` decimal(10,2) NOT NULL,
+  `promotion_details` longtext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pricing`
+--
+
+INSERT INTO `pricing` (`id`, `account_pricing`, `account_details`, `promotion_pricing`, `promotion_details`) VALUES
+(1, '10000.00', '-monthly payment', '1000.00', '-week of promotion of your product');
 
 -- --------------------------------------------------------
 
@@ -312,7 +333,8 @@ INSERT INTO `users` (`id`, `first_name`, `middle_name`, `last_name`, `email`, `p
 (43, 'william', 'g', 'galas', 'williamgalas@gmail.com', '09995567893', '$2y$10$EaMOLWWX4cKMNa62zfa8nObR1xVq92nKBWOIPuet4xVPGzagvrCNe', 'manager', 'Bed and breakfast manager', '2022-04-06 05:26:13', '624d23c9e71b15.70251466.220406012321.jpg', 'active', ''),
 (44, 'jem irall', 'g', 'flores', 'jemflores@gmail.com', '09995432341', '$2y$10$aXUzcSfcyM02FwdSJTRWa.x79p3qELNLmspoQSycEvXOB1CFRhgGu', 'manager', 'Rental vehicle manager', '2022-04-06 05:26:08', '624d23fa24e307.22292957.220406012410.png', 'active', ''),
 (45, 'dave', 'g', 'bamba', 'davebamba@gmail.com', '09995432300', '$2y$10$xmP4o/OAZRdQIMNGRfcyJeuEbDk4DdeW.9YzHPzWwpw88ClYPR5vW', 'manager', 'tourist attraction manager', '2022-04-06 05:26:04', '624d24229b7bf4.58307816.220406012450.png', 'active', ''),
-(46, 'xavier', 'g', 'cruz', 'xaviercruz@gmail.com', '09995432355', '$2y$10$aA5pGi9RDjlGEpbYpWKKdeOQz/G5ZQpYbPXGewDFws5e8CvlTxflC', 'manager', 'Resto and cafe manager', '2022-04-06 05:25:59', '624d2438e0b4f1.97615793.220406012512.png', 'active', '');
+(46, 'xavier', 'g', 'cruz', 'xaviercruz@gmail.com', '09995432355', '$2y$10$aA5pGi9RDjlGEpbYpWKKdeOQz/G5ZQpYbPXGewDFws5e8CvlTxflC', 'manager', 'Resto and cafe manager', '2022-04-06 05:25:59', '624d2438e0b4f1.97615793.220406012512.png', 'active', ''),
+(48, 'Beatriz', 'A', 'Hanna', 'beatriz@gmail.com', '09992223412', '$2y$10$oyrRSFXq4fyUcgZUXgQsr.dFvCGUT6aNWqSwNb75Qe4VID9zTKihi', 'manager', 'Resort manager', '2022-04-07 05:24:57', '624e6897567bf9.03206307.220407122911.jpg', 'active', '');
 
 --
 -- Indexes for dumped tables
@@ -382,6 +404,12 @@ ALTER TABLE `notifications`
 -- Indexes for table `packages`
 --
 ALTER TABLE `packages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pricing`
+--
+ALTER TABLE `pricing`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -464,7 +492,7 @@ ALTER TABLE `logo`
 -- AUTO_INCREMENT for table `manager_pop`
 --
 ALTER TABLE `manager_pop`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -477,6 +505,12 @@ ALTER TABLE `notifications`
 --
 ALTER TABLE `packages`
   MODIFY `id` int(255) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `pricing`
+--
+ALTER TABLE `pricing`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `reservation`
@@ -500,7 +534,7 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

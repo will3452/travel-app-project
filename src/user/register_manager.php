@@ -16,6 +16,13 @@
      if($Getlogo){
         $logoimage = $Getlogo->image;
      }
+     $GetPricing = $Gcash->GetPricing();
+     $account_pricing = '';
+     $account_details = '';
+     if($GetPricing){
+        $account_pricing = $GetPricing->account_pricing;
+        $account_details = $GetPricing->account_details;
+     }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -98,6 +105,8 @@
                             <div id="id_div">
                                 <p>Account Name: <span><?php echo ucwords($accountname); ?></span></p>
                                 <p>Account Number: <span><?php echo $accountnum; ?></span></p>
+                                <p>Account Price: <span>₱<?php echo $account_pricing; ?></span></p>
+                                <p>Account Price Details: <span><?php echo $account_details; ?></span></p>
                             </div>
                     </div>
                     <div class="input-container2">
@@ -122,6 +131,6 @@
             </div>
         </div>
     </div>
-    <script src="js/register_manager.js?v=3"></script>
+    <script src="js/register_manager.js?v=4"></script>
 </body>
 </html>
