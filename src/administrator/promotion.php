@@ -34,12 +34,16 @@
             <main>
                 <div class="container-fluid px-4">
                     <p class="mt-4 edit-title">Promotion</p>
-                    <!--loading here !-->
-                    
-
+                    <div class="button-add-emp-g">
+                        <a href="create/create-promotion"> <button id="addbtnuser">Create Promo</button></a>
+                    </div>
+                    <?php 
+                        include '_TABLE_UI/promotion-table.php'; 
+                    ?>
                 </div>
             </main>
         </div>
     </div>
+    <script src="js/promotion.js"></script>
 </body>
 </html>

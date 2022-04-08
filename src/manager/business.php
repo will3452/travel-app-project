@@ -4,14 +4,13 @@
      $User = new User;
      $GetUserID = $User->GetUserID($email);
      $iduser = $GetUserID->id;
+     $businesstype = $GetUserID->maneger_type;
      $GetBusinessManager = $User->GetBusinessManager($iduser);
      $businessname = '';
      $businesslogo = '';  
-     $businesstype = '';  
      if($GetBusinessManager){
         $businessname = $GetBusinessManager->name;
         $businesslogo = $GetBusinessManager->logo;
-        $businesstype = $GetBusinessManager->type;
      }
 ?>
 <!DOCTYPE html>
@@ -66,6 +65,14 @@
                                         <i class="far fa-image" id="iamge-empty"></i>
                                     <?php endif; ?>
                             </div>
+                            <div class="rowss">
+                                    <div id="id_div">
+                                        <p>Business Type:</p>
+                                    </div>
+                                    <div id="idcontent">
+                                        <p><?php echo $businesstype; ?></p>
+                                    </div>
+                            </diV>
                             <form id="submitForm">  
                                 <div class="rowss">
                                     <div id="id_div">
@@ -74,7 +81,7 @@
                                             <?php else: ?>
                                                 <p>Add Business Logo <span style="color:red;">*</span></p>
                                             <?php endif; ?>
-                                            <p style="color:red;">Note: logo must have dimensions 3500 x 900</p>
+                                            <p style="color:red;">Note: logo must have dimensions 770 x 600</p>
                                     </div>
                                     <div id="idcontent">
                                         <?php 
@@ -92,16 +99,6 @@
                                     </div>
                                     <div id="idcontent">
                                         <input type="text" name="businessname" required id="businessname" value="<?php echo $businessname; ?>" placeholder="Business Name" class="focusinput">
-                                    </div>
-                                    <div id="id_div">
-                                            <?php if($GetBusinessManager): ?>
-                                                <p>Update Business Type <span style="color:red;">*</span></p>
-                                            <?php else: ?>
-                                                <p>Add Business Type <span style="color:red;">*</span></p>
-                                            <?php endif; ?>
-                                    </div>
-                                    <div id="idcontent">
-                                        <input type="text" name="businesstype" required id="businesstype" value="<?php echo $businesstype; ?>" placeholder="Business Name" class="focusinput">
                                     </div>
                                 </div>
                                 <div class="button-add-emp" id="logo-btn">

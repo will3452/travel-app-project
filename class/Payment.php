@@ -1,7 +1,7 @@
 <?php
 
 class Payment extends User{
-    
+   
     public function ManagerPOP($id, $file, $type, $date)
     {
         $con = $this->GetConnection();
@@ -21,6 +21,41 @@ class Payment extends User{
         if ($executeResult) {
             move_uploaded_file($filetmp, $filedesti);
             return true;
+        }
+
+        return false;
+    }
+    public function InsertPOP($popnewname, $userid, $type)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("INSERT INTO `manager_pop`(`img`, `manager_id`, `type`) VALUE(?, ?, ?)");
+
+        $executeResult = $stmt->execute([$popnewname, $userid, $type]);
+
+        if ($executeResult) {
+
+            return true;
+        }
+
+        return false;
+    }
+    public function AdsPOP($userid, $adsimage, $imagepop, $promo_id, $date)
+    {
+        $con = $this->GetConnection();
+
+        [$fileName, $filetmp, $fileExt ,$filedesti, $finlenamenew] = $this->ExtractFileData($imagepop, 'pop');
+
+        [$fileName2, $filetmp2, $fileExt2 ,$filedesti2, $finlenamenew2] = $this->ExtractFileData($adsimage, 'ads');
+
+        $stmt = $con->prepare("INSERT INTO `advertisement`(`image`, `manager_id`, `status`, `package_id`, `pop`, `schedule_at`) VALUE(?, ?, ?, ?, ?, ?)");
+
+        $executeResult = $stmt->execute([$finlenamenew2, $userid, 'pending', $promo_id, $finlenamenew, $date]);
+
+        if ($executeResult) {
+            move_uploaded_file($filetmp, $filedesti);
+            move_uploaded_file($filetmp2, $filedesti2);
+            return $finlenamenew;
         }
 
         return false;

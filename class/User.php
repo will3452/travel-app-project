@@ -88,6 +88,12 @@ class User extends Connection
 
             return [$fileName, $fileTmp, $fileExt, $fileDest, $fileNewName];
 
+        }if($type=='ads'){
+
+            $fileDest = "../../images/ads/$fileNewName";
+
+            return [$fileName, $fileTmp, $fileExt, $fileDest, $fileNewName];
+
         }
         return false;
     }
@@ -419,5 +425,121 @@ class User extends Connection
 
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
+    public function BusinessPageSort()
+    {
+        $con = $this->GetConnection();
 
+        $stmt = $con->prepare("SELECT * FROM business");
+
+        $stmt->execute();
+
+        return $stmt->rowCount();
+    }
+    public function BusinessFetctSort($limit, $start, $namesort, $sortName)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM business ORDER by $sortName $namesort LIMIT $start, $limit";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute();
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+            }
+        }
+    }
+    public function BusinessPageSortWithCategory($category)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM business WHERE type LIKE ?");
+
+        $stmt->execute(["%$category%"]);
+
+        return $stmt->rowCount();
+    }
+    public function BusinessFetctSortWithCategory($limit, $start, $category, $namesort, $sortName)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM business WHERE type LIKE ? ORDER by $sortName $namesort LIMIT $start, $limit";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute(["%$category%"]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+            }
+        }
+    }
+    
+    public function BusinessPageSortWithSearch($search)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM business WHERE name LIKE ?");
+
+        $stmt->execute(["%$search%"]);
+
+        return $stmt->rowCount();
+    }
+    public function BusinessFetctSortWithSearch($limit, $start, $search, $namesort, $sortName)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM business WHERE name LIKE ? ORDER by $sortName $namesort LIMIT $start, $limit";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute(["%$search%"]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+            }
+        }
+    }
+    public function BusinessPageSortWithSearchAndCategory($search, $category)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM business WHERE name LIKE ? AND type like ?");
+
+        $stmt->execute(["%$search%", "%$category%"]);
+
+        return $stmt->rowCount();
+    }
+    public function BusinessFetctSortWithSearchAndCategory($limit, $start, $search, $category, $namesort, $sortName)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM business WHERE name LIKE ? AND type like  ? ORDER by $sortName $namesort LIMIT $start, $limit";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute(["%$search%", "%$category%"]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+            }
+        }
+    }
 }

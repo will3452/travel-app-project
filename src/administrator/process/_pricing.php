@@ -5,18 +5,14 @@
     if(isset($_POST['token_pricing_submit'])){
         $price_ac = $_POST['price_ac'];
         $description_acc_price = $_POST['description_acc_price'];
-        $price_pr = $_POST['price_pr'];
-        $description_pr_price = $_POST['description_pr_price'];
         $token_pricing_submit = $_POST['token_pricing_submit'];
         $ValidateToken = $Validator->ValidateToken($token_pricing_submit);
         if($ValidateToken==1){
-            $ValidateFields = $Validator->ValidateFields($price_ac, $description_acc_price, $price_pr, $description_pr_price);
+            $ValidateFields = $Validator->ValidateFields($price_ac, $description_acc_price);
             if($ValidateFields==1){
-                $ValidateContact = $Validator->ValidateContact($price_pr);
-                if($ValidateContact>0){
                     $ValidateContact = $Validator->ValidateContact($price_ac);
                     if($ValidateContact>0){
-                        $PricinghProcess = $Gcash->PricinghProcess($price_ac, $description_acc_price, $price_pr, $description_pr_price);
+                        $PricinghProcess = $Gcash->PricinghProcess($price_ac, $description_acc_price);
                         if($PricinghProcess==1){
                             echo "success";
                         }else{
@@ -25,9 +21,6 @@
                     }else{
                         echo "invnum";
                     }
-                }else{
-                    echo "invnum";
-                }
             }else{
                 echo "empty";
             }

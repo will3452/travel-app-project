@@ -5,13 +5,9 @@
      $GetPricing = $Gcash->GetPricing();
      $account_pricing = '';
      $account_details = '';
-     $promotion_pricing = '';
-     $promotion_details = '';
      if($GetPricing){
         $account_pricing = $GetPricing->account_pricing;
         $account_details = $GetPricing->account_details;
-        $promotion_pricing = $GetPricing->promotion_pricing;
-        $promotion_details = $GetPricing->promotion_details;
      }
 ?>
 <!DOCTYPE html>
@@ -91,28 +87,6 @@
                                     </div>
                                     <div id="idcontent">
                                         <textarea name="description_acc_price" id="description" placeholder="----- --- ------ --- ---" class="focusinput"><?php echo $account_details; ?></textarea>
-                                    </div>
-                                </div>
-                                <div class="rowss">
-                                    <div id="id_div">
-                                            <?php if($GetPricing): ?>
-                                                <p>Update Promotion Price <span style="color:red;">*</span></p>
-                                            <?php else: ?>
-                                                <p>Promotion Price <span style="color:red;">*</span></p>
-                                            <?php endif; ?>
-                                        </div>
-                                        <div id="idcontent">
-                                            <input type="number" name="price_pr" required id="price_pr" value="<?php echo $promotion_pricing; ?>" class="focusinput">
-                                        </div>
-                                        <div id="id_div">
-                                            <?php if($GetPricing): ?>
-                                                <p>Update Promotion Price Details <span style="color:red;">*</span></p>
-                                            <?php else: ?>
-                                                <p>Promotion Price Details<span style="color:red;">*</span></p>
-                                            <?php endif; ?>
-                                        </div>
-                                    <div id="idcontent">
-                                            <textarea name="description_pr_price" id="description" placeholder="----- --- ------ --- ---" class="focusinput"><?php echo $promotion_details; ?></textarea>
                                     </div>
                                 </div>
                                 <div class="button-add-emp" id="logo-btn">

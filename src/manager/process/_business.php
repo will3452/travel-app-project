@@ -7,11 +7,11 @@
     $email = $_SESSION['manager'];
     $GetUserID = $User->GetUserID($email);
     $userid = $GetUserID->id;
+    $businesstype = $GetUserID->maneger_type;
     if(isset($_POST['token_business_submit'])){
         $token_business_submit = $_POST['token_business_submit'];
         $logofile = $_FILES['logofilename'];
         $businessname = $_POST['businessname'];
-        $businesstype = $_POST['businesstype'];
         $ValidateToken = $Validator->ValidateToken($token_business_submit);
         if($ValidateToken==1){
             $ValidateImage = $Validator->ValidateImage($logofile);
@@ -25,7 +25,7 @@
             }elseif($Validator->ValidateImage($logofile)==='fileoversize'){
                 echo "FOS";
             }else{
-                $ValidateFields = $Validator->ValidateFields($businessname, $businesstype, $logofile);
+                $ValidateFields = $Validator->ValidateFields($businessname, $logofile);
                 if($ValidateFields==1){
                     $InsertBusinessManager = $User->InsertBusinessManager($logofile, $businessname, $userid, $businesstype);
                     if($InsertBusinessManager==1){

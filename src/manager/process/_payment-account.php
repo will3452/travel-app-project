@@ -4,6 +4,7 @@
     $Validator = new Validator;
     $Payment = new Payment;
     $User = new User;
+    $Promotion = new Promotion;
     $email = $_SESSION['manager'];
     $GetUserID = $User->GetUserID($email);
     $userid = $GetUserID->id;
@@ -42,6 +43,71 @@
                 }
             }
         }else{
+            echo "tokeninvalid";
+        }
+    }
+    elseif(isset($_POST['token_create_promo'])){
+        $token = $_POST['token_create_promo'];
+        $promo_id = $_POST['promo_id'];
+        $date = $_POST['date'];
+        $adsimage = $_FILES['image'];
+        $imagepop = $_FILES['imagepop'];
+        if($Validator->ValidateToken($token)){
+            $validateimage = $Validator->ValidateImage($adsimage);
+            if($Validator->ValidateImage($adsimage)==='emp'){
+                echo "EMP";
+            }elseif($Validator->ValidateImage($adsimage)==='fileexterror'){
+                echo "FNA";
+            }
+            elseif($Validator->ValidateImage($adsimage)==='fileeror'){
+                echo "FE";
+            }elseif($Validator->ValidateImage($adsimage)==='fileoversize'){
+                echo "FOS";
+            }else{
+                $validateimage = $Validator->ValidateImage($imagepop);
+                if($Validator->ValidateImage($imagepop)==='emp'){
+                    echo "EMP";
+                }elseif($Validator->ValidateImage($imagepop)==='fileexterror'){
+                    echo "FNA";
+                }
+                elseif($Validator->ValidateImage($imagepop)==='fileeror'){
+                    echo "FE";
+                }elseif($Validator->ValidateImage($imagepop)==='fileoversize'){
+                    echo "FOS";
+                }else{
+                    $Fields = $Validator->ValidateFields($adsimage, $imagepop, $token, $date, $promo_id);
+                    if($Fields){
+                        $ValidateDate = $Validator->ValidateDate($date);
+                        if($ValidateDate==1){
+                            //check if promo id exist
+                            $ValPromo = $Promotion->GetPromoData($promo_id);
+                            if($ValPromo){
+                                $Insert = $Payment->AdsPOP($userid, $adsimage, $imagepop, $promo_id, $date);
+                                if($Insert){
+                                    $popnewname =  $Insert;
+                                    $Insertpop = $Payment->InsertPOP($popnewname, $userid, $User::PROMOTION_PAYMENT);
+                                    if($Insertpop==1){
+                                        //notification
+                                        echo "success";
+                                    }else{
+                                        echo "error";
+                                    }
+                                }else{
+                                    echo "error";
+                                }
+                            }else{
+                                echo "invid";
+                            }
+                        }else{
+                            echo "invdate";
+                        }
+                    }else{
+                        echo "emp";
+                    }
+                }
+            }
+        }
+        else{
             echo "tokeninvalid";
         }
     }

@@ -26,8 +26,12 @@ $sidebaroutside ='
                             Reservation
                         </a>
                         <a class="nav-link" href="promotion">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-rectangle-ad"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-box"></i></div>
                             Promotion
+                        </a>
+                        <a class="nav-link" href="advertisement">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-rectangle-ad"></i></div>
+                            Advertisement
                         </a>
                         <div class="sb-sidenav-menu-heading">Setting</div>
                         <a class="nav-link" href="business">
@@ -73,8 +77,12 @@ $sidebarinside ='
                             Reservation
                         </a>
                         <a class="nav-link" href="../promotion">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-rectangle-ad"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-box"></i></div>
                             Promotion
+                        </a>
+                        <a class="nav-link" href="../advertisement">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-rectangle-ad"></i></div>
+                            Advertisement
                         </a>
                         <div class="sb-sidenav-menu-heading">Setting</div>
                         <a class="nav-link" href="../business">

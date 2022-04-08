@@ -34,8 +34,12 @@ $sidebaroutside ='
                             Subscription
                         </a>
                         <a class="nav-link" href="promotion">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-rectangle-ad"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-box"></i></div>
                             Promotion
+                        </a>
+                        <a class="nav-link" href="avail-ads">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-rectangle-ad"></i></div>
+                            Avail Ads
                         </a>
                         <div class="sb-sidenav-menu-heading">Setting</div>
                         <a class="nav-link" href="logo">
@@ -105,8 +109,12 @@ $sidebarinside ='
                             Subscription
                         </a>
                         <a class="nav-link" href="../promotion">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-rectangle-ad"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-box"></i></div>
                             Promotion
+                        </a>
+                        <a class="nav-link" href="../avail-ads">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-rectangle-ad"></i></div>
+                            Avail Ads
                         </a>
                         <div class="sb-sidenav-menu-heading">Setting</div>
                         <a class="nav-link" href="../logo">

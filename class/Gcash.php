@@ -61,7 +61,7 @@ class Gcash extends User
 
         return $stmt->rowCount();
     }
-    public function PricinghProcess($account_pricing, $account_details, $promotion_pricing, $promotion_details){
+    public function PricinghProcess($account_pricing, $account_details){
 
         $con = $this->GetConnection();
 
@@ -69,19 +69,19 @@ class Gcash extends User
         
         if ( $check > 0 ) {
 
-            $prepareStatement  = "UPDATE `pricing` SET `account_pricing`=?, `account_details`=?, `promotion_pricing`=?, `promotion_details`=?";
+            $prepareStatement  = "UPDATE `pricing` SET `account_pricing`=?, `account_details`=?";
 
             $stmt = $con->prepare($prepareStatement);
 
-            $executeResult = $stmt->execute([$account_pricing, $account_details, $promotion_pricing, $promotion_details]);
+            $executeResult = $stmt->execute([$account_pricing, $account_details]);
 
             return $executeResult;
         }
-        $prepareStatement  = "INSERT INTO `pricing`(`account_pricing`, `account_details`, `promotion_pricing`, `promotion_details`) VALUE(?, ?, ?, ?)";
+        $prepareStatement  = "INSERT INTO `pricing`(`account_pricing`, `account_details`) VALUE(?, ?)";
 
         $stmt = $con->prepare($prepareStatement);
 
-        $executeResult = $stmt->execute([$account_pricing, $account_details, $promotion_pricing, $promotion_details]);
+        $executeResult = $stmt->execute([$account_pricing, $account_details]);
 
         return $executeResult;
     }
