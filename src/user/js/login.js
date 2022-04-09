@@ -48,7 +48,7 @@ $("#submitForm").on("submit", function(e){
                 window.location.href="../administrator/dashboard";
             }
             else if($.trim(d)==='traveler'){
-                window.location.href="../traveler/dashboard";
+                window.location.href="../traveler/host-list";
             }
             else if($.trim(d)==='manager'){
                 window.location.href="../manager/dashboard";

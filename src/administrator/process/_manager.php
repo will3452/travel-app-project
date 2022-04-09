@@ -16,7 +16,12 @@
                     //accept
                     $AcceptUser = $User->AcceptUser($User::USER_TYPE_MANAGER, $id_get);
                     if($AcceptUser==1){
-                        echo "success";
+                        $UpdateManagerPOPAccount = $Payment->UpdateManagerPOPAccount($id_get, $User::STATUS_DONE);
+                        if($AcceptUser==1){
+                            echo "success";
+                        }else{
+                            echo "error";
+                        }
                     }else{
                         echo "error";
                     }

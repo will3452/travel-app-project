@@ -85,6 +85,6 @@
             </main>
         </div>
     </div>
-    <script src="js/manager.js?v=8"></script>
+    <script src="js/manager.js?v=10"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 class Payment extends User{
    
-    public function ManagerPOP($id, $file, $type, $date)
+    public function ManagerPOP($id, $file, $type, $date, $status, $price)
     {
         $con = $this->GetConnection();
 
@@ -14,9 +14,9 @@ class Payment extends User{
 
         $newdate = $date.' '.$time;
         
-        $stmt = $con->prepare("INSERT INTO `manager_pop`(`img`, `manager_id`, `type`, `date`) VALUE(?, ?, ?, ?)");
+        $stmt = $con->prepare("INSERT INTO `manager_pop`(`img`, `price`, `manager_id`, `type`, `date`, `status`) VALUE(?, ?, ?, ?, ?, ?)");
 
-        $executeResult = $stmt->execute([$finlenamenew, $id, $type, $newdate]);
+        $executeResult = $stmt->execute([$finlenamenew, $price, $id, $type, $newdate, $status]);
 
         if ($executeResult) {
             move_uploaded_file($filetmp, $filedesti);
@@ -25,13 +25,13 @@ class Payment extends User{
 
         return false;
     }
-    public function InsertPOP($popnewname, $userid, $type)
+    public function InsertPOP($popnewname, $userid, $type, $status, $price)
     {
         $con = $this->GetConnection();
 
-        $stmt = $con->prepare("INSERT INTO `manager_pop`(`img`, `manager_id`, `type`) VALUE(?, ?, ?)");
+        $stmt = $con->prepare("INSERT INTO `manager_pop`(`img`, `price`, `manager_id`, `type`, `status`) VALUE(?, ?, ?, ?, ?)");
 
-        $executeResult = $stmt->execute([$popnewname, $userid, $type]);
+        $executeResult = $stmt->execute([$popnewname, $price, $userid, $type, $status]);
 
         if ($executeResult) {
 
@@ -39,6 +39,16 @@ class Payment extends User{
         }
 
         return false;
+    }
+    public function UpdateManagerPOPAccount($userid, $status)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("UPDATE manager_pop SET status=? WHERE manager_id=?");
+
+        $result = $stmt->execute([$status, $userid]);
+
+        return $result;
     }
     public function AdsPOP($userid, $adsimage, $imagepop, $promo_id, $date)
     {
@@ -219,6 +229,21 @@ class Payment extends User{
                 return true;
             }
             return false;
+        }
+
+        return false;
+    }
+    public function InsertRevenue($price, $userid, $type)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("INSERT INTO `revenue`(`amount`, `user_id`, `type`) VALUE(?, ?, ?)");
+
+        $executeResult = $stmt->execute([$price, $userid, $type]);
+
+        if ($executeResult) {
+
+            return true;
         }
 
         return false;

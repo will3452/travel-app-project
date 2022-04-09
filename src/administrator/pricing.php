@@ -1,12 +1,20 @@
 <?php 
      include_once '../../vendor/autoload.php';
+
      include_once 'process/LoginStatus.php';
+
      $Gcash = new Gcash;
+
      $GetPricing = $Gcash->GetPricing();
+
      $account_pricing = '';
+
      $account_details = '';
+
      if($GetPricing){
+
         $account_pricing = $GetPricing->account_pricing;
+        
         $account_details = $GetPricing->account_details;
      }
 ?>

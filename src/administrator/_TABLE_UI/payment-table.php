@@ -54,6 +54,8 @@
                                             </div>
                                         </th>
                                         <th scope="col">type of payment</th>
+                                        <th scope="col">total</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col"></th>
                                     <?php else: ?>
                                         <th scope="col">
@@ -75,6 +77,8 @@
                                             </div>
                                         </th>
                                         <th scope="col">type of payment</th>
+                                        <th scope="col">total</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col"></th>
                                     <?php endif; ?>
                                     </tr>
@@ -85,6 +89,8 @@
                                             <td id="idss"><?php echo sprintf('%06d', $dis['id'])?></td>
                                             <td data-target="name"><?php echo $dis['date']; ?></td>
                                             <td><?php echo $dis['type']; ?></td>
+                                            <td><?php echo $dis['price']; ?></td>
+                                            <td><?php echo $dis['status']; ?></td>
                                             <td id="btn">
                                                 <div class="d-flex">
                                                     <span class="tip_view_container">

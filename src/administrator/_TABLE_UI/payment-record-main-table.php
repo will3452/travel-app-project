@@ -55,6 +55,8 @@
                                         </th>
                                         <th scope="col">Manager Email</th>
                                         <th scope="col">type of payment</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col"></th>
                                     <?php else: ?>
                                         <th scope="col">
@@ -77,6 +79,8 @@
                                         </th>
                                         <th scope="col">Manager Email</th>
                                         <th scope="col">type of payment</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">Status</th>
                                         <th scope="col"></th>
                                     <?php endif; ?>
                                     </tr>
@@ -92,8 +96,18 @@
                                             ?>
                                             <td><a href="view/manager-data?manager_id=<?php  echo $GetUserData->id; ?>"><?php echo $GetUserData->email; ?></a></td>
                                             <td><?php echo $dis['type']; ?></td>
+                                            <td><?php echo $dis['price']; ?></td>
+                                            <td><?php echo $dis['status']; ?></td>
                                             <td id="btn">
                                                 <div class="d-flex">
+                                                    <?php if($dis['status']=='pending'): ?>
+                                                        <!-- <span class="tip_accept_container">
+                                                            <i class="fas fa-check-circle btns" id="accept" data-id="<?php echo $dis['id']; ?>"></i>
+                                                        <span class="tip_accept">Accept</span> -->
+                                                    </span>
+                                                    <?php else: ?>
+
+                                                    <?php endif; ?>
                                                     <span class="tip_view_container">
                                                         <i class="fa-solid fa-eye btns" id="showinfo" data-id="<?php echo $dis['id']; ?>"></i>
                                                         <span class="tip_view">View</span>

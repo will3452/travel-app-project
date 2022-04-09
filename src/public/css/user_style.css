@@ -1055,6 +1055,10 @@ display: flex;
 }
  @media (min-width:600px){
   .form-container-user .rowss #idcontent img{
+    width:300px;
+  }
+} @media (min-width:900px){
+  .form-container-user .rowss #idcontent img{
     width:500px;
   }
 }
@@ -1070,7 +1074,7 @@ display: flex;
           width: 50%;
           
       }  .imgviews{
-        text-align: left;
+        text-align: center;
       }
       #idcontents .toprevent{
           display:flex;
@@ -1912,7 +1916,7 @@ text-align: center;
       height:10em;
       margin-bottom:1.5em;
       background:none;
-      margin-top:2em;
+      margin-top:1em;
       border-radius:10px;
       box-shadow: 0px 1px 5px 0px rgba(0,0,0,0.2);
       padding:20px 10px 30px 10px;
@@ -3337,4 +3341,52 @@ width: 100%;
               font-weight:700;
               text-decoration:none;
             }
-          
+            .title-services{
+              text-align: center;
+            }
+            .title-services p{
+              font-size: 20px;
+              color: #0095a4;
+              font-weight:700;
+              letter-spacing: 2px;
+              margin: 20px 0 40px 0;
+            }
+            .title2{
+              display: flex;
+              justify-content: space-between;
+            }
+            .title2 p{
+              font-weight:700;
+              color:#0095a4;
+              margin-top: 10px;
+          } 
+          .rowss-operation{
+            width:100%;
+            height:auto;
+            padding:15px 20px 10px 20px;
+            border-bottom:solid 1px #e4e8f2;
+          }
+          .rowss-operation .button-add-emp-66 a button{
+            
+            width: 100%;
+            margin-top: 0;
+            font-size:16px;
+            cursor:pointer;
+            padding:6px 12px;
+            border-radius:5px;
+            border:none;
+            outline:none;
+            background: #0095a4;
+            transition:all ease .35s;
+            color:white;
+            width:100%;
+          }
+          @media (min-width:700px){
+            .rowss-operation{
+              display: flex;
+            }
+           
+            .rowss-operation .button-add-emp-66{
+              margin-right:10px;
+            }
+          }

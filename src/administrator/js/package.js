@@ -18,9 +18,9 @@ $('#search').keyup(function(){
             var search = $("#search").val();
             $("#search").attr('disabled', true);
             if(search==''){
-                window.location.href="promotion";
+                window.location.href="package";
             }else{
-                window.location.href="promotion?search="+search;
+                window.location.href="package?search="+search;
             }
         }, timeouttable);
     }
@@ -34,7 +34,7 @@ $("#search").keyup(function(e){
     }
 });
 $(document).on('click','.clearable__clear_search',function(){
-    window.location.href="promotion";
+    window.location.href="package";
 });
 $(document).on('click','.clearable__clear',function(){
     $(".clearable__clear").hide();

@@ -1,11 +1,18 @@
 <?php 
      include_once '../../../vendor/autoload.php';
+
      include_once '../process/LoginStatus.php';
+
      include_once '../process/id_validation_fetch.php';
+
      if(!isset($_GET['payment_id'])){
+
          header("location:../dashboard");
+
      }
+     
      $idmanager = $paymentdata->manager_id;
+
      $GetUserData = $User->GetUserData($idmanager, $User::USER_TYPE_MANAGER);
 ?>
 <!DOCTYPE html>
@@ -73,6 +80,22 @@
                                 </div>
                                 <div id="idcontent">
                                         <p><?php echo $paymentdata->date; ?></p>
+                                </div>
+                        </div>
+                        <div class="rowss">
+                                <div id="id_div">
+                                        <p>Total</p>
+                                </div>
+                                <div id="idcontent">
+                                        <p><?php echo $paymentdata->price; ?></p>
+                                </div>
+                        </div>
+                        <div class="rowss">
+                                <div id="id_div">
+                                        <p>Payment Status</p>
+                                </div>
+                                <div id="idcontent">
+                                        <p><?php echo $paymentdata->status; ?></p>
                                 </div>
                         </div>
                         <div class="rowss">

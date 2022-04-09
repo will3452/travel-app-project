@@ -5,6 +5,9 @@
     $Payment = new Payment;
     $User = new User;
     $Promotion = new Promotion;
+    $Gcash = new Gcash;
+    $GetPricing = $Gcash->GetPricing();
+    $account_pricing = $GetPricing->account_pricing;
     $email = $_SESSION['manager'];
     $GetUserID = $User->GetUserID($email);
     $userid = $GetUserID->id;
@@ -28,7 +31,7 @@
                 if($Fields){
                     $ValidateDate = $Validator->ValidateDate($date);
                     if($ValidateDate==1){
-                        $Insert = $Payment->ManagerPOP($userid, $pop, $User::ACCOUNT_PAYMENT, $date);
+                        $Insert = $Payment->ManagerPOP($userid, $pop, $User::ACCOUNT_PAYMENT, $date, $User::STATUS_PENDING, $account_pricing);
                         if($Insert==1){
                             //here notif
                             echo "success";
@@ -82,10 +85,11 @@
                             //check if promo id exist
                             $ValPromo = $Promotion->GetPromoData($promo_id);
                             if($ValPromo){
+                                $priceads = $ValPromo->price;
                                 $Insert = $Payment->AdsPOP($userid, $adsimage, $imagepop, $promo_id, $date);
                                 if($Insert){
                                     $popnewname =  $Insert;
-                                    $Insertpop = $Payment->InsertPOP($popnewname, $userid, $User::PROMOTION_PAYMENT);
+                                    $Insertpop = $Payment->InsertPOP($popnewname, $userid, $User::PROMOTION_PAYMENT, $User::STATUS_PENDING, $priceads);
                                     if($Insertpop==1){
                                         //notification
                                         echo "success";

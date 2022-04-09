@@ -177,7 +177,7 @@ $(".close_modal").css({'pointer-events': 'none'});
                     location.reload();
                 }, 1500);
             }else{
-                swal("Error!", "Process Error", "error");
+                swal("Error!", d, "error");
                 $(".center-loading-3").hide();
                 $('.span_modal').show();
                 $("#acceptmanager").attr("disabled",false);
@@ -220,7 +220,7 @@ $("#submitmodal_cancel").on("submit", function(e){
                         location.reload();
                     }, 1500);
                 }else{
-                    swal("Error!", "Process Failed", "error");
+                    swal("Error!", d, "error");
                     $(".center-loading-3").hide();
                     $('.span_modal').show();
                     $("#deletemanager").attr("disabled",false);
@@ -264,7 +264,7 @@ $("#submitmodal_cancel").on("submit", function(e){
                             location.reload();
                         }, 1500);
                     }else{
-                        swal("Error!", "Process Failed", "error");
+                        swal("Error!", d, "error");
                         $(".center-loading-3").hide();
                         $('.span_modal').show();
                         $("#bantempbtn").attr("disabled",false);
@@ -308,7 +308,7 @@ $("#submitmodal_cancel").on("submit", function(e){
                             location.reload();
                         }, 1500);
                     }else{
-                        swal("Error!", "Process Failed", "error");
+                        swal("Error!", d, "error");
                         $(".center-loading-3").hide();
                         $('.span_modal').show();
                         $("#banpermbtn").attr("disabled",false);
@@ -352,7 +352,7 @@ $("#submitmodal_cancel").on("submit", function(e){
                             location.reload();
                         }, 1500);
                     }else{
-                        swal("Error!", "Process Failed", "error");
+                        swal("Error!", d, "error");
                         $(".center-loading-3").hide();
                         $('.span_modal').show();
                         $("#unbantempbtn").attr("disabled",false);

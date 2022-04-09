@@ -35,7 +35,29 @@
                 <div class="container-fluid px-4">
                     <p class="mt-4 edit-title">Subscription</p>
                     <!--loading here !-->
-                    
+                    <!--nav table -->
+                    <div class="overflowtables div-navs">
+                        <div class="locate-nav">    
+                            <div class="locate-div">
+                                <?php if(isset($_GET['tab'])): ?>
+                                    <?php if($_GET['tab']=='ads_sub'): ?>
+                                        <a href="subscription"><button>Account</button></a>
+                                        <a href="#"><button id="activenav">Adverstisement</button></a>
+                                        <input type="hidden" id="usersearch" value="searchpending">
+                                    <?php else: ?>
+                                        <a href="#"><button id="activenav">Account</button></a>
+                                        <a href="?tab=ads_sub"><button>Adverstisement</button></a>
+                                        <input type="hidden" id="usersearch" value="none">
+                                    <?php endif; ?>
+                                <?php else: ?>
+                                    <a href="#"><button id="activenav">Account</button></a>
+                                    <a href="?tab=ads_sub"><button>Adverstisement</button></a>
+                                    <input type="hidden" id="usersearch" value="none">
+                                <?php endif; ?>
+                            </div>    
+                        </div>
+                    </div>
+                    <br>
 
                 </div>
             </main>

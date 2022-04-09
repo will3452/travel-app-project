@@ -4,10 +4,6 @@ $sidebaroutside ='
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading"></div>
-                        <a class="nav-link" href="dashboard">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
-                            Profile
-                        </a>
                         <a class="nav-link" href="host-list">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-house"></i></div>
                             Host List
@@ -28,6 +24,10 @@ $sidebaroutside ='
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-circle-question"></i></div>
                             Inquire
                         </a>
+                        <a class="nav-link" href="dashboard">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
+                            Profile
+                        </a>
                     </div> 
                 </div>
             </nav>
@@ -37,10 +37,6 @@ $sidebarinside ='
             <div class="sb-sidenav-menu">
                 <div class="nav">
                     <div class="sb-sidenav-menu-heading"></div>
-                    <a class="nav-link" href="../dashboard">
-                        <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
-                        Profile
-                    </a>
                     <a class="nav-link" href="../host-list">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-house"></i></div>
                         Host List
@@ -60,6 +56,10 @@ $sidebarinside ='
                     <a class="nav-link" href="../inquire">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-circle-question"></i></div>
                         Inquire
+                    </a>
+                    <a class="nav-link" href="../dashboard">
+                        <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
+                        Profile
                     </a>
                 </div> 
             </div>

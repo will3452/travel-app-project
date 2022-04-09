@@ -1,13 +1,22 @@
 <?php 
      include_once '../../vendor/autoload.php';
+
      include_once 'process/LoginStatus.php';
+
      $Branding = new Branding;
+
      $GetBranding = $Branding->GetBranding();
+
      $brandname = '';
+
      $branddesciption = '';
+
      if($GetBranding){
+
         $brandname = $GetBranding->name;
+
         $branddesciption = $GetBranding->description;
+        
      }
 ?>
 <!DOCTYPE html>

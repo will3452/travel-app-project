@@ -34,10 +34,6 @@
             <main>
                 <div class="container-fluid px-4">
                     <p class="mt-4 edit-title">Revenue</p>
-                    <!-- button create revenue!-->
-                    <div class="button-add-emp-g">
-                        <a href="create/create-revenue"> <button id="addbtnuser">Create Revenue</button></a>
-                    </div>
                     <!-- search -->
                     <span class="clearable">
                         <i class="fas fa-search search_icon"></i>

@@ -33,13 +33,9 @@ $sidebaroutside ='
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-address-card"></i></div>
                             Subscription
                         </a>
-                        <a class="nav-link" href="promotion">
+                        <a class="nav-link" href="package">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-box"></i></div>
-                            Promotion
-                        </a>
-                        <a class="nav-link" href="avail-ads">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-rectangle-ad"></i></div>
-                            Avail Ads
+                            Package
                         </a>
                         <div class="sb-sidenav-menu-heading">Setting</div>
                         <a class="nav-link" href="logo">
@@ -108,13 +104,9 @@ $sidebarinside ='
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-address-card"></i></div>
                             Subscription
                         </a>
-                        <a class="nav-link" href="../promotion">
+                        <a class="nav-link" href="../package">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-box"></i></div>
-                            Promotion
-                        </a>
-                        <a class="nav-link" href="../avail-ads">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-rectangle-ad"></i></div>
-                            Avail Ads
+                            Package
                         </a>
                         <div class="sb-sidenav-menu-heading">Setting</div>
                         <a class="nav-link" href="../logo">

@@ -44,6 +44,6 @@
             </main>
         </div>
     </div>
-    <script src="js/promotion.js"></script>
+    <script src="js/package.js?v=1"></script>
 </body>
 </html>

@@ -10,7 +10,7 @@ if($Getlogo){
 ?>
 <a class="navbar-brand display-title-none" href="#">
     <?php if($logoimage): ?>
-        <img src="../user/assets/logo/<?php echo $logoimage; ?>" alt="" id="logonav">
+        <img src="../../user/assets/logo/<?php echo $logoimage; ?>" alt="" id="logonav">
     <?php else: ?>
         <p style="margin-left:40px; margin-top:15px;">NO LOGO</p>
     <?php endif; ?>
@@ -111,9 +111,9 @@ if($Getlogo){
     <li class="nav-item dropdown">
         <a class="colorblack" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span id="titlenamess">Traveler User</span> <span><i class="fas fa-angle-down fa-fw mt-1"></i></span></a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="profile">Profile</a></li>
+            <li><a class="dropdown-item" href="../profile">Profile</a></li>
             <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="process/logout">Logout</a></li>
+            <li><a class="dropdown-item" href="../process/logout">Logout</a></li>
         </ul>
     </li>
 </ul>

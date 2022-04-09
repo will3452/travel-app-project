@@ -1,8 +1,12 @@
 <?php 
      include_once '../../../vendor/autoload.php';
+
      include_once '../process/LoginStatus.php';
+
      include_once '../process/id_validation_fetch.php';
+
      if(!isset($_GET['manager_id'])){
+         
         header("location:../dashboard");
     }
 ?>

@@ -1,11 +1,18 @@
 <?php
      include_once '../../vendor/autoload.php';
+
      include_once 'process/LoginStatus.php';
+
      $logo = new Logo;
+
      $Getlogo = $logo->Getlogo();
+
      $logoimage = '';
+
      if($Getlogo){
+
         $logoimage = $Getlogo->image;
+        
      }
 ?>
 <!DOCTYPE html>

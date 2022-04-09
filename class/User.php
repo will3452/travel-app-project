@@ -6,6 +6,7 @@ class User extends Connection
     const USER_TYPE_MANAGER = "manager";
     const STATUS_ACTIVE = "active";
     const STATUS_PENDING = "pending";
+    const STATUS_DONE = "done";
     const BLOCK_STATUS_TEMPORARY = "temporary";
     const BLOCK_STATUS_PERMANENTLY = "permanently";
     const BLOCK_STATUS_UNBAN = "";
@@ -541,5 +542,15 @@ class User extends Connection
                 return $r;
             }
         }
+    }
+    public function GetBusinessData($id){
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM business WHERE id=?");
+
+        $executeResult = $stmt->execute([$id]);
+
+        return $stmt->fetch(PDO::FETCH_OBJ);
     }
 }
