@@ -1,15 +1,28 @@
 <?php 
     include_once '../../../vendor/autoload.php';
+
     include_once '../process/LoginStatus.php';
+
     include_once '../process/id_validation_fetch.php';
+
+    $Service = new Service;
+    
     $businemanager_id = $data->manager_id;
+
     $businename = $data->name;
+
     $businelogo = $data->logo;
+
     $businetype = $data->type;
+
     $GetManagerData = $User->GetUserData($businemanager_id, $User::USER_TYPE_MANAGER);
+
     if(!isset($_GET['host_id'])){
+        
         header("location:../host-list.php");
+
     }
+    $GetCategory = $Service->GetCategory($_GET['host_id']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,6 +107,21 @@
                             <p>Service Offer</p>
                         </div>
                         <div class="search-container" id="tabs">
+                            <div class="dropdown-per-page">
+                                <button class="btn titleperpage-bn dropdown-toggle sortwidth" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Category
+                                </button>
+                                <div class="dropdown-menu" id="dropdown" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item sort" href="?host_id=<?php echo $_GET['host_id']; ?>">All</a></li>
+
+                                    <?php if($GetCategory): ?>
+                                        <?php foreach($GetCategory as $fetch): ?>
+                                            <li><a class="dropdown-item sort" href="?host_id=<?php echo $_GET['host_id']; ?>&category=<?php echo $fetch['name']; ?>#tabs"><?php echo ucwords($fetch['name']); ?></a></li>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </div>
+                                <input type="hidden" id="categoryval" value="<?php if(isset($_GET['category'])){ echo $_GET['category']; } else{ echo "";}?>">
+                            </div>
                             <div class="search-view-list">
                                 <span class="clearable">
                                     <i class="fas fa-search search_icon2"></i>
@@ -109,6 +137,7 @@
                                 </span>  
                             </div>
                         </div>
+                        <br>
                     <!--loading here !-->
                     <div class="loadingforallcontent">
                         <div class="loading-icon">
@@ -133,6 +162,6 @@
         </div>
     </div>
     <script src="../js/load.js?v=5"></script>
-    <script src="../js/host-list-data.js?v=5"></script>
+    <script src="../js/host-list-data.js?v=6"></script>
 </body>
 </html>

@@ -16,11 +16,19 @@
                     //accept
                     $AcceptUser = $User->AcceptUser($User::USER_TYPE_MANAGER, $id_get);
                     if($AcceptUser==1){
-                        $UpdateManagerPOPAccount = $Payment->UpdateManagerPOPAccount($id_get, $User::STATUS_DONE);
-                        if($AcceptUser==1){
+                        $date = date("Y-m-d");
+                        date_default_timezone_set('Asia/Manila');
+                        $d = strtotime("+1 months",strtotime($date));
+                        $newdate =  date("Y-m-d",$d); 
+                        $InsertSub = $User->InsertAccountSubs($id_get, $date, $newdate);
+                        if($InsertSub==1){
+                            $GetAccSubsData = $User->GetAccSubsData($id_get);
+                            $type_id = $GetAccSubsData->id;
+                            $UpdateManagerPOPAccount = $Payment->UpdateManagerPOPAccount($id_get, $User::STATUS_DONE, $type_id);
+
                             echo "success";
                         }else{
-                            echo "error";
+                             echo "error";
                         }
                     }else{
                         echo "error";

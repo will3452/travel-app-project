@@ -7,15 +7,24 @@ $('#search_2').keyup(function(){
             //do stuff here e.g ajax call etc....
             var search_2 = $("#search_2").val();
             var host_id = $("#host_id").val();
+            var categoryval = $("#categoryval").val();
             $("#search_2").attr('disabled', true);
 
-           
+            if(categoryval==''){
                 if(search_2==''){
                     window.location.href="?host_id="+host_id+"#tabs";
                 }
                 else{
                     window.location.href="?host_id="+host_id+"&search="+search_2+"#tabs";
                 }
+            }else{
+                if(search_2==''){
+                    window.location.href="?category="+categoryval+"&host_id="+host_id+"#tabs";
+                }
+                else{
+                    window.location.href="?host_id="+host_id+"&category="+categoryval+"&search="+search_2+"#tabs";
+                }
+            }
         }, timeouttable);
     }
 });
@@ -29,7 +38,12 @@ $("#search_2").keyup(function(e){
 });
 $(document).on('click','.clearable__clear_search',function(){
     var host_id = $("#host_id").val();
-    window.location.href="?host_id="+host_id+"#tabs";
+    var categoryval = $("#categoryval").val();
+    if(categoryval==''){
+        window.location.href="?host_id="+host_id+"#tabs";
+    }else{
+        window.location.href="?host_id="+host_id+"&category="+categoryval+"#tabs";
+    }
 });
 $(document).on('click','.clearable__clear',function(){
     $(".clearable__clear").hide();

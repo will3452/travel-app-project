@@ -150,3 +150,79 @@ $deletepop= '<div class="modal deletepop" id="exampleModal" tabindex="-1" role="
     </div>
   </form>
 </div>';
+$acceptadssubs = '<div class="modal acceptadssubs" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog closemodal" role="document">
+    <form id="submitmodal_ads" class="modal-content">
+      <input type="hidden" id="token_accept_acceptadssubs" name="token_accept_acceptadssubs" value='.password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT).'> 
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Accept Ads Subs Account</h5>
+        <p class="close_modal">+</p>
+      </div>
+      <div class="modal-body">
+        <p id="name_title">Manager Name: <span class="name_here"></span></p>
+        <input type="hidden" name="adssub_id" id="adssub_id" class="id_get">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" id="acceptadssubsbtn" class="colorbtn width_btn">
+            <span class="span_modal">Process</span>
+            <div class="center-loading-3">
+                        <div class="span5load2"></div>
+                        <div class="span6load2"></div>
+                        <div class="span7load2"></div>
+                    </div>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>';
+$doneadssubs = '<div class="modal doneadssubs" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog closemodal" role="document">
+    <form id="submitmodal_ads_done" class="modal-content">
+      <input type="hidden" id="token_accept_doneadssubs" name="token_accept_doneadssubs" value='.password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT).'> 
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Done Ads Subs Account</h5>
+        <p class="close_modal">+</p>
+      </div>
+      <div class="modal-body">
+        <p id="name_title">Manager Name: <span class="name_here"></span></p>
+        <input type="hidden" name="adssub_iddone" id="adssub_iddone" class="adssub_iddone">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" id="doneadssubsbtn" class="colorbtn width_btn">
+            <span class="span_modal">Process</span>
+            <div class="center-loading-3">
+                        <div class="span5load2"></div>
+                        <div class="span6load2"></div>
+                        <div class="span7load2"></div>
+                    </div>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>';
+$deleteadssubs = '<div class="modal deleteadssubs" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog closemodal" role="document">
+    <form id="submitmodal_ads_delete" class="modal-content">
+      <input type="hidden" id="token_accept_deleteadssubs" name="token_accept_deleteadssubs" value='.password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT).'> 
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Ads Subs Account</h5>
+        <p class="close_modal">+</p>
+      </div>
+      <div class="modal-body">
+        <p style="color:red;">Note: <i>Deleting Ads also will delete the payment record</i></p>
+        <p id="name_title">Manager Name: <span class="name_here"></span></p>
+        <input type="hidden" name="adssub_iddelete" id="adssub_iddelete" class="adssub_iddelete">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" id="deleteadssubsbtn" class="colorbtn width_btn">
+            <span class="span_modal">Process</span>
+            <div class="center-loading-3">
+                        <div class="span5load2"></div>
+                        <div class="span6load2"></div>
+                        <div class="span7load2"></div>
+                    </div>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>';

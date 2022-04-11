@@ -89,4 +89,5 @@ class Promotion extends User{
 
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
+   
 }

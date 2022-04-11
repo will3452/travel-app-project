@@ -3,6 +3,13 @@
     $business_id = $_GET['host_id'];
     include '_UI_SORTING_FETCHING/service-fetch.php';
 ?>
+ <div class="title-sorting">
+        <p>Category: <span><?php if(isset($_GET['category'])){
+            echo $_GET['category'];
+        }else{
+            echo "ALL";
+        } ?></span></p>
+    </div>
                         <div class="div1">
                             <?php if($display): ?>
                                 <?php foreach($display as $businesdisplay):  ?>

@@ -22,70 +22,7 @@ class Service extends User{
              return true;
         }
     }
-    public function ServicePageSort($businessid)
-    {
-        $con = $this->GetConnection();
-
-        $stmt = $con->prepare("SELECT * FROM services WHERE business_id=?");
-
-        $stmt->execute([$businessid]);
-
-        return $stmt->rowCount();
-    }
-    public function ServiceFetctSort($limit, $start, $namesort, $sortName, $businessid)
-    {
-        $con = $this->GetConnection();
-
-        $qs = "SELECT * FROM services WHERE business_id=? ORDER by $sortName $namesort LIMIT $start, $limit";
-        $stmt = $con->prepare($qs);
-
-        $stmt->execute([$businessid]);
-
-        $numwors = $stmt->rowCount();
-
-        if ($numwors > 0) {
-
-            while($r = $stmt->fetchAll()){
-
-                return $r;
-            }
-        }
-    }
-    public function ServiceSearchPageSort($search, $businessid)
-    {
-        $con = $this->GetConnection();
-
-        $stmt = $con->prepare("SELECT * FROM services WHERE
-        name LIKE ? && business_id=? ||
-        price LIKE ? && business_id=? ||
-        category LIKE ? && business_id=?");
-
-        $stmt->execute(["%$search%", $businessid, "%$search%", $businessid, "%$search%", $businessid]);
-
-        return $stmt->rowCount();
-    }
-    public function ServiceSearchFetchSort($limit, $start, $namesort, $sortName, $search, $businessid)
-    {
-        $con = $this->GetConnection();
-
-        $stmt = $con->prepare("SELECT * FROM services WHERE
-        name LIKE ? && business_id=? ||
-        price LIKE ? && business_id=? ||
-        category LIKE ? && business_id=?
-        ORDER by $sortName $namesort LIMIT $start, $limit");
-
-        $stmt->execute(["%$search%", $businessid, "%$search%", $businessid, "%$search%", $businessid]);
-        $numwors = $stmt->rowCount();
-
-        if ($numwors > 0) {
-            
-            while($r = $stmt->fetchAll()){
-
-                return $r;
-            }
-        }
-    }
-
+    
     public function CheckServiceExist($service_id, $businessid){
 
         $con = $this->GetConnection();
@@ -167,5 +104,234 @@ class Service extends User{
                 }
             }
         }return false;
+    }
+    public function InsertServiceCategory($id, $name){
+
+        $con = $this->GetConnection();
+
+        $prepareStatement  = "INSERT INTO `category`(`business_id`, `name`) VALUE(?, ?)";
+        
+        $stmt = $con->prepare($prepareStatement);
+
+        $param = [ $id, $name ];
+
+        $executeResult = $stmt->execute($param);
+
+        if ($executeResult) {
+
+             return true;
+        }
+    }
+    public function GetCategory($id){
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM category WHERE business_id=?");
+
+        $executeResult = $stmt->execute([$id]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+                
+                return $r;
+
+            }
+        }
+    }
+    public function ServiceCategory($id, $name){
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM category WHERE business_id=? && name=?");
+
+        $executeResult = $stmt->execute([$id, $name]);
+
+        $check = $stmt->rowCount();
+
+        if ($check>0) {
+
+            return $stmt->fetch(PDO::FETCH_OBJ);
+        }
+        return false;
+
+    }
+    public function CategoryPageSort($businessid)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM category WHERE business_id=?");
+
+        $stmt->execute([$businessid]);
+
+        return $stmt->rowCount();
+    }
+    public function CategoryFetctSort($limit, $start, $namesort, $sortName, $businessid)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM category WHERE business_id=? ORDER by $sortName $namesort LIMIT $start, $limit";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute([$businessid]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+            }
+        }
+    }
+    public function CategorySearchPageSort($search, $businessid)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM category WHERE
+        name LIKE ? && business_id=?");
+
+        $stmt->execute(["%$search%", $businessid]);
+
+        return $stmt->rowCount();
+    }
+    public function CategorySearchFetchSort($limit, $start, $namesort, $sortName, $search, $businessid)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM category WHERE
+        name LIKE ? && business_id=? 
+        ORDER by $sortName $namesort LIMIT $start, $limit");
+
+        $stmt->execute(["%$search%", $businessid]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+            
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+            }
+        }
+    }
+    public function ServicePageSort($businessid)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM services WHERE business_id=?");
+
+        $stmt->execute([$businessid]);
+
+        return $stmt->rowCount();
+    }
+    public function ServiceFetctSort($limit, $start, $namesort, $sortName, $businessid)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM services WHERE business_id=? ORDER by $sortName $namesort LIMIT $start, $limit";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute([$businessid]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+            }
+        }
+    }
+    public function ServicePageSortWithCategory($businessid, $category)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM services WHERE business_id=? && category LIKE ?");
+
+        $stmt->execute([$businessid, "%$category%"]);
+
+        return $stmt->rowCount();
+    }
+    public function ServiceFetctSortWithCategory($limit, $start, $category, $namesort, $sortName, $businessid)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM services WHERE business_id=? && category LIKE ? ORDER by $sortName $namesort LIMIT $start, $limit";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute([$businessid, "%$category%"]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+            }
+        }
+    }
+    public function ServicePageSortWithSearch($businessid, $search)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM services WHERE business_id=? && name LIKE ?");
+
+        $stmt->execute([$businessid, "%$search%"]);
+
+        return $stmt->rowCount();
+    }
+    public function ServiceFetctSortWithSearch($limit, $start, $search, $namesort, $sortName, $businessid)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM services WHERE business_id=? && name LIKE ? ORDER by $sortName $namesort LIMIT $start, $limit";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute([$businessid, "%$search%"]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+            }
+        }
+    }
+    public function ServicePageSortWithSearchAndCategory($businessid, $search, $category)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM services WHERE business_id=? && name LIKE ? && category like ?");
+
+        $stmt->execute([$businessid, "%$search%", "%$category%"]);
+
+        return $stmt->rowCount();
+    }
+    public function ServiceFetctSortWithSearchAndCategory($limit, $start, $search, $category, $namesort, $sortName, $businessid)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM services WHERE business_id=? && name LIKE ? && category like ? ORDER by $sortName $namesort LIMIT $start, $limit";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute([$businessid, "%$search%", "%$category%"]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+            }
+        }
     }
 }

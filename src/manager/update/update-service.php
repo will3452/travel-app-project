@@ -1,26 +1,28 @@
 <?php 
      include_once '../../../vendor/autoload.php';
+
      include_once '../process/LoginStatus.php';
+
      include_once '../process/id_validation_fetch.php';
+    
      $User = new User;
+  
+     $Service = new Service;
+     
      $GetUserID = $User->GetUserID($email);
+
      $iduser = $GetUserID->id;
-     $maneger_type = $GetUserID->maneger_type;
-     $category = '';
-     if($maneger_type=='Resort manager'){
-        $category = $User::SERVICE_CATEGORY_RESORT_MANAGER;
-     }
-     if($maneger_type=='Bed and breakfast manager'){
-        $category = $User::SERVICE_CATEGORY_BEDANDBREAKFAST_MANAGER;
-     }
-     if($maneger_type=='Rental vehicle manager'){
-        $category = $User::SERVICE_CATEGORY_RENTALVEHICLE_MANAGER;
-     }
-     if($maneger_type=='tourist attraction manager'){
-        $category = $User::SERVICE_CATEGORY_TOURISTATTRACTION_MANAGER;
-     }
-     if($maneger_type=='Resto and cafe manager'){
-        $category = $User::SERVICE_CATEGORY_RESTOCAFE_MANAGER;
+
+     $check = $User->GetBusinessManager($iduser);
+
+     $businessid = $check->id;
+
+     $GetCategory = $Service->GetCategory($businessid);
+
+     if(!isset($_GET['service_id'])){
+
+        header("location:../services");
+
      }
 ?>
 <!DOCTYPE html>
@@ -73,9 +75,9 @@
                                 </div>
                                 <div id="idcontent">
                                     <select name="category" id="category" required>
-                                        <option val="<?php echo $data->category; ?>"><?php echo $data->category; ?></option>
-                                            <?php  foreach($category as $Fetchs): ?>
-                                                <option value="<?php echo $Fetchs; ?>"><?php echo ucwords($Fetchs); ?></option>
+                                        <option val="<?php echo $data->category; ?>"><?php echo ucwords($data->category); ?></option>
+                                            <?php  foreach($GetCategory as $Fetchs): ?>
+                                                <option value="<?php echo $Fetchs['name']; ?>"><?php echo ucwords($Fetchs['name']); ?></option>
                                             <?php endforeach; ?>
                                     </select>
                                 </div>

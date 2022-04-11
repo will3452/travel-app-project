@@ -43,7 +43,7 @@
                                     <?php if($_GET['tab']=='ads_sub'): ?>
                                         <a href="subscription"><button>Account</button></a>
                                         <a href="#"><button id="activenav">Adverstisement</button></a>
-                                        <input type="hidden" id="usersearch" value="searchpending">
+                                        <input type="hidden" id="usersearch" value="searchads">
                                     <?php else: ?>
                                         <a href="#"><button id="activenav">Account</button></a>
                                         <a href="?tab=ads_sub"><button>Adverstisement</button></a>
@@ -58,10 +58,25 @@
                         </div>
                     </div>
                     <br>
-
+                    <?php
+                        if(isset($_GET['tab'])){
+                            if($_GET['tab']=='ads_sub'){
+                                include '_UI/modal.php';
+                                echo $acceptadssubs;
+                                echo $doneadssubs;
+                                echo $deleteadssubs;
+                                include '_TABLE_UI/ads-subs-table.php';
+                            }else{
+                                include '_TABLE_UI/account-subs-table.php';
+                            }
+                        }else{
+                            include '_TABLE_UI/account-subs-table.php';
+                        }
+                    ?>
                 </div>
             </main>
         </div>
     </div>
+    <script src="js/subscription.js?v=6"></script>
 </body>
 </html>

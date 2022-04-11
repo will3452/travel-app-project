@@ -18,9 +18,9 @@ $('#search').keyup(function(){
             var search = $("#search").val();
             $("#search").attr('disabled', true);
             if(search==''){
-                window.location.href="package";
+                window.location.href="category";
             }else{
-                window.location.href="package?search="+search;
+                window.location.href="category?search="+search;
             }
         }, timeouttable);
     }
@@ -34,7 +34,7 @@ $("#search").keyup(function(e){
     }
 });
 $(document).on('click','.clearable__clear_search',function(){
-    window.location.href="package";
+    window.location.href="category";
 });
 $(document).on('click','.clearable__clear',function(){
     $(".clearable__clear").hide();
@@ -42,6 +42,5 @@ $(document).on('click','.clearable__clear',function(){
 });
 $(document).on('click','#showinfo',function(){
     var id = $(this).attr("data-id");
-    window.location.href="view/package-data?pack_id="+id;
+    window.location.href="view/category-data?category_id="+id;
 });
-

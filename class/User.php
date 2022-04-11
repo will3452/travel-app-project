@@ -6,53 +6,54 @@ class User extends Connection
     const USER_TYPE_MANAGER = "manager";
     const STATUS_ACTIVE = "active";
     const STATUS_PENDING = "pending";
+    const STATUS_ONGOING = "ongoing";
     const STATUS_DONE = "done";
     const BLOCK_STATUS_TEMPORARY = "temporary";
     const BLOCK_STATUS_PERMANENTLY = "permanently";
     const BLOCK_STATUS_UNBAN = "";
     const ACCOUNT_PAYMENT = "account payment";
     const PROMOTION_PAYMENT = "promotion payment";
-    const SERVICE_CATEGORY_RESORT_MANAGER = [
-        "Room And Accomodation",
-        "Package Tours",
-    ];
-    const SERVICE_CATEGORY_BEDANDBREAKFAST_MANAGER = [
-        "Room And Accomodation",
-    ];
-    const SERVICE_CATEGORY_RENTALVEHICLE_MANAGER = [
-        "Vehicles",
-    ];
-    const SERVICE_CATEGORY_TOURISTATTRACTION_MANAGER = [
-        "Activities",
-    ];
-    const SERVICE_CATEGORY_RESTOCAFE_MANAGER = [
-        "Food and Menu",
-    ];
+    // const SERVICE_CATEGORY_RESORT_MANAGER = [
+    //     "Room And Accomodation",
+    //     "Package Tours",
+    // ];
+    // const SERVICE_CATEGORY_BEDANDBREAKFAST_MANAGER = [
+    //     "Room And Accomodation",
+    // ];
+    // const SERVICE_CATEGORY_RENTALVEHICLE_MANAGER = [
+    //     "Vehicles",
+    // ];
+    // const SERVICE_CATEGORY_TOURISTATTRACTION_MANAGER = [
+    //     "Activities",
+    // ];
+    // const SERVICE_CATEGORY_RESTOCAFE_MANAGER = [
+    //     "Food and Menu",
+    // ];
     public function GetConnection()
     {
         $con = $this->con();
         date_default_timezone_set('Asia/Manila');
         return $con;
     }
-    public function ServiceCategory($category)
-    {
-        if(in_array($category, self::SERVICE_CATEGORY_RESORT_MANAGER)){
-            return true;
-        }
-        if(in_array($category, self::SERVICE_CATEGORY_BEDANDBREAKFAST_MANAGER)){
-            return true;
-        }
-        if(in_array($category, self::SERVICE_CATEGORY_RENTALVEHICLE_MANAGER)){
-            return true;
-        }
-        if(in_array($category, self::SERVICE_CATEGORY_TOURISTATTRACTION_MANAGER)){
-            return true;
-        }
-        if(in_array($category, self::SERVICE_CATEGORY_RESTOCAFE_MANAGER)){
-            return true;
-        }
-        return false;
-    }
+    // public function ServiceCategory($category)
+    // {
+    //     if(in_array($category, self::SERVICE_CATEGORY_RESORT_MANAGER)){
+    //         return true;
+    //     }
+    //     if(in_array($category, self::SERVICE_CATEGORY_BEDANDBREAKFAST_MANAGER)){
+    //         return true;
+    //     }
+    //     if(in_array($category, self::SERVICE_CATEGORY_RENTALVEHICLE_MANAGER)){
+    //         return true;
+    //     }
+    //     if(in_array($category, self::SERVICE_CATEGORY_TOURISTATTRACTION_MANAGER)){
+    //         return true;
+    //     }
+    //     if(in_array($category, self::SERVICE_CATEGORY_RESTOCAFE_MANAGER)){
+    //         return true;
+    //     }
+    //     return false;
+    // }
     public function ExtractFileData($file, $type)
     {
         $fileName = $file['name'];
@@ -553,4 +554,206 @@ class User extends Connection
 
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
+    public function InsertAccountSubs($id, $start, $expiration) {
+
+        $con = $this->GetConnection();
+
+        date_default_timezone_set('Asia/Manila');
+
+        $time = date("H:i:s");
+
+        $newdatestart = $start.' '.$time;
+
+        $newdateexpiration = $expiration.' '.$time;
+        
+        $prepareStatement  = "INSERT INTO `account_subscription`(`user_id`, `start`, `expiration`) VALUE(?, ?, ?)";
+
+        $param = [$id, $newdatestart, $newdateexpiration];
+
+        $stmt = $con->prepare($prepareStatement);
+
+        $executeResult = $stmt->execute($param);
+
+        if ($executeResult) {
+
+             return true;
+        }
+
+        return false;
+
+    }
+    public function SubsPageSort()
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM account_subscription");
+
+        $stmt->execute();
+
+        return $stmt->rowCount();
+    }
+
+    public function SubsFetctSort($limit, $start, $namesort, $sortName)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM account_subscription ORDER by $sortName $namesort LIMIT $start, $limit";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute();
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+                
+                return $r;
+
+            }
+        }
+    }
+    public function SubsSearchFetchSort($limit, $start, $namesort, $sortName, $search)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM account_subscription WHERE
+        start LIKE ? ||
+        expiration LIKE ?
+        ORDER by $sortName $namesort LIMIT $start, $limit");
+
+        $stmt->execute(["%$search%", "%$search%"]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+
+            }
+        }
+    }
+    public function SubsSearchPageSort($search)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM account_subscription WHERE
+        start LIKE ? ||
+        expiration LIKE ?");
+
+        $stmt->execute(["%$search%", "%$search%"]);
+
+        return $stmt->rowCount();
+    }
+    public function GetAccSubsData($id)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM account_subscription WHERE user_id=?");
+
+        $stmt->execute([$id]);
+
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+    public function AdsSubsPageSort()
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM advertisement");
+
+        $stmt->execute();
+
+        return $stmt->rowCount();
+    }
+
+    public function AdsSubsFetctSort($limit, $start, $namesort, $sortName)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM advertisement ORDER by $sortName $namesort LIMIT $start, $limit";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute();
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+                
+                return $r;
+
+            }
+        }
+    }
+    public function AdsSubsSearchFetchSort($limit, $start, $namesort, $sortName, $search)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM advertisement WHERE
+        schedule_at LIKE ? ||  status LIKE ?
+        ORDER by $sortName $namesort LIMIT $start, $limit");
+
+        $stmt->execute(["%$search%", "%$search%"]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+
+            }
+        }
+    }
+    public function AdsSubsSearchPageSort($search)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM advertisement WHERE
+        schedule_at LIKE ? ||  status LIKE ?");
+
+        $stmt->execute(["%$search%", "%$search%"]);
+
+        return $stmt->rowCount();
+    }
+    public function GetAdsData($id)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM advertisement WHERE id=?");
+
+        $stmt->execute([$id]);
+
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+    public function UpdateAdsSubs($id, $status)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("UPDATE advertisement SET status=? WHERE id=?");
+
+        $result = $stmt->execute([$status, $id]);
+
+        return $result;
+    }
+    public function DeleteAdsSubs($id){
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("DELETE FROM `advertisement` WHERE id=?");
+
+        $true = $stmt->execute([$id]);
+
+        if ($true) {
+
+            return true;
+        }
+
+        return false;
+    }
+    
 }

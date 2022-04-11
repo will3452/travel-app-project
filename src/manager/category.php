@@ -15,7 +15,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://kit.fontawesome.com/a66db60870.js" crossorigin="anonymous"></script>
-    <title>Admin - Promotion</title>
+    <title>Manager - Category</title>
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bgnav shadow-sm p-3 mb-5 rounded">
@@ -33,17 +33,17 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <p class="mt-4 edit-title">Promotion</p>
+                    <p class="mt-4 edit-title">Category</p>
                     <div class="button-add-emp-g">
-                        <a href="create/create-promotion"> <button id="addbtnuser">Create Promo</button></a>
+                        <a href="create/create-category"> <button id="addbtnuser">Create Category</button></a>
                     </div>
-                    <?php 
-                        include '_TABLE_UI/promotion-table.php'; 
+                    <?php
+                        include '_TABLE_UI/category-table.php'; 
                     ?>
                 </div>
             </main>
         </div>
     </div>
-    <script src="js/package.js?v=2"></script>
+    <script src="js/category.js"></script>
 </body>
 </html>

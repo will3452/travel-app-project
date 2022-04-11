@@ -31,23 +31,22 @@
             }else{
                 $ValidateFields = $Validator->ValidateFields($image, $token, $category, $name, $price, $description);
                 if($ValidateFields==1){
-                    $ServiceCategory = $User->ServiceCategory($category);
-                    if($ServiceCategory==1){
-                        //check business exist
-                        $check = $User->GetBusinessManager($iduser);
-                        if($check){
-                            $businessid = $check->id;
+                           // //check business exist
+                    $check = $User->GetBusinessManager($iduser);
+                    if($check){
+                        $businessid = $check->id;
+                        $ServiceCategory = $Service->ServiceCategory($businessid, $category);
+                        if($ServiceCategory){
+                 
                             $Insert = $Service->Insert($category, $image, $name, $price, $description, $businessid);
                             if($Insert==1){
                                 echo "success";
-                            }else{
-                                echo "error";
                             }
                         }else{
-                            echo "nobusiness";
+                            echo "notvalidcategory";
                         }
                     }else{
-                        echo "notvalidcategory";
+                        echo "nobusiness";
                     }
                 }else{
                     echo "EMPF";
@@ -96,11 +95,11 @@
         if($ValidateToken==1){
             $ValidateFields = $Validator->ValidateFields($service_id, $token, $category, $name, $price, $description);
             if($ValidateFields==1){
-                $ServiceCategory = $User->ServiceCategory($category);
-                if($ServiceCategory==1){
-                    $check = $User->GetBusinessManager($iduser);
-                    if($check){
-                        $businessid = $check->id;
+                $check = $User->GetBusinessManager($iduser);
+                if($check){
+                    $businessid = $check->id;
+                    $ServiceCategory = $Service->ServiceCategory($businessid, $category);
+                    if($ServiceCategory){
                         if(!empty($_FILES['image']['name'])){
                             $validateimage = $Validator->ValidateImage($image);
                             if($Validator->ValidateImage($image)==='emp'){
@@ -129,10 +128,10 @@
                             }
                         }
                     }else{
-                        echo "nobusiness";
+                        echo "notvalidcategory";
                     }
                 }else{
-                    echo "notvalidcategory";
+                    echo "nobusiness";
                 }
             }else{
                 echo "EMPF";

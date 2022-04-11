@@ -83,25 +83,15 @@
                         $ValidateDate = $Validator->ValidateDate($date);
                         if($ValidateDate==1){
                             //check if promo id exist
-                            $ValPromo = $Promotion->GetPromoData($promo_id);
-                            if($ValPromo){
-                                $priceads = $ValPromo->price;
+                            
                                 $Insert = $Payment->AdsPOP($userid, $adsimage, $imagepop, $promo_id, $date);
                                 if($Insert){
-                                    $popnewname =  $Insert;
-                                    $Insertpop = $Payment->InsertPOP($popnewname, $userid, $User::PROMOTION_PAYMENT, $User::STATUS_PENDING, $priceads);
-                                    if($Insertpop==1){
-                                        //notification
-                                        echo "success";
-                                    }else{
-                                        echo "error";
-                                    }
+
+                                   echo "success";
+                                   
                                 }else{
                                     echo "error";
                                 }
-                            }else{
-                                echo "invid";
-                            }
                         }else{
                             echo "invdate";
                         }

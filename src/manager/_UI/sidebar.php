@@ -42,9 +42,9 @@ $sidebaroutside ='
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-money-bill"></i></div>
                             Payment History
                         </a>
-                        <a class="nav-link" href="profile">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
-                            Profile
+                        <a class="nav-link" href="category">
+                            <div class="sb-nav-link-icon"><i class="fa-brands fa-product-hunt"></i></div>
+                            Category
                         </a>
                     </div> 
                 </div>
@@ -93,9 +93,9 @@ $sidebarinside ='
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-money-bill"></i></div>
                             Payment History
                         </a>
-                        <a class="nav-link" href="../profile">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
-                            Profile
+                        <a class="nav-link" href="category">
+                            <div class="sb-nav-link-icon"><i class="fa-brands fa-product-hunt"></i></div>
+                            Category
                         </a>
                     </div> 
                 </div>

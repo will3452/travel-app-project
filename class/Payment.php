@@ -25,13 +25,13 @@ class Payment extends User{
 
         return false;
     }
-    public function InsertPOP($popnewname, $userid, $type, $status, $price)
+    public function InsertPOP($popnewname, $userid, $type_id, $type, $status, $price)
     {
         $con = $this->GetConnection();
 
-        $stmt = $con->prepare("INSERT INTO `manager_pop`(`img`, `price`, `manager_id`, `type`, `status`) VALUE(?, ?, ?, ?, ?)");
+        $stmt = $con->prepare("INSERT INTO `manager_pop`(`img`, `price`, `manager_id`, `type_id`, `type`, `status`) VALUE(?, ?, ?, ?, ?, ?)");
 
-        $executeResult = $stmt->execute([$popnewname, $price, $userid, $type, $status]);
+        $executeResult = $stmt->execute([$popnewname, $price, $userid, $type_id, $type, $status]);
 
         if ($executeResult) {
 
@@ -40,15 +40,56 @@ class Payment extends User{
 
         return false;
     }
-    public function UpdateManagerPOPAccount($userid, $status)
+    public function UpdateManagerPOPAccount($userid, $status, $type_id)
     {
         $con = $this->GetConnection();
 
-        $stmt = $con->prepare("UPDATE manager_pop SET status=? WHERE manager_id=?");
+        $stmt = $con->prepare("UPDATE manager_pop SET status=?, type_id=? WHERE manager_id=?");
 
-        $result = $stmt->execute([$status, $userid]);
+        $result = $stmt->execute([$status, $type_id, $userid]);
 
         return $result;
+    }
+    public function UpdateManagerPOPAds($userid, $type_id, $status)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("UPDATE manager_pop SET status=? WHERE manager_id=? && type_id=?");
+
+        $result = $stmt->execute([$status, $userid, $type_id]);
+
+        return $result;
+    }
+    public function DeleteManagerPOPAds($userid, $type_id)
+    {
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM manager_pop WHERE manager_id=? && type_id=?");
+
+        $executeResult = $stmt->execute([$userid, $type_id]);
+
+        if ($executeResult) {
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $img =  $result['img'];
+
+            $olddist2 = "../../images/pop/$img"; //old profile
+
+            unlink($olddist2); //deleting pass profile
+
+            $stmt = $con->prepare("DELETE FROM `manager_pop` WHERE manager_id=? && type_id=?");
+
+            $true = $stmt->execute([$userid, $type_id]);
+
+            if ($true) {
+
+                return true;
+            }
+
+            return false;
+        }
     }
     public function AdsPOP($userid, $adsimage, $imagepop, $promo_id, $date)
     {
@@ -63,9 +104,12 @@ class Payment extends User{
         $executeResult = $stmt->execute([$finlenamenew2, $userid, 'pending', $promo_id, $finlenamenew, $date]);
 
         if ($executeResult) {
+
             move_uploaded_file($filetmp, $filedesti);
+
             move_uploaded_file($filetmp2, $filedesti2);
-            return $finlenamenew;
+            
+            return true;
         }
 
         return false;
