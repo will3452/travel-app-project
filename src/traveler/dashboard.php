@@ -1,6 +1,14 @@
 <?php 
-     include_once '../../vendor/autoload.php';
-     include_once 'process/LoginStatus.php';
+    include_once '../../vendor/autoload.php';
+
+    include_once 'process/LoginStatus.php';
+
+    $User = new User;
+
+    $GetUserID = $User->GetUserID($email);
+
+    $iduser = $GetUserID->id;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,7 +52,90 @@
                             </div>
                         </div> 
                     </div>
-
+                    <div class="hide-dash">
+                    <form id="submitForm_profile">
+                        <?php 
+                    date_default_timezone_set('Asia/Manila');   
+                    ?> 
+                    <input type="hidden" id="token_profile" name="token_profile" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>"> 
+                            <div class="form-container-user">
+                            <div class="header-profile">
+                                <div class="circular--landscape2"> 
+                                    <img src="../images/users/<?php echo $GetUserID->image;  ?>" alt="">
+                                </div>
+                            </div>
+                            <div class="rowss">
+                                <div id="id_div">
+                                        <p>Profile (Optional)</span></p>
+                                </div>
+                                <div id="idcontent">
+                                    <input type="file" id="fileimage" name="fileimage">
+                                </div>
+                            </div>
+                            <div class="rowss">
+                                <div id="id_div">
+                                        <p>First Name <span style="color:red;">*</span></p>
+                                </div>
+                                <div id="idcontent">
+                                    <input type="text" id="fname" name="fname" required value="<?php echo $GetUserID->first_name; ?>">
+                                </div>
+                            </div>
+                            <div class="rowss">
+                                <div id="id_div">
+                                        <p>Middle Name <span style="color:red;">*</span></p>
+                                </div>
+                                <div id="idcontent">
+                                        <input type="text" id="mname" name="mname" required value="<?php  echo $GetUserID->middle_name; ?>">
+                                </div>
+                            </div>
+                            <div class="rowss">
+                                <div id="id_div">
+                                     <p>Last Name <span style="color:red;">*</span></p>
+                                </div>
+                                <div id="idcontent">
+                                        <input type="text" id="lname" name="lname" required value="<?php echo $GetUserID->last_name;  ?>">
+                                </div>
+                            </div>
+                            <div class="rowss">
+                                <div id="id_div">
+                                        <p>Email</p>
+                                </div>
+                                <div id="idcontent">
+                                    <p><?php 
+                                      echo $GetUserID->email;
+                                    ?></p>
+                                </div>
+                            </div>
+                            <div class="rowss">
+                                <div id="id_div">
+                                        <p>Contact <span style="color:red;">*</span></p>
+                                </div>
+                                <div id="idcontent">
+                                   <input type="contact" id="contact" placeholder="09*********" name="contact" required  value="<?php echo $GetUserID->phone; ?>">
+                                </div>
+                            </div>
+                            <div class="rowss">
+                                <div id="id_div">
+                                        <p>Password (optional)</span></p>
+                                        <p style="color:red;">Password Must Uppercase, Special Character and Number</p>
+                                </div>
+                                <div id="idcontent">
+                                    <input type="password" id="password" name="password" placeholder="********">
+                                </div>
+                                </div>
+                            </div>
+                            <div class="button-add-emp" id="logo-btn">
+                                    <button type="submit" id="buttonss">
+                                            <span id="spansubmit2">Update</span>
+                                            <div class="center-loading-3">
+                                                <div class="span5load2"></div>
+                                                <div class="span6load2"></div>
+                                                <div class="span7load2"></div>
+                                            </div>
+                                    </button>
+                                </div>
+                        </form>
+                    </div>
                 </div>
             </main>
         </div>

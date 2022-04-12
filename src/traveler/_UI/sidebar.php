@@ -8,13 +8,9 @@ $sidebaroutside ='
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-house"></i></div>
                             Host List
                         </a>
-                        <a class="nav-link" href="notification">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-bell"></i></div>
-                            Notification
-                        </a>
                         <a class="nav-link" href="bucketlist">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-list-check"></i></div>
-                            Bucketlist
+                            My Bucketlist
                         </a>
                         <a class="nav-link" href="booking">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-calendar-check"></i></div>
@@ -41,13 +37,9 @@ $sidebarinside ='
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-house"></i></div>
                         Host List
                     </a>
-                    <a class="nav-link" href="../notification">
-                        <div class="sb-nav-link-icon"><i class="fa-solid fa-bell"></i></div>
-                        Notification
-                    </a>
                     <a class="nav-link" href="../bucketlist">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-list-check"></i></div>
-                        Bucketlist
+                        My Bucketlist
                     </a>
                     <a class="nav-link" href="../booking">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-calendar-check"></i></div>

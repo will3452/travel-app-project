@@ -9,6 +9,8 @@
 
     $Promotion = new Promotion;
 
+    $Notification = new Notification;
+
     if(isset($_POST['token_accept_acceptadssubs'])){
 
         $token = $_POST['token_accept_acceptadssubs'];
@@ -42,11 +44,20 @@
 
                         $priceads = $ValPromo->price;
 
+                        $promoname = $ValPromo->name;
+
                         $InsertPOP = $Payment->InsertPOP($popnewname, $manageid, $adssub_id, $User::PROMOTION_PAYMENT, $User::STATUS_DONE, $priceads);
                    
                         if($InsertPOP==1){
                             
-                            echo "success";
+                            $insertnotif = $Notification->Insert($manageid, $User::USER_TYPE_MANAGER, "Accept your avail advertisement!". " ". $promoname);
+                                                        
+                            if($insertnotif==1){
+
+                                echo "success";
+
+                            }
+
                         }
                     }
                 }
@@ -79,11 +90,27 @@
 
                 $manageid = $dataads->manager_id;
 
+                $promo_id = $dataads->package_id;
+
                 $UpdateAdsSubs = $User->UpdateAdsSubs($adssub_iddone, $User::STATUS_DONE);
 
                 if($UpdateAdsSubs==1){
 
-                    echo "success";
+                    $ValPromo = $Promotion->GetPromoData($promo_id);
+                    
+                    if($ValPromo){
+
+                        $promoname = $ValPromo->name;
+
+                        $insertnotif = $Notification->Insert($manageid, $User::USER_TYPE_MANAGER, "Your avail advertisement!". " ". $promoname. " has been expired!");
+                                                        
+                        if($insertnotif==1){
+
+                            echo "success";
+
+                        }
+
+                    }
                 }
 
             }else{
@@ -116,36 +143,47 @@
                 
                 $status = $dataads->status;
 
-                if($status==$User::STATUS_DONE){
-                    //will not send notif
-                    $DeleteManagerPOPAds = $Payment->DeleteManagerPOPAds($manageid, $adssub_iddelete);
+                $promo_id = $dataads->package_id;
 
-                    if($DeleteManagerPOPAds==1){
-
-                        $DeleteAdsSubs = $User->DeleteAdsSubs($adssub_iddelete);
-
-                        if($DeleteAdsSubs==1){
-                            
-                            echo "success";
-                            
-                        }
-                    }
+                    $ValPromo = $Promotion->GetPromoData($promo_id);
                     
-                }else{
-                    //will send notiff
-                    $DeleteManagerPOPAds = $Payment->DeleteManagerPOPAds($manageid, $adssub_iddelete);
+                    if($ValPromo){
 
-                    if($DeleteManagerPOPAds==1){
- 
-                        $DeleteAdsSubs = $User->DeleteAdsSubs($adssub_iddelete);
- 
-                        if($DeleteAdsSubs==1){
-                             
-                             echo "success";
-                             
+                        $promoname = $ValPromo->name;
+
+                        if($status==$User::STATUS_DONE){
+                            //will not send notif
+                            $DeleteManagerPOPAds = $Payment->DeleteManagerPOPAds($manageid, $adssub_iddelete);
+
+                            if($DeleteManagerPOPAds==1){
+
+                                $DeleteAdsSubs = $User->DeleteAdsSubs($adssub_iddelete);
+
+                                if($DeleteAdsSubs==1){
+                                    
+                                    echo "success";
+                                    
+                                }
+                            }
+                            
+                        }else{
+                            //will send notiff
+                                $DeleteAdsSubs = $User->DeleteAdsSubs($adssub_iddelete);
+        
+                                if($DeleteAdsSubs==1){
+                                    
+                                    $insertnotif = $Notification->Insert($manageid, $User::USER_TYPE_MANAGER, "Your avail advertisement!". " ". $promoname. " is rejected!");
+                                                                
+                                    if($insertnotif==1){
+            
+                                        echo "success";
+            
+                                    }
+            
+                                    
+                                }
                         }
                     }
-                }
 
                
 

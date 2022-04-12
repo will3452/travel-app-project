@@ -126,10 +126,7 @@
                                                             <span class="tip_delete">Cancel</span>
                                                         </span>
                                                     <?php elseif($dis['status']==$User::STATUS_DONE): ?>
-                                                        <span class="tip_accept_container">
-                                                            <i class="fas fa-check-circle btns" id="accept" data-id="<?php echo $dis['id']; ?>"></i>
-                                                            <span class="tip_accept">Accept</span>
-                                                        </span>
+                                                      
                                                         <span class="tip_delete_container">
                                                             <i class="far fa-trash-alt" id="delete" data-id="<?php echo $dis['id']; ?>"></i>
                                                             <span class="tip_delete">Delete</span>

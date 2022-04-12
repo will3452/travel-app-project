@@ -13,47 +13,12 @@ class User extends Connection
     const BLOCK_STATUS_UNBAN = "";
     const ACCOUNT_PAYMENT = "account payment";
     const PROMOTION_PAYMENT = "promotion payment";
-    // const SERVICE_CATEGORY_RESORT_MANAGER = [
-    //     "Room And Accomodation",
-    //     "Package Tours",
-    // ];
-    // const SERVICE_CATEGORY_BEDANDBREAKFAST_MANAGER = [
-    //     "Room And Accomodation",
-    // ];
-    // const SERVICE_CATEGORY_RENTALVEHICLE_MANAGER = [
-    //     "Vehicles",
-    // ];
-    // const SERVICE_CATEGORY_TOURISTATTRACTION_MANAGER = [
-    //     "Activities",
-    // ];
-    // const SERVICE_CATEGORY_RESTOCAFE_MANAGER = [
-    //     "Food and Menu",
-    // ];
     public function GetConnection()
     {
         $con = $this->con();
         date_default_timezone_set('Asia/Manila');
         return $con;
     }
-    // public function ServiceCategory($category)
-    // {
-    //     if(in_array($category, self::SERVICE_CATEGORY_RESORT_MANAGER)){
-    //         return true;
-    //     }
-    //     if(in_array($category, self::SERVICE_CATEGORY_BEDANDBREAKFAST_MANAGER)){
-    //         return true;
-    //     }
-    //     if(in_array($category, self::SERVICE_CATEGORY_RENTALVEHICLE_MANAGER)){
-    //         return true;
-    //     }
-    //     if(in_array($category, self::SERVICE_CATEGORY_TOURISTATTRACTION_MANAGER)){
-    //         return true;
-    //     }
-    //     if(in_array($category, self::SERVICE_CATEGORY_RESTOCAFE_MANAGER)){
-    //         return true;
-    //     }
-    //     return false;
-    // }
     public function ExtractFileData($file, $type)
     {
         $fileName = $file['name'];

@@ -41,3 +41,6 @@
             echo "invalidtoken";
         }
     }
+    elseif(isset($_POST['token_profile'])){
+        print_r($_POST);
+    }

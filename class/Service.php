@@ -247,6 +247,44 @@ class Service extends User{
             }
         }
     }
+    public function ServiceSearchPageSort($search, $businessid)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM services WHERE 
+        business_id=? && category LIKE ? ||
+        business_id=? && name LIKE ? ||
+        business_id=? && price LIKE ?
+        ");
+
+        $stmt->execute([$businessid, "%$search%", $businessid, "%$search%", $businessid, "%$search%"]);
+
+        return $stmt->rowCount();
+
+    }
+    public function ServiceSearchFetchSort($limit, $start, $namesort, $sortName, $search, $businessid)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM services WHERE 
+        business_id=? && category LIKE ? ||
+        business_id=? && name LIKE ? ||
+        business_id=? && price LIKE ?
+        ORDER by $sortName $namesort LIMIT $start, $limit";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute([$businessid, "%$search%", $businessid, "%$search%", $businessid, "%$search%"]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+            }
+        }
+    }
     public function ServicePageSortWithCategory($businessid, $category)
     {
         $con = $this->GetConnection();
@@ -333,5 +371,149 @@ class Service extends User{
                 return $r;
             }
         }
+    }
+    public function InsertBucketList($id, $service_id, $date, $remarks)
+    {
+
+        $con = $this->GetConnection();
+
+        $prepareStatement  = "INSERT INTO `bucketlist`(`remarks`, `package_id`, `user_id`, `date`) VALUE(?, ?, ?, ?)";
+
+        $stmt = $con->prepare($prepareStatement);
+
+        $param = [$remarks, $service_id, $id, $date];
+
+        $executeResult = $stmt->execute($param);
+
+        if ($executeResult) {
+            
+             return true;
+        }
+
+        return false;
+
+    }
+
+    public function BucketlistPageSort($iduser)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM bucketlist WHERE user_id=?");
+
+        $stmt->execute([$iduser]);
+
+        return $stmt->rowCount();
+    }
+    public function BucketlistFetctSort($limit, $start, $namesort, $sortName, $iduser)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM bucketlist WHERE user_id=? ORDER by $sortName $namesort LIMIT $start, $limit";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute([$iduser]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+            }
+        }
+    }
+    public function BucketlistSearchPageSort($search, $iduser)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM bucketlist WHERE
+        user_id=? && date LIKE ? ");
+
+        $stmt->execute([$iduser, "%$search%"]);
+
+        return $stmt->rowCount();
+
+    }
+    public function BucketlistSearchFetchSort($limit, $start, $namesort, $sortName, $search, $iduser)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM bucketlist WHERE
+        user_id=? && date LIKE ?
+        ORDER by $sortName $namesort LIMIT $start, $limit";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute([$iduser, "%$search%"]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+            }
+        }
+    }
+    public function GetServiceExist($service_id){
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM services WHERE id=?");
+
+        $executeResult = $stmt->execute([$service_id]);
+
+        $check = $stmt->rowCount();
+
+        if ($check>0) {
+
+            return $stmt->fetch(PDO::FETCH_OBJ);
+        }
+        return false;
+    }
+    public function GetBucketlistExist($user_id, $id){
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM bucketlist WHERE id=? && user_id=?");
+
+        $executeResult = $stmt->execute([$id, $user_id]);
+
+        $check = $stmt->rowCount();
+
+        if ($check>0) {
+
+            return $stmt->fetch(PDO::FETCH_OBJ);
+        }
+        return false;
+    }
+    public function UpdateBucketlist($user_id, $id, $date, $remarks)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("UPDATE `bucketlist` SET date=?, remarks=? WHERE id=? && user_id=?");
+                
+        $true = $stmt->execute([$date, $remarks, $id, $user_id]);
+                
+        if ($true) {
+                   
+            return $true;
+        }
+        return false;
+    }
+    public function DeleteBucketList($user_id, $id)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("DELETE FROM `bucketlist` WHERE user_id=? && id=?");
+                
+        $true = $stmt->execute([$user_id, $id]);
+                
+        if ($true) {
+                   
+            return $true;
+        }
+        return false;
     }
 }
