@@ -372,16 +372,16 @@ class Service extends User{
             }
         }
     }
-    public function InsertBucketList($id, $service_id, $date, $remarks)
+    public function InsertBucketList($id, $businessid, $date, $remarks)
     {
 
         $con = $this->GetConnection();
 
-        $prepareStatement  = "INSERT INTO `bucketlist`(`remarks`, `package_id`, `user_id`, `date`) VALUE(?, ?, ?, ?)";
+        $prepareStatement  = "INSERT INTO `bucketlist`(`remarks`, `business_id`, `user_id`, `date`) VALUE(?, ?, ?, ?)";
 
         $stmt = $con->prepare($prepareStatement);
 
-        $param = [$remarks, $service_id, $id, $date];
+        $param = [$remarks, $businessid, $id, $date];
 
         $executeResult = $stmt->execute($param);
 

@@ -8,6 +8,8 @@
     $Payment = new Payment;
 
     $Notification = new Notification;
+    
+    $protocollinks = $Notification->ProtocolAndLinks();
 
     if(isset($_POST['token_accept_manager'])){
 
@@ -51,7 +53,9 @@
 
                             $UpdateManagerPOPAccount = $Payment->UpdateManagerPOPAccount($id_get, $User::STATUS_DONE, $type_id);
 
-                            $insertnotif = $Notification->Insert($id_get, $User::USER_TYPE_MANAGER, "Welcome Please Create Your Business!");
+                            $link = $protocollinks.'/src/manager/view/view-notification';
+                            
+                            $insertnotif = $Notification->Insert($id_get, $User::USER_TYPE_MANAGER, $link, "Welcome Please Create Your Business!");
                                                         
                             if($insertnotif==1){
 
@@ -146,7 +150,9 @@
 
                 if($BanAccount==1){
 
-                    $insertnotif = $Notification->Insert($id_get, $User::USER_TYPE_MANAGER, "Your Account had been temporary Ban");
+                    $link = $protocollinks.'/src/manager/view/view-notification';
+
+                    $insertnotif = $Notification->Insert($id_get, $User::USER_TYPE_MANAGER, $link, "Your Account had been temporary Ban");
                                                         
                     if($insertnotif==1){
 
@@ -220,7 +226,9 @@
 
                 if($BanAccount==1){
 
-                    $insertnotif = $Notification->Insert($id_get_un, $User::USER_TYPE_MANAGER, "Your Account Has been Activated");
+                    $link = $protocollinks.'/src/manager/view/view-notification';
+
+                    $insertnotif = $Notification->Insert($id_get_un, $User::USER_TYPE_MANAGER, $link, "Your Account Has been Activated");
                                                         
                     if($insertnotif==1){
 

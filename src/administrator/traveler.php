@@ -46,6 +46,6 @@
             </main>
         </div>
     </div>
-    <script src="js/traveler.js?v=6"></script>
+    <script src="js/traveler.js?v=10"></script>
 </body>
 </html>

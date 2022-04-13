@@ -1,9 +1,18 @@
 <?php 
     include_once '../../../vendor/autoload.php';
+
     include_once '../process/LoginStatus.php';
+
     include_once '../process/id_validation_fetch.php';
-    if(!isset($_GET['service_id']) || !isset($_GET['host_view'])){
+
+    $businemanager_id = $data->manager_id;
+
+    $GetManagerData = $User->GetUserData($businemanager_id, $User::USER_TYPE_MANAGER);
+
+    if(!isset($_GET['host_id'])){
+        
         header("location:../host-list.php");
+
     }
 ?>
 <!DOCTYPE html>
@@ -48,30 +57,37 @@
                                 date_default_timezone_set('Asia/Manila'); 
                             ?> 
                             <input type="hidden" id="token_add_bucketlist" name="token_add_bucketlist" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>"> 
-                            <input type="hidden" id="service_id" name="service_id" value="<?php echo $_GET['service_id']; ?>">
-                            <input type="hidden" id="host_view" name="host_view" value="<?php echo $_GET['host_view']; ?>">
+                            <input type="hidden" id="host_id" name="host_id" value="<?php echo $_GET['host_id']; ?>">
                             <div class="rowss">
                                     <div id="id_div">
 
                                     </div>
                                     <div id="idcontent" class="imgviews">
-                                        <img src="../../images/services/<?php echo $data->image; ?>" alt="">
+                                        <img src="../../user/assets/logo/<?php echo $data->logo; ?>" alt="">
                                     </div>
                             </div>
                             <div class="rowss">
                                     <div id="id_div">
-                                            <p>Service Name</p>
+                                            <p>Business Name</p>
                                     </div>
                                     <div id="idcontent">
                                             <p><?php echo ucwords( $data->name); ?></p>
                                     </div>
                             </div>
                             <div class="rowss">
+                                <div id="id_div">
+                                        <p>Business Owner</p>
+                                </div>
+                                <div id="idcontent">
+                                        <p><?php echo ucwords($GetManagerData->first_name.' '.$GetManagerData->last_name); ?></p>
+                                </div>
+                            </div>
+                            <div class="rowss">
                                     <div id="id_div">
-                                            <p>Price</p>
+                                            <p>Contact</p>
                                     </div>
                                     <div id="idcontent">
-                                            <p>₱<?php echo $data->price; ?></p>
+                                            <p><?php echo ucwords($GetManagerData->phone); ?></p>
                                     </div>
                             </div>
                             <div class="rowss">
@@ -92,7 +108,7 @@
                             </div>
                         </div>
                         <div class="button-add-emp">
-                           <a href="../view/service-data?host_view=<?php echo $_GET['host_view']; ?>&service_id=<?php echo $_GET['service_id']; ?>" id="cancel">Cancel</a>
+                           <a href="../view/host-list-data?host_id=<?php echo $_GET['host_id']; ?>" id="cancel">Cancel</a>
                             <button type="submit" id="buttonss" name="button">
                                 <span id="spansubmit">Add To Bucketlist</span>
                                 <div class="center-loading-2">

@@ -4,9 +4,11 @@
     $User = new User;
 
     $Validator = new Validator;
-
     
     $Notification = new Notification;
+
+    $protocollinks = $Notification->ProtocolAndLinks();
+
 
     if(isset($_POST['token_Bantemp_manager'])){
 
@@ -26,7 +28,9 @@
 
                 if($BanAccount==1){
 
-                    $insertnotif = $Notification->Insert($id_get, $User::USER_TYPE_TRAVELER, "Your Account had been temporary Ban");
+                    $link = $protocollinks.'/src/traveler/view-notification';
+                    
+                    $insertnotif = $Notification->Insert($id_get, $User::USER_TYPE_TRAVELER, $link, "Your Account had been temporary Ban");
                                                         
                     if($insertnotif==1){
 
@@ -100,7 +104,9 @@
 
                 if($BanAccount==1){
 
-                    $insertnotif = $Notification->Insert($id_get_un, $User::USER_TYPE_TRAVELER, "Your Account Has been Activated");
+                    $link = $protocollinks.'/src/traveler/view-notification';
+
+                    $insertnotif = $Notification->Insert($id_get_un, $User::USER_TYPE_TRAVELER, $link, "Your Account Has been Activated");
                                                         
                     if($insertnotif==1){
 

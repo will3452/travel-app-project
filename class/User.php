@@ -6,6 +6,8 @@ class User extends Connection
     const USER_TYPE_MANAGER = "manager";
     const STATUS_ACTIVE = "active";
     const STATUS_PENDING = "pending";
+    const STATUS_APPROVED = "approved";
+    const STATUS_HISTORY = "history";
     const STATUS_ONGOING = "ongoing";
     const STATUS_DONE = "done";
     const BLOCK_STATUS_TEMPORARY = "temporary";

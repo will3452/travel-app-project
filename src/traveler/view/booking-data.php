@@ -1,9 +1,18 @@
 <?php 
     include_once '../../../vendor/autoload.php';
+
     include_once '../process/LoginStatus.php';
+
     include_once '../process/id_validation_fetch.php';
-    if(!isset($_GET['service_id']) || !isset($_GET['host_view'])){
+
+    $business_id = $data->business_id;
+                                                //get service info
+    $businessdata = $User->GetBusinessData($business_id);
+
+    if(!isset($_GET['book_id'])){
+        
         header("location:../host-list.php");
+
     }
 ?>
 <!DOCTYPE html>
@@ -13,7 +22,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../public/css/default.css?v=7">
-    <link rel="stylesheet" href="../../public/css/user_style.css?v=11">
+    <link rel="stylesheet" href="../../public/css/user_style.css?v=9">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="../../public/js/operate.js"></script> 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -38,11 +47,9 @@
             <main>
                 <div class="container-fluid px-4">
                     <p class="mt-4 edit-title">
-                        <?php 
-                            echo "title";
-                        ?>
+                        View Booking
                     </p>
-                    <a href="host-list-data?host_id=<?php echo $host_id; ?>"><button id="backpage_color"><i class="fas fa-arrow-circle-left"></i></button></a>
+                    <a href="../booking"><button id="backpage_color"><i class="fas fa-arrow-circle-left"></i></button></a>
                     <br>
                     <div class="form-container-user">
                         <div class="rowss">
@@ -50,36 +57,58 @@
 
                                 </div>
                                 <div id="idcontent" class="imgviews">
-                                    <img src="../../images/services/<?php echo $data->image; ?>" alt="">
+                                    <img src="../../user/assets/logo/<?php echo $businessdata->logo; ?>" alt="">
                                 </div>
                         </div>
                         <div class="rowss">
                                 <div id="id_div">
-                                        <p>Service Name</p>
+                                        <p>Business Name</p>
                                 </div>
                                 <div id="idcontent">
-                                        <p><?php echo ucwords( $data->name); ?></p>
+                                        <p><a href="host-list-data?host_id=<?php echo $businessdata->id?>"><?php echo ucwords($businessdata->name); ?></a></p>
                                 </div>
                         </div>
                         <div class="rowss">
                                 <div id="id_div">
-                                        <p>Service Description</p>
+                                        <p>Date</p>
                                 </div>
                                 <div id="idcontent">
-                                        <p><?php echo  $data->remarks; ?></p>
+                                        <p><?php echo $data->reserved_at; ?></p>
                                 </div>
                         </div>
                         <div class="rowss">
                                 <div id="id_div">
-                                        <p>Price</p>
+                                        <p>Time</p>
                                 </div>
                                 <div id="idcontent">
-                                        <p>₱<?php echo $data->price; ?></p>
+                                        <p><?php echo date("h:i a", strtotime($data->time)); ?></p>
+                                </div>
+                        </div>
+                        <div class="rowss">
+                                <div id="id_div">
+                                        <p>Note</p>
+                                </div>
+                                <div id="idcontent">
+                                        <p><?php echo $data->notes; ?></p>
+                                </div>
+                        </div>
+                        <div class="rowss">
+                                <div id="id_div">
+                                        <p>Remarks</p>
+                                </div>
+                                <div id="idcontent">
+                                        <?php if($data->remarks==$User::STATUS_DONE): ?>
+                                            <p style="color:#0095a4; font-weight:700;"><?php echo strtoupper($data->remarks); ?></p>
+                                        <?php else: ?>
+                                            <p style="color:red; font-weight:700;"><?php echo strtoupper($data->remarks); ?></p>
+                                        <?php endif; ?>
                                 </div>
                         </div>
                     </div>
-                <br>
-                <br>
+                    <br>
+                    <div class="button-add-emp-3">
+                    <a href="../update/update-book?book_id=<?php echo $_GET['book_id']; ?>"> <button id="addbtnuser"><i class="far fa-edit btns text-white" id="updateuser"></i></button></a>
+                    </div>
                 <br>
             </main>
         </div>

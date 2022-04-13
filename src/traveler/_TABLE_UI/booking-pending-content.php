@@ -6,13 +6,15 @@
                         $GetUserID = $User->GetUserID($email);
 
                         $iduser = $GetUserID->id;
+
+                        $status = $User::STATUS_PENDING;
                         
-                        include '_UI_SORTING_FETCHING/bucketlist-fetch.php';
+                        include '_UI_SORTING_FETCHING/booking-fetch.php';
                     ?>
                     <!-- search -->
                     <span class="clearable">
                                             <i class="fas fa-search search_icon"></i>
-                        <input class="form-control mr-sm-2" type="text" id="search" placeholder="Search"
+                        <input class="form-control mr-sm-2" type="text" id="search" placeholder="Search Date"
                         value="<?php if(isset($_GET['search'])){echo $_GET['search'];} ?>"
                         aria-label="Search">
                         <?php if(isset($_GET['search'])): ?>
@@ -24,14 +26,14 @@
                     <!-- table -->
                     <div class="card mb-4">
                         <div class="card-header">
-                            <div>Bucketlist Table</div>
+                            <div>Booking Table</div>
                             <div class="dropdown-per-page">
                                 <button class="btn titleperpage-bn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 </button>
                                 <div class="dropdown-menu" id="dropdown" aria-labelledby="dropdownMenuButton1">
                                         <p class="titleperpage">Per Page</p>
                                         <?php 
-                                            include '_UI_SORTING_FETCHING/bucketlist-sort-service.php';
+                                                    include '_UI_SORTING_FETCHING/booking-sort.php';
                                         ?> 
                                 </div>
                             </div>
@@ -52,6 +54,7 @@
                                                 </div>
                                             </div>
                                         </th>
+                                        <th scope="col">Time</th>
                                         <th scope="col"></th>
                                     <?php else: ?>
                                         <th scope="col">Business Name</th>
@@ -64,12 +67,13 @@
                                                 </div>
                                             </div>
                                         </th>
+                                        <th scope="col">Time</th>
                                         <th scope="col"></th>
                                     <?php endif; ?>
                                     </tr>
                                 </thead>
                                 <tbody class="hideafter">
-                                    <?php foreach ($display as $dis): ?>
+                                <?php foreach ($display as $dis): ?>
                                         <tr class="<?php echo $dis['id']; ?>" id="<?php echo $dis['id']; ?>">
                                            <?php 
                                                 $business_id = $dis['business_id'];
@@ -77,7 +81,8 @@
                                                 $businessdata = $User->GetBusinessData($business_id);
                                            ?>
                                             <td data-target="name"><a href="view/host-list-data?host_id=<?php echo $businessdata->id; ?>"><?php echo $businessdata->name; ?></a></td>
-                                            <td><?php echo date("Y-m-d", strtotime($dis['date'])); ?></td>
+                                            <td><?php echo $dis['reserved_at']; ?></td>
+                                            <td><?php echo date("h:i A", strtotime($dis['time'])); ?></td>
                                             <td id="btn">
                                                 <div class="d-flex">
                                                     <span class="tip_view_container">
@@ -90,7 +95,7 @@
                                                     </span>
                                                     <span class="tip_delete_container">
                                                         <i class="far fa-trash-alt" id="delete" data-id="<?php echo $dis['id']; ?>"></i>
-                                                        <span class="tip_delete">Delete</span>
+                                                        <span class="tip_delete">Cancel</span>
                                                     </span>
                                                 </div>
                                             </td>
@@ -114,7 +119,7 @@
                             <div class='bottomtable overflowtables'>
                                 <div class="pre-nex">
                                     <?php 
-                                        include '_UI_SORTING_FETCHING/bucketlist-pagination-fetch.php';    
+                                        include '_UI_SORTING_FETCHING/booking-pagination-fetch.php';    
                                     ?>
                                 </div>
                             </div>

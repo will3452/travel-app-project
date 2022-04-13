@@ -5,17 +5,12 @@
 
     include_once '../process/id_validation_fetch.php';
 
-    $business_id = $data->business_id;
-
-        //get service info
-    $businessdata = $User->GetBusinessData($business_id);
-
-    $businemanager_id = $businessdata->manager_id; 
+    $businemanager_id = $data->manager_id;
 
     $GetManagerData = $User->GetUserData($businemanager_id, $User::USER_TYPE_MANAGER);
 
-    if(!isset($_GET['bucketlist_id'])){
-        
+    if(!isset($_GET['host_id'])){
+
         header("location:../host-list.php");
 
     }
@@ -35,7 +30,7 @@
     <script src="https://kit.fontawesome.com/a66db60870.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-    <title>Traveler - Add bucketlist</title>
+    <title>Traveler - Book</title>
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bgnav shadow-sm p-3 mb-5 rounded">
@@ -54,29 +49,29 @@
             <main>
                 <div class="container-fluid px-4">
                     <p class="mt-4 edit-title">
-                       Update Bucketlist
+                       Book
                     </p>
                     <form id="submitForm">  
                         <div class="form-container-user">
                         <?php 
                                 date_default_timezone_set('Asia/Manila'); 
                             ?> 
-                            <input type="hidden" id="token_update_bucketlist" name="token_update_bucketlist" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>"> 
-                            <input type="hidden" id="bucketlist_id" name="bucketlist_id" value="<?php echo $_GET['bucketlist_id']; ?>">
-                            <div class="rowss">
-                                <div id="id_div">
+                            <input type="hidden" id="token_add_book" name="token_add_book" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>"> 
+                             <input type="hidden" id="host_id" name="host_id" value="<?php echo $_GET['host_id']; ?>">
+                             <div class="rowss">
+                                    <div id="id_div">
 
-                                </div>
-                                <div id="idcontent" class="imgviews">
-                                    <img src="../../user/assets/logo/<?php echo $businessdata->logo; ?>" alt="">
-                                </div>
+                                    </div>
+                                    <div id="idcontent" class="imgviews">
+                                        <img src="../../user/assets/logo/<?php echo $data->logo; ?>" alt="">
+                                    </div>
                             </div>
                             <div class="rowss">
                                     <div id="id_div">
                                             <p>Business Name</p>
                                     </div>
                                     <div id="idcontent">
-                                            <p><a href="host-list-data?host_id=<?php echo $businessdata->id?>"><?php echo ucwords($businessdata->name); ?></a></p>
+                                            <p><?php echo ucwords( $data->name); ?></p>
                                     </div>
                             </div>
                             <div class="rowss">
@@ -100,7 +95,15 @@
                                         <p>Schedule Date <span style="color:red;">*</span></p>
                                 </div>
                                 <div id="idcontent">
-                                        <input type="text" id="date" name="date" value="<?php echo date("Y-m-d", strtotime($data->date)); ?>" required class="focusinput" placeholder="-------">
+                                        <input type="text" id="date" name="date" required class="focusinput" placeholder="-------">
+                                </div>
+                            </div>
+                            <div class="rowss">
+                                <div id="id_div">
+                                        <p>Time <span style="color:red;">*</span></p>
+                                </div>
+                                <div id="idcontent">
+                                        <input type="time" id="time" name="time" required class="focusinput" placeholder="-------">
                                 </div>
                             </div>
                             <div class="rowss">
@@ -108,14 +111,14 @@
                                         <p>Remarks <span style="color:red;">*</span></p>
                                 </div>
                                 <div id="idcontent">
-                                <textarea name="description" id="description" required class="focusinput"><?php echo $data->remarks; ?></textarea>
+                                <textarea name="description" id="description" required class="focusinput"></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="button-add-emp">
-                           <a href="../view/bucketlist-data?bucketlist_id=<?php echo $_GET['bucketlist_id']; ?>" id="cancel">Cancel</a>
+                           <a href="../view/host-list-data?host_id=<?php echo $_GET['host_id']; ?>" id="cancel">Cancel</a>
                             <button type="submit" id="buttonss" name="button">
-                                <span id="spansubmit">Add To Bucketlist</span>
+                                <span id="spansubmit">Book Now</span>
                                 <div class="center-loading-2">
                                     <div class="span5load"></div>
                                     <div class="span6load"></div>
@@ -130,6 +133,6 @@
             </main>
         </div>
     </div>
-    <script src="../js/update-bucketlist.js?v=1"></script>
+    <script src="../js/create-book.js"></script>
 </body>
 </html>

@@ -20,9 +20,7 @@
 
         $token = $_POST['token_add_bucketlist'];
 
-        $service_id = $_POST['service_id'];
-
-        $host_view = $_POST['host_view'];
+        $host_id = $_POST['host_id'];
 
         $date = $_POST['date'];
 
@@ -32,27 +30,33 @@
 
         if($ValidateToken==1){
 
-            $ValidateFields = $Validator->ValidateFields($token, $service_id, $date, $description);
+            $ValidateFields = $Validator->ValidateFields($token, $host_id, $date, $description);
 
             if($ValidateFields==1){
 
                 $ValidateDate = $Validator->ValidateDate($date);
 
                 if($ValidateDate){
-                    //check CheckServiceExist
+                    //check business
 
-                    $check = $Service->CheckServiceExist($service_id, $host_view);
-
+                    $check = $User->GetBusinessData($host_id);
+                    
                     if($check){
                         //insert bucketlist
 
-                        $insert = $Service->InsertBucketList($iduser, $service_id, $date, $description);
+                        $insert = $Service->InsertBucketList($iduser, $host_id, $date, $description);
 
                         if($insert==1){
                             
                             echo "success";
+                        }else{
+                        
+                            echo "error - > create error";
                         }
 
+                    }else{
+
+                        echo "error - > business error";
                     }
 
                 }else{

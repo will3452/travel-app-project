@@ -4,6 +4,8 @@ $Service = new Service();
 
 $User = new User;
 
+$Reservation = new Reservation;
+
 $email = $_SESSION['traveler'];
 
 $GetUserID = $User->GetUserID($email);
@@ -22,13 +24,12 @@ if(isset($_GET['host_id'])){
 
     }
 }
-elseif(isset($_GET['service_id']) || isset($_GET['host_view'])){
 
-    $id = $_GET['service_id'];
+elseif(isset($_GET['bucketlist_id'])){
+    
+    $id = $_GET['bucketlist_id'];
 
-    $host_id = $_GET['host_view'];
-
-    $data = $Service->CheckServiceExist($id, $host_id);
+    $data = $Service->GetBucketlistExist($iduser, $id);
 
     if(!$data){
 
@@ -36,11 +37,12 @@ elseif(isset($_GET['service_id']) || isset($_GET['host_view'])){
 
     }
 }
-elseif(isset($_GET['bucketlist_id'])){
-    
-    $id = $_GET['bucketlist_id'];
 
-    $data = $Service->GetBucketlistExist($iduser, $id);
+elseif(isset($_GET['book_id'])){
+    
+    $id = $_GET['book_id'];
+
+    $data = $Reservation->GetBook($iduser, $id);
 
     if(!$data){
 

@@ -11,6 +11,8 @@ $Gcash = new Gcash;
 
 $Notification = new Notification;
 
+$protocollinks = $Notification->ProtocolAndLinks();
+
 $GetPricing = $Gcash->GetPricing();
 
 $account_pricing = $GetPricing->account_pricing;
@@ -129,8 +131,9 @@ if(isset($_POST['token_register_manager'])){
                                                     if($insertpop==1){
 
                                                         //notif
+                                                        $link = $protocollinks.'src/administrator/view/view-notification';
 
-                                                        $insertnotif = $Notification->Insert($newid, $User::USER_TYPE_ADMIN, "Created New Manager Account!");
+                                                        $insertnotif = $Notification->Insert($newid, $User::USER_TYPE_ADMIN, $link, "Created New Manager Account!");
                                                         
                                                         if($insertnotif==1){
 
@@ -262,9 +265,11 @@ elseif(isset($_POST['token_register_traveler'])){
 
                                             $newid = $GetUserID->id;
 
-                                             //notif
+                                            //notif
 
-                                            $insertnotif = $Notification->Insert($newid, $User::USER_TYPE_ADMIN, "Created New Traveler Account!");
+                                            $link = $protocollinks.'src/administrator/view/view-notification';
+
+                                            $insertnotif = $Notification->Insert($newid, $User::USER_TYPE_ADMIN, $link, "Created New Traveler Account!");
                                                             
                                             if($insertnotif==1){
 

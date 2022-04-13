@@ -48,6 +48,10 @@ class Validator
     {
         return date('Y-m-d', strtotime($date))==$date;
     }
+    public function ValidateTime($time)
+    {
+        return date('H:i', strtotime($time))==$time;
+    }
     public function ValidateEmail($email)
     {
         return filter_var($email, FILTER_VALIDATE_EMAIL);

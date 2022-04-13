@@ -99,6 +99,14 @@
                                         <p><?php echo ucwords($GetManagerData->phone); ?></p>
                                 </div>
                         </div>
+                        <div class="rowss-operation">
+                                <div class="button-add-emp-66">
+                                        <a href="../create/create-book?host_id=<?php echo $_GET['host_id']; ?>"> <button id="addbtnuser">Book Now</button></a>
+                                </div>
+                                <div class="button-add-emp-66">
+                                        <a href="../create/create-bucketlist?host_id=<?php echo $_GET['host_id']; ?>"> <button id="addbtnuser">Add To Bucket List</button></a>
+                                </div>
+                        </div>
                     </div>
                     <br>
                     <br>

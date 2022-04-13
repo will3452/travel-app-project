@@ -133,7 +133,7 @@ $(document).on('click','#updateuser',function(){
     $("#banpermbtn").attr("disabled",true);
     $(".close_modal").css({'pointer-events': 'none'});
         $.ajax({
-            url  : "process/_manager.php",
+            url  : "process/_traveler.php",
             type : "POST",
             cache:false,
             data :formData,
@@ -177,7 +177,7 @@ $("#submitmodal_unban").on("submit", function(e){
     $("#unbantempbtn").attr("disabled",true);
     $(".close_modal").css({'pointer-events': 'none'});
         $.ajax({
-            url  : "process/_manager.php",
+            url  : "process/_traveler.php",
             type : "POST",
             cache:false,
             data :formData,

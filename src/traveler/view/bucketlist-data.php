@@ -5,9 +5,9 @@
 
     include_once '../process/id_validation_fetch.php';
 
-    $serviceid = $data->package_id;
-
-    $GetServiceExist = $Service->GetServiceExist($serviceid);
+    $business_id = $data->business_id;
+                                                //get service info
+    $businessdata = $User->GetBusinessData($business_id);
 
     if(!isset($_GET['bucketlist_id'])){
         
@@ -57,15 +57,15 @@
 
                                 </div>
                                 <div id="idcontent" class="imgviews">
-                                    <img src="../../images/services/<?php echo $GetServiceExist->image; ?>" alt="">
+                                    <img src="../../user/assets/logo/<?php echo $businessdata->logo; ?>" alt="">
                                 </div>
                         </div>
                         <div class="rowss">
                                 <div id="id_div">
-                                        <p>Service Name</p>
+                                        <p>Business Name</p>
                                 </div>
                                 <div id="idcontent">
-                                        <p><a href="service-data?host_view=<?php echo $GetServiceExist->business_id; ?>&service_id=<?php echo $GetServiceExist->id; ?>"><?php echo ucwords($GetServiceExist->name); ?></a></p>
+                                        <p><a href="host-list-data?host_id=<?php echo $businessdata->id?>"><?php echo ucwords($businessdata->name); ?></a></p>
                                 </div>
                         </div>
                         <div class="rowss">

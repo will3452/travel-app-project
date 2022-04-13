@@ -15,6 +15,8 @@
 
     $Notification = new Notification;
 
+    $protocollinks = $Notification->ProtocolAndLinks();
+
     $GetPricing = $Gcash->GetPricing();
 
     $account_pricing = $GetPricing->account_pricing;
@@ -24,6 +26,7 @@
     $GetUserID = $User->GetUserID($email);
 
     $userid = $GetUserID->id;
+
     if(isset($_POST['token_payrenewal'])){
 
         $pop = $_FILES['pop'];
@@ -69,7 +72,9 @@
                             //here create renewal acc subs
 
                             //here notif
-                            $insertnotif = $Notification->Insert($userid, $User::USER_TYPE_ADMIN, "Account Renewal Payment");
+                            $link = $protocollinks.'src/administrator/view/view-notification';
+
+                            $insertnotif = $Notification->Insert($userid, $User::USER_TYPE_ADMIN, $link, "Account Renewal Payment");
                                                         
                             if($insertnotif==1){
         
@@ -169,7 +174,9 @@
                                 if($Insert){
 
                                     //here notif
-                                    $insertnotif = $Notification->Insert($userid, $User::USER_TYPE_ADMIN, "Avail ".$packagename." Advertisment");
+                                    $link = $protocollinks.'src/administrator/view/view-notification';
+
+                                    $insertnotif = $Notification->Insert($userid, $User::USER_TYPE_ADMIN, $link, "Avail ".$packagename." Advertisment");
                                                                     
                                     if($insertnotif==1){
                     
