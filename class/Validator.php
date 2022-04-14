@@ -48,6 +48,19 @@ class Validator
     {
         return date('Y-m-d', strtotime($date))==$date;
     }
+    public function ValidateDateLimit($date)
+    {  
+        date_default_timezone_set('Asia/Manila');   
+        
+        $NewDate=Date('Y-m-d', strtotime('-1 days'));
+
+        if($NewDate>=$date){
+
+            return false;
+        }
+        return true;
+
+    }
     public function ValidateTime($time)
     {
         return date('H:i', strtotime($time))==$time;

@@ -16,10 +16,6 @@ $sidebaroutside ='
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-calendar-check"></i></div>
                             Booking
                         </a>
-                        <a class="nav-link" href="inquire">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-circle-question"></i></div>
-                            Inquire
-                        </a>
                         <a class="nav-link" href="dashboard">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
                             Profile
@@ -44,10 +40,6 @@ $sidebarinside ='
                     <a class="nav-link" href="../booking">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-calendar-check"></i></div>
                         Booking
-                    </a>
-                    <a class="nav-link" href="../inquire">
-                        <div class="sb-nav-link-icon"><i class="fa-solid fa-circle-question"></i></div>
-                        Inquire
                     </a>
                     <a class="nav-link" href="../dashboard">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>

@@ -5,13 +5,13 @@
 
     include_once '../process/id_validation_fetch.php';
 
-    $business_id = $data->business_id;
-                                                //get service info
-    $businessdata = $User->GetBusinessData($business_id);
+    $userid = $data->user_id;
 
-    if(!isset($_GET['book_id'])){
+    $travelerdata = $User->GetUserData($userid, $User::USER_TYPE_TRAVELER);
+
+    if(!isset($_GET['rs_id'])){
         
-        header("location:../host-list.php");
+        header("location:../dashboard.php");
 
     }
 ?>
@@ -28,7 +28,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://kit.fontawesome.com/a66db60870.js" crossorigin="anonymous"></script>
-    <title>Traveler - </title>
+    <title>Manager - Reservation</title>
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bgnav shadow-sm p-3 mb-5 rounded">
@@ -47,25 +47,30 @@
             <main>
                 <div class="container-fluid px-4">
                     <p class="mt-4 edit-title">
-                        View Booking
+                        View Reservation
                     </p>
-                    <a href="../booking"><button id="backpage_color"><i class="fas fa-arrow-circle-left"></i></button></a>
+                    <a href="../reservation"><button id="backpage_color"><i class="fas fa-arrow-circle-left"></i></button></a>
                     <br>
                     <div class="form-container-user">
-                        <div class="rowss">
-                                <div id="id_div">
-
-                                </div>
-                                <div id="idcontent" class="imgviews">
-                                    <img src="../../user/assets/logo/<?php echo $businessdata->logo; ?>" alt="">
+                        <div class="header-profile">
+                                <div class="circular--landscape2"> 
+                                    <img src="../../images/users/<?php echo $travelerdata->image; ?>" alt="">
                                 </div>
                         </div>
                         <div class="rowss">
                                 <div id="id_div">
-                                        <p>Business Name</p>
+                                        <p>Name</p>
                                 </div>
                                 <div id="idcontent">
-                                        <p><a href="host-list-data?host_id=<?php echo $businessdata->id?>"><?php echo ucwords($businessdata->name); ?></a></p>
+                                        <p><?php echo ucwords($travelerdata->first_name. ' '. $travelerdata->last_name); ?></p>
+                                </div>
+                        </div>
+                        <div class="rowss">
+                                <div id="id_div">
+                                        <p>Email</p>
+                                </div>
+                                <div id="idcontent">
+                                        <p><a href="traveler-data?traveler_id=<?php echo $travelerdata->id; ?>"><?php echo $travelerdata->email; ?></a></p>
                                 </div>
                         </div>
                         <div class="rowss">
@@ -110,7 +115,7 @@
 
                     <?php else: ?>
                         <div class="button-add-emp-3">
-                            <a href="../update/update-book?book_id=<?php echo $_GET['book_id']; ?>"> <button id="addbtnuser"><i class="far fa-edit btns text-white" id="updateuser"></i></button></a>
+                        <a href="../update/update-reservation?rs_id=<?php echo $_GET['rs_id']; ?>"> <button id="addbtnuser"><i class="far fa-edit btns text-white" id="updateuser"></i></button></a>
                         </div>
                     <?php endif; ?>
                 <br>

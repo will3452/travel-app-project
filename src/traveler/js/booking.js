@@ -77,3 +77,57 @@ var timertable;
             var showinfo = $(this).attr("data-id");
             window.location.href="view/booking-data?book_id="+showinfo;
         });
+        $(document).on('click','#delete',function(){
+            var id = $(this).attr("data-id");
+            var name = $('#'+id).children('td[data-target=name]').text();
+            $(".name_here").text(name);
+            $(".deletereservation").fadeIn();
+            $("#res_id_d").val(id);
+        });
+        $(document).on('click','.close_modal',function(){
+            $(".name_here").text("");
+            $(".deletereservation").fadeOut();
+            $("#res_id_d").val("");
+        });
+        $("#submitmodal_res_de").on("submit", function(e){
+            e.preventDefault(e);
+            var formData = new FormData(this);
+            $(".center-loading-3").show();
+            $('.span_modal').hide();
+            $("#resacc_btn_d").attr("disabled",true);
+            $(".close_modal").css({'pointer-events': 'none'});
+                $.ajax({
+                    url  : "process/_booking.php",
+                    type : "POST",
+                    cache:false,
+                    data :formData,
+                    contentType : false, // you can also use multipart/form-data replace of false
+                    processData: false,
+                    success:function(d){
+                        if($.trim(d)=='success'){
+                            $(".center-loading-3").hide();
+                            $('.span_modal').show();
+                            $("#resacc_btn_d").attr("disabled",false);
+                            $(".close_modal").css({'pointer-events': 'auto'});
+                            $(".name_here").text("");
+                            $(".deletereservation").fadeOut();
+                            $("#res_id_d").val("");
+                            swal("Success!", "", "success", {
+                                button: "Close",
+                            });
+                            setTimeout(function(){
+                                location.reload();
+                            }, 1500);
+                        }else{
+                            swal("Error!", d, "error");
+                            $(".center-loading-3").hide();
+                            $('.span_modal').show();
+                            $("#resacc_btn_d").attr("disabled",false);
+                            $(".close_modal").css({'pointer-events': 'auto'});
+                            $(".name_here").text("");
+                            $(".deletereservation").fadeOut();
+                            $("#res_id_d").val("");
+                        }
+                    }
+                });
+        });

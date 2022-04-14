@@ -46,64 +46,134 @@
 
                 if($ValidateDate){
 
-                    $ValidateTime = $Validator->ValidateTime($time);
+                    $vallimitdate = $Validator->ValidateDateLimit($date);
+    
+                    if($vallimitdate){
 
-                    if($ValidateTime){
+                        $ValidateTime = $Validator->ValidateTime($time);
 
-                        $check = $User->GetBusinessData($host_id);
-                    
-                        if($check){
+                        if($ValidateTime){
 
-                            //chcek if user already book on that day
+                            $check = $User->GetBusinessData($host_id);
+                        
+                            if($check){
 
-                            $checkbook = $Reservation->CheckIfReservationExist($iduser, $host_id, $date);
+                                //chcek if user already book on that day
 
-                            if($checkbook>0){
+                                $checkbook = $Reservation->CheckIfReservationExist($iduser, $host_id, $date);
 
-                                echo "error - > you already book on this host and date";
-                            }                            
-                            else{
+                                if($checkbook>0){
 
-                                $insert = $Reservation->InsertReservation($iduser, $host_id, $User::STATUS_PENDING, $description, $date, $time);
+                                    echo "error - > you already book on this host and date";
+                                }                            
+                                else{
 
-                                if($insert==1){
+                                    $insert = $Reservation->InsertReservation($iduser, $host_id, $User::STATUS_PENDING, $description, $date, $time);
+
+                                    if($insert==1){
+                                        
+                                        //here notif
+                                        $link = $protocollinks.'src/manager/view/view-notification';
+        
+                                        $message = 'Book On '.$date. ', '.date("h:i:a", strtotime($time));
+        
+                                        $insertnotif = $Notification->Insert($iduser, $User::USER_TYPE_MANAGER, $link, $message);
+                                                                        
+                                        if($insertnotif==1){
+                        
+                                            echo "success";
+                        
+                                        }
+                                    }else{
                                     
-                                    //here notif
-                                    $link = $protocollinks.'src/manager/view/view-notification';
-    
-                                    $message = 'Book On '.$date. ', '.date("h:i:a", strtotime($time));
-    
-                                    $insertnotif = $Notification->Insert($iduser, $User::USER_TYPE_MANAGER, $link, $message);
-                                                                    
-                                    if($insertnotif==1){
-                    
-                                        echo "success";
-                    
+                                        echo "error - > create error";
                                     }
-                                }else{
-                                
-                                    echo "error - > create error";
                                 }
+                            }else{
+
+                                echo "error - > business error";
                             }
                         }else{
-
-                            echo "error - > business error";
+                            
+                            echo "error - > invtime";
                         }
                     }else{
                         
-                        echo "invtime";
+                        echo "error - > invdate";
                     }
                 }else{
-                    
-                    echo "invdate";
+                        
+                    echo "error - > invdate";
                 }
             }else{
 
-                echo "EMPF";
+                echo "error - > EMPF";
             }
         }else{
 
-            echo "tokenerror";
+            echo "error - > tokenerror";
         }
 
+    }
+    elseif(isset($_POST['token_deletereservation_travler'])){
+
+        $token = $_POST['token_deletereservation_travler'];
+
+        $res_id = $_POST['res_id_d'];
+
+        $ValidateToken = $Validator->ValidateToken($token);
+
+        if($ValidateToken==1){
+
+            $ValidateFields = $Validator->ValidateFields($token, $res_id);
+            
+            if($ValidateFields==1){
+
+                 //update reservation / booking into approved
+
+                $GetBook = $Reservation->GetBook($iduser, $res_id);
+
+                if($GetBook){
+ 
+                    $dateofbook = $GetBook->reserved_at;
+ 
+                    $timeofbook = $GetBook->time;
+ 
+                    $user_id = $GetBook->user_id;
+ 
+                    $update = $Reservation->UpdateReservationTravel($res_id, $User::STATUS_HISTORY, $User::STATUS_DROP, $iduser);
+ 
+                    if($update){
+     
+                        //here notif
+                        $link = $protocollinks.'src/traveler/view/view-notification';
+     
+                        $message = 'Cancel Book on '.$dateofbook. ' '.date("h:i:A", strtotime($timeofbook));
+     
+                        $insertnotif = $Notification->Insert($user_id, $User::USER_TYPE_MANAGER, $link, $message);
+                                                        
+                        if($insertnotif==1){
+        
+                            echo "success";
+        
+                        }
+     
+                    }else{
+     
+                        echo "error -> invalid process";
+                    }
+                }else{
+ 
+                    echo "error -> invalid process";
+                }
+
+            }else{
+
+                echo "error -> invalid process";
+            }
+
+        }else{
+
+            echo "error -> token error";
+        }
     }
