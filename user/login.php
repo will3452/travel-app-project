@@ -35,7 +35,7 @@
 <body>
     <div class="containter-login">
         <div class="logo_cont">
-            <img src="assets/logo/<?php echo $logoimage; ?>" alt="">
+            <img src="/user/assets/logo/<?php echo $logoimage; ?>" alt="">
         </div>
         <div class="login-containers">
             <div class="header-container">
@@ -79,6 +79,6 @@
             </div>
         </div>
     </div>
-    <script src="js/login.js?v=7"></script>
+    <script src="/user/js/login.js?v=7"></script>
 </body>
 </html>
