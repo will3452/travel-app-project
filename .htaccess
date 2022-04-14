@@ -10,17 +10,15 @@
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^(.*)$ $1.php [NC,L] 
+RewriteRule ^(.*)$ $1.php [NC,L]
 RedirectMatch 403 ^/class/
 RedirectMatch 403 ^/database/
 RedirectMatch 403 ^/vendor/
-RedirectMatch 403 ^/src/administrator/_UI
-RedirectMatch 403 ^/src/administrator/_TABLE_UI
-RedirectMatch 403 ^/src/manager/_UI
-RedirectMatch 403 ^/src/manager/_TABLE_UI
-RedirectMatch 403 ^/src/traveler/_UI
-RedirectMatch 403 ^/src/traveler/_TABLE_UI
+RedirectMatch 403 ^/administrator/_UI
+RedirectMatch 403 ^/administrator/_TABLE_UI
+RedirectMatch 403 ^/manager/_UI
+RedirectMatch 403 ^/manager/_TABLE_UI
+RedirectMatch 403 ^/traveler/_UI
+RedirectMatch 403 ^/traveler/_TABLE_UI
 # RewriteRule .*\.(wav|swf|jpg|jpeg|gif|png|bmp|js|css)$ - [F,NC,L]
 Options -Indexes
-
-
