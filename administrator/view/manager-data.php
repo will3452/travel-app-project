@@ -1,4 +1,4 @@
-<?php 
+<?php
      include_once '../../vendor/autoload.php';
 
      include_once '../process/LoginStatus.php';
@@ -6,7 +6,7 @@
      include_once '../process/id_validation_fetch.php';
 
      if(!isset($_GET['manager_id'])){
-         
+
         header("location:../dashboard");
     }
 ?>
@@ -16,10 +16,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../public/css/default.css?v=7">
-    <link rel="stylesheet" href="../../public/css/user_style.css?v=7">
+    <link rel="stylesheet" href="..//public/css/default.css?v=7">
+    <link rel="stylesheet" href="..//public/css/user_style.css?v=7">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="../../public/js/operate.js"></script> 
+    <script src="..//public/js/operate.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://kit.fontawesome.com/a66db60870.js" crossorigin="anonymous"></script>
@@ -27,13 +27,13 @@
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bgnav shadow-sm p-3 mb-5 rounded">
-        <?php 
+        <?php
             include '../_UI/header_2.php';
         ?>
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-            <?php 
+            <?php
                 include '../_UI/sidebar.php';
                 echo $sidebarinside;
             ?>
@@ -48,7 +48,7 @@
                     <br>
                     <div class="form-container-user">
                         <div class="header-profile">
-                                <div class="circular--landscape2"> 
+                                <div class="circular--landscape2">
                                     <img src="../../images/users/<?php echo $userdata->image; ?>" alt="">
                                 </div>
                         </div>
@@ -61,8 +61,8 @@
                                         <input type="hidden" id="manager_id" value="<?php echo $_GET['manager_id'] ?>">
                                 </div>
                         </div>
-                       
-                       
+
+
                         <div class="rowss">
                                 <div id="id_div">
                                         <p>Name</p>
@@ -110,7 +110,7 @@
                                         <p>Date Registered</p>
                                 </div>
                                 <div id="idcontent">
-                                    <p><?php 
+                                    <p><?php
                                         if($userdata->subcribed_at==''){
                                             echo "------------";
                                         }else{
@@ -140,10 +140,10 @@
                     <div class="button-add-emp-3">
                         <a href="../update/update-manager?manage_id=<?php echo $_GET['manage_id']; ?>"> <button id="addbtnuser"><i class="far fa-edit btns text-white" id="updateuser"></i></button></a>
                     </div>
-                    <?php  
+                    <?php
                     include '../_UI/modal.php';
                     echo $deletepop;
-                    include '../_TABLE_UI/payment-table.php'; 
+                    include '../_TABLE_UI/payment-table.php';
                     ?>
                 </div>
                 <br>

@@ -1,4 +1,4 @@
-<?php 
+<?php
      include_once '../../vendor/autoload.php';
      include_once '../process/LoginStatus.php';
      include_once '../process/id_validation_fetch.php';
@@ -12,10 +12,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../public/css/default.css?v=7">
-    <link rel="stylesheet" href="../../public/css/user_style.css?v=7">
+    <link rel="stylesheet" href="..//public/css/default.css?v=7">
+    <link rel="stylesheet" href="..//public/css/user_style.css?v=7">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="../../public/js/operate.js"></script> 
+    <script src="..//public/js/operate.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://kit.fontawesome.com/a66db60870.js" crossorigin="anonymous"></script>
@@ -25,13 +25,13 @@
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bgnav shadow-sm p-3 mb-5 rounded">
-        <?php 
+        <?php
             include '../_UI/header_2.php';
         ?>
     </nav>
     <div id="layoutSidenav">
         <div id="layoutSidenav_nav">
-            <?php 
+            <?php
                 include '../_UI/sidebar.php';
                 echo $sidebarinside;
             ?>
@@ -40,17 +40,17 @@
             <main>
                 <div class="container-fluid px-4">
                     <p class="mt-4 edit-title">Avail Promo Ads</p>
-                    <form id="submitForm">  
+                    <form id="submitForm">
                         <div class="form-container-user">
                             <div class="rowss">
                                 <div id="id_div">
                                         <p style="font-size:20px;">Avail Promo Ads Form</p>
                                 </div>
                             </div>
-                            <?php 
-                                date_default_timezone_set('Asia/Manila'); 
-                            ?> 
-                            <input type="hidden" id="token_create_promo" name="token_create_promo" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>"> 
+                            <?php
+                                date_default_timezone_set('Asia/Manila');
+                            ?>
+                            <input type="hidden" id="token_create_promo" name="token_create_promo" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>">
                             <input type="hidden" id="promo_id" name="promo_id" value="<?php echo $_GET['promo_id']; ?>">
                             <div class="rowss">
                                 <div id="id_div">
@@ -120,8 +120,8 @@
                                     <div class="span7load"></div>
                                 </div>
                             </button>
-                        </div>  
-                    </form>  
+                        </div>
+                    </form>
 
                 </div>
                 <br>
