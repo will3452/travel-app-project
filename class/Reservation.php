@@ -237,4 +237,18 @@ class Reservation extends Service{
         }
         return false;
     }
+    public function UpdateReservationDataTraveler($id, $user_id, $date, $time, $notes){
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("UPDATE `reservation` SET reserved_at=?, time=?, notes=? WHERE id=? && user_id=?");
+
+        $true = $stmt->execute([$date, $time, $notes, $id, $user_id]);
+
+        if ($true) {
+                   
+            return $true;
+        }
+        return false;
+    }
 }

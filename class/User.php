@@ -10,7 +10,7 @@ class User extends Connection
     const STATUS_HISTORY = "history";
     const STATUS_ONGOING = "ongoing";
     const STATUS_DONE = "done";
-    const STATUS_DROP = "drop";
+    const STATUS_DROPPED = "dropped";
     const BLOCK_STATUS_TEMPORARY = "temporary";
     const BLOCK_STATUS_PERMANENTLY = "permanently";
     const BLOCK_STATUS_UNBAN = "";

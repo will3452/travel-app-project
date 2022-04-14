@@ -7,3 +7,21 @@
 
 //  $date = date('2022-04-14 12:56:00');
 // echo date("h:i:a", strtotime($date));
+
+
+//send mail
+// include_once 'vendor/autoload.php';
+
+// include_once 'PHPmailersetup/mailsetup.php';
+
+// $Mails = new Mail;
+// $mail->Body = $Mails->SendMail();
+// if($mail->send()){
+//   echo "success";
+//   echo "Email is Sent";
+// }else{
+//   echo "failed";
+//   echo "Something is wrong". $mail->ErrorInfo;
+// }
+
+
