@@ -323,7 +323,7 @@ class Reservation extends Service{
 
         $con = $this->GetConnection();
 
-        $qs = "DELETE FROM reservation_service WHERE reservation_id=? && service_id=?";
+        $qs = "DELETE FROM reservation_service WHERE reservation_id=? && service_id!=?";
         $stmt = $con->prepare($qs);
 
         $true = $stmt->execute([$reservation_id, $service_id]);

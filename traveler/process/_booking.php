@@ -58,6 +58,7 @@
                         
                             if($check){
 
+                                $manager_id = $check->manager_id;
                                 //chcek if user already book on that day
 
                                 $checkbook = $Reservation->CheckIfReservationExist($iduser, $host_id, $date);
@@ -77,7 +78,7 @@
         
                                         $message = 'Book On '.$date. ', '.date("h:i:a", strtotime($time));
         
-                                        $insertnotif = $Notification->Insert($iduser, $User::USER_TYPE_MANAGER, $link, $message);
+                                        $insertnotif = $Notification->Insert($iduser, $manager_id, $User::USER_TYPE_MANAGER, $link, $message);
                                                                         
                                         if($insertnotif==1){
                         
@@ -138,8 +139,12 @@
                     $dateofbook = $GetBook->reserved_at;
  
                     $timeofbook = $GetBook->time;
- 
-                    $user_id = $GetBook->user_id;
+
+                    $host_id = $GetBook->business_id;
+
+                    $check = $User->GetBusinessData($host_id);
+
+                    $manager_id = $check->manager_id;
  
                     $update = $Reservation->UpdateReservationTravel($res_id, $User::STATUS_HISTORY, $User::STATUS_DROPPED, $iduser);
  
@@ -150,7 +155,7 @@
      
                         $message = 'Cancel Book on '.$dateofbook. ' '.date("h:i:A", strtotime($timeofbook));
      
-                        $insertnotif = $Notification->Insert($user_id, $User::USER_TYPE_MANAGER, $link, $message);
+                        $insertnotif = $Notification->Insert($iduser, $manager_id, $User::USER_TYPE_MANAGER, $link, $message);
                                                         
                         if($insertnotif==1){
         
@@ -240,7 +245,7 @@
                                
                                             $message = 'update book on '.$date. ' '.date("h:i:A", strtotime($time));
                         
-                                            $insertnotif = $Notification->Insert($managerid, $User::USER_TYPE_MANAGER, $link, $message);
+                                            $insertnotif = $Notification->Insert($iduser, $managerid, $User::USER_TYPE_MANAGER, $link, $message);
                                                                             
                                             if($insertnotif==1){
                             
@@ -272,7 +277,7 @@
                                     
                                                 $message = 'update book from '.$dateold. ' to ' .$date .' '.date("h:i:A", strtotime($time));
                             
-                                                $insertnotif = $Notification->Insert($managerid, $User::USER_TYPE_MANAGER, $link, $message);
+                                                $insertnotif = $Notification->Insert($iduser, $managerid, $User::USER_TYPE_MANAGER, $link, $message);
                                                                                 
                                                 if($insertnotif==1){
                                 

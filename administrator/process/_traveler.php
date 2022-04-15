@@ -38,7 +38,7 @@
 
                     $link = $protocollinks.'/traveler/view-notification';
                     
-                    $insertnotif = $Notification->Insert($id_get, $User::USER_TYPE_TRAVELER, $link, "Your Account had been temporary Ban");
+                    $insertnotif = $Notification->Insert('', $id_get, $User::USER_TYPE_TRAVELER, $link, "Your Account had been temporary Ban");
                                                         
                     if($insertnotif==1){
 
@@ -156,7 +156,7 @@
 
                     $link = $protocollinks.'/traveler/view-notification';
 
-                    $insertnotif = $Notification->Insert($id_get_un, $User::USER_TYPE_TRAVELER, $link, "Your Account Has been Activated");
+                    $insertnotif = $Notification->Insert('', $id_get_un, $User::USER_TYPE_TRAVELER, $link, "Your Account Has been Activated");
                                                         
                     if($insertnotif==1){
 

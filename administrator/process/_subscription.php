@@ -54,7 +54,7 @@
                             
                             $link = $protocollinks.'/manager/view/view-notification';
 
-                            $insertnotif = $Notification->Insert($manageid, $User::USER_TYPE_MANAGER, $link, "Accept your avail advertisement!". " ". $promoname);
+                            $insertnotif = $Notification->Insert('', $manageid, $User::USER_TYPE_MANAGER, $link, "Accept your avail advertisement!". " ". $promoname);
                                                         
                             if($insertnotif==1){
 
@@ -108,7 +108,7 @@
 
                         $link = $protocollinks.'/manager/view/view-notification';
 
-                        $insertnotif = $Notification->Insert($manageid, $User::USER_TYPE_MANAGER, $link, "Your avail advertisement!". " ". $promoname. " has been expired!");
+                        $insertnotif = $Notification->Insert('', $manageid, $User::USER_TYPE_MANAGER, $link, "Your avail advertisement!". " ". $promoname. " has been expired!");
                                                         
                         if($insertnotif==1){
 
@@ -185,7 +185,7 @@
                                     
                                     $link = $protocollinks.'/manager/view/view-notification';
 
-                                    $insertnotif = $Notification->Insert($manageid, $User::USER_TYPE_MANAGER, $link, "Your avail advertisement!". " ". $promoname. " is Deleted!");
+                                    $insertnotif = $Notification->Insert('', $manageid, $User::USER_TYPE_MANAGER, $link, "Your avail advertisement!". " ". $promoname. " is Deleted!");
                                                                 
                                     if($insertnotif==1){
             
@@ -205,7 +205,7 @@
 
                                     $link = $protocollinks.'/manager/view/view-notification';
 
-                                    $insertnotif = $Notification->Insert($manageid, $User::USER_TYPE_MANAGER, $link, "Your avail advertisement!". " ". $promoname. " is rejected!");
+                                    $insertnotif = $Notification->Insert('', $manageid, $User::USER_TYPE_MANAGER, $link, "Your avail advertisement!". " ". $promoname. " is rejected!");
                                                                 
                                     if($insertnotif==1){
             

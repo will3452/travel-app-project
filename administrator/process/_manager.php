@@ -59,7 +59,7 @@
 
                             $link = $protocollinks.'/manager/view/view-notification';
                             
-                            $insertnotif = $Notification->Insert($id_get, $User::USER_TYPE_MANAGER, $link, "Welcome Please Create Your Business!");
+                            $insertnotif = $Notification->Insert('', $id_get, $User::USER_TYPE_MANAGER, $link, "Welcome Please Create Your Business!");
                                                         
                             if($insertnotif==1){
 
@@ -200,7 +200,7 @@
 
                     $link = $protocollinks.'/manager/view/view-notification';
 
-                    $insertnotif = $Notification->Insert($id_get, $User::USER_TYPE_MANAGER, $link, "Your Account had been temporary Ban");
+                    $insertnotif = $Notification->Insert('', $id_get, $User::USER_TYPE_MANAGER, $link, "Your Account had been temporary Ban");
                                                         
                     if($insertnotif==1){
 
@@ -318,7 +318,7 @@
 
                     $link = $protocollinks.'/manager/view/view-notification';
 
-                    $insertnotif = $Notification->Insert($id_get_un, $User::USER_TYPE_MANAGER, $link, "Your Account Has been Activated");
+                    $insertnotif = $Notification->Insert('', $id_get_un, $User::USER_TYPE_MANAGER, $link, "Your Account Has been Activated");
                                                         
                     if($insertnotif==1){
 

@@ -64,7 +64,7 @@
     
                        $message = 'Your Book in '. $businessname.' at '.$dateofbook. ' '.date("h:i:A", strtotime($timeofbook)).' Has been approved';
     
-                       $insertnotif = $Notification->Insert($user_id, $User::USER_TYPE_TRAVELER, $link, $message);
+                       $insertnotif = $Notification->Insert($iduser, $user_id,  $User::USER_TYPE_TRAVELER, $link, $message);
                                                        
                        if($insertnotif==1){
        
@@ -127,7 +127,7 @@
      
                         $message = 'Your Book in '. $businessname.' at '.$dateofbook. ' '.date("h:i:A", strtotime($timeofbook)).' Has been dropped';
      
-                        $insertnotif = $Notification->Insert($user_id, $User::USER_TYPE_TRAVELER, $link, $message);
+                        $insertnotif = $Notification->Insert($iduser, $user_id, $User::USER_TYPE_TRAVELER, $link, $message);
                                                         
                         if($insertnotif==1){
         
@@ -218,7 +218,7 @@
             
                                 $message = 'Your Book in '. $businessname.' at '.$dateofbook. ' '.date("h:i:A", strtotime($timeofbook)).' Has been done';
             
-                                $insertnotif = $Notification->Insert($user_id, $User::USER_TYPE_TRAVELER, $link, $message);
+                                $insertnotif = $Notification->Insert($iduser, $user_id, $User::USER_TYPE_TRAVELER, $link, $message);
                                                                 
                                 if($insertnotif==1){
                 
@@ -319,7 +319,7 @@
                             
                                                 $message = $businessname.' created book on '.$date. ' '.date("h:i:A", strtotime($time));
                             
-                                                $insertnotif = $Notification->Insert($travelerid, $User::USER_TYPE_TRAVELER, $link, $message);
+                                                $insertnotif = $Notification->Insert($iduser, $travelerid, $User::USER_TYPE_TRAVELER, $link, $message);
                                                                                 
                                                 if($insertnotif==1){
                                 
@@ -428,7 +428,7 @@
                             
                                          $message = $businessname.' update your book on '.$date. ' '.date("h:i:A", strtotime($time));
                      
-                                         $insertnotif = $Notification->Insert($travelerid, $User::USER_TYPE_TRAVELER, $link, $message);
+                                         $insertnotif = $Notification->Insert($iduser, $travelerid, $User::USER_TYPE_TRAVELER, $link, $message);
                                                                          
                                          if($insertnotif==1){
                          
@@ -460,7 +460,7 @@
                                 
                                             $message = $businessname.' update your book from '.$dateold. ' to ' .$date .' '.date("h:i:A", strtotime($time));
                         
-                                            $insertnotif = $Notification->Insert($travelerid, $User::USER_TYPE_TRAVELER, $link, $message);
+                                            $insertnotif = $Notification->Insert($iduser, $travelerid, $User::USER_TYPE_TRAVELER, $link, $message);
                                                                             
                                             if($insertnotif==1){
                             
@@ -556,23 +556,22 @@
 
                                         $serviceidval = $value;
 
-                                        //delete
-
                                         $delete = $Reservation->DeleteReservationService($rs_id, $serviceidval);
                                         
 
-
-                                        $insertserviceq = $Reservation->InsertReservationService($rs_id, $serviceidval);
-
-
                                     }
+                                }
+                                foreach($packages as $value){
+
+                                    $insertserviceq = $Reservation->InsertReservationService($rs_id, $value);
+
                                 }
                                  //here notif
                                  $link = $protocollinks.'/traveler/view/view-notification';
             
                                  $message = 'Update Your Book History Data in '. $businessname.' at '.$dateofbook. ' '.date("h:i:A", strtotime($timeofbook));
              
-                                 $insertnotif = $Notification->Insert($user_id, $User::USER_TYPE_TRAVELER, $link, $message);
+                                 $insertnotif = $Notification->Insert($iduser, $user_id, $User::USER_TYPE_TRAVELER, $link, $message);
                                                                  
                                  if($insertnotif==1){
                  

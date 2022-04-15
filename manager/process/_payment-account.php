@@ -74,7 +74,7 @@
                             //here notif
                             $link = $protocollinks.'/administrator/view/view-notification';
 
-                            $insertnotif = $Notification->Insert($userid, $User::USER_TYPE_ADMIN, $link, "Account Renewal Payment");
+                            $insertnotif = $Notification->Insert($userid, '', $User::USER_TYPE_ADMIN, $link, "Account Renewal Payment");
                                                         
                             if($insertnotif==1){
         
@@ -176,7 +176,7 @@
                                     //here notif
                                     $link = $protocollinks.'/administrator/view/view-notification';
 
-                                    $insertnotif = $Notification->Insert($userid, $User::USER_TYPE_ADMIN, $link, "Avail ".$packagename." Advertisment");
+                                    $insertnotif = $Notification->Insert($userid, '', $User::USER_TYPE_ADMIN, $link, "Avail ".$packagename." Advertisment");
                                                                     
                                     if($insertnotif==1){
                     

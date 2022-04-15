@@ -133,7 +133,7 @@ if(isset($_POST['token_register_manager'])){
                                                         //notif
                                                         $link = $protocollinks.'/administrator/view/view-notification';
 
-                                                        $insertnotif = $Notification->Insert($newid, $User::USER_TYPE_ADMIN, $link, "Created New Manager Account!");
+                                                        $insertnotif = $Notification->Insert($newid, '', $User::USER_TYPE_ADMIN, $link, "Created New Manager Account!");
                                                         
                                                         if($insertnotif==1){
 
@@ -269,7 +269,7 @@ elseif(isset($_POST['token_register_traveler'])){
 
                                             $link = $protocollinks.'/administrator/view/view-notification';
 
-                                            $insertnotif = $Notification->Insert($newid, $User::USER_TYPE_ADMIN, $link, "Created New Traveler Account!");
+                                            $insertnotif = $Notification->Insert($newid, '', $User::USER_TYPE_ADMIN, $link, "Created New Traveler Account!");
                                                             
                                             if($insertnotif==1){
 

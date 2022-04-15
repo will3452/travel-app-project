@@ -2,15 +2,15 @@
 
 class Notification extends User{
 
-    public function Insert($id, $type, $link, $message){
+    public function Insert($id, $user_receieve_id, $type, $link, $message){
 
         $con = $this->GetConnection();
 
-        $prepareStatement  = "INSERT INTO `notifications`(`user_id`, `type`, `link`, `message`) VALUE(?, ?, ?, ?)";
+        $prepareStatement  = "INSERT INTO `notifications`(`user_id`, `user_receieve_id`, `type`, `link`, `message`) VALUE(?, ?, ?, ?, ?)";
         
         $stmt = $con->prepare($prepareStatement);
 
-        $param = [ $id, $type, $link, $message];
+        $param = [ $id, $user_receieve_id, $type, $link, $message];
 
         $executeResult = $stmt->execute($param);
 
@@ -63,6 +63,44 @@ class Notification extends User{
             
              return true;
         }
+
+    }
+    public function FetchAdminNotif($user){
+
+        $con = $this->GetConnection();
+
+        $prepareStatement  = "SELECT * FROM notifications WHERE type=? ORDER by date_created DESC";
+
+        $stmt = $con->prepare($prepareStatement);
+
+        $param = [ $user ];
+
+        $executeResult = $stmt->execute($param);
+
+        $numwors = $stmt->rowCount();
+
+        if($numwors>0){
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+
+            }
+        }
+    }
+    public function CountUnreadNotifAdmin($user){
+
+        $con = $this->GetConnection();
+
+        $prepareStatement  = "SELECT * FROM notifications WHERE type=?";
+
+        $stmt = $con->prepare($prepareStatement);
+
+        $param = [ $user ];
+
+        $executeResult = $stmt->execute($param);
+
+        return $numwors = $stmt->rowCount();
 
     }
 }
