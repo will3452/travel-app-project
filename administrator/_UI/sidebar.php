@@ -1,4 +1,4 @@
-<?php 
+<?php
 $sidebaroutside ='
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
@@ -11,11 +11,11 @@ $sidebaroutside ='
                         <div class="sb-sidenav-menu-heading">Resources</div>
                         <a class="nav-link" href="traveler">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
-                            Traveler Users
+                            Traveler:users
                         </a>
                         <a class="nav-link" href="manager">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-people-roof"></i></div>
-                            Manager Users
+                            Manager:users
                         </a>
                         <a class="nav-link" href="payment-record">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-money-check"></i></div>
@@ -35,7 +35,7 @@ $sidebaroutside ='
                         </a>
                         <a class="nav-link" href="package">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-box"></i></div>
-                            Package
+                            Packages
                         </a>
                         <div class="sb-sidenav-menu-heading">Setting</div>
                         <a class="nav-link" href="logo">
@@ -52,11 +52,11 @@ $sidebaroutside ='
                         </a>
                         <a class="nav-link" href="terms&condition">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-book-atlas"></i></div>
-                            T&D
+                            Terms and Conditions
                         </a>
                         <a class="nav-link" href="gcash">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-money-check-dollar"></i></div>
-                            Gcash Account
+                            GCASH Account
                         </a>
                         <a class="nav-link" href="pricing">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-money-bill"></i></div>
@@ -66,7 +66,7 @@ $sidebaroutside ='
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
                             Profile
                         </a>
-                    </div> 
+                    </div>
                 </div>
             </nav>
 ';
@@ -82,11 +82,11 @@ $sidebarinside ='
                         <div class="sb-sidenav-menu-heading">Resources</div>
                         <a class="nav-link" href="../traveler">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
-                            Traveler Users
+                            Traveler:users
                         </a>
                         <a class="nav-link" href="../manager">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-people-roof"></i></div>
-                            Manager Users
+                            Manager:users
                         </a>
                         <a class="nav-link" href="../payment-record">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-money-check"></i></div>
@@ -102,11 +102,11 @@ $sidebarinside ='
                         </a>
                         <a class="nav-link" href="../subscription">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-address-card"></i></div>
-                            Subscription
+                            Subscriptions
                         </a>
                         <a class="nav-link" href="../package">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-box"></i></div>
-                            Package
+                            Packages
                         </a>
                         <div class="sb-sidenav-menu-heading">Setting</div>
                         <a class="nav-link" href="../logo">
@@ -123,11 +123,11 @@ $sidebarinside ='
                         </a>
                         <a class="nav-link" href="../terms&condition">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-book-atlas"></i></div>
-                            T&D
+                            Terms and Conditions
                         </a>
                         <a class="nav-link" href="../gcash">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-money-check-dollar"></i></div>
-                            Gcash Account
+                            GCASH Account
                         </a>
                         <a class="nav-link" href="../pricing">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-money-bill"></i></div>
@@ -137,8 +137,7 @@ $sidebarinside ='
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
                             Profile
                         </a>
-                    </div> 
+                    </div>
                 </div>
             </nav>
 ';
-

@@ -1,4 +1,4 @@
-<?php 
+<?php
 $sidebaroutside ='
         <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
@@ -15,7 +15,7 @@ $sidebaroutside ='
                         </a>
                         <a class="nav-link" href="traveler">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
-                            Traveler Users
+                            Traveler:users
                         </a>
                         <a class="nav-link" href="services">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-square-poll-horizontal"></i></div>
@@ -46,7 +46,7 @@ $sidebaroutside ='
                             <div class="sb-nav-link-icon"><i class="fa-brands fa-product-hunt"></i></div>
                             Category
                         </a>
-                    </div> 
+                    </div>
                 </div>
             </nav>
 ';
@@ -97,7 +97,7 @@ $sidebarinside ='
                             <div class="sb-nav-link-icon"><i class="fa-brands fa-product-hunt"></i></div>
                             Category
                         </a>
-                    </div> 
+                    </div>
                 </div>
             </nav>
 ';
