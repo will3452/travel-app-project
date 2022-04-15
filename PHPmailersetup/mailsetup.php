@@ -23,7 +23,7 @@
     $mail->Host       = 'smtp.gmail.com';                 
     $mail->SMTPAuth   = true;                                 
     $mail->Username   = $email;                   
-    $mail->Password   = 'Newpassword_27';                     
+    $mail->Password   = 'Petvetgocorp_14';                     
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;           
     $mail->Port       = 465;  
     $mail->SMTPSecure = "ssl";
