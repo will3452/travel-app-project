@@ -516,4 +516,23 @@ class Service extends User{
         }
         return false;
     }
+    public function GetServiceManager($businessid)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM services WHERE business_id=?";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute([$businessid]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+            }
+        }
+    }
 }

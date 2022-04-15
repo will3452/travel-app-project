@@ -55,7 +55,7 @@
 
                     $user_id = $GetBookManager->user_id;
 
-                    $update = $Reservation->UpdateReservation($res_id, $User::STATUS_APPROVED, null, $businessid);
+                    $update = $Reservation->UpdateReservation($res_id, $User::STATUS_APPROVED, null, $businessid, '');
 
                     if($update){
     
@@ -118,7 +118,7 @@
  
                     $user_id = $GetBookManager->user_id;
  
-                    $update = $Reservation->UpdateReservation($res_id, $User::STATUS_HISTORY, $User::STATUS_DROPPED, $businessid);
+                    $update = $Reservation->UpdateReservation($res_id, $User::STATUS_HISTORY, $User::STATUS_DROPPED, $businessid, '');
  
                     if($update){
      
@@ -160,55 +160,95 @@
 
         $res_id = $_POST['res_id_done'];
 
+        $totalprice = $_POST['totalprice'];
+
         $ValidateToken = $Validator->ValidateToken($token);
 
         if($ValidateToken==1){
 
-            $ValidateFields = $Validator->ValidateFields($token, $res_id);
+            if(isset($_POST['packages'])){
+
+                $packages = $_POST['packages'];
+
+                $ValidateFields = $Validator->ValidateFields($token, $res_id, $totalprice, $packages);
+                
+                if($ValidateFields==1){
+
+                    //check total price
+
+                    $checkpricenumber = $Validator->ValidateContact($totalprice);
+
+                    if($checkpricenumber){
+
+                        //update reservation / booking into approved
+
+                        $GetBookManager = $Reservation->GetBookManager($res_id, $businessid);
+
+                        if($GetBookManager){
+        
+                            $dateofbook = $GetBookManager->reserved_at;
+        
+                            $timeofbook = $GetBookManager->time;
+        
+                            $user_id = $GetBookManager->user_id;
+        
+                            $update = $Reservation->UpdateReservation($res_id, $User::STATUS_HISTORY, $User::STATUS_DONE, $businessid, $totalprice);
+        
+                            if($update){
+
+                                   //check packages exit
+                                foreach($packages as $value){
+
+                                    $CheckServiceExist = $Service->CheckServiceExist($value, $businessid);
+
+                                    if($CheckServiceExist){
+
+                                        $serviceidval = $value;
+
+                                        //insert service acquired
+
+                                        $insertserviceq = $Reservation->InsertReservationService($res_id, $serviceidval);
+
+                                    }
+                                }
+
             
-            if($ValidateFields==1){
-
-                 //update reservation / booking into approved
-
-                $GetBookManager = $Reservation->GetBookManager($res_id, $businessid);
-
-                if($GetBookManager){
- 
-                    $dateofbook = $GetBookManager->reserved_at;
- 
-                    $timeofbook = $GetBookManager->time;
- 
-                    $user_id = $GetBookManager->user_id;
- 
-                    $update = $Reservation->UpdateReservation($res_id, $User::STATUS_HISTORY, $User::STATUS_DONE, $businessid);
- 
-                    if($update){
-     
-                        //here notif
-                        $link = $protocollinks.'/traveler/view/view-notification';
-     
-                        $message = 'Your Book in '. $businessname.' at '.$dateofbook. ' '.date("h:i:A", strtotime($timeofbook)).' Has been done';
-     
-                        $insertnotif = $Notification->Insert($user_id, $User::USER_TYPE_TRAVELER, $link, $message);
-                                                        
-                        if($insertnotif==1){
+                                //here notif
+                                $link = $protocollinks.'/traveler/view/view-notification';
+            
+                                $message = 'Your Book in '. $businessname.' at '.$dateofbook. ' '.date("h:i:A", strtotime($timeofbook)).' Has been done';
+            
+                                $insertnotif = $Notification->Insert($user_id, $User::USER_TYPE_TRAVELER, $link, $message);
+                                                                
+                                if($insertnotif==1){
+                
+                                    echo "success";
+                
+                                }
+            
+                            }else{
+            
+                                echo "error -> invalid process";
+                            }
+                        }else{
         
-                            echo "success";
-        
+                            echo "error -> invalid process";
                         }
-     
+                        
+                                
                     }else{
-     
-                        echo "error -> invalid process";
+
+                        echo "error -> price invalid";
                     }
+
+
                 }else{
- 
+
                     echo "error -> invalid process";
                 }
-
             }else{
 
-                echo "error -> invalid process";
+                echo "error -> select packages";
             }
 
         }else{
@@ -466,6 +506,103 @@
                 echo "error -> invalid process";
             }
 
+        }else{
+
+            echo "error -> token error";
+        }
+    }
+    elseif(isset($_POST['token_update_reservation_service_aquired'])){
+
+        $token = $_POST['token_update_reservation_service_aquired'];
+
+        $rs_id = $_POST['rs_id'];
+
+        $totalprice = $_POST['totalprice'];
+
+        $ValidateToken = $Validator->ValidateToken($token);
+
+        if($ValidateToken==1){
+            if(isset($_POST['packages'])){
+
+                $packages = $_POST['packages'];
+
+                $ValidateFields = $Validator->ValidateFields($token, $rs_id, $totalprice, $packages);
+                
+                if($ValidateFields==1){
+
+                    $checkpricenumber = $Validator->ValidateContact($totalprice);
+
+                    if($checkpricenumber){
+
+                        $GetBookManager = $Reservation->GetBookManager($rs_id, $businessid);
+
+                        if($GetBookManager){
+
+                            $dateofbook = $GetBookManager->reserved_at;
+        
+                            $timeofbook = $GetBookManager->time;
+        
+                            $user_id = $GetBookManager->user_id;
+        
+                            $update = $Reservation->UpdateReservationCost($rs_id, $User::STATUS_HISTORY, $businessid, $totalprice);
+
+                            if($update){
+                                //check packages exit
+                                foreach($packages as $value){
+
+                                    $CheckServiceExist = $Service->CheckServiceExist($value, $businessid);
+
+                                    if($CheckServiceExist){
+
+                                        $serviceidval = $value;
+
+                                        //delete
+
+                                        $delete = $Reservation->DeleteReservationService($rs_id, $serviceidval);
+                                        
+
+
+                                        $insertserviceq = $Reservation->InsertReservationService($rs_id, $serviceidval);
+
+
+                                    }
+                                }
+                                 //here notif
+                                 $link = $protocollinks.'/traveler/view/view-notification';
+            
+                                 $message = 'Update Your Book History Data in '. $businessname.' at '.$dateofbook. ' '.date("h:i:A", strtotime($timeofbook));
+             
+                                 $insertnotif = $Notification->Insert($user_id, $User::USER_TYPE_TRAVELER, $link, $message);
+                                                                 
+                                 if($insertnotif==1){
+                 
+                                     echo "success";
+                 
+                                 }
+
+                            }else{
+            
+                                echo "error -> invalid process";
+                            }
+                        }else{
+            
+                            echo "error -> invalid process";
+                        }
+
+                    }else{
+        
+                        echo "error -> invalid process";
+                    }
+
+                }else{
+
+                    echo "error -> invalid process";
+                }
+
+            }else{
+
+                echo "error -> select packages";
+            }
         }else{
 
             echo "error -> token error";

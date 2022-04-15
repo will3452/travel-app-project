@@ -15,7 +15,7 @@
                                 <?php foreach($display as $businesdisplay):  ?>
                                     <div class="boxes" id="showinfo" data-id="<?php echo $businesdisplay['id']; ?>">
                                         <div class="body-boxes">
-                                            <div><img src="../../images/services/<?php echo $businesdisplay['image']; ?>" alt=""></div>
+                                            <div><img src="/../../images/services/<?php echo $businesdisplay['image']; ?>" alt=""></div>
                                         </div>
                                         <div class="title2">
                                             <p data-target="name"><?php echo $businesdisplay['name']; ?> </p>

@@ -72,7 +72,7 @@
                         <div class="form-container-user">
                             <div class="rowss image-body">
                                     <?php if($GetBusinessManager): ?>
-                                        <img src="../user/assets/logo/<?php echo $businesslogo; ?>" alt="">
+                                        <img src="/user/assets/logo/<?php echo $businesslogo; ?>" alt="">
                                     <?php else: ?>
                                         <i class="far fa-image" id="iamge-empty"></i>
                                     <?php endif; ?>

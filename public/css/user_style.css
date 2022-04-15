@@ -3390,3 +3390,91 @@ width: 100%;
               margin-right:10px;
             }
           }
+
+          .modal-body .inputmodal{
+              width:100%;
+              font-size:16px;
+              padding:8px 12px;
+              border-radius:8px;
+              border:rgb(223, 223, 223) 2px solid;
+              outline:none;
+              transition: all ease 1s;
+          }
+          .modal-body .inputmodal:focus{
+            border:#0095a4 2px solid;
+          }
+          .packages_scroll{
+            height: 20em;
+            overflow:hidden;
+            overflow-y:auto;
+          }
+          #idcontent .fa-trash-alt{
+            color:#0095a4;
+            font-size: 20px;
+            cursor: pointer;
+          }
+          #idcontent .fa-edit{
+            color:#0095a4;
+            font-size: 20px;
+            cursor: pointer;
+          }
+           /* tip_delete_container */
+           #idcontent .tip_delete_container{
+            position: relative;
+          }
+         #idcontent .tip_delete_container:hover .tip_delete{
+            visibility: visible;
+          }
+          #idcontent .tip_delete_container > .tip_delete{
+            visibility: hidden;
+            display: inline-block;
+            position: absolute;
+            top:-32px;
+            left:-20px;
+            color:#fff;
+            padding:2px 7px;
+            border-radius: 5px;
+            background-color: #0095a4;
+          }
+          #idcontent .tip_delete_container > .tip_delete:after{
+            content: "";
+            width: 10px;
+            height: 10px;
+            background-color: #0095a4;
+            transform: rotate(45deg);
+            position: absolute;
+            bottom:-2px;
+            left:25px;
+          }
+           /* tip_update_container */
+        #idcontent .tip_update_container{
+          position: relative;
+        }
+        #idcontent .tip_update_container:hover .tip_update{
+          visibility: visible;
+        }
+        #idcontent .tip_update_container > .tip_update{
+          visibility: hidden;
+          display: inline-block;
+          position: absolute;
+          top:-35px;
+          left:-20px;
+          color:#fff;
+          padding:2px 7px;
+          border-radius: 5px;
+          background-color: #0095a4;
+        }
+        #idcontent .tip_update_container > .tip_update:after{
+          content: "";
+          width: 10px;
+          height: 10px;
+          background-color: #0095a4;
+          transform: rotate(45deg);
+          position: absolute;
+          bottom:-3px;
+          left:25px;
+        }
+        #id_div #imgtd2 img{
+            width:70px; 
+            border-radius: 0;
+        }

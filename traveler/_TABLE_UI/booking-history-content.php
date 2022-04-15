@@ -55,6 +55,7 @@
                                             </div>
                                         </th>
                                         <th scope="col">Time</th>
+                                        <th scope="col">Price</th>
                                         <th scope="col">remarks</th>
                                         <th scope="col"></th>
                                     <?php else: ?>
@@ -68,6 +69,8 @@
                                                 </div>
                                             </div>
                                         </th>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Price</th>
                                         <th scope="col">remarks</th>
                                         <th scope="col"></th>
                                     <?php endif; ?>
@@ -84,6 +87,7 @@
                                             <td data-target="name"><a href="view/host-list-data?host_id=<?php echo $businessdata->id; ?>"><?php echo $businessdata->name; ?></a></td>
                                             <td><?php echo $dis['reserved_at']; ?></td>
                                             <td><?php echo date("h:i A", strtotime($dis['time'])); ?></td>
+                                            <td>₱<?php echo $dis['total']; ?></td>
                                             <td>
                                                 <?php if($dis['remarks']==$User::STATUS_DONE): ?>
                                                     <div style="color:#0095a4; font-weight:700;"><?php echo strtoupper($dis['remarks']); ?></div>

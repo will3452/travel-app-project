@@ -14,7 +14,7 @@
         header("location:../dashboard.php");
 
     }
-    if($data->status==$User::STATUS_HISTORY){
+    if($data->status==$User::STATUS_PENDING || $data->status==$User::STATUS_APPROVED){
 
         header("location:../dashboard.php");
     }
@@ -34,7 +34,7 @@
     <script src="https://kit.fontawesome.com/a66db60870.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
-    <title>Manager - Update Reservation</title>
+    <title>Manager - Update Reservation Service Acquired</title>
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bgnav shadow-sm p-3 mb-5 rounded">
@@ -52,7 +52,7 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <p class="mt-4 edit-title">Update Reservation</p>
+                    <p class="mt-4 edit-title">Update Reservation Service Acquired</p>
                     <br>
                     <form id="submitForm">
                         <div class="form-container-user">
@@ -63,13 +63,13 @@
                             </div>
                             <div class="rowss">
                                 <div id="id_div">
-                                        <p style="font-size:20px;">Reservation Form</p>
+                                        <p style="font-size:20px;">Reservation Service Acquired Form</p>
                                 </div>
                             </div>
                             <?php
                                 date_default_timezone_set('Asia/Manila');
                             ?>
-                            <input type="hidden" id="token_update_reservation" name="token_update_reservation" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>">
+                            <input type="hidden" id="token_update_reservation_service_aquired" name="token_update_reservation_service_aquired" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>">
                             <input type="hidden" id="rs_id" name="rs_id" value="<?php echo $_GET['rs_id']; ?>">
                             <div class="rowss">
                                     <div id="id_div">
@@ -89,31 +89,60 @@
                             </div>
                             <div class="rowss">
                                 <div id="id_div">
-                                        <p>Schedule Date <span style="color:red;">*</span></p>
+                                        <p>Schedule Date</p>
                                 </div>
                                 <div id="idcontent">
-                                        <input type="text" id="date" name="date" value="<?php echo $data->reserved_at; ?>" required class="focusinput" placeholder="-------">
+                                        <p><?php echo $data->reserved_at; ?></p>
                                 </div>
                             </div>
                             <div class="rowss">
                                 <div id="id_div">
-                                        <p>Time <span style="color:red;">*</span></p>
+                                        <p>Time </p>
                                 </div>
                                 <div id="idcontent">
-                                        <input type="time" id="time" name="time" value="<?php echo $data->time; ?>" required class="focusinput" placeholder="-------">
+                                    <p><?php echo date("h:i a", strtotime($data->time)); ?></p>
                                 </div>
                             </div>
                             <div class="rowss">
                                 <div id="id_div">
-                                        <p>Remarks <span style="color:red;">*</span></p>
+                                        <p>Total Cost <span style="color:red;">*</span></p>
                                 </div>
                                 <div id="idcontent">
-                                <textarea name="description" id="description" required class="focusinput"><?php echo $data->notes; ?></textarea>
+                                    <input type="number" name="totalprice" id="totalprice" class="focusinput" value="<?php echo $data->total; ?>">
                                 </div>
+                            </div>
+                            <div class="rowss">
+                                <div id="id_div">
+                                        <p>Packages <span style="color:red;">*</span></p>
+                                </div>
+                                <div id="id_div">
+                                    <?php  $GetServiceManager = $Service->GetServiceManager($businessid); ?>
+
+                                    <?php foreach($GetServiceManager as $displays):
+                                        $dataid = $displays['id'];
+                                        $dataname = $displays['name']; 
+                                    ?>
+                                    <div class="packages_data form-check">
+                                        <input class="form-check-input" name="packages[]" type="checkbox" <?php 
+                                            $CheckReservationService = $Reservation->CheckReservationService($_GET['rs_id'], $dataid);
+
+                                            if($CheckReservationService){
+
+                                                echo "checked";
+                                            }else{
+                                                echo '';
+                                            }
+                                        ?> value='<?php echo $dataid; ?>' id="flexCheckChecked">
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                                          <?php echo $dataname; ?>
+                                        </label>
+                                    
+                                    </div>
+                                    <?php endforeach;?>
                             </div>
                         </div>
                         <div class="button-add-emp">
-                           <a href="../reservation" id="cancel">Cancel</a>
+                           <a href="../view/reservation-data?rs_id=<?php echo $_GET['rs_id']; ?>" id="cancel">Cancel</a>
                             <button type="submit" id="buttonss" name="button">
                                 <span id="spansubmit">Update Reservation</span>
                                 <div class="center-loading-2">
@@ -130,6 +159,6 @@
             </main>
         </div>
     </div>
-    <script src="../js/update-reservation.js?v=4"></script>
+    <script src="../js/update-reservation-data.js"></script>
 </body>
 </html>

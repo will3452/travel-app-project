@@ -30,10 +30,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="..//public/css/default.css?v=7">
-    <link rel="stylesheet" href="..//public/css/user_style.css?v=11">
+    <link rel="stylesheet" href="/../public/css/default.css?v=7">
+    <link rel="stylesheet" href="/../public/css/user_style.css?v=11">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="..//public/js/operate.js"></script>
+    <script src="/../public/js/operate.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://kit.fontawesome.com/a66db60870.js" crossorigin="anonymous"></script>
@@ -72,7 +72,7 @@
 
                                 </div>
                                 <div id="idcontent" class="imgviews">
-                                    <img src="../../user/assets/logo/<?php echo $businessdata->logo; ?>" alt="">
+                                    <img src="/../user/assets/logo/<?php echo $businessdata->logo; ?>" alt="">
                                 </div>
                             </div>
                             <div class="rowss">

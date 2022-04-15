@@ -195,13 +195,13 @@ class Reservation extends Service{
         return false;
     }
 
-    public function UpdateReservation($id, $status, $remarks, $business_id){
+    public function UpdateReservation($id, $status, $remarks, $business_id, $totalprice){
 
         $con = $this->GetConnection();
 
-        $stmt = $con->prepare("UPDATE `reservation` SET status=?, remarks=? WHERE id=? && business_id=?");
+        $stmt = $con->prepare("UPDATE `reservation` SET status=?, remarks=?, total=? WHERE id=? && business_id=?");
 
-        $true = $stmt->execute([$status, $remarks, $id, $business_id]);
+        $true = $stmt->execute([$status, $remarks, $totalprice, $id, $business_id]);
 
         if ($true) {
                    
@@ -248,6 +248,89 @@ class Reservation extends Service{
         if ($true) {
                    
             return $true;
+        }
+        return false;
+    }
+    public function InsertReservationService($reservation_id, $service_id){
+
+        $con = $this->GetConnection();
+
+        $prepareStatement  = "INSERT INTO `reservation_service`(`reservation_id`, `service_id`) VALUE(?, ?)";
+        
+        $stmt = $con->prepare($prepareStatement);
+
+        $param = [ $reservation_id, $service_id ];
+
+        $executeResult = $stmt->execute($param);
+
+        if ($executeResult) {
+
+             return true;
+        }
+    }
+    public function GetReservationService($reservation_id){
+
+        $con = $this->GetConnection();
+
+
+        $qs = "SELECT * FROM reservation_service WHERE reservation_id=?";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute([$reservation_id]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+            }
+        }
+    }
+    public function CheckReservationService($reservation_id, $service_id){
+
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM reservation_service WHERE reservation_id=? && service_id=?";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute([$reservation_id, $service_id]);
+
+        $check = $stmt->rowCount();
+
+        if ($check>0) {
+
+            return $stmt->fetch(PDO::FETCH_OBJ);
+        }
+        return false;
+    }
+    public function UpdateReservationCost($id, $status, $business_id, $totalprice){
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("UPDATE `reservation` SET total=? WHERE id=? && business_id=? && status=?");
+
+        $true = $stmt->execute([$totalprice, $id, $business_id, $status]);
+
+        if ($true) {
+                   
+            return $true;
+        }
+        return false;
+    }
+    public function DeleteReservationService($reservation_id, $service_id){
+
+        $con = $this->GetConnection();
+
+        $qs = "DELETE FROM reservation_service WHERE reservation_id=? && service_id=?";
+        $stmt = $con->prepare($qs);
+
+        $true = $stmt->execute([$reservation_id, $service_id]);
+
+        if($true){
+
+            return true;
         }
         return false;
     }

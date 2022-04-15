@@ -66,7 +66,7 @@ $sidebarinside ='
                         </a>
                         <a class="nav-link" href="../traveler">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
-                            Traveler Users
+                            Traveler:users
                         </a>
                         <a class="nav-link" href="../services">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-square-poll-horizontal"></i></div>
