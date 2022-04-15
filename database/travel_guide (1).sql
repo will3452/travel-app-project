@@ -377,6 +377,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
+INSERT INTO `users` (`id`, `first_name`, `middle_name`, `last_name`, `email`, `phone`, `password`, `type`, `maneger_type`, `subcribed_at`, `image`, `status`, `block_status`) VALUES
+(16, 'admin', 'admin', 'admin', 'superadmin@travel.com', '09992221234', '$2y$10$vyVj99v7.tzXtYgl0tzAmeKSh/HQJCopdg6z8j1gb2feS8sRHEka.', 'administrator', '', '2022-03-31 09:55:23', '', 'active', '');
 
 --
 -- Indexes for dumped tables
