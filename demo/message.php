@@ -2,6 +2,14 @@
     <title>Message: demo</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
+<style>
+    .you{
+        color:red;
+    }
+    .other{
+        color:green;
+    }
+</style>
 <body>
     <form action="" id="form">
         <input type="text" id="receiver" placeholder="receiver">
@@ -40,7 +48,7 @@
 
                     messages.forEach(function (item) {
                       var classItem = 'you';
-                      if (item.sender != 'william') {
+                      if (item.sender != 'leo') {
                         classItem = 'other';
                       }
                       mItem += `<li class='${classItem}'> ${item.messages} </li>`
