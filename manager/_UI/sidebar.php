@@ -9,10 +9,6 @@ $sidebaroutside ='
                             Dashboard
                         </a>
                         <div class="sb-sidenav-menu-heading">Resources</div>
-                        <a class="nav-link" href="notification">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-bell"></i></div>
-                            Notification
-                        </a>
                         <a class="nav-link" href="traveler">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
                             Traveler:users
@@ -60,10 +56,6 @@ $sidebarinside ='
                             Dashboard
                         </a>
                         <div class="sb-sidenav-menu-heading">Resources</div>
-                        <a class="nav-link" href="../notification">
-                            <div class="sb-nav-link-icon"><i class="fa-solid fa-bell"></i></div>
-                            Notification
-                        </a>
                         <a class="nav-link" href="../traveler">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-users"></i></div>
                             Traveler:users

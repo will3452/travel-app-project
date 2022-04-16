@@ -120,6 +120,6 @@
     </div>
     <script src="js/load.js"></script>
     <script src="js/gcash.js?v=1"></script>
-    <script src="js/notification_outside.js?v=7"></script>
+    <script src="js/notification.js?v=7"></script>
 </body>
 </html>

@@ -37,15 +37,15 @@
 
                         $GetUserData = $User->GetUserData($user_id, $User::USER_TYPE_TRAVELER);
                     }
-                    if($displays['read_at']==''){
-                        echo ' <a href="view/view-notification?notif_id='.$displays['id'].'" class="loop_link_mess">
+                    if($displays['read_at']=='0000-00-00 00:00:00'){
+                        echo ' <a href="'.$displays['link'].'?notif_id='.$displays['id'].'" class="loop_link_mess">
                         <div class="mess_loop">
                             <div class="_cont">
                                 <div class="circular--landscape--mess">
-                                    <img id="vievimage" src="../images/users/'.$GetUserData->image.'" alt="">
+                                    <img id="vievimage" src="/images/users/'.$GetUserData->image.'" alt="">
                                 </div>
                                 <div class="head_mess">
-                                    <span id="name_heres">'.$GetUserData->email.' (unread)</span>
+                                    <span id="name_heres">'.$GetUserData->email.'</span>
                                 </div>
                             </div>
                             <div class="_cont">
@@ -55,12 +55,13 @@
                             </div>
                             </div>
                         </a>';
-                    }else{
-                        echo ' <a href="view/view-notification?notif_id='.$displays['id'].'" class="loop_link_mess">
+                    }
+                    else{
+                        echo ' <a href="'.$displays['link'].'?notif_id='.$displays['id'].'" class="loop_link_mess">
                         <div class="mess_loop">
                             <div class="_cont">
                                 <div class="circular--landscape--mess">
-                                    <img id="vievimage" src="../images/users/'.$GetUserData->image.'" alt="">
+                                    <img id="vievimage" src="/images/users/'.$GetUserData->image.'" alt="">
                                 </div>
                                 <div class="head_mess">
                                     <span id="name_heres">'.$GetUserData->email.'</span>

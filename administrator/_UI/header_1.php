@@ -17,7 +17,7 @@ if($Getlogo){
 
 date_default_timezone_set('Asia/Manila');   
 
-$numofnotif = $Notification->CountUnreadNotifAdmin($User::USER_TYPE_ADMIN);
+$numofnotif = $Notification->CountUnreadNotifAdmin($User::USER_TYPE_ADMIN, '0000-00-00 00:00:00');
 
 ?>
 <a class="navbar-brand display-title-none" href="#">

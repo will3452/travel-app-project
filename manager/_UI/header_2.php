@@ -1,11 +1,30 @@
 
 <?php
+$User = new User;
+
 $logo = new Logo;
+
+$Notification = new Notification;
+
+$email = $_SESSION['manager'];
+
+$GetUserID = $User->GetUserID($email);
+
+$iduser = $GetUserID->id;
+
 $Getlogo = $logo->Getlogo();
+
 $logoimage = '';
+
 if($Getlogo){
+
    $logoimage = $Getlogo->image;
 }
+
+date_default_timezone_set('Asia/Manila');  
+
+$numofnotif = $Notification->CountUnreadNotifUsers($User::USER_TYPE_MANAGER, $iduser, '0000-00-00 00:00:00');
+
 
 ?>
 <a class="navbar-brand display-title-none" href="#">
@@ -70,9 +89,22 @@ if($Getlogo){
 
 
 <div class="d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0 displaynone">
+<input type="hidden" id="notification_load_token" name="notification_load_token" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>"> 
  </div>
  <div class="notif-icon">
-        <span class="countnum">0</span>
+        <span class="countnum">
+            <?php
+            if($numofnotif){
+                if($numofnotif>9){
+                    echo "9+";
+                }else{
+                    echo $numofnotif;
+                }
+            }else{
+                echo 0;
+            }
+            ?>
+        </span>
         <i class="fas fa-bell" id="notif_btn_open"></i>
     </div>
 

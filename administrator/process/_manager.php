@@ -146,7 +146,12 @@
 
                         if($mail->send()){
                                     
-                            echo "success";
+                            $deletenotif = $Notification->DeleteNotificationAdminAfterCancelAcc($id_get_cancel, $User::USER_TYPE_ADMIN);
+                            
+                            if($deletenotif){
+
+                                echo "success";
+                            }
 
                         }else{
 

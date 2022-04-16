@@ -8,6 +8,8 @@ $Promotion = new Promotion;
 
 $Reservation = new Reservation;
 
+$Notification = new Notification;
+
 $email = $_SESSION['manager'];
 
 $GetUserID = $User->GetUserID($email);
@@ -71,6 +73,37 @@ elseif(isset($_GET['rs_id'])){
 
         header("location:../dashboard");
 
+    }
+}
+elseif(isset($_GET['notif_id'])){
+
+    $id =  $_GET['notif_id'];
+
+    $datanotif2 = $Notification->GetDataNotifUsers($User::USER_TYPE_MANAGER, $id, $iduser);
+
+    if(!$datanotif2){
+
+        header("location:../dashboard");
+
+    }else{
+
+        $read_ats = $datanotif2->read_at;
+
+        if($read_ats=='0000-00-00 00:00:00'){
+
+           $update = $Notification->UpdateNotificationUsers(date("Y-m-d H:i:s"), $id, $User::USER_TYPE_MANAGER, $iduser);
+
+           if($update){
+
+                $datanotif = $Notification->GetDataNotifUsers($User::USER_TYPE_MANAGER, $id, $iduser);
+
+           }
+
+        }else{
+
+            $datanotif = $Notification->GetDataNotifUsers($User::USER_TYPE_MANAGER, $id, $iduser);
+
+        }
     }
 }
 else{

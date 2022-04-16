@@ -1,12 +1,29 @@
 
 <?php
+$User = new User;
+
 $logo = new Logo;
+
+$Notification = new Notification;
+
+$email = $_SESSION['traveler'];
+
+$GetUserID = $User->GetUserID($email);
+
+$iduser = $GetUserID->id;
+
 $Getlogo = $logo->Getlogo();
+
 $logoimage = '';
+
 if($Getlogo){
+
    $logoimage = $Getlogo->image;
 }
 
+date_default_timezone_set('Asia/Manila');  
+
+$numofnotif = $Notification->CountUnreadNotifUsers($User::USER_TYPE_TRAVELER, $iduser, '0000-00-00 00:00:00');
 ?>
 <a class="navbar-brand display-title-none" href="#">
     <?php if($logoimage): ?>
@@ -70,9 +87,23 @@ if($Getlogo){
 
 
 <div class="d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0 displaynone">
+<input type="hidden" id="notification_load_token" name="notification_load_token" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>"> 
  </div>
  <div class="notif-icon">
-        <span class="countnum">0</span>
+        <span class="countnum">
+        <?php 
+                if($numofnotif){
+                    if($numofnotif>9){
+                        echo "9+";
+                    }else{
+                        echo $numofnotif;
+                    }
+                }else{
+                    echo 0;
+                }
+            ?>
+
+        </span>
         <i class="fas fa-bell" id="notif_btn_open"></i>
     </div>
 
@@ -86,15 +117,7 @@ if($Getlogo){
             </div>
     </div>
     <div class="dropdown-content-notification" id="fetchnotification">
-            <div class="bgserachtitle-notif">
-                <p><i class="fas fa-bell" id="notif_btn_open"></i> New / Un-Read Notification</p>
-            </div>
-            <a href="" class="loop_link_notif">
-                        <div class="notif_loop">
-                                <span><i class="fas fa-circle"></i><span id="titlenotifss">title notif</span></span><br>
-                                <span id="notifmessage"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, rerum!</span>
-                    </div>
-            </a>
+        
 
     </div>
     <div class="noresult-content-notif">
@@ -103,9 +126,46 @@ if($Getlogo){
                 </div>
                 <p id="body-not">No Notification</p>
     </div>
+    <div class="notif-message">
+        <span class="countnum" id="loadcont">0</span>
+        <i class="fa-solid fa-message" id="mess_btn_open"></i>
+    </div>
 
-
-    
+    <div class="loading-content-message">
+    <div class="loading-icon-main">
+                        <div class="center">
+                            <div class="span1load"></div>
+                            <div class="span2load"></div>
+                            <div class="span3load"></div>
+                    </div>
+            </div>
+    </div>
+    <div class="dropdown-content-message" id="fetchmessage">
+        <div class="bgserachtitle-notif">
+            <p><i class="fa-solid fa-message" id="mess_btn_open"></i> New / Un-Read Messages</p>
+        </div>
+        <a href="view/message?id_cli='.$iduserun.'" class="loop_link_mess">
+            <div class="mess_loop">
+                <div class="_cont">
+                    <div class="circular--landscape--mess">
+                        <img id="vievimage" src="#" alt="">
+                    </div>
+                    <div class="head_mess">
+                        <span id="name_heres">leo corpuz jr</span>
+                    </div>
+                </div>
+                <div class="_cont">
+                        <span id="notifmessage_mess"> <i class="fas fa-circle"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, obcaecati.</span>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="noresult-content-mess">
+                <div class="bgserachtitle-mess">
+                    <p><i class="fa-solid fa-message" id="mess_btn_open"></i> New / Un-Read Message</p>
+                </div>
+                <p id="body-not">No Message</p>
+    </div>
  <div class="vl"></div>
 <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
     <li class="nav-item dropdown">

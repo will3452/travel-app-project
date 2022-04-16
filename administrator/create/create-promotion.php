@@ -100,5 +100,6 @@
         </div>
     </div>
     <script src="../js/create-promo.js?v=1"></script>
+    <script src="../js/notification_2.js?v=7"></script>
 </body>
 </html>

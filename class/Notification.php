@@ -29,15 +29,15 @@ class Notification extends User{
 
         return $protocol.$links;
     }
-    public function UpdateNotification($date, $id, $user_id){
+    public function UpdateNotificationAdmin($date, $id, $type){
 
         $con = $this->GetConnection();
 
-        $prepareStatement  = "UPDATE `notifications` SET read_at=? WHERE id=? && user_id=?";
+        $prepareStatement  = "UPDATE `notifications` SET read_at=? WHERE id=? && type=?";
 
         $stmt = $con->prepare($prepareStatement);
 
-        $param = [ $date, $id, $user_id ];
+        $param = [ $date, $id, $type ];
 
         $executeResult = $stmt->execute($param);
 
@@ -47,15 +47,51 @@ class Notification extends User{
         }
 
     }
-    public function DeleteNotification($id, $user_id){
+    public function UpdateNotificationUsers($date, $id, $type, $user){
 
         $con = $this->GetConnection();
 
-        $prepareStatement  = "DELETE FROM `notifications` WHERE id=? && user_id=?";
+        $prepareStatement  = "UPDATE `notifications` SET read_at=? WHERE id=? && type=? && user_receieve_id=?";
 
         $stmt = $con->prepare($prepareStatement);
 
-        $param = [ $id, $user_id ];
+        $param = [ $date, $id, $type, $user ];
+
+        $executeResult = $stmt->execute($param);
+
+        if ($executeResult) {
+            
+             return true;
+        }
+
+    }
+    public function DeleteNotificationAdmin($id, $type){
+
+        $con = $this->GetConnection();
+
+        $prepareStatement  = "DELETE FROM `notifications` WHERE id=? && type=?";
+
+        $stmt = $con->prepare($prepareStatement);
+
+        $param = [ $id, $type ];
+
+        $executeResult = $stmt->execute($param);
+
+        if ($executeResult) {
+            
+             return true;
+        }
+
+    }
+    public function DeleteNotificationAdminAfterCancelAcc($id, $type){
+
+        $con = $this->GetConnection();
+
+        $prepareStatement  = "DELETE FROM `notifications` WHERE user_id=? && type=?";
+
+        $stmt = $con->prepare($prepareStatement);
+
+        $param = [ $id, $type ];
 
         $executeResult = $stmt->execute($param);
 
@@ -88,15 +124,75 @@ class Notification extends User{
             }
         }
     }
-    public function CountUnreadNotifAdmin($user){
+    public function FetchNOtifUsers($user, $user_receieve_id){
 
         $con = $this->GetConnection();
 
-        $prepareStatement  = "SELECT * FROM notifications WHERE type=?";
+        $prepareStatement  = "SELECT * FROM notifications WHERE type=? && user_receieve_id=? ORDER by date_created DESC";
 
         $stmt = $con->prepare($prepareStatement);
 
-        $param = [ $user ];
+        $param = [ $user, $user_receieve_id ];
+
+        $executeResult = $stmt->execute($param);
+
+        $numwors = $stmt->rowCount();
+
+        if($numwors>0){
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+
+            }
+        }
+    }
+    public function GetDataNotifAdmin($type, $id){
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM notifications WHERE type=? && id=?");
+
+        $executeResult = $stmt->execute([ $type, $id ]);
+
+        return $stmt->fetch(PDO::FETCH_OBJ);
+
+    }
+    public function GetDataNotifUsers($type, $id, $user){
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM notifications WHERE type=? && id=? && user_receieve_id=?");
+
+        $executeResult = $stmt->execute([ $type, $id, $user ]);
+
+        return $stmt->fetch(PDO::FETCH_OBJ);
+
+    }
+    public function CountUnreadNotifAdmin($user, $read_at){
+
+        $con = $this->GetConnection();
+
+        $prepareStatement  = "SELECT * FROM notifications WHERE type=? && read_at=?";
+
+        $stmt = $con->prepare($prepareStatement);
+
+        $param = [ $user, $read_at];
+
+        $executeResult = $stmt->execute($param);
+
+        return $numwors = $stmt->rowCount();
+
+    }
+    public function CountUnreadNotifUsers($user, $user_receieve_id, $read_at){
+
+        $con = $this->GetConnection();
+
+        $prepareStatement  = "SELECT * FROM notifications WHERE type=? && user_receieve_id=? && read_at=?";
+
+        $stmt = $con->prepare($prepareStatement);
+
+        $param = [ $user, $user_receieve_id, $read_at];
 
         $executeResult = $stmt->execute($param);
 

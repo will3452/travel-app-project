@@ -25,7 +25,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/../public/css/default.css?v=7">
-    <link rel="stylesheet" href="/../public/css/user_style.css?v=7">
+    <link rel="stylesheet" href="/../public/css/user_style.css?v=23">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="/../public/js/operate.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -126,5 +126,6 @@
         </div>
     </div>
     <script src="../js/create-service.js?v=3"></script>
+    <script src="../js/notificaiton_2.js?v=10"></script>
 </body>
 </html>

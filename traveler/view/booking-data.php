@@ -173,5 +173,6 @@
             </main>
         </div>
     </div>
+    <script src="../js/notificaiton_2.js?v=10"></script>
 </body>
 </html>

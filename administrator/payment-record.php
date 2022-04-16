@@ -45,6 +45,6 @@
         </div>
     </div>
     <script src="js/payment-record.js?v=2"></script>
-    <script src="js/notification_outside.js?v=7"></script>
+    <script src="js/notification.js?v=7"></script>
 </body>
 </html>

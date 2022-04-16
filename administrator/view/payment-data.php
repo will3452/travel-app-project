@@ -139,5 +139,6 @@
             </main>
         </div>
     </div>
+    <script src="../js/notification_2.js?v=7"></script>
 </body>
 </html>

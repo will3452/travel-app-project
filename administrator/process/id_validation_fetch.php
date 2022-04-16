@@ -5,6 +5,8 @@ $Payment = new Payment;
 
 $Promotion = new Promotion;
 
+$Notification = new Notification;
+
 if(isset($_GET['payment_id'])){
 
     $id =  $_GET['payment_id'];
@@ -63,6 +65,37 @@ elseif(isset($_GET['pack_id'])){
 
         header("location:../dashboard");
 
+    }
+}
+elseif(isset($_GET['notif_id'])){
+
+    $id =  $_GET['notif_id'];
+
+    $datanotif2 = $Notification->GetDataNotifAdmin($User::USER_TYPE_ADMIN, $id);
+
+    if(!$datanotif2){
+
+        header("location:../dashboard");
+
+    }else{
+
+        $read_ats = $datanotif2->read_at;
+
+        if($read_ats=='0000-00-00 00:00:00'){
+
+           $update = $Notification->UpdateNotificationAdmin(date("Y-m-d H:i:s"), $id, $User::USER_TYPE_ADMIN);
+
+           if($update){
+
+                $datanotif = $Notification->GetDataNotifAdmin($User::USER_TYPE_ADMIN, $id);
+
+           }
+
+        }else{
+
+            $datanotif = $Notification->GetDataNotifAdmin($User::USER_TYPE_ADMIN, $id);
+
+        }
     }
 }
 else{

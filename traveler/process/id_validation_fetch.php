@@ -6,6 +6,8 @@ $User = new User;
 
 $Reservation = new Reservation;
 
+$Notification = new Notification;
+
 $email = $_SESSION['traveler'];
 
 $GetUserID = $User->GetUserID($email);
@@ -63,6 +65,37 @@ elseif(isset($_GET['book_id'])){
 
         header("location:../host-list");
 
+    }
+}
+elseif(isset($_GET['notif_id'])){
+
+    $id =  $_GET['notif_id'];
+
+    $datanotif2 = $Notification->GetDataNotifUsers($User::USER_TYPE_TRAVELER, $id, $iduser);
+
+    if(!$datanotif2){
+
+        header("location:../dashboard");
+
+    }else{
+
+        $read_ats = $datanotif2->read_at;
+
+        if($read_ats=='0000-00-00 00:00:00'){
+
+           $update = $Notification->UpdateNotificationUsers(date("Y-m-d H:i:s"), $id, $User::USER_TYPE_TRAVELER, $iduser);
+
+           if($update){
+
+                $datanotif = $Notification->GetDataNotifUsers($User::USER_TYPE_TRAVELER, $id, $iduser);
+
+           }
+
+        }else{
+
+            $datanotif = $Notification->GetDataNotifUsers($User::USER_TYPE_TRAVELER, $id, $iduser);
+
+        }
     }
 }
 else{

@@ -5,11 +5,21 @@
 
      include_once '../process/id_validation_fetch.php';
 
-     if(!isset($_GET['service_id'])){
+     if(!isset($_GET['notif_id'])){
 
-        header("location:../services");
+        header("location:../dashboard");
 
-     }
+    }
+
+    $userid = $datanotif->user_id;
+
+    $getuser = $User->GetUserData($userid, $User::USER_TYPE_TRAVELER);
+
+    if(!$getuser){
+
+        $getuser = $User->GetUserData($userid, $User::USER_TYPE_MANAGER);
+
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,13 +28,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/../public/css/default.css?v=7">
-    <link rel="stylesheet" href="/../public/css/user_style.css?v=23">
+    <link rel="stylesheet" href="/../public/css/user_style.css?v=22">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="/../public/js/operate.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://kit.fontawesome.com/a66db60870.js" crossorigin="anonymous"></script>
-    <title>Manager - Service</title>
+    <title>Admin - Notification</title>
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bgnav shadow-sm p-3 mb-5 rounded">
@@ -42,63 +52,68 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <p class="mt-4 edit-title">View Service</p>
-                    <a href="../services"><button id="backpage_color"><i class="fas fa-arrow-circle-left"></i></button></a>
+                    <p class="mt-4 edit-title">View Notification</p>
+                    <a href="#"><button id="backpage_color" onclick="history.go(-1);"><i class="fas fa-arrow-circle-left"></i></button></a>
+                    <br>
+                    <br>
                     <br>
                     <div class="form-container-user">
-                        <div class="rowss">
-                                <div id="id_div">
-                                        <p>Service Image</p>
-                                </div>
-                                <div id="idcontent" class="imgviews">
-                                    <img src="/../images/services/<?php echo $data->image; ?>" alt="">
+                        <div class="header-profile">
+                                <div class="circular--landscape2">
+                                    <img src="/../images/users/<?php echo $getuser->image; ?>" alt="">
                                 </div>
                         </div>
                         <div class="rowss">
                                 <div id="id_div">
-                                        <p>ID</p>
+                                        <p>Name</p>
                                 </div>
                                 <div id="idcontent">
-                                        <p><?php echo sprintf('%06d',$_GET['service_id']); ?></p>
+                                        <p><?php echo ucwords($getuser->first_name.' '.$getuser->middle_name.' '.$getuser->last_name);  ?></p>
                                 </div>
                         </div>
                         <div class="rowss">
                                 <div id="id_div">
-                                        <p>Service Name</p>
+                                        <p>Email</p>
                                 </div>
                                 <div id="idcontent">
-                                        <p><?php echo ucwords($data->name); ?></p>
+                                    <?php if($getuser->type==$User::USER_TYPE_TRAVELER): ?>
+                                        <a href="traveler-data?traveler_id=<?php echo $getuser->id; ?>"><p><?php echo ucwords($getuser->email); ?></p></a>
+                                    <?php else: ?>
+                                        <a href="manager-data?manager_id=<?php echo $getuser->id; ?>"><p><?php echo ucwords($getuser->email); ?></p></a>
+                                    <?php endif; ?>
                                 </div>
                         </div>
                         <div class="rowss">
                                 <div id="id_div">
-                                        <p>Description</p>
+                                        <p>Content</p>
                                 </div>
                                 <div id="idcontent">
-                                    <p><?php echo $data->remarks; ?></p>
+                                    <p><?php echo $datanotif->message; ?></p>
                                 </div>
                         </div>
                         <div class="rowss">
                                 <div id="id_div">
-                                        <p>Price</p>
+                                        <p>Date Created</p>
                                 </div>
                                 <div id="idcontent">
-                                    <p>₱<?php echo $data->price; ?></p>
+                                    <p><?php echo date("Y-m-d h:i A", strtotime($datanotif->date_created)); ?></p>
                                 </div>
                         </div>
                         <div class="rowss">
-                            <div id="id_div">
-                                        <p>Category</p>
-                            </div>
-                            <div id="idcontent">
-                            <p><?php echo $data->category; ?></p>
-                            </div>
+                                <div id="id_div">
+                                        <p>Read At</p>
+                                </div>
+                                <div id="idcontent">
+                                    <p><?php echo $datanotif->read_at; ?></p>
+                                </div>
+                        </div>
+                        <div class="rowss-operation">
+                                <div class="button-add-emp-66">
+                                        <button id="addbtnuser" data-id="<?php ?>">Delete</button>
+                                </div>
                         </div>
                     </div>
                     <br>
-                    <div class="button-add-emp-3">
-                    <a href="../update/update-service?service_id=<?php echo $_GET['service_id']; ?>"> <button id="addbtnuser"><i class="far fa-edit btns text-white" id="updateuser"></i></button></a>
-                    </div>
                 </div>
                 <br>
                 <br>
@@ -106,6 +121,6 @@
             </main>
         </div>
     </div>
-    <script src="../js/notificaiton_2.js?v=10"></script>
+    <script src="../js/notification_2.js?v=7"></script>
 </body>
 </html>

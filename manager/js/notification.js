@@ -1,0 +1,130 @@
+$(document).on('click','#notif_btn_open',function(){
+
+    $(".loading-content-notification").show();
+    $(".dropdown-content").hide();
+    $("#fetchglobalsearch").hide();
+    $("#searchglobal").val("");
+    $(".noresult-content").hide();
+    $(".loading-content").hide();
+
+    $(".text-field-search").hide();
+    $(".loading-content-moba").hide();
+    $(".dropdown-content-moba").hide();
+    $("#fetchglobalsearch-moba").hide();
+    $("#searchglobal-moba").val("");
+    $(".noresult-content-moba").hide();
+
+    $(".loading-content-message").hide();
+    $(".dropdown-content-message").hide();
+     $("#mess_btn_open").css({
+            'pointer-events':'auto',
+    });
+    $(".noresult-content-mess").hide();
+    $("#fetchmessage").val("");
+
+    var notification_load_token = $("#notification_load_token").val();
+    setTimeout(function(){
+        if(notification_load_token=='' || notification_load_token.trim()==''){
+            $(".loading-content-notification").hide();
+        }
+        else{
+            $.ajax({
+                url:'process/_notification.php',
+                method:'post',
+                datatype:'text',
+                data:{
+                    notification_load_token:notification_load_token
+                },success:function(d){
+                    if($.trim(d) ===''){
+                        $(".loading-content-notification").hide();
+                        $(".noresult-content-notif").show();
+                    }else{
+                        $(".loading-content-notification").hide();
+                        $(".dropdown-content-notification").show();
+                        $("#notif_btn_open").css({
+                            'pointer-events':'none',
+                        });
+                        $("#fetchnotification").html(d);
+                        $(".noresult-content-notif").hide();
+                    }
+                   
+                }
+            }); 
+        }
+    }, 1500);
+});
+
+
+$(".container-fluid").click(function(){
+    $(".loading-content-notification").hide();
+    $(".dropdown-content-notification").hide();
+    $("#notif_btn_open").css({
+        'pointer-events':'auto',
+    });
+    $(".noresult-content-notif").hide();
+    $("#fetchnotification").val("");
+});
+$(".navbar-nav").click(function(){
+    $(".loading-content-notification").hide();
+    $(".dropdown-content-notification").hide();
+    $("#notif_btn_open").css({
+        'pointer-events':'auto',
+    });
+    $(".noresult-content-notif").hide();
+    $("#fetchnotification").val("");
+});
+$("#layoutSidenav").click(function(){
+    $(".loading-content-notification").hide();
+    $(".dropdown-content-notification").hide();
+    $("#notif_btn_open").css({
+        'pointer-events':'auto',
+    });
+    $(".noresult-content-notif").hide();
+    $("#fetchnotification").val("");
+});
+$(".navbar-brand").click(function(){
+    $(".loading-content-notification").hide();
+    $(".dropdown-content-notification").hide();
+    $("#notif_btn_open").css({
+        'pointer-events':'auto',
+    });
+    $(".noresult-content-notif").hide();
+    $("#fetchnotification").val("");
+});
+$("#searchglobal").click(function(){
+    $(".loading-content-notification").hide();
+    $(".dropdown-content-notification").hide();
+    $("#notif_btn_open").css({
+        'pointer-events':'auto',
+    });
+    $(".noresult-content-notif").hide();
+    $("#fetchnotification").val("");
+});
+$("#iconsearch").click(function(){
+    $(".loading-content-notification").hide();
+    $(".dropdown-content-notification").hide();
+    $("#notif_btn_open").css({
+        'pointer-events':'auto',
+    });
+    $(".noresult-content-notif").hide();
+    $("#fetchnotification").val("");
+});
+$("#searchglobal-moba").click(function(){
+    $(".loading-content-notification").hide();
+    $(".dropdown-content-notification").hide();
+    $("#notif_btn_open").css({
+        'pointer-events':'auto',
+    });
+    $(".noresult-content-notif").hide();
+    $("#fetchnotification").val("");
+});
+
+$(".navbar-burger-size").click(function(){
+    $(".loading-content-notification").hide();
+    $(".dropdown-content-notification").hide();
+    $("#notif_btn_open").css({
+        'pointer-events':'auto',
+    });
+    $(".noresult-content-notif").hide();
+    $("#fetchnotification").val("");
+});

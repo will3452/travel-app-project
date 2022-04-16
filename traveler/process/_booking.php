@@ -151,7 +151,7 @@
                     if($update){
      
                         //here notif
-                        $link = $protocollinks.'/traveler/view/view-notification';
+                        $link = $protocollinks.'/manager/view/view-notification';
      
                         $message = 'Cancel Book on '.$dateofbook. ' '.date("h:i:A", strtotime($timeofbook));
      
@@ -273,7 +273,7 @@
                                             if($update){
             
                                                  //here notif
-                                                $link = $protocollinks.'/traveler/view/view-notification';
+                                                $link = $protocollinks.'/manager/view/view-notification';
                                     
                                                 $message = 'update book from '.$dateold. ' to ' .$date .' '.date("h:i:A", strtotime($time));
                             
