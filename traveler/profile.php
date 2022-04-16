@@ -124,7 +124,7 @@
                                 </div>
                                 </div>
                             </div>
-                            <div class="button-add-emp" id="logo-btn">
+                            <div class="button-add-emp">
                                     <button type="submit" id="buttonss">
                                             <span id="spansubmit2">Update</span>
                                             <div class="center-loading-3">
@@ -142,5 +142,6 @@
     </div>
     <script src="js/load.js?v=5"></script>
     <script src="js/notification.js"></script>
+    <script src="js/profile.js"></script>
 </body>
 </html>

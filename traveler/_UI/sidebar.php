@@ -16,7 +16,7 @@ $sidebaroutside ='
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-calendar-check"></i></div>
                             Booking
                         </a>
-                        <a class="nav-link" href="dashboard">
+                        <a class="nav-link" href="profile">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
                             Profile
                         </a>
@@ -41,7 +41,7 @@ $sidebarinside ='
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-calendar-check"></i></div>
                         Booking
                     </a>
-                    <a class="nav-link" href="../dashboard">
+                    <a class="nav-link" href="../profile">
                         <div class="sb-nav-link-icon"><i class="fa-solid fa-user"></i></div>
                         Profile
                     </a>

@@ -723,5 +723,18 @@ class User extends Connection
 
         return false;
     }
+
+    // public function UpdateProfile($type, $id)
+    // {
+    //     $con = $this->GetConnection();
+
+    //     $date = date('Y-m-d H:i:s');
+
+    //     $stmt = $con->prepare("UPDATE users SET status=?, subcribed_at=? WHERE id=? && type=?");
+
+    //     $result = $stmt->execute([self::STATUS_ACTIVE, $date, $id, $type]);
+
+    //     return $result;
+    // }
     
 }
