@@ -21,7 +21,7 @@ $("#submitForm").on("submit", function(e){
                         location.reload();
                     }, 1500);
                 }else{
-                    swal("Error!", "Process Error", "error");
+                    swal("Error!", d, "error");
                     $(".center-loading-2").hide();
                     $('#spansubmit').show();
                 }
