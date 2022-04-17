@@ -40,6 +40,9 @@
     <nav class="sb-topnav navbar navbar-expand navbar-dark bgnav shadow-sm p-3 mb-5 rounded">
         <?php
             include '../_UI/header_2.php';
+            include '../_UI/modal.php';
+            echo $deleteallnotif;
+            echo $deletenotif;
         ?>
     </nav>
     <div id="layoutSidenav">
@@ -109,7 +112,7 @@
                         </div>
                         <div class="rowss-operation">
                                 <div class="button-add-emp-66">
-                                        <button id="addbtnuser" data-id="<?php ?>">Delete</button>
+                                      <button id="addbtnuser" data-id="<?php echo $_GET['notif_id']; ?>">Delete</button>
                                 </div>
                         </div>
                     </div>
@@ -121,6 +124,7 @@
             </main>
         </div>
     </div>
-    <script src="../js/notification_2.js?v=7"></script>
+    <script src="../js/notification_2.js?v=15"></script>
+    <script src="../js/view-notification.js"></script>
 </body>
 </html>

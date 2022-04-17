@@ -128,3 +128,55 @@ $(".navbar-burger-size").click(function(){
     $(".noresult-content-notif").hide();
     $("#fetchnotification").val("");
 });
+
+$(document).on('click','#deleteallnotif',function(){
+    $(".loading-content-notification").hide();
+    $(".dropdown-content-notification").hide();
+    $("#notif_btn_open").css({
+        'pointer-events':'auto',
+    });
+    $(".noresult-content-notif").hide();
+    $("#fetchnotification").val("");
+    $(".deleteallnotif").fadeIn();
+});
+$(document).on('click','.close_modal',function(){
+    $(".deleteallnotif").fadeOut();
+});
+$("#submitdeleteallnotif").on("submit", function(e){
+    e.preventDefault(e);
+    var formData = new FormData(this);
+    $(".center-loading-3").show();
+    $('.span_modal').hide();
+    $("#delete_btn_n").attr("disabled",true);
+    $(".close_modal").css({'pointer-events': 'none'});
+        $.ajax({
+            url  : "process/_notification.php",
+            type : "POST",
+            cache:false,
+            data :formData,
+            contentType : false, // you can also use multipart/form-data replace of false
+            processData: false,
+            success:function(d){
+                if($.trim(d)=='success'){
+                    $(".center-loading-3").hide();
+                    $('.span_modal').show();
+                    $("#delete_btn_n").attr("disabled",false);
+                    $(".close_modal").css({'pointer-events': 'auto'});
+                    $(".deleteallnotif").fadeOut();
+                    swal("Success!", "", "success", {
+                        button: "Close",
+                    });
+                    setTimeout(function(){
+                        location.reload();
+                    }, 1500);
+                }else{
+                    swal("Error!", d, "error");
+                    $(".center-loading-3").hide();
+                    $('.span_modal').show();
+                    $("#delete_btn_n").attr("disabled",false);
+                    $(".close_modal").css({'pointer-events': 'auto'});
+                    $(".deleteallnotif").fadeOut();
+                }
+            }
+        });
+});

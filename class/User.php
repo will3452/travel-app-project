@@ -724,17 +724,45 @@ class User extends Connection
         return false;
     }
 
-    // public function UpdateProfile($type, $id)
-    // {
-    //     $con = $this->GetConnection();
+    public function UpdateProfile($id, $type, $file, $fname, $mname, $lname, $phone, $password)
+    {
+        $con = $this->GetConnection();
 
-    //     $date = date('Y-m-d H:i:s');
+        $result = $this->GetUserData($id, $type);
 
-    //     $stmt = $con->prepare("UPDATE users SET status=?, subcribed_at=? WHERE id=? && type=?");
+        if($result){
 
-    //     $result = $stmt->execute([self::STATUS_ACTIVE, $date, $id, $type]);
+            $img =  $result->image;
 
-    //     return $result;
-    // }
+            if(empty($file['name'])){
+
+                $stmt = $con->prepare("UPDATE users SET first_name=?, middle_name=?, last_name=?, phone=?, password=? WHERE id=? && type=?");
     
+                $result = $stmt->execute([$fname, $mname, $lname, $phone, $password, $id, $type]);
+        
+                return $result;
+    
+            }
+
+            $olddist = "../../images/users/$img"; //old profile
+
+            unlink($olddist);
+
+            [$fileName, $filetmp, $fileExt, $filedesti, $finlenamenew] = $this->ExtractFileData($file, 'user');
+
+            $stmt = $con->prepare("UPDATE users SET first_name=?, middle_name=?, last_name=?, phone=?, image=?, password=? WHERE id=? && type=?");
+    
+            $result = $stmt->execute([$fname, $mname, $lname, $phone, $finlenamenew, $password, $id, $type]);
+    
+            if ($result) {
+
+                move_uploaded_file($filetmp, $filedesti);
+
+                return true;
+            }
+
+
+        }
+        return false;
+    }
 }

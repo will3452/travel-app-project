@@ -24,6 +24,7 @@
             if($fetchadminnotif){
                 echo '<div class="bgserachtitle-notif">
                     <p><i class="fas fa-bell" id="notif_btn_open"></i> New / Un-Read Notification</p>
+                    <button id="deleteallnotif" class="deleteallnotif">Delete All</button>
                 </div>';
 
                 foreach($fetchadminnotif as $displays){
@@ -78,6 +79,42 @@
                     
                 }
                 
+            }
+
+        }
+    }
+    elseif(isset($_POST['token_deleteallnotif_admin'])){
+
+        $token = $_POST['token_deleteallnotif_admin'];
+
+        $ValidateToken = $Validator->ValidateToken($token);
+
+        if($ValidateToken==1){
+
+            $delete  = $Notification->DeleteAdminNotifAll($User::USER_TYPE_ADMIN);
+
+            if($delete){
+
+                echo "success";
+            }
+
+        }
+    }
+    elseif(isset($_POST['token_deletenotif_admin'])){
+
+        $token = $_POST['token_deletenotif_admin'];
+
+        $notif_ids = $_POST['notif_ids'];
+
+        $ValidateToken = $Validator->ValidateToken($token);
+
+        if($ValidateToken==1){
+
+            $delete  = $Notification->DeleteAdminNotif($notif_ids, $User::USER_TYPE_ADMIN);
+
+            if($delete){
+
+                echo "success";
             }
 
         }

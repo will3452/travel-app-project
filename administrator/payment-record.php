@@ -21,6 +21,8 @@
     <nav class="sb-topnav navbar navbar-expand navbar-dark bgnav shadow-sm p-3 mb-5 rounded">
         <?php
             include '_UI/header_1.php';
+            include '_UI/modal.php';
+            echo $deleteallnotif;
         ?>
     </nav>
     <div id="layoutSidenav">
@@ -46,5 +48,6 @@
     </div>
     <script src="js/payment-record.js?v=2"></script>
     <script src="js/notification.js?v=7"></script>
+    <script src="js/notification.js?v=15"></script>
 </body>
 </html>

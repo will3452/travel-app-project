@@ -334,4 +334,69 @@ class Reservation extends Service{
         }
         return false;
     }
+
+    public function ReservationTravelerPageSortManager($iduser, $status, $traveler_id)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM reservation WHERE business_id=? && status=? && user_id=?");
+
+        $stmt->execute([$iduser, $status, $traveler_id]);
+
+        return $stmt->rowCount();
+    }
+    public function ReservationTravelerFetctSortManager($limit, $start, $namesort, $sortName, $iduser, $status, $traveler_id)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM reservation WHERE business_id=? && status=? && user_id=? ORDER by $sortName $namesort LIMIT $start, $limit";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute([$iduser, $status, $traveler_id]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+            }
+        }
+    }
+    public function ReservationTravelerSearchPageSortManager($search, $iduser, $status, $traveler_id)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM reservation WHERE
+        business_id=? && reserved_at LIKE ? && status=? && user_id=?
+        ");
+
+        $stmt->execute([$iduser, "%$search%", $status, $traveler_id]);
+
+        return $stmt->rowCount();
+
+    }
+    public function ReservationTravelerSearchFetchSortManager($limit, $start, $namesort, $sortName, $search, $iduser, $status, $traveler_id)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM reservation WHERE
+        business_id=? && reserved_at LIKE ? && status=? && user_id=?
+        ORDER by $sortName $namesort LIMIT $start, $limit";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute([$iduser, "%$search%", $status, $traveler_id]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+            }
+        }
+    }
 }
+

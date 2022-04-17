@@ -9,7 +9,14 @@
 
                         $GetBusinessManager = $User->GetBusinessManager($iduser);
 
-                        $business_id = $GetBusinessManager->id;
+                        
+                        if($GetBusinessManager){
+
+                            $business_id = $GetBusinessManager->id;
+                        }else{
+                            $business_id='';
+                        }
+
 
                         $status = $User::STATUS_HISTORY;
                         

@@ -59,35 +59,48 @@
                             if($check){
 
                                 $manager_id = $check->manager_id;
-                                //chcek if user already book on that day
 
-                                $checkbook = $Reservation->CheckIfReservationExist($iduser, $host_id, $date);
+                                $GetManagerData = $User->GetUserData($manager_id, $User::USER_TYPE_MANAGER);
 
-                                if($checkbook>0){
+                                if($GetManagerData->block_status == $User::BLOCK_STATUS_TEMPORARY){
 
-                                    echo "error - > you already book on this host and date";
-                                }                            
-                                else{
-
-                                    $insert = $Reservation->InsertReservation($iduser, $host_id, $User::STATUS_PENDING, $description, $date, $time);
-
-                                    if($insert==1){
-                                        
-                                        //here notif
-                                        $link = $protocollinks.'/manager/view/view-notification';
-        
-                                        $message = 'Book On '.$date. ', '.date("h:i:a", strtotime($time));
-        
-                                        $insertnotif = $Notification->Insert($iduser, $manager_id, $User::USER_TYPE_MANAGER, $link, $message);
-                                                                        
-                                        if($insertnotif==1){
-                        
-                                            echo "success";
-                        
-                                        }
-                                    }else{
+                                    echo "error -> host temporary disabled";
                                     
-                                        echo "error - > create error";
+                                }elseif($GetManagerData->block_status == $User::BLOCK_STATUS_PERMANENTLY){
+
+                                    echo "error -> host is no longer available";
+                                }
+                                else{
+                                    //chcek if user already book on that day
+
+                                    $checkbook = $Reservation->CheckIfReservationExist($iduser, $host_id, $date);
+
+                                    if($checkbook>0){
+
+                                        echo "error - > you already book on this host and date";
+                                    }                            
+                                    else{
+
+                                        $insert = $Reservation->InsertReservation($iduser, $host_id, $User::STATUS_PENDING, $description, $date, $time);
+
+                                        if($insert==1){
+                                            
+                                            //here notif
+                                            $link = $protocollinks.'/manager/view/view-notification';
+            
+                                            $message = 'Book On '.$date. ', '.date("h:i:a", strtotime($time));
+            
+                                            $insertnotif = $Notification->Insert($iduser, $manager_id, $User::USER_TYPE_MANAGER, $link, $message);
+                                                                            
+                                            if($insertnotif==1){
+                            
+                                                echo "success";
+                            
+                                            }
+                                        }else{
+                                        
+                                            echo "error - > create error";
+                                        }
                                     }
                                 }
                             }else{
@@ -228,54 +241,34 @@
 
                                 $managerid = $GetBusinessData->manager_id;
 
-                                if($status==$User::STATUS_HISTORY || $status==$User::STATUS_APPROVED){
+                                $GetManagerData = $User->GetUserData($managerid, $User::USER_TYPE_MANAGER);
 
-                                    echo "error -> process error";
-    
-                                }else{
+                                if($GetManagerData->block_status == $User::BLOCK_STATUS_TEMPORARY){
+
+                                    echo "error -> host temporary disabled";
                                     
-                                    if($dateold==$date){
+                                }elseif($GetManagerData->block_status == $User::BLOCK_STATUS_PERMANENTLY){
 
-                                        $update = $Reservation->UpdateReservationDataTraveler($book_id, $iduser, $date, $time, $description);
+                                    echo "error -> host is no longer available";
+                                }
+                                else{
 
-                                        if($update){
-    
-                                            //here notif
-                                            $link = $protocollinks.'/manager/view/view-notification';
-                               
-                                            $message = 'update book on '.$date. ' '.date("h:i:A", strtotime($time));
-                        
-                                            $insertnotif = $Notification->Insert($iduser, $managerid, $User::USER_TYPE_MANAGER, $link, $message);
-                                                                            
-                                            if($insertnotif==1){
-                            
-                                                echo "success";
-                            
-                                            }else{
+                                    if($status==$User::STATUS_HISTORY || $status==$User::STATUS_APPROVED){
+
+                                        echo "error -> process error";
         
-                                                echo "error -> process error";
-                                            }
-       
-       
-                                       }else{
-       
-                                           echo "error -> process failed";
-                                       }
-
                                     }else{
-
-                                        $vallimitdate = $Validator->ValidateDateLimit($date);
-    
-                                        if($vallimitdate){
+                                        
+                                        if($dateold==$date){
 
                                             $update = $Reservation->UpdateReservationDataTraveler($book_id, $iduser, $date, $time, $description);
-    
+
                                             if($update){
-            
-                                                 //here notif
+        
+                                                //here notif
                                                 $link = $protocollinks.'/manager/view/view-notification';
-                                    
-                                                $message = 'update book from '.$dateold. ' to ' .$date .' '.date("h:i:A", strtotime($time));
+                                
+                                                $message = 'update book on '.$date. ' '.date("h:i:A", strtotime($time));
                             
                                                 $insertnotif = $Notification->Insert($iduser, $managerid, $User::USER_TYPE_MANAGER, $link, $message);
                                                                                 
@@ -287,19 +280,52 @@
             
                                                     echo "error -> process error";
                                                 }
-            
-            
-                                            }else{
-            
-                                                echo "error -> process failed";
-                                            }
-
+        
+        
                                         }else{
         
-                                            echo "error -> date error";
+                                            echo "error -> process failed";
                                         }
-                                    }
 
+                                        }else{
+
+                                            $vallimitdate = $Validator->ValidateDateLimit($date);
+        
+                                            if($vallimitdate){
+
+                                                $update = $Reservation->UpdateReservationDataTraveler($book_id, $iduser, $date, $time, $description);
+        
+                                                if($update){
+                
+                                                    //here notif
+                                                    $link = $protocollinks.'/manager/view/view-notification';
+                                        
+                                                    $message = 'update book from '.$dateold. ' to ' .$date .' '.date("h:i:A", strtotime($time));
+                                
+                                                    $insertnotif = $Notification->Insert($iduser, $managerid, $User::USER_TYPE_MANAGER, $link, $message);
+                                                                                    
+                                                    if($insertnotif==1){
+                                    
+                                                        echo "success";
+                                    
+                                                    }else{
+                
+                                                        echo "error -> process error";
+                                                    }
+                
+                
+                                                }else{
+                
+                                                    echo "error -> process failed";
+                                                }
+
+                                            }else{
+            
+                                                echo "error -> date error";
+                                            }
+                                        }
+
+                                    }
                                 }
 
                             }else{

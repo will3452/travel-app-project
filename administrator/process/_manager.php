@@ -393,3 +393,240 @@
             echo "invalidtoken";
         }
     }
+    elseif(isset($_POST['token_profile'])){
+
+        $token = $_POST['token_profile'];
+
+        $fname = $_POST['fname'];
+
+        $mname = $_POST['mname'];
+
+        $lname = $_POST['lname'];
+
+        $contact = $_POST['contact'];
+
+        $password = $_POST['password'];
+        
+        $manager_id = $_POST['manager_id'];
+
+        $ValidateToken = $Validator->ValidateToken($token);
+
+        if($ValidateToken==1){
+
+            $ValidateFields = $Validator->ValidateFields($token, $fname, $mname, $lname, $contact, $manager_id);
+
+            if($ValidateFields==1){
+
+                $ValidateContact = $Validator->ValidateContact($contact);
+
+                if($ValidateContact){
+
+                    $GetUserData = $User->GetUserData($manager_id, $User::USER_TYPE_MANAGER);
+
+                    if($GetUserData){
+
+                        $currentphone = $GetUserData->phone;
+
+                        $currentpassword = $GetUserData->password;
+
+                        $emailofrecipient = $GetUserData->email;
+
+                        if(empty($password)){
+
+                            if($currentphone==$contact){
+
+                                $update = $User->UpdateProfile($manager_id, $User::USER_TYPE_MANAGER, '', $fname, $mname, $lname, $currentphone, $currentpassword);
+                                
+                                if($update){
+
+                                    $link = $protocollinks.'/manager/view/view-notification';
+                    
+                                    $insertnotif = $Notification->Insert('', $manager_id, $User::USER_TYPE_MANAGER, $link, "Your Account Has Been Modify By Admin");
+                                                                        
+                                    if($insertnotif==1){
+
+                                        $mail->addAddress($emailofrecipient);  
+
+                                        $mail->Subject = 'Account Status';   
+                
+                                        $messageemail = 'Your Account has been modify by admin <b> Travel Guide for Cebu Province Inc. </b>';
+                
+                                        $message_ext = 'Thank You so much!';
+                
+                                        $mail->Body = $Mails->SendMailAccDisabling($protocollinks, 'Account Status', 'Travel Guide for Cebu Province Inc.', $messageemail, $message_ext);
+                
+                                        if($mail->send()){
+                                                    
+                                            echo "success";
+                
+                                        }else{
+                
+                                            echo "error -> failed send mail";
+                                        }
+
+                                    }
+                                        
+                                }
+
+                            }else{
+
+                                $PhoneExist = $User->PhoneExist($contact);
+
+                                if($PhoneExist){
+
+                                    echo "error -> phone already taken";
+
+                                }else{
+
+                                    $update = $User->UpdateProfile($manager_id, $User::USER_TYPE_MANAGER, '', $fname, $mname, $lname, $contact, $currentpassword);
+
+                                    if($update){
+
+                                        $link = $protocollinks.'/manager/view/view-notification';
+                    
+                                        $insertnotif = $Notification->Insert('', $manager_id, $User::USER_TYPE_MANAGER, $link, "Your Account Has Been Modify By Admin");
+                                                                            
+                                        if($insertnotif==1){
+    
+                                            $mail->addAddress($emailofrecipient);  
+    
+                                            $mail->Subject = 'Account Status';   
+                    
+                                            $messageemail = 'Your Account has been modify by admin <b> Travel Guide for Cebu Province Inc. </b>';
+                    
+                                            $message_ext = 'Thank You so much!';
+                    
+                                            $mail->Body = $Mails->SendMailAccDisabling($protocollinks, 'Account Status', 'Travel Guide for Cebu Province Inc.', $messageemail, $message_ext);
+                    
+                                            if($mail->send()){
+                                                        
+                                                echo "success";
+                    
+                                            }else{
+                    
+                                                echo "error -> failed send mail";
+                                            }
+    
+                                        }
+                                            
+                                    }
+
+                                }
+                            }
+
+                        }else{
+
+                            $dcps = $User->dcrypt($password);
+
+                            $ValidatePassword = $Validator->ValidatePassword($password);
+
+                            if($ValidatePassword){
+
+                                if($currentphone==$contact){
+
+                                    $update = $User->UpdateProfile($manager_id, $User::USER_TYPE_MANAGER, '', $fname, $mname, $lname, $currentphone, $dcps);
+
+                                    if($update){
+
+                                        $link = $protocollinks.'/manager/view/view-notification';
+                    
+                                        $insertnotif = $Notification->Insert('', $manager_id, $User::USER_TYPE_MANAGER, $link, "Your Account Has Been Modify By Admin, Password Change to ". $password);
+                                                                            
+                                        if($insertnotif==1){
+    
+                                            $mail->addAddress($emailofrecipient);  
+    
+                                            $mail->Subject = 'Account Status';   
+                    
+                                            $messageemail = 'Your Account Has Been Modify By Admin, Password Change to '. $password. '<b> Travel Guide for Cebu Province Inc. </b>';
+                    
+                                            $message_ext = 'Thank You so much!';
+                    
+                                            $mail->Body = $Mails->SendMailAccDisabling($protocollinks, 'Account Status', 'Travel Guide for Cebu Province Inc.', $messageemail, $message_ext);
+                    
+                                            if($mail->send()){
+                                                        
+                                                echo "success";
+                    
+                                            }else{
+                    
+                                                echo "error -> failed send mail";
+                                            }
+    
+                                        }
+                                        
+                                    }
+                                }else{
+
+                                    $PhoneExist = $User->PhoneExist($contact);
+
+                                    if($PhoneExist){
+                                    
+                                        echo "error -> phone already taken";
+                                    }else{
+
+                                        $update = $User->UpdateProfile($manager_id, $User::USER_TYPE_MANAGER, '', $fname, $mname, $lname, $contact, $dcps);
+
+                                        if($update){
+
+                                            $link = $protocollinks.'/manager/view/view-notification';
+                    
+                                            $insertnotif = $Notification->Insert('', $manager_id, $User::USER_TYPE_MANAGER, $link, "Your Account Has Been Modify By Admin, Password Change to ". $password);
+                                                                                
+                                            if($insertnotif==1){
+        
+                                                $mail->addAddress($emailofrecipient);  
+        
+                                                $mail->Subject = 'Account Status';   
+                        
+                                                $messageemail = 'Your Account Has Been Modify By Admin, Password Change to '. $password. '<b> Travel Guide for Cebu Province Inc. </b>';
+                        
+                                                $message_ext = 'Thank You so much!';
+                        
+                                                $mail->Body = $Mails->SendMailAccDisabling($protocollinks, 'Account Status', 'Travel Guide for Cebu Province Inc.', $messageemail, $message_ext);
+                        
+                                                if($mail->send()){
+                                                            
+                                                    echo "success";
+                        
+                                                }else{
+                        
+                                                    echo "error -> failed send mail";
+                                                }
+        
+                                            }
+                                            
+                                        }
+                                    }
+
+                                }
+
+
+                            }else{
+
+                                echo "error -> password not strong";
+                            }
+                        }
+                        
+
+                    }else{
+                        
+                        echo "error -> process failed";
+
+                    }
+
+                }else{
+
+                    echo "error -> invalid contact";
+                }
+
+            }else{
+
+                echo "error - > empty fields";
+            }
+        }else{
+
+            echo "error -> process error";
+        }
+
+    }

@@ -132,3 +132,39 @@
         }
 
     }
+    elseif(isset($_POST['token_deleteallnotif_traveler'])){
+
+        $token = $_POST['token_deleteallnotif_traveler'];
+
+        $ValidateToken = $Validator->ValidateToken($token);
+
+        if($ValidateToken==1){
+
+            $delete  = $Notification->DeleteUserNotifAll($iduser, $User::USER_TYPE_TRAVELER);
+
+            if($delete){
+
+                echo "success";
+            }
+
+        }
+    }
+    elseif(isset($_POST['token_deletenotif_traveler'])){
+
+        $token = $_POST['token_deletenotif_traveler'];
+
+        $notif_ids = $_POST['notif_ids'];
+
+        $ValidateToken = $Validator->ValidateToken($token);
+
+        if($ValidateToken==1){
+
+            $delete  = $Notification->DeleteUserNotif($notif_ids, $iduser, $User::USER_TYPE_TRAVELER);
+
+            if($delete){
+
+                echo "success";
+            }
+
+        }
+    }

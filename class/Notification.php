@@ -199,4 +199,76 @@ class Notification extends User{
         return $numwors = $stmt->rowCount();
 
     }
+    public function DeleteUserNotifAll($user_receieve_id, $type){
+
+        $con = $this->GetConnection();
+
+        $prepareStatement  = "DELETE FROM `notifications` WHERE user_receieve_id=? && type=?";
+
+        $stmt = $con->prepare($prepareStatement);
+
+        $param = [ $user_receieve_id, $type ];
+
+        $executeResult = $stmt->execute($param);
+
+        if ($executeResult) {
+            
+             return true;
+        }
+
+    }
+    public function DeleteAdminNotifAll($type){
+
+        $con = $this->GetConnection();
+
+        $prepareStatement  = "DELETE FROM `notifications` WHERE type=?";
+
+        $stmt = $con->prepare($prepareStatement);
+
+        $param = [ $type ];
+
+        $executeResult = $stmt->execute($param);
+
+        if ($executeResult) {
+            
+             return true;
+        }
+
+    }
+    public function DeleteUserNotif($id, $user_receieve_id, $type){
+
+        $con = $this->GetConnection();
+
+        $prepareStatement  = "DELETE FROM `notifications` WHERE id=? && user_receieve_id=? && type=?";
+
+        $stmt = $con->prepare($prepareStatement);
+
+        $param = [ $id, $user_receieve_id, $type ];
+
+        $executeResult = $stmt->execute($param);
+
+        if ($executeResult) {
+            
+             return true;
+        }
+
+    }
+    public function DeleteAdminNotif($id, $type){
+
+        $con = $this->GetConnection();
+
+        $prepareStatement  = "DELETE FROM `notifications` WHERE id=? && type=?";
+
+        $stmt = $con->prepare($prepareStatement);
+
+        $param = [ $id, $type ];
+
+        $executeResult = $stmt->execute($param);
+
+        if ($executeResult) {
+            
+             return true;
+        }
+
+    }
 }

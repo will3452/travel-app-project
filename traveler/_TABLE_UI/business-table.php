@@ -11,15 +11,23 @@
     </div>
                     <div class="div1">
                         <?php if($display): ?>
-                            <?php foreach($display as $businesdisplay):  ?>
-                            <div class="boxes" id="showinfo" data-id="<?php echo $businesdisplay['id']; ?>">
-                                <div class="body-boxes">
-                                    <div><img src="../user/assets/logo/<?php echo $businesdisplay['logo']; ?>" alt=""></div>
-                                </div>
-                                <div class="title">
-                                    <p data-target="name"><?php echo $businesdisplay['name']; ?></p>
-                                </div>
-                            </div>
+                            <?php foreach($display as $businesdisplay):  
+                                $businemanager_id = $businesdisplay['manager_id'];
+                                $GetManagerData = $User->GetUserData($businemanager_id, $User::USER_TYPE_MANAGER);    
+                            ?>
+                                <?php if($GetManagerData->block_status == $User::BLOCK_STATUS_TEMPORARY || $GetManagerData->block_status == $User::BLOCK_STATUS_PERMANENTLY):?>
+                                    
+                                <?php else: ?>
+                                    <div class="boxes" id="showinfo" data-id="<?php echo $businesdisplay['id']; ?>">
+                                        <div class="body-boxes">
+                                            <div><img src="../user/assets/logo/<?php echo $businesdisplay['logo']; ?>" alt=""></div>
+                                        </div>
+                                        <div class="title">
+                                            <p data-target="name"><?php echo $businesdisplay['name']; ?></p>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+                            
                             <?php endforeach; ?>
                         </div>
                         <?php else: ?>

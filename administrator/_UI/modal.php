@@ -226,3 +226,52 @@ $deleteadssubs = '<div class="modal deleteadssubs" id="exampleModal" tabindex="-
     </div>
   </form>
 </div>';
+$deleteallnotif= '<div class="modal deleteallnotif" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog closemodal" role="document">
+    <form id="submitdeleteallnotif" class="modal-content">
+      <input type="hidden" id="token_deleteallnotif_admin" name="token_deleteallnotif_admin" value='.password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT).'> 
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete All Notifications</h5>
+        <p class="close_modal">+</p>
+      </div>
+      <div class="modal-body">
+        <p id="name_title">Process: <span class="name_here">Notifications</span></p>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" id="delete_btn_n" class="colorbtn width_btn">
+            <span class="span_modal">Process</span>
+            <div class="center-loading-3">
+                        <div class="span5load2"></div>
+                        <div class="span6load2"></div>
+                        <div class="span7load2"></div>
+                    </div>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>';
+$deletenotif= '<div class="modal deletenotif" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog closemodal" role="document">
+    <form id="submit_delete_notif_admin" class="modal-content">
+      <input type="hidden" id="token_deletenotif_admin" name="token_deletenotif_admin" value='.password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT).'> 
+      <div class="modal-header">
+       <h5 class="modal-title" id="exampleModalLabel">Delete Notifications</h5>
+        <p class="close_modal">+</p>
+      </div>
+      <div class="modal-body">
+        <p id="name_title">Process: <span class="name_here">Notifications</span></p>
+        <input type="hidden" name="notif_ids" id="notif_ids" notif_ids="res_id">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" id="delete_btn_n" class="colorbtn width_btn">
+            <span class="span_modal">Process</span>
+            <div class="center-loading-3">
+                        <div class="span5load2"></div>
+                        <div class="span6load2"></div>
+                        <div class="span7load2"></div>
+                    </div>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>';

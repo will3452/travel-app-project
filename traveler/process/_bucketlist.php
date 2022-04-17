@@ -42,16 +42,31 @@
                     $check = $User->GetBusinessData($host_id);
                     
                     if($check){
-                        //insert bucketlist
 
-                        $insert = $Service->InsertBucketList($iduser, $host_id, $date, $description);
+                        $manager_id = $check->manager_id;
 
-                        if($insert==1){
+                        $GetManagerData = $User->GetUserData($manager_id, $User::USER_TYPE_MANAGER);
+
+                        if($GetManagerData->block_status == $User::BLOCK_STATUS_TEMPORARY){
+
+                            echo "error -> host temporary disabled";
                             
-                            echo "success";
-                        }else{
-                        
-                            echo "error - > create error";
+                        }elseif($GetManagerData->block_status == $User::BLOCK_STATUS_PERMANENTLY){
+
+                            echo "error -> host is no longer available";
+                        }
+                        else{
+                            //insert bucketlist
+
+                            $insert = $Service->InsertBucketList($iduser, $host_id, $date, $description);
+
+                            if($insert==1){
+                                
+                                echo "success";
+                            }else{
+                            
+                                echo "error - > create error";
+                            }
                         }
 
                     }else{
@@ -101,23 +116,45 @@
 
                     if($GetBucketlistExist){
 
+                        $businessid = $GetBucketlistExist->business_id;
+
                         $dateold = date("Y-m-d", strtotime($GetBucketlistExist->date));
 
-                        if($date==$dateold){
+                        $check = $User->GetBusinessData($businessid);
+                    
+                        if($check){
 
-                            $update = $Service->UpdateBucketlist($iduser, $bucketlist_id, $dateold, $description);
+                            $manager_id = $check->manager_id;
 
-                            if($update){
-
-                                echo "success";
+                            $GetManagerData = $User->GetUserData($manager_id, $User::USER_TYPE_MANAGER);
+    
+                            if($GetManagerData->block_status == $User::BLOCK_STATUS_TEMPORARY){
+    
+                                echo "error -> host temporary disabled";
+                                
+                            }elseif($GetManagerData->block_status == $User::BLOCK_STATUS_PERMANENTLY){
+    
+                                echo "error -> host is no longer available";
                             }
-                        }else{
+                            else{
 
-                            $update = $Service->UpdateBucketlist($iduser, $bucketlist_id, $date, $description);
+                                if($date==$dateold){
 
-                            if($update){
+                                    $update = $Service->UpdateBucketlist($iduser, $bucketlist_id, $dateold, $description);
 
-                                echo "success";
+                                    if($update){
+
+                                        echo "success";
+                                    }
+                                }else{
+
+                                    $update = $Service->UpdateBucketlist($iduser, $bucketlist_id, $date, $description);
+
+                                    if($update){
+
+                                        echo "success";
+                                    }
+                                }
                             }
                         }
                         

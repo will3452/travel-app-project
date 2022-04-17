@@ -21,6 +21,8 @@
     <nav class="sb-topnav navbar navbar-expand navbar-dark bgnav shadow-sm p-3 mb-5 rounded">
         <?php
             include '../_UI/header_2.php';
+            include '../_UI/modal.php';
+            echo $deleteallnotif;
         ?>
     </nav>
     <div id="layoutSidenav">
@@ -100,6 +102,6 @@
         </div>
     </div>
     <script src="../js/create-promo.js?v=1"></script>
-    <script src="../js/notification_2.js?v=7"></script>
+    <script src="../js/notification_2.js?v=15"></script>
 </body>
 </html>

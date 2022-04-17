@@ -15,7 +15,12 @@
 
     $check = $User->GetBusinessManager($iduser);
 
-    $businessid = $check->id;
+    if($check){
+        
+        $businessid = $check->id;
+    }
+    $businessid = '';
+   
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,6 +41,8 @@
     <nav class="sb-topnav navbar navbar-expand navbar-dark bgnav shadow-sm p-3 mb-5 rounded">
         <?php
             include '_UI/header_1.php';
+            include '_UI/modal.php';
+            echo $deleteallnotif;
         ?>
     </nav>
     <div id="layoutSidenav">
@@ -160,6 +167,6 @@
         </div>
     </div>
     <script src="js/reservation.js?v=8"></script>
-    <script src="js/notification.js"></script>
+    <script src="js/notification.js?v=5"></script>
 </body>
 </html>

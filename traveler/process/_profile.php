@@ -28,6 +28,8 @@
 
         $password = $_POST['password'];
 
+        $image = $_FILES['fileimage'];
+
         $ValidateToken = $Validator->ValidateToken($token);
 
         if($ValidateToken==1){
@@ -47,8 +49,6 @@
 
                         $currentphone = $GetUserData->phone;
 
-                        $currentimage = $GetUserData->image;
-
                         $currentpassword = $GetUserData->password;
                         
                         if(empty($_FILES['fileimage']['tmp_name'])){
@@ -62,7 +62,12 @@
                                 if($currentphone==$contact){
                                     // update
 
-                                    $update = $User->UpdateProfile($iduser, $User::USER_TYPE_TRAVELER, $fname, $mname, $lname, $currentphone, $currentimage);
+                                    $update = $User->UpdateProfile($iduser, $User::USER_TYPE_TRAVELER, $image, $fname, $mname, $lname, $currentphone, $currentpassword);
+                                    if($update){
+
+                                        echo "success";
+                                        
+                                    }
 
                                     
                                 }else{
@@ -75,20 +80,163 @@
                                         echo "error -> phone already taken";
                                     }else{
 
+                                        $update = $User->UpdateProfile($iduser, $User::USER_TYPE_TRAVELER, $image, $fname, $mname, $lname, $contact, $currentpassword);
 
+                                        if($update){
+
+                                            echo "success";
+                                            
+                                        }
                                     }
 
                                 }
 
                             }else{
+                                
+                                $dcps = $User->dcrypt($password);
 
+                                //validatepassword 
+                                $ValidatePassword = $Validator->ValidatePassword($password);
 
+                                if($ValidatePassword){
+
+                                    if($currentphone==$contact){
+
+                                        $update = $User->UpdateProfile($iduser, $User::USER_TYPE_TRAVELER, $image, $fname, $mname, $lname, $currentphone, $dcps);
+
+                                        if($update){
+
+                                            echo "success";
+                                            
+                                        }
+                                    }else{
+
+                                        $PhoneExist = $User->PhoneExist($contact);
+
+                                        if($PhoneExist){
+                                        
+                                            echo "error -> phone already taken";
+                                        }else{
+    
+                                            $update = $User->UpdateProfile($iduser, $User::USER_TYPE_TRAVELER, $image, $fname, $mname, $lname, $contact, $dcps);
+    
+                                            if($update){
+
+                                                echo "success";
+                                                
+                                            }
+                                        }
+
+                                    }
+
+                                }else{
+
+                                    echo "error -> password not strong";
+                                }
+                                
                             }
 
 
                         }else{
                           
+                            $validateimage = $Validator->ValidateImage($image);
 
+                            if($Validator->ValidateImage($image)==='emp'){
+
+                                echo "EMPIMG";
+
+                            }elseif($Validator->ValidateImage($image)==='fileexterror'){
+                                
+                                echo "FNA";
+
+                            }
+                            elseif($Validator->ValidateImage($image)==='fileeror'){
+
+                                echo "FE";
+
+                            }elseif($Validator->ValidateImage($image)==='fileoversize'){
+
+                                echo "FOS";
+
+                            }else{
+
+                                if(empty($password)){
+
+                                    if($currentphone==$contact){
+                                        
+                                        $update = $User->UpdateProfile($iduser, $User::USER_TYPE_TRAVELER, $image, $fname, $mname, $lname, $currentphone, $currentpassword);
+
+                                        if($update){
+
+                                            echo "success";
+                                            
+                                        }
+                                    }else{
+
+                                        $PhoneExist = $User->PhoneExist($contact);
+
+                                        if($PhoneExist){
+                                            
+                                            echo "error -> phone already taken";
+                                        }else{
+    
+                                            $update = $User->UpdateProfile($iduser, $User::USER_TYPE_TRAVELER, $image, $fname, $mname, $lname, $contact, $currentpassword);
+                                            
+                                            if($update){
+
+                                                echo "success";
+                                                
+                                            }
+                                        }
+                                        
+                                    }
+                                }else{
+
+                                    $dcps = $User->dcrypt($password);
+
+                                    //validatepassword 
+                                    $ValidatePassword = $Validator->ValidatePassword($password);
+
+                                    if($ValidatePassword){
+
+                                        if($currentphone==$contact){
+
+                                            $update = $User->UpdateProfile($iduser, $User::USER_TYPE_TRAVELER, $image, $fname, $mname, $lname, $currentphone, $dcps);
+
+                                            if($update){
+
+                                                echo "success";
+                                                
+                                            }
+
+                                        }else{
+
+                                            $PhoneExist = $User->PhoneExist($contact);
+
+                                            if($PhoneExist){
+                                            
+                                                echo "error -> phone already taken";
+                                            }else{
+        
+                                                $update = $User->UpdateProfile($iduser, $User::USER_TYPE_TRAVELER, $image, $fname, $mname, $lname, $contact, $dcps);
+        
+                                                if($update){
+
+                                                    echo "success";
+                                                    
+                                                }
+                                            }
+
+                                        }
+
+                                    }else{
+
+                                        echo "error -> password not strong";
+                                    }
+
+                                }
+
+                            }
 
                         }
                         

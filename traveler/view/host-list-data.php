@@ -15,12 +15,24 @@
 
     $businetype = $data->type;
 
+    $bsid = $_GET['host_id'];
+
     $GetManagerData = $User->GetUserData($businemanager_id, $User::USER_TYPE_MANAGER);
 
     if(!isset($_GET['host_id'])){
 
         header("location:../host-list.php");
 
+    }
+    if($GetManagerData->block_status == $User::BLOCK_STATUS_TEMPORARY){
+
+        header("location:host_status?host_id=$bsid");
+        
+    }
+    if($GetManagerData->block_status == $User::BLOCK_STATUS_PERMANENTLY){
+
+        header("location:host_status?host_id=$bsid");
+        
     }
     $GetCategory = $Service->GetCategory($_GET['host_id']);
 ?>
@@ -43,6 +55,8 @@
     <nav class="sb-topnav navbar navbar-expand navbar-dark bgnav shadow-sm p-3 mb-5 rounded">
         <?php
             include '../_UI/header_2.php';
+            include '../_UI/modal.php';
+            echo $deleteallnotif;
         ?>
     </nav>
     <div id="layoutSidenav">
@@ -174,6 +188,6 @@
     </div>
     <script src="../js/load.js?v=5"></script>
     <script src="../js/host-list-data.js?v=6"></script>
-    <script src="../js/notificaiton_2.js?v=10"></script>
+    <script src="../js/notificaiton_2.js?v=15"></script>
 </body>
 </html>

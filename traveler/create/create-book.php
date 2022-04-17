@@ -6,6 +6,8 @@
     include_once '../process/id_validation_fetch.php';
 
     $businemanager_id = $data->manager_id;
+    
+    $bsid = $_GET['host_id'];
 
     $GetManagerData = $User->GetUserData($businemanager_id, $User::USER_TYPE_MANAGER);
 
@@ -13,6 +15,16 @@
 
         header("location:../host-list.php");
 
+    }
+    if($GetManagerData->block_status == $User::BLOCK_STATUS_TEMPORARY){
+
+        header("location:../view/host_status?host_id=$bsid");
+        
+    }
+    if($GetManagerData->block_status == $User::BLOCK_STATUS_PERMANENTLY){
+
+        header("location:../view/host_status?host_id=$bsid");
+        
     }
 ?>
 <!DOCTYPE html>
@@ -36,6 +48,8 @@
     <nav class="sb-topnav navbar navbar-expand navbar-dark bgnav shadow-sm p-3 mb-5 rounded">
         <?php
             include '../_UI/header_2.php';
+            include '../_UI/modal.php';
+            echo $deleteallnotif;
         ?>
     </nav>
     <div id="layoutSidenav">
@@ -134,5 +148,6 @@
         </div>
     </div>
     <script src="../js/create-book.js"></script>
+    <script src="../js/notificaiton_2.js?v=15"></script>
 </body>
 </html>

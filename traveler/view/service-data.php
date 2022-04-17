@@ -5,10 +5,30 @@
 
     include_once '../process/id_validation_fetch.php';
 
+    $bsid = $_GET['host_view'];
+
+    $business_ids = $data->business_id;
+
+    $GetBusinessData = $User->GetBusinessData($business_ids);
+
+    $businemanager_id = $GetBusinessData->manager_id;
+
+    $GetManagerData = $User->GetUserData($businemanager_id, $User::USER_TYPE_MANAGER);
+
     if(!isset($_GET['service_id']) || !isset($_GET['host_view'])){
 
         header("location:../host-list.php");
 
+    }
+    if($GetManagerData->block_status == $User::BLOCK_STATUS_TEMPORARY){
+
+        header("location:../view/host_status?host_id=$bsid");
+        
+    }
+    if($GetManagerData->block_status == $User::BLOCK_STATUS_PERMANENTLY){
+
+        header("location:../view/host_status?host_id=$bsid");
+        
     }
 ?>
 <!DOCTYPE html>
@@ -30,6 +50,8 @@
     <nav class="sb-topnav navbar navbar-expand navbar-dark bgnav shadow-sm p-3 mb-5 rounded">
         <?php
             include '../_UI/header_2.php';
+            include '../_UI/modal.php';
+            echo $deleteallnotif;
         ?>
     </nav>
     <div id="layoutSidenav">
@@ -87,5 +109,6 @@
             </main>
         </div>
     </div>
+    <script src="../js/notificaiton_2.js?v=15"></script>
 </body>
 </html>
