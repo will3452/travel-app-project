@@ -34,11 +34,11 @@ class Logo extends User
 
                 move_uploaded_file($filetmp, $filedesti);
                 
-                return "ppp";
+                return true;
             }
-            return "ooo";
+            return false;
         }
-        $prepareStatement  = "INSERT INTO `Logo`(`image`) VALUE(?)";
+        $prepareStatement  = "INSERT INTO `logo`(`image`) VALUE(?)";
 
         $stmt = $con->prepare($prepareStatement);
 
@@ -48,9 +48,9 @@ class Logo extends User
 
             move_uploaded_file($filetmp, $filedesti);
 
-            return "hihi";
+            return true;
         }
-        return "aaa";
+        return false;
     }
     public function GetLogo()
     {
