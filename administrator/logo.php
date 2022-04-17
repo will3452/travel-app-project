@@ -110,7 +110,7 @@
         </div>
     </div>
     <script src="js/load.js"></script>
-    <script src="js/logo.js"></script>
+    <script src="js/logo.js?v=10"></script>
     <script src="js/notification.js?v=20"></script>
 </body>
 </html>
