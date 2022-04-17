@@ -1,5 +1,5 @@
 
-<?php 
+<?php
     include_once 'vendor/autoload.php';
 
     $Branding = new Branding;
@@ -22,6 +22,43 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://kit.fontawesome.com/a66db60870.js" crossorigin="anonymous"></script>
+    <style>
+        .dropdown {
+            position: relative;
+        }
+
+        .hidden {
+            visibility: hidden;
+        }
+
+        .dropdown>.dropdown-items {
+            position: absolute;
+            top: 3.5em;
+            width: 30vw;
+            background: #0095A4;
+            padding: 0.5em;
+        }
+
+        .dropdown>.dropdown-items::before {
+            content:' ';
+            position: absolute;
+            top: -4px;
+            display: block;
+            width: 15px;
+            height: 15px;
+            transform: rotate(-45deg);
+            background: #0095A4;
+            z-index: 0;
+        }
+
+        .dropdown-items>* {
+            display: block;
+            z-index: 4;
+            color: #fff !important;
+            font-size: 14px !important;
+        }
+
+    </style>
 </head>
 <body>
 
@@ -31,13 +68,13 @@
              <div class="span2load"></div>
              <div class="span3load"></div>
         </div>
-    </div>      
+    </div>
     <div class="load-body">
         <header class="headerssss" id="body-headersss">
             <nav class="navbarssss">
                 <div class="titles">
                         <a href="#" class="nav-logos"><img id="logosss" src="user/assets/logo/<?php echo $GetLogo->image; ?>" alt=""> </a>
-                        
+
                 </div>
                     <ul class="nav-menussss">
                         <li class="nav-itemss">
@@ -52,11 +89,12 @@
                         <li class="nav-itemss">
                             <a href="user/login" class="nav-linkss">login</a>
                         </li>
-                        <li class="nav-itemss">
-                            <a href="user/register_manager" class="nav-linkss">register ( Manager )</a>
-                        </li>
-                        <li class="nav-itemss">
-                            <a href="user/register_traveler" class="nav-linkss">register ( Traveler )</a>
+                        <li class="nav-itemss dropdown">
+                            <a href="#" class="nav-linkss">Register</a>
+                            <div class="dropdown-items hidden">
+                                <a href="user/register_manager">As Manager</a>
+                                <a href="user/register_traveler" >As Traveler</a>
+                            </div>
                         </li>
                     </ul>
                     <div class="hamburger">
@@ -79,13 +117,13 @@
         </main>
     </div>
 
-    
+
     <script>
         const hamburger = document.querySelector(".hamburger");
         const navMenu = document.querySelector(".nav-menussss");
 
         hamburger.addEventListener("click", mobileMenu);
-        
+
         function mobileMenu() {
             hamburger.classList.toggle("active");
             navMenu.classList.toggle("active");
@@ -95,12 +133,12 @@
         });
          window.addEventListener("load", function(){
             $(".loading-icon-landing").fadeOut();
-            
+
             setTimeout(function(){
             $(".load-body").show();
             }, 1000);
 
-        }); 
+        });
 
         var scrollnum = 0;
         window.addEventListener("scroll",function(){
@@ -126,6 +164,18 @@
                 );
             }
         });
+    </script>
+
+    <script>
+        var _hide = true;
+        $('.dropdown').click(function () {
+            if (_hide) {
+                $(this).children('.dropdown-items').removeClass('hidden');
+            } else {
+                $(this).children('.dropdown-items').addClass('hidden');
+            }
+            _hide = ! _hide;
+        })
     </script>
 </body>
 </html>
