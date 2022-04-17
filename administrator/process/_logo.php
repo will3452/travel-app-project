@@ -35,16 +35,16 @@
                 echo "FOS";
 
             }else{
-                $LogoProcess = $Logo->LogoProcess($logofile);
+                echo $LogoProcess = $Logo->LogoProcess($logofile);
 
-                if($LogoProcess==1){
+                // if($LogoProcess==1){
 
-                    echo "success";
+                //     echo "success";
 
-                }else{
+                // }else{
 
-                    echo "error";
-                }
+                //     echo "error";
+                // }
             }
         }else{
             
