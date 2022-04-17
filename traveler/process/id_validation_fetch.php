@@ -75,7 +75,7 @@ elseif(isset($_GET['notif_id'])){
 
     if(!$datanotif2){
 
-        header("location:../dashboard");
+        header("location:../host-list");
 
     }else{
 
