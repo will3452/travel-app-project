@@ -185,12 +185,12 @@
                                     <div class="span3load-table"></div>
                                 </div>
                             </div> 
-                            <div class='bottomtable overflowtables'>
+                        </div>
+                        <div class='bottomtable overflowtables'>
                                 <div class="pre-nex">
                                     <?php 
                                         include '_UI_SORTING_FETCHING/traveler-pagination-fetch.php';    
                                     ?>
                                 </div>
                             </div>
-                        </div>
                     </div>

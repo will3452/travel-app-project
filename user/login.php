@@ -76,7 +76,11 @@
             <div class="sign_up">
                 <p>or</p>
                 <a href="register_manager">Register as Manager</a> / <a href="register_traveler">Register as Traveler</a>
+                <br>
+                <br>
+                <a href="../">Cancel</a>
             </div>
+            <br>
         </div>
     </div>
     <script src="/user/js/login.js?v=7"></script>

@@ -84,6 +84,9 @@
             <div class="sign_up">
                 <p>or</p>
                 <a href="login">login</a> / <a href="register_manager">Register as Manager</a>
+                <br>
+                <br>
+                <a href="../">Cancel</a>
             </div>
         </div>
     </div>

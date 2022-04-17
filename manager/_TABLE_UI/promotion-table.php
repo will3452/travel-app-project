@@ -111,13 +111,13 @@
                                     <div class="span2load-table"></div>
                                     <div class="span3load-table"></div>
                                 </div>
-                            </div> 
-                            <div class='bottomtable overflowtables'>
+                            </div>
+                        </div>
+                        <div class='bottomtable overflowtables'>
                                 <div class="pre-nex">
                                     <?php 
                                         include '_UI_SORTING_FETCHING/promo-pagination-fetch.php';    
                                     ?>
                                 </div>
                             </div>
-                        </div>
                     </div>

@@ -42,9 +42,6 @@
                             <div class="pre-nex2">
                                 <?php 
                                     include '_UI_SORTING_FETCHING/business-pagination-fetch.php';    
-                                ?>
-                                <!-- <p class="nomore2">Previous</p>
-                                <p  class="pagess2">Page 1-1</p>
-                                <p class="nomore2">Next</p> -->
+                                ?>->
                             </div>
                         </div>

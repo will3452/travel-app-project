@@ -4,6 +4,7 @@
 #c67e6a
 #59bcb9
 #0095a4
+#e08e78
 
 -logo
 width:3500px;

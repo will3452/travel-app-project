@@ -59,36 +59,38 @@
                         <div class="button-add-emp-g">
                             <a href="create/create-reservation"> <button id="addbtnuser">Create Reservation</button></a>
                         </div>
-                        <div class="locate-nav">
-                            <div class="locate-div">
-                           <?php if(isset($_GET['tab'])): ?>
-                                <?php if($_GET['tab']=='pending'): ?>
-                                    <a href="#"><button id="activenav">Pending</button></a>
-                                    <a href="?tab=approved"><button>Approved</button></a>
-                                    <a href="?tab=history"><button>History</button></a>
-                                    <input type="hidden" id="booksearch" value="">
-                                <?php elseif($_GET['tab']=='approved'): ?>
-                                    <a href="reservation"><button>Pending</button></a>
-                                    <a href="#"><button id="activenav">Approved</button></a>
-                                    <a href="?tab=history"><button>History</button></a>
-                                    <input type="hidden" id="booksearch" value="book2">
-                                <?php elseif($_GET['tab']=='history'): ?>
-                                    <a href="reservation"><button>Pending</button></a>
-                                    <a href="?tab=approved"><button>Approved</button></a>
-                                    <a href="#"><button id="activenav">History</button></a>
-                                    <input type="hidden" id="booksearch" value="book3">
+                        <div class="overflowtables div-navs">
+                            <div class="locate-nav">
+                                <div class="locate-div">
+                            <?php if(isset($_GET['tab'])): ?>
+                                    <?php if($_GET['tab']=='pending'): ?>
+                                        <a href="#"><button id="activenav">Pending</button></a>
+                                        <a href="?tab=approved"><button>Approved</button></a>
+                                        <a href="?tab=history"><button>History</button></a>
+                                        <input type="hidden" id="booksearch" value="">
+                                    <?php elseif($_GET['tab']=='approved'): ?>
+                                        <a href="reservation"><button>Pending</button></a>
+                                        <a href="#"><button id="activenav">Approved</button></a>
+                                        <a href="?tab=history"><button>History</button></a>
+                                        <input type="hidden" id="booksearch" value="book2">
+                                    <?php elseif($_GET['tab']=='history'): ?>
+                                        <a href="reservation"><button>Pending</button></a>
+                                        <a href="?tab=approved"><button>Approved</button></a>
+                                        <a href="#"><button id="activenav">History</button></a>
+                                        <input type="hidden" id="booksearch" value="book3">
+                                    <?php else: ?>
+                                        <a href="#"><button id="activenav">Pending</button></a>
+                                        <a href="?tab=approved"><button>Approved</button></a>
+                                        <a href="?tab=history"><button>History</button></a>
+                                        <input type="hidden" id="booksearch" value="">
+                                    <?php endif; ?>
                                 <?php else: ?>
                                     <a href="#"><button id="activenav">Pending</button></a>
                                     <a href="?tab=approved"><button>Approved</button></a>
                                     <a href="?tab=history"><button>History</button></a>
                                     <input type="hidden" id="booksearch" value="">
                                 <?php endif; ?>
-                            <?php else: ?>
-                                <a href="#"><button id="activenav">Pending</button></a>
-                                <a href="?tab=approved"><button>Approved</button></a>
-                                <a href="?tab=history"><button>History</button></a>
-                                <input type="hidden" id="booksearch" value="">
-                            <?php endif; ?>
+                                </div>
                             </div>
                         </div>
                         <br>
