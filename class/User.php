@@ -867,4 +867,23 @@ class User extends Connection
         }
         return false;
     }
+    public function BusinessFetctSortInLandingPage()
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM business";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute();
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+            }
+        }
+    }
 }
