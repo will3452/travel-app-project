@@ -44,3 +44,7 @@ $(document).on('click','#showinfo',function(){
     var id = $(this).attr("data-id");
     window.location.href="view/traveler-data?traveler_id="+id;
 });
+$(document).on('click','#message',function(){
+    var id = $(this).attr("data-id");
+    window.location.href="inquire/message?traveler_id="+id;
+});

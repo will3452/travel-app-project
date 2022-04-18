@@ -120,6 +120,10 @@ $(document).on('click','#showinfo',function(){
     var id = $(this).attr("data-id");
     window.location.href="view/manager-data?manager_id="+id;
 });
+$(document).on('click','#message',function(){
+    var id = $(this).attr("data-id");
+    window.location.href="inquire/message?manager_id="+id;
+});
 $(document).on('click','#updateuser',function(){
     var id = $(this).attr("data-id");
     window.location.href="update/update-manager?manager_id="+id;

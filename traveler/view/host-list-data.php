@@ -121,7 +121,7 @@
                                         <a href="../create/create-bucketlist?host_id=<?php echo $_GET['host_id']; ?>"> <button id="addbtnuser">Add To Bucket List</button></a>
                                 </div>
                                 <div class="button-add-emp-66">
-                                        <a href="#"> <button id="addbtnuser">Inquire</button></a>
+                                        <a href="../inquire/message?host_id=<?php echo $_GET['host_id']; ?>"> <button id="addbtnuser">Inquire</button></a>
                                 </div>
                         </div>
                     </div>

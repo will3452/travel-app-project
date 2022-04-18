@@ -29,6 +29,10 @@ $sidebaroutside ='
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-rectangle-ad"></i></div>
                             Advertisement
                         </a>
+                        <a class="nav-link" href="admin-inquire">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-message"></i></div>
+                            Inquire:admin
+                        </a>
                         <div class="sb-sidenav-menu-heading">Setting</div>
                         <a class="nav-link" href="business">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-copyright"></i></div>
@@ -75,6 +79,10 @@ $sidebarinside ='
                         <a class="nav-link" href="../advertisement">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-rectangle-ad"></i></div>
                             Advertisement
+                        </a>
+                        <a class="nav-link" href="../admin-inquire">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-message"></i></div>
+                            Inquire:admin
                         </a>
                         <div class="sb-sidenav-menu-heading">Setting</div>
                         <a class="nav-link" href="../business">

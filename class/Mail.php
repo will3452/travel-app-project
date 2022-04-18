@@ -131,4 +131,47 @@ class Mail extends User{
             </body>
             </html>";
     }
+    public function SendMailForgotPassword($protocollinks, $title_mail, $headtitle, $message_content, $secretcode, $encodeem){
+
+        return "<html lang='en'>
+        <head>
+        <meta charset='UTF-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.'>
+        </head>
+
+        <body style='padding:0;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size:1rem;
+        width:100%;
+        margin:0;
+        color:black;
+        background: #0095a4;'>
+
+        <div style='flex-direction:row;  background: #0095a4;
+        color:white;
+        z-index:98;
+        padding:10px;
+        text-align:center;
+        box-shadow:0 0 3px rgba(0,0,0,.25);'>
+        <h2>$headtitle</h2>
+        </div>
+        <div style='width:100%; background:white; margin:auto;'>
+        <div style='width:100%;
+        padding:10px 20px 10px 20px;'>
+        <p style='font-size:25px; '>$title_mail</p>
+        </div>
+        <div style='width:100%;
+        padding: 10px 20px;'>
+            <p>Dear User</p>
+            <p>$message_content </p>
+            <a href='$protocollinks/user/change_password?zzz=$secretcode&ems=$encodeem'>$protocollinks/user/change-password.php?zzz=$secretcode&ems=$encodeem</a>
+            <p>Please Do Not Share This Link To Anyone </p>
+            <p>Thank You! </p>
+        </div>   
+
+            </div> 
+        </body>
+        </html>";
+    }
 }

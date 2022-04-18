@@ -18,12 +18,12 @@
 
                 
     $mail->isSMTP();   
-    $email = "juncorpuz941@gmail.com";
+    $email = "admin@ostg.online";
     $name = "Travel Guide for Cebu Province Inc.";                                         
-    $mail->Host       = 'smtp.gmail.com';                 
+    $mail->Host       = 'smtp.hostinger.com';                 
     $mail->SMTPAuth   = true;                                 
     $mail->Username   = $email;                   
-    $mail->Password   = 'Petvetgocorp_14';                     
+    $mail->Password   = '#Qwerty123456';                     
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;           
     $mail->Port       = 465;  
     $mail->SMTPSecure = "ssl";

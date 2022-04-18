@@ -535,4 +535,58 @@ class Service extends User{
             }
         }
     }
+    public function CheckCategExist($id, $businessid){
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM category WHERE id=? && business_id=?");
+
+        $executeResult = $stmt->execute([$id, $businessid]);
+
+        $check = $stmt->rowCount();
+
+        if ($check>0) {
+
+            return $stmt->fetch(PDO::FETCH_OBJ);
+        }
+        return false;
+    }
+    public function CheckCategUsedInService($categname, $businessid){
+
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM services WHERE business_id=? && category=?";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute([$businessid, $categname]);
+
+        return $numwors = $stmt->rowCount();
+
+    }
+    public function CategoryDelete($category_id, $business_id){
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("DELETE FROM `category` WHERE id=? && business_id=?");
+
+        $true = $stmt->execute([$category_id, $business_id]);
+
+        if ($true) {
+
+            return $true;
+        }
+
+    }
+    public function CheckServiceUsedInReservation($service_id){
+
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM reservation_service WHERE service_id=?";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute([$service_id]);
+
+        return $numwors = $stmt->rowCount();
+
+    }
 }

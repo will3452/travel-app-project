@@ -44,3 +44,58 @@ $(document).on('click','#showinfo',function(){
     var id = $(this).attr("data-id");
     window.location.href="view/category-data?category_id="+id;
 });
+
+$(document).on('click','#delete',function(){
+    var id = $(this).attr("data-id");
+    var name = $('#'+id).children('td[data-target=name]').text();
+    $(".name_here").text(name);
+    $(".deletecategory").fadeIn();
+    $("#categ_id").val(id);
+});
+$(document).on('click','.close_modal',function(){
+    $(".name_here").text("");
+    $(".deletecategory").fadeOut();
+    $("#categ_id").val("");
+});
+$("#submit_delete_categ_manager").on("submit", function(e){
+    e.preventDefault(e);
+    var formData = new FormData(this);
+    $(".center-loading-3").show();
+    $('.span_modal').hide();
+    $("#delete_btn_n").attr("disabled",true);
+    $(".close_modal").css({'pointer-events': 'none'});
+        $.ajax({
+            url  : "process/_category.php",
+            type : "POST",
+            cache:false,
+            data :formData,
+            contentType : false, // you can also use multipart/form-data replace of false
+            processData: false,
+            success:function(d){
+                if($.trim(d)=='success'){
+                    $(".center-loading-3").hide();
+                    $('.span_modal').show();
+                    $("#delete_btn_n").attr("disabled",false);
+                    $(".close_modal").css({'pointer-events': 'auto'});
+                    $(".name_here").text("");
+                    $(".deletecategory").fadeOut();
+                    $("#categ_id").val("");
+                    swal("Success!", "", "success", {
+                        button: "Close",
+                    });
+                    setTimeout(function(){
+                        location.reload();
+                    }, 1500);
+                }else{
+                    swal("Error!", d, "error");
+                    $(".center-loading-3").hide();
+                    $('.span_modal').show();
+                    $("#delete_btn_n").attr("disabled",false);
+                    $(".close_modal").css({'pointer-events': 'auto'});
+                    $(".name_here").text("");
+                    $(".deletecategory").fadeOut();
+                    $("#categ_id").val("");
+                }
+            }
+        });
+});

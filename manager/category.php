@@ -1,5 +1,6 @@
 <?php
      include_once '../vendor/autoload.php';
+
      include_once 'process/LoginStatus.php';
 ?>
 <!DOCTYPE html>
@@ -40,13 +41,15 @@
                         <a href="create/create-category"> <button id="addbtnuser">Create Category</button></a>
                     </div>
                     <?php
+                        include '_UI/modal.php';
+                        echo $deletecategory;
                         include '_TABLE_UI/category-table.php';
                     ?>
                 </div>
             </main>
         </div>
     </div>
-    <script src="js/category.js"></script>
+    <script src="js/category.js?v=1"></script>
     <script src="js/notification.js?v=5"></script>
     
 </body>

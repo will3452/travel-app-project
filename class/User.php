@@ -163,7 +163,16 @@ class User extends Connection
 
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
+    public function GetAdminData()
+    {
+        $con = $this->GetConnection();
 
+        $stmt = $con->prepare("SELECT * FROM users WHERE type=?");
+
+        $stmt->execute([self::USER_TYPE_ADMIN]);
+
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
     public function UserPageSort($type, $status)
     {
         $con = $this->GetConnection();
@@ -708,6 +717,16 @@ class User extends Connection
 
         return $result;
     }
+    public function TotalPendingAds($status)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM advertisement WHERE status=?");
+
+        $stmt->execute([$status]);
+
+        return $stmt->rowCount();
+    }
     public function DeleteAdsSubs($id){
 
         $con = $this->GetConnection();
@@ -761,6 +780,89 @@ class User extends Connection
                 return true;
             }
 
+
+        }
+        return false;
+    }
+    public function CheckIfForgotEmailExist($email){
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM passwordrecovery WHERE email=?");
+
+        $executeResult = $stmt->execute([$email]);
+
+        return $stmt->rowCount();
+    }
+    public function CheckIfForgotCodeConfirm($email, $code){
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM passwordrecovery WHERE email=? && code=?");
+
+        $executeResult = $stmt->execute([$email, $code]);
+
+        return $stmt->rowCount();
+    }
+    public function InsertUpdateEmailForgot($email, $code){
+
+        $con = $this->GetConnection();
+
+        $check = $this->CheckIfForgotEmailExist($email);
+
+        if($check){
+
+            $stmt = $con->prepare("UPDATE passwordrecovery SET code=? WHERE email=?");
+    
+            $result = $stmt->execute([$code, $email]);
+    
+            if ($result) {
+
+                return true;
+            }
+            
+        }
+            $stmt = $con->prepare("INSERT INTO passwordrecovery (`email`, `code`) VALUES(?, ?)");
+    
+            $result = $stmt->execute([$email, $code]);
+    
+            if ($result) {
+
+                return true;
+            }
+
+    }
+    public function ChangePasswordForgot($password){
+
+        session_start();
+
+        $con = $this->GetConnection();
+
+        $email = $_SESSION['changepassword'];
+
+        $stmt = $con->prepare("UPDATE users SET password=? WHERE email=?");
+    
+        $result = $stmt->execute([$password, $email]);
+
+        if ($result) {
+
+            return true;
+        }
+        return false;
+    }
+    public function deleteforgotpassword(){
+
+        $con = $this->GetConnection();
+
+        $email = $_SESSION['changepassword'];
+
+        $stmt = $con->prepare("DELETE FROM `passwordrecovery` WHERE email=?");
+
+        $true = $stmt->execute(array($email));
+
+        if($true){
+
+            return true;
 
         }
         return false;

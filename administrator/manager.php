@@ -87,7 +87,7 @@
             </main>
         </div>
     </div>
-    <script src="js/manager.js?v=10"></script>
+    <script src="js/manager.js?v=15"></script>
     <script src="js/notification.js?v=15"></script>
 </body>
 </html>

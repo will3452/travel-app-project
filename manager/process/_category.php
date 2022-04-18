@@ -48,14 +48,78 @@
                 }
                 else{
 
-                    echo "nobusiness";
+                    echo "error -> create business first";
                 }
             }else{
 
-                echo "emp";
+                echo "error -> process error";
             }
         }else{
 
-            echo "tokenerror";
+            echo "error -> process error";
+        }
+    }
+    elseif(isset($_POST['token_categorydelete_manager'])){
+
+        $token = $_POST['token_categorydelete_manager'];
+
+        $categ_id = $_POST['categ_id'];
+
+        $ValidateToken = $Validator->ValidateToken($token);
+        
+        if($ValidateToken==1){
+
+            $ValidateFields = $Validator->ValidateFields($token, $categ_id);
+
+            if($ValidateFields==1){
+
+                $check = $User->GetBusinessManager($iduser);
+
+                if($check){
+            
+                    $businessid = $check->id;
+                    //check if categ exist
+                    $check = $Service->CheckCategExist($categ_id, $businessid);
+
+                    if($check){
+
+                        $categname = $check->name;
+                        
+                        //check if categ is used
+
+                        $check2 = $Service->CheckCategUsedInService($categname, $businessid);
+
+                        if($check2){
+                            
+                            echo "error -> category is used, cannot be deleted!";
+
+                        }else{
+
+                            $delete = $Service->CategoryDelete($categ_id, $businessid);
+
+                            if($delete){
+
+                                echo "success";
+                            }
+                            else{
+
+                                echo "error -> process error delete";
+                            }
+                        }
+
+                    }else{
+
+                        echo "error -> create business first";
+                    }
+
+                }
+            }else{
+
+                echo "error -> process error";
+            }
+
+        }else{
+
+            echo "error -> process error";
         }
     }

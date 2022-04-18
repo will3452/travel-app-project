@@ -125,3 +125,29 @@ $deletenotif= '<div class="modal deletenotif" id="exampleModal" tabindex="-1" ro
     </div>
   </form>
 </div>';
+$deletecategory= '<div class="modal deletecategory" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog closemodal" role="document">
+    <form id="submit_delete_categ_manager" class="modal-content">
+      <input type="hidden" id="token_categorydelete_manager" name="token_categorydelete_manager" value='.password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT).'> 
+      <div class="modal-header">
+       <h5 class="modal-title" id="exampleModalLabel">Delete Category</h5>
+        <p class="close_modal">+</p>
+      </div>
+      <div class="modal-body">
+        <p id="name_title">Category Name: <span class="name_here"></span></p>
+        <p style="color:red;">Note: <i>Category Cannot Be Delete if Already Use</i></p>
+        <input type="hidden" name="categ_id" id="categ_id">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" id="delete_btn_n" class="colorbtn width_btn">
+            <span class="span_modal">Process</span>
+            <div class="center-loading-3">
+                        <div class="span5load2"></div>
+                        <div class="span6load2"></div>
+                        <div class="span7load2"></div>
+                    </div>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>';

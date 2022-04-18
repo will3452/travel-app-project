@@ -92,10 +92,6 @@
                                             <td data-target="name"><?php echo $dis['name'];?></td>
                                             <td id="btn">
                                                 <div class="d-flex">
-                                                    <span class="tip_update_container">
-                                                        <i class="far fa-edit btns" id="update" data-id="<?php echo $dis['id']; ?>"></i>
-                                                        <span class="tip_update">Update</span>
-                                                    </span>
                                                     <span class="tip_delete_container">
                                                         <i class="far fa-trash-alt" id="delete" data-id="<?php echo $dis['id']; ?>"></i>
                                                         <span class="tip_delete">Delete</span>

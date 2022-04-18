@@ -43,7 +43,7 @@
             </main>
         </div>
     </div>
-    <script src="js/traveler.js?v=6"></script>
+    <script src="js/traveler.js?v=10"></script>
     <script src="js/notification.js?v=5"></script>
 </body>
 </html>

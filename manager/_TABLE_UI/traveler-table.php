@@ -127,6 +127,10 @@
                                             <td id="btn">
                                             <td id="btn">
                                                 <div class="d-flex">
+                                                    <span class="tip_message_container">
+                                                            <i class="fa-solid fa-message btns" id="message" data-id="<?php echo $dis['id']; ?>"></i>
+                                                            <span class="tip_message">Message</span>
+                                                    </span>
                                                     <span class="tip_view_container">
                                                         <i class="fa-solid fa-eye btns" id="showinfo" data-id="<?php echo $dis['id']; ?>"></i>
                                                         <span class="tip_view">View</span>
