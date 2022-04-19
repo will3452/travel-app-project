@@ -146,7 +146,7 @@
                             ?>
                                 <?php if($GetManagerData->block_status == $User::BLOCK_STATUS_TEMPORARY || $GetManagerData->block_status == $User::BLOCK_STATUS_PERMANENTLY):?>
                                 <?php else: ?>
-                                    <div class="item"><img src="user/assets/logo/<?php echo $businesdisplay['logo']; ?>" class="imagehost" alt=""></div>
+                                    <a href="user/login"><div class="item"><img src="user/assets/logo/<?php echo $businesdisplay['logo']; ?>" class="imagehost" alt=""></div></a>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         <?php else: ?>
