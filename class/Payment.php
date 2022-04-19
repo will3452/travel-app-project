@@ -292,4 +292,111 @@ class Payment extends User{
 
         return false;
     }
+    public function RevenuePageSort()
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT DATE(date) as date, SUM(price) as total  FROM manager_pop WHERE status=? GROUP by date(date)");
+
+        $stmt->execute([self::STATUS_DONE]);
+
+        return $stmt->rowCount();
+    }
+    public function RevenueFetctSort($limit, $start, $namesort, $sortName)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT DATE(date) as date, SUM(price) as total  FROM manager_pop WHERE status=? GROUP by date(date)  ORDER by $sortName $namesort LIMIT $start, $limit";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute([self::STATUS_DONE]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+
+            }
+        }
+    }
+    public function RevenueSearchPageSort($search)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT DATE(date) as date, SUM(price) as total  
+        FROM manager_pop WHERE status=? && date LIKE ? GROUP by date(date)");
+
+        $stmt->execute([self::STATUS_DONE, "%$search%"]);
+
+        return $stmt->rowCount();
+    }
+    public function RevenueSearchFetchSort($limit, $start, $namesort, $sortName, $search)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT DATE(date) as date, SUM(price) as total  
+        FROM manager_pop WHERE status=? && date LIKE ? GROUP by date(date) ORDER by $sortName $namesort LIMIT $start, $limit");
+
+        $stmt->execute([self::STATUS_DONE, "%$search%"]);
+
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+            }
+        }
+    }
+    public function GenerateReport($datefrom, $dateto){
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT DATE(date) as date, SUM(price) as total  
+
+        FROM manager_pop WHERE status=? && date BETWEEN ? AND ? GROUP by date(date) ORDER by date desc");
+
+        $stmt->execute([self::STATUS_DONE, $datefrom, $dateto]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            header('Content-Type: text/csv; charset=utf-8');
+
+            header("Content-Disposition: attachment; filename=RevenueReportFrom' $datefrom ' to ' $dateto '.csv");
+
+            $output = fopen("php://output", "w");
+            
+            $result = $r = $stmt->fetchAll();
+
+            $totalvalue = 0;
+
+            fputcsv($output, array('Date','Total Revenue', 'Over All Revenue'));
+
+            foreach ($result as $values) {
+
+                $totalvalue += $values['total'];
+
+            }
+            fputcsv($output, array('','',$totalvalue));
+
+            foreach ($result as $value) {
+               
+                fputcsv($output, array($value['date'], $value['total']));
+
+                $totalvalue += $value['total'];
+
+            }
+            fclose($output);
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

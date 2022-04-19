@@ -10,6 +10,10 @@
 
     $GetBranding = $Branding->GetBranding();
 
+    $GetSystemAbout = $Branding->GetSystemAbout();
+
+    $GetSystemFooter = $Branding->GetSystemFooter();
+
     $GetLogo = $Logo->GetLogo();
 
     $businesslist = $User->BusinessFetctSortInLandingPage();
@@ -21,8 +25,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $GetBranding->name; ?></title>
-    <link rel="stylesheet" href="public/css/default.css?v=29">
-    <link rel="stylesheet" href="public/css/landing.css?v=29">
+    <link rel="stylesheet" href="public/css/default.css?v=31">
+    <link rel="stylesheet" href="public/css/landing.css?v=31">
     <link rel="stylesheet" href="carousel/dist/assets/owl.carousel.css" />
     <link rel="stylesheet" href="carousel/dist/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="carousel/dist/assets/owl.theme.default.css" />
@@ -88,14 +92,14 @@
             <nav class="navbarssss">
                 <div class="titles">
                         <a href="#" class="nav-logos"><img id="logosss" src="user/assets/logo/<?php echo $GetLogo->image; ?>" alt=""> </a>
-                        <a href="../" id="title-texts"><?php echo $GetBranding->name; ?></a>
+                        <a href="#home" id="title-texts"><?php echo $GetBranding->name; ?></a>
                 </div>
                     <ul class="nav-menussss">
                         <li class="nav-itemss">
-                            <a href="#about" class="nav-linkss">about</a>
+                            <a href="#host" class="nav-linkss">host</a>
                         </li>
                         <li class="nav-itemss">
-                            <a href="#host" class="nav-linkss">host</a>
+                            <a href="#about" class="nav-linkss">about</a>
                         </li>
                         <li class="nav-itemss">
                             <a href="#contact" class="nav-linkss">contact</a>
@@ -104,7 +108,7 @@
                             <a href="user/login" class="nav-linkss">login</a>
                         </li>
                         <li class="nav-itemss dropdown">
-                            <a href="#" class="nav-linkss">Register</a>
+                            <a href="#reg" class="nav-linkss">Register</a>
                             <div class="dropdown-items hidden">
                                 <a href="user/register_manager">As Manager</a>
                                 <a href="user/register_traveler" >As Traveler</a>
@@ -151,6 +155,47 @@
                     </div>
                     </div>
             </section>
+            <section class="container-body hre body-cont1" id="about">
+                <div class="container-div container-body1">
+                    <div class="center-content">
+                        <h1><?php echo $GetSystemAbout->title; ?></h1>
+                        <span><i><?php echo $GetSystemAbout->description; ?></i></span><br>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </section>
+            <footer id="contact">
+                <div class="footer-header">
+                    <ul>
+                        <li class="nav-itemss2">
+                            <a href="#funerals" >Host</a>
+                        </li>
+                        <li class="nav-itemss2">
+                            <a href="#home" class="nav-linkss" id="footertitle"><?php echo $GetBranding->name; ?></a>
+                        </li>
+                        <li class="nav-itemss2">
+                            <a href="users/login" >login</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-body" id="contact">
+                    <h1>contact</h1>
+                    <div class="contact-cont">
+                        <a href="tel:<?php echo $GetSystemFooter->contact; ?>" style="text-decoration:underline;"><?php echo $GetSystemFooter->contact; ?></a>
+                    </div>
+                    <div class="contact-cont">
+                        <a href="<?php echo $GetSystemFooter->facebook; ?>"><i class="fa fa-facebook"></i></a>
+                        <a href="<?php echo $GetSystemFooter->instagram; ?>"><i class="fa fa-instagram"></i></a>
+                        <a href="<?php echo $GetSystemFooter->twitter; ?>"><i class="fa fa-twitter"></i></a>
+                    </div>
+                    <br>
+                    <div class="policy">
+                        <p>&copy; Copyright 2022 <?php echo $GetBranding->name; ?></p>
+                        <a href="view/data-privacy" target='_blank'>PRIVACY POLICY</a>
+                    </div>
+                </div>
+            </footer>
         </main>
     </div>
     <script src="carousel/dist/owl.carousel.js"></script>
@@ -217,14 +262,14 @@
     </script>
     <script>
        $('.owl-carousel').owlCarousel({
-        items:1,
-        margin:10,
-        animateOut: 'fadeOut',
-        autoHeight:true,
-        autoplay:true,
-        autoplayTimeout:3000,
-        autoplayHoverPause:true
-    });
+            items:1,
+            margin:10,
+            loop:true,
+            autoHeight:true,
+            autoplay:true,
+            autoplayTimeout:1500,
+            autoplayHoverPause:true
+        });
         
     </script>
 </body>

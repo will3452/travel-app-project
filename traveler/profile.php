@@ -143,7 +143,7 @@
         </div>
     </div>
     <script src="js/load.js?v=5"></script>
-    <script src="js/notification.js"></script>
+    <script src="js/profile.js?v=5"></script>
     <script src="js/notification.js?v=5"></script>
 </body>
 </html>

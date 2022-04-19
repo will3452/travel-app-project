@@ -2,6 +2,46 @@
      include_once '../vendor/autoload.php';
 
      include_once 'process/LoginStatus.php';
+
+     $Branding = new Branding;
+
+     $GetSystemAbout = $Branding->GetSystemAbout();
+
+     $systemabouttitle = '';
+
+     $systemaboutdesciption = '';
+
+     if($GetSystemAbout){
+
+        $systemabouttitle = $GetSystemAbout->title;
+
+        $systemaboutdesciption = $GetSystemAbout->description;
+
+     }
+
+
+
+     $GetSystemFooter = $Branding->GetSystemFooter();
+
+     $contactfooter = '';
+
+     $facebookfooter = '';
+
+     $twitterfooter = '';
+
+     $instagramfooter = '';
+
+     if($GetSystemFooter){
+
+        $contactfooter = $GetSystemFooter->contact;
+
+        $facebookfooter = $GetSystemFooter->facebook;
+        
+        $twitterfooter = $GetSystemFooter->twitter;
+
+        $instagramfooter = $GetSystemFooter->instagram;
+
+     }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,12 +87,145 @@
                             </div>
                         </div>
                     </div>
+                    <div class="hide-dash">
+                        <div class="form-container-user">
+                            <form id="submitdsystemabout">
+                                <?php
+                                    date_default_timezone_set('Asia/Manila');
+                                ?>
+                                <input type="hidden" id="token_systemabout" name="token_systemabout" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>">
+                                <div class="rowss">
+                                        <div id="id_div">
+                                            <p style="font-size:20px;">System About</p>
+                                        </div>
+                                </div>
+                                <div class="rowss">
+                                    <div id="id_div">
+                                        <?php if($GetSystemAbout): ?>
+                                            <p>Update Title <span style="color:red;">*</span></p>
+                                        <?php else: ?>
+                                            <p>Title <span style="color:red;">*</span></p>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div id="idcontent">
+                                        <input type="text" name="titlelandingdesc"  value="<?php echo $systemabouttitle; ?>" required id="titlelandingdesc" class="focusinput">
+                                    </div>
+                                </div>
+                                <div class="rowss">
+                                    <div id="id_div">
+                                        <?php if($GetSystemAbout): ?>
+                                            <p>Update Description <span style="color:red;">*</span></p>
+                                        <?php else: ?>
+                                            <p>Description <span style="color:red;">*</span></p>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div id="idcontent">
+                                        <textarea name="description" id="description" required class="description"><?php echo $systemaboutdesciption; ?></textarea>
+                                    </div>
+                                </div>
+                                <div class="button-add-emp" id="logo-btn">
+                                    <button type="submit" id="buttonss">
+                                        <?php if($GetSystemAbout): ?>
+                                            <span id="spansubmit">Update</span>
+                                        <?php else: ?>
+                                            <span id="spansubmit">Submit</span>
+                                        <?php endif; ?>
+                                        <div class="center-loading-2">
+                                            <div class="span5load"></div>
+                                            <div class="span6load"></div>
+                                            <div class="span7load"></div>
+                                        </div>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
 
+
+
+                        <div class="form-container-user">
+                            <div class="rowss">
+                                <div id="id_div">
+                                    <p style="font-size:20px;">For Footer</p>
+                                </div>
+                            </div>
+                            <form id="submitfooter"> 
+                                <?php
+                                    date_default_timezone_set('Asia/Manila');
+                                ?>
+                                <input type="hidden" id="token_footer" name="token_footer" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>"> 
+                                <div class="rowss">
+                                    <div id="id_div">
+                                        <?php if($GetSystemFooter): ?>
+                                            <p>Update Contact<span> (optional)</span></p>
+                                        <?php else: ?>
+                                            <p>Contact<span> (optional)</span></p>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div id="idcontent">
+                                        <input type="text" name="contact" value="<?php echo $contactfooter; ?>"  id="contact" placeholder="ex: 0999#######"  class="focusinput">
+                                    </div>
+                                </div>
+                                <div class="rowss">
+                                    <div id="id_div">
+                                        <?php if($GetSystemFooter): ?>
+                                            <p>Update Facebook<span> (optional)</span></p>
+                                        <?php else: ?>
+                                            <p>Facebook<span> (optional)</span></p>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div id="idcontent">
+                                        <input type="text" name="facebook"  id="facebook" value="<?php echo $facebookfooter; ?>" placeholder="ex: https://www.facebook.com/"  class="focusinput">
+                                    </div>
+                                </div>
+                                <div class="rowss">
+                                    <div id="id_div">
+                                        <?php if($GetSystemFooter): ?>
+                                            <p>Update twitter<span> (optional)</span></p>
+                                        <?php else: ?>
+                                            <p>twitter<span> (optional)</span></p>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div id="idcontent">
+                                        <input type="text" name="twitter"  id="twitter" value="<?php echo $twitterfooter; ?>" placeholder="ex: https://www.twitter.com/"  class="focusinput">
+                                    </div>
+                                </div>
+                                <div class="rowss">
+                                    <div id="id_div">
+                                        <?php if($GetSystemFooter): ?>
+                                            <p>Update Instagram<span> (optional)</span></p>
+                                        <?php else: ?>
+                                            <p>Instagram<span> (optional)</span></p>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div id="idcontent">
+                                        <input type="text" name="instagram"  id="instagram" value="<?php echo $instagramfooter; ?>" placeholder="ex: https://www.instagram.com/"  class="focusinput">
+                                    </div>
+                                </div>
+                                <div class="button-add-emp" id="logo-btn">
+                                    <button type="submit" id="buttonss">
+                                            <?php if($GetSystemFooter): ?>
+                                                <span id="spansubmit2">Update</span>
+                                            <?php else: ?>
+                                                <span id="spansubmit2">Submit</span>
+                                            <?php endif; ?>
+                                            <div class="center-loading-3">
+                                                <div class="span5load2"></div>
+                                                <div class="span6load2"></div>
+                                                <div class="span7load2"></div>
+                                            </div>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
                 </div>
             </main>
         </div>
     </div>
     <script src="js/load.js"></script>
     <script src="js/notification.js?v=15"></script>
+    <script src="js/landing-page.js"></script>
 </body>
 </html>

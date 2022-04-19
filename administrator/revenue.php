@@ -36,117 +36,14 @@
             <main>
                 <div class="container-fluid px-4">
                     <p class="mt-4 edit-title">Revenue</p>
-                    <!-- search -->
-                    <span class="clearable">
-                        <i class="fas fa-search search_icon"></i>
-                        <input class="form-control mr-sm-2" type="text" id="search" placeholder="Search"
-                            value=""
-                            aria-label="Search">
-                        <i class="clearable__clear">&times;</i>
-                    </span>
-
-                     <!-- table -->
-                     <div class="card mb-4">
-                        <div class="card-header">
-                            <div>Revenue Table</div>
-                            <div class="dropdown-per-page">
-                                <button class="btn titleperpage-bn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                </button>
-                                <div class="dropdown-menu" id="dropdown" aria-labelledby="dropdownMenuButton1">
-                                        <p class="titleperpage">Per Page</p>
-                                        <li><a class="dropdown-item sort" href="#">15</a></li>
-                                        <li><a class="dropdown-item sort" href="#">25</a></li>
-                                        <li><a class="dropdown-item sort" href="#">50</a></li>
-                                        <li><a class="dropdown-item sort" href="#">75</a></li>
-                                        <li><a class="dropdown-item sort" href="#">100</a></li>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body-table overflowtables">
-                            <table class="tablenew">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">
-                                            <div class="d-flex">
-                                                <span>ID </span>
-                                                <div class="sorted-table">
-                                                    <div><a href="#"><i class="fas fa-chevron-up"></i></a></div>
-                                                    <div><a href="#"><i class="fas fa-chevron-down"></i></a></div>
-                                                </div>
-                                            </div>
-                                        </th>
-                                        <th scope="col">
-                                            <div class="d-flex">
-                                                <span>Date </span>
-                                                <div class="sorted-table">
-                                                    <div><a href="#"><i class="fas fa-chevron-up"></i></a></div>
-                                                    <div><a href="#"><i class="fas fa-chevron-down"></i></a></div>
-                                                </div>
-                                            </div>
-                                        </th>
-                                        <th scope="col">
-                                            <div class="d-flex">
-                                                <span>Amount </span>
-                                                <div class="sorted-table">
-                                                    <div><a href="#"><i class="fas fa-chevron-up"></i></a></div>
-                                                    <div><a href="#"><i class="fas fa-chevron-down"></i></a></div>
-                                                </div>
-                                            </div>
-                                        </th>
-                                        <th scope="col"></th>
-                                    </tr>
-                                </thead>
-                                <tbody class="hideafter">
-                                    <tr>
-                                        <td id="idss"><?php echo sprintf('%06d', 1)?></td>
-                                        <td>2022-03-31</td>
-                                        <td>₱5000</td>
-                                        <td id="btn">
-                                            <div class="d-flex">
-                                                <i class="fa-solid fa-eye btns" id="showinfo"></i>
-                                                <i class="far fa-edit btns" id="updateuser"></i>
-                                                <i class="fas fa-trash btns" id="delete"></i>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td id="idss"><?php echo sprintf('%06d', 2)?></td>
-                                        <td>2022-03-31</td>
-                                        <td>₱5000</td>
-                                        <td id="btn">
-                                            <div class="d-flex">
-                                                <i class="fa-solid fa-eye btns" id="showinfo"></i>
-                                                <i class="far fa-edit btns" id="updateuser"></i>
-                                                <i class="fas fa-trash btns" id="delete"></i>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <!-- if table empty -->
-                            <!-- <div id="emptyss"><i class="fa-solid fa-table-list"></i><p>No Data</p></div> -->
-
-                            <!--table loading-->
-                            <!-- <div class="loadingss">
-                                <div class="center-table">
-                                    <div class="span1load-table"></div>
-                                    <div class="span2load-table"></div>
-                                    <div class="span3load-table"></div>
-                                </div>
-                            </div>  -->
-                            <div class='bottomtable overflowtables'>
-                                <div class="pre-nex">
-                                    <p class="nomore">Previous</p>
-                                    <p>Page 1 - 1</p>
-                                    <p class="nomore">Next</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php 
+                        include '_TABLE_UI/revenue-table.php'
+                    ?>
                 </div>
             </main>
         </div>
     </div>
     <script src="js/notification.js?v=15"></script>
+    <script src="js/revenue.js?v=1"></script>
 </body>
 </html>

@@ -1,6 +1,31 @@
 <?php
      include_once '../vendor/autoload.php';
+
      include_once 'process/LoginStatus.php';
+
+     $Branding = new Branding;
+     
+     $GetSystemTMD = $Branding->GetSystemTMD();
+
+     $termstitle = '';
+
+     $termsdescription = '';
+
+     $conditiontitle = '';
+
+     $conditiondescription = '';
+
+     if($GetSystemTMD){
+
+        $termstitle = $GetSystemTMD->termstitle;
+
+        $termsdescription = $GetSystemTMD->termsdescription;
+        
+        $conditiontitle = $GetSystemTMD->conditiontitle;
+
+        $conditiondescription = $GetSystemTMD->conditiondescription;
+
+     }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,18 +75,22 @@
                     <!--tmd content -->
                     <div class="hide-dash">
                         <div class="form-container-user">
-                            <div class="rowss">
-                                    <div id="id_div">
-                                    <p style="font-size:20px;">For Terms</p>
-                                    </div>
-                            </div>
-                            <form id="submitFormheader">
+                            <form id="submittermsandcondition">
+                                <?php
+                                    date_default_timezone_set('Asia/Manila');
+                                ?>
+                                <input type="hidden" id="token_tmd" name="token_tmd" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>"> 
+                                <div class="rowss">
+                                        <div id="id_div">
+                                            <p style="font-size:20px;">For Terms</p>
+                                        </div>
+                                </div>
                                 <div class="rowss">
                                     <div id="id_div">
                                         <p>Title<span style="color:red;">*</span></p>
                                     </div>
                                     <div id="idcontent">
-                                            <input type="text" name="titleterms"  id="titleterms" placeholder="----- ---"  class="focusinput">
+                                            <input type="text" name="titlet" value="<?php echo $termstitle; ?>" required id="titleterms" placeholder="ex: Terms"  class="focusinput">
                                     </div>
                                 </div>
                                 <div class="rowss">
@@ -69,52 +98,41 @@
                                             <p>Description <span style="color:red;">*</span></p>
                                     </div>
                                     <div id="idcontent">
-                                        <textarea name="description" id="description" placeholder="----- --- ------ --- ---" class="focusinput"></textarea>
+                                        <textarea name="descriptiont" id="description" required placeholder="ex: Terms Description" class="focusinput"><?php echo $termsdescription; ?></textarea>
+                                    </div>
+                                </div>
+                                <div class="rowss">
+                                    <div id="id_div">
+                                        <p style="font-size:20px;">For Condition</p>
+                                    </div>
+                                </div>
+                                <div class="rowss">
+                                    <div id="id_div">
+                                        <p>Title<span style="color:red;">*</span></p>
+                                    </div>
+                                    <div id="idcontent">
+                                            <input type="text" name="titlec"  id="titleterms" value="<?php echo $conditiontitle; ?>" required placeholder="ex: Condition"  class="focusinput">
+                                    </div>
+                                </div>
+                                <div class="rowss">
+                                    <div id="id_div">
+                                            <p>Description <span style="color:red;">*</span></p>
+                                    </div>
+                                    <div id="idcontent">
+                                        <textarea name="descriptionc" id="description" required placeholder="ex: Condition Description" class="focusinput"><?php echo $conditiondescription; ?></textarea>
                                     </div>
                                 </div>
                                 <div class="button-add-emp" id="logo-btn">
                                     <button type="submit" id="buttonss">
-                                            <span id="spansubmit">Submit</span>
+                                            <?php if($GetSystemTMD): ?>
+                                                <span id="spansubmit">Update</span>
+                                            <?php else: ?>
+                                                <span id="spansubmit">Submit</span>
+                                            <?php endif; ?>
                                             <div class="center-loading-2">
                                                 <div class="span5load"></div>
                                                 <div class="span6load"></div>
                                                 <div class="span7load"></div>
-                                            </div>
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-
-                        <div class="form-container-user">
-                            <div class="rowss">
-                                    <div id="id_div">
-                                    <p style="font-size:20px;">For Condition</p>
-                                    </div>
-                            </div>
-                            <form id="submitFormheader">
-                                <div class="rowss">
-                                    <div id="id_div">
-                                        <p>Title<span style="color:red;">*</span></p>
-                                    </div>
-                                    <div id="idcontent">
-                                            <input type="text" name="titleterms"  id="titleterms" placeholder="----- ---"  class="focusinput">
-                                    </div>
-                                </div>
-                                <div class="rowss">
-                                    <div id="id_div">
-                                            <p>Description <span style="color:red;">*</span></p>
-                                    </div>
-                                    <div id="idcontent">
-                                        <textarea name="description" id="description" placeholder="----- --- ------ --- ---" class="focusinput"></textarea>
-                                    </div>
-                                </div>
-                                <div class="button-add-emp" id="logo-btn">
-                                    <button type="submit" id="buttonss">
-                                            <span id="spansubmit2">Submit</span>
-                                            <div class="center-loading-3">
-                                                <div class="span5load2"></div>
-                                                <div class="span6load2"></div>
-                                                <div class="span7load2"></div>
                                             </div>
                                     </button>
                                 </div>
@@ -129,5 +147,6 @@
     </div>
     <script src="js/load.js"></script>
     <script src="js/notification.js?v=15"></script>
+    <script src="js/termsandcondition.js"></script>
 </body>
 </html>

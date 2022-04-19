@@ -146,7 +146,7 @@ text-align: center;
     letter-spacing: 2px;
 }.nav-logos img{
     width:100%;
-    height:57px;
+    height:70px;
     z-index:100;
     margin-top:-1.5px;
     display: none;
@@ -166,10 +166,17 @@ text-align: center;
    display:inline-block;
    text-overflow: ellipsis;
    white-space: nowrap;
-   padding:3.1px;
+   padding:4.5px;
+}
+#footertitle{
+    display: none;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .body-cont2{
     background:#f8f9fc;
+   
 }
  @media(min-width:550px){
     #title-texts{
@@ -179,6 +186,11 @@ text-align: center;
 @media(min-width:1000px){
     .nav-logos img{
         display: inherit;
+    }
+    #footertitle{
+        margin-top: 10px;
+        display: inline-block;
+        width : 200px;
     }
 } @media(min-width:1200px){
     #title-texts{
@@ -251,6 +263,7 @@ text-align: center;
 section{
     width: 100%;
     height:100vh;
+    padding:50px 10px;
 }
 .body-cont1{
     background:#fff;
@@ -290,6 +303,7 @@ section{
     width:95%;
     margin:auto;
     text-align: center;
+    cursor: pointer;
 }
 .owl-carousel .item img{
     object-fit: cover;  
@@ -303,7 +317,7 @@ section{
     letter-spacing: 2px;
     font-size: 30px;
     margin-bottom: 8px;
-    margin-top:-50px;
+    margin-top:10px;
     text-transform: uppercase;
     color: #0095a4;
 }
@@ -341,10 +355,7 @@ section{
  }
  @media (min-width:900px){
     .center-content2{
-        width:50em;
-    }
-    .owl-carousel .item img{
-        height: 400px;
+        width:40em;
     }
  }
 @media (min-width:1100px){
@@ -375,11 +386,127 @@ section{
         font-size: 18px;
     }
     .center-content2{
-        width:55em;
+        width:45em;
     }
-    .owl-carousel .item img{
-        height: 450px;
-    }
+    
     
 }
 
+@media (max-height:700px){
+  .hre{
+      height:750px;
+  }
+}
+
+
+footer{
+        
+    justify-content: space-between;
+    z-index:100;
+    /* display: none; */
+}
+footer .footer-header{
+    width:100%;
+    background-color: #026871;
+    padding:1.5em 22em .5em 22em;
+    
+} #logobottom{
+    object-fit: cover;  
+    width: 70px;
+    margin-top: -70px;
+}
+  footer .footer-header ul{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}footer .footer-header ul a{
+    font-size: 13px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    letter-spacing: 1.5px;
+    color:#fff;
+}
+.nav-item2 {
+    text-transform: uppercase;
+}
+footer{
+    margin-top: 120px;
+}
+footer .footer-body{
+    width:100%;
+    background-color: #0095a4;
+    padding:3em 15em 2em 15em;
+    text-align: center;
+}
+footer .footer-body h1{
+    font-family: Reem Kufi;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    /* identical to box height */
+    color: #FFFFFF;
+    letter-spacing: 1px;
+}
+footer .footer-body .contact-address p{
+    font-family: Reem Kufi;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 28px;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+} footer .footer-body .policy a{
+    font-family: Reem Kufi;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+}footer .footer-body .policy p{
+    font-family: Reem Kufi;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+}
+.contact-cont{
+    width:100%;
+    text-align: center;
+   margin-top:15px;
+   margin-bottom:15px;
+}
+.contact-cont a{
+    width:20px;
+    cursor:pointer;
+    margin: 15px;
+    color:#fff;
+    text-decoration: none;
+    font-size: 20px;
+    transition: all ease .35s;
+}.contact-cont a:hover{
+    color:#fff;
+}
+@media (max-width:1200px){
+    footer .footer-header{
+        width:100%;
+        background-color: #026871;
+        padding:1.5em 3em .5em 3em;
+        
+    }
+}@media (max-width:800px){
+    footer .footer-header{
+        width:100%;
+        background-color: #026871;
+        padding:1.5em 4em .5em 3em;
+        
+    }footer .footer-header ul a{
+        font-size: 13px;
+    }footer .footer-body{
+        background-color: #0095a4;
+        padding:3em 2em 2em 2em;
+        text-align: center;
+    }
+}
