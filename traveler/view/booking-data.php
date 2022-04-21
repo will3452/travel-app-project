@@ -110,6 +110,18 @@
                                     <?php endif; ?>
                                 </div>
                         </div>
+                        <?php if($data->status==$User::STATUS_HISTORY): ?>
+                            <div class="rowss">
+                                <div id="id_div">
+                                        <p>Remarks</p>
+                                </div>
+                                <div id="idcontent">
+                                    <a href="../create/review-host?host_id=<?php echo $business_id; ?>"><button>Review</button></a>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                           
+                        <?php endif; ?>
                     </div>
                     <br>
                     <?php if($data->status==$User::STATUS_HISTORY || $data->status==$User::STATUS_APPROVED): ?>

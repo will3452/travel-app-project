@@ -519,7 +519,7 @@ footer .footer-body .contact-address p{
     }
 }
 
-/* .viewfullscreenclass{
+.viewfullscreenclass{
     position: fixed;
     width: 70%;
     z-index: 100;
@@ -551,7 +551,7 @@ footer .footer-body .contact-address p{
     margin-right: 30px;
     text-shadow: 2px 2px 4px #000000;
     cursor: pointer;
-} */
+}
 
 .smallsize{
     position: fixed;
@@ -575,7 +575,7 @@ footer .footer-body .contact-address p{
     text-align: right;
     height:100%;
     width: 100%;
-    top: 70px;
+    top: 45px;
     position: relative;
     display: none;
 }.smallsize .close-cion .fa-xmark{
@@ -598,23 +598,21 @@ footer .footer-body .contact-address p{
     text-shadow: 2px 2px 4px #000000;
 }
 .smallsize:hover img{
-    filter: blur(3px);
-    -webkit-filter: blur(3px);
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
 }
-.smallsize:hover .view-cion{
-    display: inherit;
-}
+
 .smallsize:hover .close-cion{
     display: inherit;
  } 
 
 
- /* @media(max-width:1000px){
+ @media(max-width:1000px){
     .viewfullscreenclass{
         width:98%;
         left:1%;
     }
- } */
+ }
 
 @media(max-width:600px){
     .smallsize{
@@ -636,11 +634,11 @@ footer .footer-body .contact-address p{
     .smallsize .view-cion{
         top:60px;
     }
-    /* .viewfullscreenclass{
+    .viewfullscreenclass{
         top:30%;
     }
      .viewfullscreenclass img{
         height:250px;
-    } */
+    }
 }
 

@@ -589,4 +589,152 @@ class Service extends User{
         return $numwors = $stmt->rowCount();
 
     }
+
+    public function SubmitReviews($user_id, $business_id, $star, $message, $status){
+
+        $con = $this->GetConnection();
+
+        $prepareStatement  = "INSERT INTO `reviews`(`user_id`, `business_id`, `star`, `message`, `status`) VALUE(?, ?, ?, ?, ?)";
+        
+        $stmt = $con->prepare($prepareStatement);
+
+        $param = [ $user_id, $business_id, $star, $message, $status];
+
+        $executeResult = $stmt->execute($param);
+
+        if ($executeResult) {
+
+             return true;
+        }
+        return false;
+    }
+    public function ReviewPageSort($businessid)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM reviews WHERE business_id=?");
+
+        $stmt->execute([$businessid]);
+
+        return $stmt->rowCount();
+    }
+    public function ReviewsFetctSort($limit, $start, $namesort, $sortName, $businessid)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM reviews WHERE business_id=? ORDER by $sortName $namesort LIMIT $start, $limit";
+
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute([$businessid]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+            }
+        }
+    }
+    public function ReviewSearchPageSort($search, $businessid)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM reviews WHERE 
+        business_id=? && star LIKE ? ||
+        business_id=? && status LIKE ? 
+        ");
+
+        $stmt->execute([$businessid, "%$search%", $businessid, "%$search%"]);
+
+        return $stmt->rowCount();
+
+    }
+    public function ReviewSearchFetchSort($limit, $start, $namesort, $sortName, $search, $businessid)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM reviews WHERE 
+        business_id=? && star LIKE ? ||
+        business_id=? && status LIKE ? 
+        ORDER by $sortName $namesort LIMIT $start, $limit";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute([$businessid, "%$search%", $businessid, "%$search%"]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+            }
+        }
+    }
+    public function GetReviews($id, $business_id){
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM reviews WHERE id=? && business_id=?");
+
+        $executeResult = $stmt->execute([$id, $business_id]);
+
+        $check = $stmt->rowCount();
+
+        if ($check>0) {
+
+            return $stmt->fetch(PDO::FETCH_OBJ);
+        }
+        return false;
+    }
+    public function DeleteReviews($id, $businessid)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("DELETE FROM `reviews` WHERE id=? && business_id=?");
+                
+        $true = $stmt->execute([$id, $businessid]);
+                
+        if ($true) {
+                   
+            return $true;
+        }
+        return false;
+    }
+    public function UpdateReviews($id, $businessid, $status)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("UPDATE `reviews` SET status=? WHERE id=? && business_id=?");
+                
+        $true = $stmt->execute([$status, $id, $businessid]);
+                
+        if ($true) {
+                   
+            return $true;
+        }
+        return false;
+    }
+    public function GetReviewTraveler($businessid, $status)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM reviews WHERE business_id=? && status=?";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute([$businessid, $status]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+            }
+        }
+    }
 }

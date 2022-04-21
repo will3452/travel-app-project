@@ -398,5 +398,20 @@ class Reservation extends Service{
             }
         }
     }
+    public function CheckIfTravelerAlreadyHaveBookInSpecificHost($user_id, $business_id, $status){
+
+        $con = $this->GetConnection();
+
+        $prepareStatement  = "SELECT `user_id`, `business_id`, `status` FROM `reservation` WHERE user_id=? && business_id=? && status=?";
+        
+        $stmt = $con->prepare($prepareStatement);
+
+        $param = [ $user_id, $business_id, $status];
+
+        $executeResult = $stmt->execute($param);
+
+        return $stmt->rowCount();
+
+    }
 }
 

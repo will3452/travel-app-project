@@ -18,8 +18,12 @@
     if($check){
         
         $businessid = $check->id;
+
+    }else{
+
+        $businessid = '';
     }
-    $businessid = '';
+   
    
 ?>
 <!DOCTYPE html>

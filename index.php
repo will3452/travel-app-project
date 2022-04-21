@@ -25,8 +25,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $GetBranding->name; ?></title>
-    <link rel="stylesheet" href="public/css/default.css?v=36">
-    <link rel="stylesheet" href="public/css/landing.css?v=36">
+    <link rel="stylesheet" href="public/css/default.css?v=37">
+    <link rel="stylesheet" href="public/css/landing.css?v=37">
     <link rel="stylesheet" href="carousel/dist/assets/owl.carousel.css" />
     <link rel="stylesheet" href="carousel/dist/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="carousel/dist/assets/owl.theme.default.css" />
@@ -125,15 +125,14 @@
                 <div class="close-cion">
                     <i class="fa-solid fa-xmark" id="closeaddbtn"></i>
                 </div>
-                <div class="view-cion">
-                    <i class="fa-solid fa-down-left-and-up-right-to-center"></i>
-                </div>
-                <div class="owl-carousel newcous owl-theme">
-                    <img src="images/ads/625517b8b84058.62736571.220412021000.png" class="imagesads" alt="">
-                    <img src="images/ads/sample1.jpg" class="imagesads" alt="">
-                    <img src="images/ads/sample2.jpg" class="imagesads" alt="">
-                    <img src="images/ads/sample3.jpg" class="imagesads" alt="">
-                </div>
+                <a href="user/ads-view">
+                    <div class="owl-carousel newcous owl-theme">
+                        <img src="images/ads/625517b8b84058.62736571.220412021000.png" class="imagesads" alt="">
+                        <img src="images/ads/sample1.jpg" class="imagesads" alt="">
+                        <img src="images/ads/sample2.jpg" class="imagesads" alt="">
+                        <img src="images/ads/sample3.jpg" class="imagesads" alt="">
+                    </div>
+                </a>
             </div>
 
             <section class="container-body hre body-cont1" id="home">
@@ -289,22 +288,16 @@
                 items:1,
                 margin:10,
                 loop:true,
-                animateOut: 'slideOutDown',
-                animateIn: 'flipInX',
                 lazyLoad: true,
                 autoHeight:true,
                 autoplay:true,
-                autoplayTimeout:1500,
+                autoplayTimeout:2000,
                 autoplayHoverPause:true
             });
             $(document).on('click','#closeaddbtn',function(){
                 $(".ads-contatiner").hide();
             });
-        //    $(document).on('click',function(){
-        //         $(".ads-contatiner").removeClass('smallsize');
-        //         $(".ads-contatiner").addClass('viewfullscreenclass');
-        //         $(".fa-xmark").addClass('close-cionfullscreen');
-        //    });
+        
     </script>
 </body>
 </html>

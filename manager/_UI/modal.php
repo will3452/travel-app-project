@@ -151,3 +151,78 @@ $deletecategory= '<div class="modal deletecategory" id="exampleModal" tabindex="
     </div>
   </form>
 </div>';
+$deletereviews= '<div class="modal deletereviews" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog closemodal" role="document">
+    <form id="submit_delete_reviews" class="modal-content">
+      <input type="hidden" id="token_deletereviews_manager" name="token_deletereviews_manager" value='.password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT).'> 
+      <div class="modal-header">
+       <h5 class="modal-title" id="exampleModalLabel">Delete Review</h5>
+        <p class="close_modal">+</p>
+      </div>
+      <div class="modal-body">
+        <p id="name_title">Name: <span class="name_here"></span></p>
+        <input type="hidden" name="reviews_id" id="reviews_id">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" id="delete_btn_reviews" class="colorbtn width_btn">
+            <span class="span_modal">Process</span>
+            <div class="center-loading-3">
+                        <div class="span5load2"></div>
+                        <div class="span6load2"></div>
+                        <div class="span7load2"></div>
+                    </div>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>';
+$hidereviews= '<div class="modal hidereviews" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog closemodal" role="document">
+    <form id="submit_hide_reviews" class="modal-content">
+      <input type="hidden" id="token_hidereviews_manager" name="token_hidereviews_manager" value='.password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT).'> 
+      <div class="modal-header">
+       <h5 class="modal-title" id="exampleModalLabel">Hide Review</h5>
+        <p class="close_modal">+</p>
+      </div>
+      <div class="modal-body">
+        <p id="name_title">Name: <span class="name_here"></span></p>
+        <input type="hidden" name="reviews_id_h" id="reviews_id_h">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" id="delete_btn_reviews_h" class="colorbtn width_btn">
+            <span class="span_modal">Process</span>
+            <div class="center-loading-3">
+                        <div class="span5load2"></div>
+                        <div class="span6load2"></div>
+                        <div class="span7load2"></div>
+                    </div>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>';
+$showreviews= '<div class="modal showreviews" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog closemodal" role="document">
+    <form id="submit_shows_reviews" class="modal-content">
+      <input type="hidden" id="token_showreviews_manager" name="token_showreviews_manager" value='.password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT).'> 
+      <div class="modal-header">
+       <h5 class="modal-title" id="exampleModalLabel">Show Review</h5>
+        <p class="close_modal">+</p>
+      </div>
+      <div class="modal-body">
+        <p id="name_title">Name: <span class="name_here"></span></p>
+        <input type="hidden" name="reviews_id_s" id="reviews_id_s">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" id="delete_btn_reviews_s" class="colorbtn width_btn">
+            <span class="span_modal">Process</span>
+            <div class="center-loading-3">
+                        <div class="span5load2"></div>
+                        <div class="span6load2"></div>
+                        <div class="span7load2"></div>
+                    </div>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>';

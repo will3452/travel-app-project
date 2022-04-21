@@ -75,6 +75,18 @@ elseif(isset($_GET['rs_id'])){
 
     }
 }
+elseif(isset($_GET['reviews_d'])){
+    
+    $id = $_GET['reviews_d'];
+
+    $data = $Service->GetReviews($id, $businessid);
+
+    if(!$data){
+
+        header("location:../dashboard");
+
+    }
+}
 elseif(isset($_GET['notif_id'])){
 
     $id =  $_GET['notif_id'];
