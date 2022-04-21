@@ -77,27 +77,12 @@
                                         <p>Administrator</p>
                                     <?php else:?>
 
-                                        <p><?php echo ucwords($Getbusinessinfo->name);  ?></p>
+                                        <a href="host-list-data?host_id=<?php echo $Getbusinessinfo->id; ?>"><p><?php echo ucwords($Getbusinessinfo->name);  ?></p></a>
 
                                     <?php endif; ?>
                                 </div>
                         </div>
-                        <?php if($userid==''): ?>
-                        <?php else:?>
-
-                            <div class="rowss">
-                                    <div id="id_div">
-                                            <p>Email</p>
-                                    </div>
-                                    <div id="idcontent">
-                                        <?php if($getuser->type==$User::USER_TYPE_TRAVELER): ?>
-                                            <a href="traveler-data?traveler_id=<?php echo $getuser->id; ?>"><p><?php echo ucwords($getuser->email); ?></p></a>
-                                        <?php else: ?>
-                                            <a href="manager-data?manager_id=<?php echo $getuser->id; ?>"><p><?php echo ucwords($getuser->email); ?></p></a>
-                                        <?php endif; ?>
-                                    </div>
-                            </div>
-                        <?php endif; ?>
+                        
                         <div class="rowss">
                                 <div id="id_div">
                                         <p>Content</p>
