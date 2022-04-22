@@ -20,7 +20,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://kit.fontawesome.com/a66db60870.js" crossorigin="anonymous"></script>
-    <title>Manager - Admin Inquire</title>
+    <title>Manager - Help Support</title>
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bgnav shadow-sm p-3 mb-5 rounded">
@@ -40,7 +40,7 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <p class="mt-4 edit-title">Admin Inquire</p>
+                    <p class="mt-4 edit-title">Help Support</p>
                     <form id="form_initialize_chat">
                         <input type="hidden" id="receiver" value="<?php  echo $GetAdminData->email; ?>" placeholder="receiver">
                         <input type="hidden" id="sender" value="<?php echo $email; ?>"  placeholder="sender">

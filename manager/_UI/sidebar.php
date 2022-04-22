@@ -35,7 +35,7 @@ $sidebaroutside ='
                         </a>
                         <a class="nav-link" href="admin-inquire">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-message"></i></div>
-                            Inquire:admin
+                            Help Support:admin
                         </a>
                         <div class="sb-sidenav-menu-heading">Setting</div>
                         <a class="nav-link" href="business">
@@ -90,7 +90,7 @@ $sidebarinside ='
                         </a>
                         <a class="nav-link" href="../admin-inquire">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-message"></i></div>
-                            Inquire:admin
+                            Help Support:admin
                         </a>
                         <div class="sb-sidenav-menu-heading">Setting</div>
                         <a class="nav-link" href="../business">
