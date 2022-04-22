@@ -130,7 +130,7 @@
             </main>
         </div>
     </div>
-    <script src="../js/avail-promo.js?v=4"></script>
+    <script src="../js/avail-promo.js?v=5"></script>
     <script src="../js/notificaiton_2.js?v=12"></script>
 </body>
 </html>

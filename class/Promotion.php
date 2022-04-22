@@ -89,5 +89,128 @@ class Promotion extends User{
 
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
-   
+    
+    public function GetAdsOngoing($status, $schedule_at, $end_at){
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM advertisement WHERE status=? && schedule_at<=? && end_at>=?");
+
+        $stmt->execute([$status, $schedule_at, $end_at]);
+        
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+
+            }
+        }
+    }
+    public function AdsPageSort($iduser)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM advertisement WHERE manager_id=?");
+
+        $stmt->execute([$iduser]);
+
+        return $stmt->rowCount();
+    }
+    public function AdsFetctSort($limit, $start, $namesort, $sortName, $iduser)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM advertisement WHERE manager_id=? ORDER by $sortName $namesort LIMIT $start, $limit";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute([$iduser]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+                
+                return $r;
+
+            }
+        }
+    }
+    public function AdsSearchFetchSort($limit, $start, $namesort, $sortName, $search, $iduser)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM advertisement WHERE 
+        status LIKE ? && manager_id=? || 
+        schedule_at LIKE ? && manager_id=? || 
+        end_at LIKE ? && manager_id=? 
+        ORDER by $sortName $namesort LIMIT $start, $limit");
+
+        $stmt->execute(["%$search%", $iduser, "%$search%", $iduser, "%$search%", $iduser]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+
+            }
+        }
+    }
+    public function AdsSearchPageSort($search, $iduser)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM advertisement WHERE 
+        status LIKE ? && manager_id=? || 
+        schedule_at LIKE ? && manager_id=? || 
+        end_at LIKE ? && manager_id=?");
+
+        $stmt->execute(["%$search%", $iduser, "%$search%", $iduser, "%$search%", $iduser]);
+
+        return $stmt->rowCount();
+    }
+    public function CanceleAdsSubsManager($id, $status, $manager_id){
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM `advertisement` WHERE id=? && status=? && manager_id=?");
+
+        $executeResult = $stmt->execute([$id, $status, $manager_id]);
+
+        if ($executeResult) {
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $img =  $result['image'];
+
+            $pop =  $result['pop'];
+
+            $olddist2 = "../../images/pop/$pop"; //old profile
+
+            $olddist3 = "../../images/ads/$img"; //old profile
+
+            unlink($olddist2); //deleting pass profile
+
+            unlink($olddist3); //deleting pass profile
+
+            $stmt = $con->prepare("DELETE FROM `advertisement` WHERE id=? && status=? && manager_id=?");
+
+            $true = $stmt->execute([$id, $status, $manager_id]);
+    
+            if ($true) {
+    
+                return true;
+            }
+    
+            return false;
+
+        }
+    }
+
 }

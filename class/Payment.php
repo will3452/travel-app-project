@@ -91,7 +91,7 @@ class Payment extends User{
             return false;
         }
     }
-    public function AdsPOP($userid, $adsimage, $imagepop, $promo_id, $date)
+    public function AdsPOP($userid, $adsimage, $imagepop, $promo_id, $date, $datend)
     {
         $con = $this->GetConnection();
 
@@ -99,9 +99,9 @@ class Payment extends User{
 
         [$fileName2, $filetmp2, $fileExt2 ,$filedesti2, $finlenamenew2] = $this->ExtractFileData($adsimage, 'ads');
 
-        $stmt = $con->prepare("INSERT INTO `advertisement`(`image`, `manager_id`, `status`, `package_id`, `pop`, `schedule_at`) VALUE(?, ?, ?, ?, ?, ?)");
+        $stmt = $con->prepare("INSERT INTO `advertisement`(`image`, `manager_id`, `status`, `package_id`, `pop`, `schedule_at`, `end_at`) VALUE(?, ?, ?, ?, ?, ?, ?)");
 
-        $executeResult = $stmt->execute([$finlenamenew2, $userid, 'pending', $promo_id, $finlenamenew, $date]);
+        $executeResult = $stmt->execute([$finlenamenew2, $userid, 'pending', $promo_id, $finlenamenew, $date, $datend]);
 
         if ($executeResult) {
 

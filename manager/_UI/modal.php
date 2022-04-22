@@ -226,3 +226,29 @@ $showreviews= '<div class="modal showreviews" id="exampleModal" tabindex="-1" ro
     </div>
   </form>
 </div>';
+
+$cancelads= '<div class="modal cancelads" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog closemodal" role="document">
+    <form id="submit_shows_cancelads" class="modal-content">
+      <input type="hidden" id="token_cancelads_manager" name="token_cancelads_manager" value='.password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT).'> 
+      <div class="modal-header">
+       <h5 class="modal-title" id="exampleModalLabel">Show Review</h5>
+        <p class="close_modal">+</p>
+      </div>
+      <div class="modal-body">
+        <p id="name_title">Name: <span class="name_here"></span></p>
+        <input type="hidden" name="cancelads_id_s" id="cancelads_id_s">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" id="delete_btn_cancelads_s" class="colorbtn width_btn">
+            <span class="span_modal">Process</span>
+            <div class="center-loading-3">
+                        <div class="span5load2"></div>
+                        <div class="span6load2"></div>
+                        <div class="span7load2"></div>
+                    </div>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>';

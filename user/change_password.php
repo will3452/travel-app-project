@@ -79,7 +79,7 @@
                 <input type="hidden" id="token_authentication_changepassword" name="token_authentication_changepassword" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>">
                 <div class="email-container">
                     <label for="">Password</label>
-                    <input type="text" id="password" name="password" placeholder="New Password" required>
+                    <input type="password" id="password" name="password" placeholder="New Password" required>
                 </div>
                 <div class="submit-container">
                     <button id="submit">

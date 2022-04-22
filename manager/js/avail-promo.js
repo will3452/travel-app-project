@@ -34,7 +34,7 @@ $("#submitForm").on("submit", function(e){
                         button: "Close",
                     });
                     setTimeout(function(){
-                        window.location.href="../adverstisement";
+                        window.location.href="../advertisement";
                     }, 1500);
                 }
                 else if($.trim(d)=='emp'){

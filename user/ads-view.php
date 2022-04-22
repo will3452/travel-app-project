@@ -2,11 +2,17 @@
 <?php
     include_once '../vendor/autoload.php';
 
+    date_default_timezone_set('Asia/Manila');
+
     $Branding = new Branding;
 
     $Logo = new Logo;
 
     $User = new User;
+
+    $Promotion = new Promotion;
+
+    $GetAdsOngoing = $Promotion->GetAdsOngoing($User::STATUS_ONGOING, date("Y-m-d"), date("Y-m-d"));
 
     $GetBranding = $Branding->GetBranding();
 
@@ -17,6 +23,11 @@
     $GetLogo = $Logo->GetLogo();
 
     $businesslist = $User->BusinessFetctSortInLandingPage();
+    
+    if(!$GetAdsOngoing){
+
+        header("location:../");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -121,14 +132,17 @@
                 </nav>
         </header>
         <main>
-            <div class="ads-contatiner viewfullscreenclass">
-                    <div class="owl-carousel newcous owl-theme">
-                        <img src="../images/ads/625517b8b84058.62736571.220412021000.png" class="imagesads" alt="">
-                        <img src="../images/ads/sample1.jpg" class="imagesads" alt="">
-                        <img src="../images/ads/sample2.jpg" class="imagesads" alt="">
-                        <img src="../images/ads/sample3.jpg" class="imagesads" alt="">
-                    </div>
-            </div>
+            <?php if($GetAdsOngoing): ?>
+                <div class="ads-contatiner viewfullscreenclass">
+                        <div class="owl-carousel newcous owl-theme">
+                            <?php foreach($GetAdsOngoing as $displayads): ?>
+                                <img src="../images/ads/<?php echo $displayads['image']; ?>" class="imagesads" alt="">
+                            <?php endforeach; ?>
+                        </div>
+                </div>
+            <?php else: ?>
+
+            <?php endif; ?>
         </main>
     </div>
     <script src="../carousel/dist/owl.carousel.js"></script>

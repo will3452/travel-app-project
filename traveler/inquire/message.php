@@ -150,6 +150,9 @@
                     }
                 })
             });
+            setInterval(function(){
+                myFunction();
+            }, 10000);
     </script>
 </body>
 </html>

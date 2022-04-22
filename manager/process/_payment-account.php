@@ -69,7 +69,6 @@
                         $Insert = $Payment->ManagerPOP($userid, $pop, $User::ACCOUNT_PAYMENT, $date, $User::STATUS_PENDING, $account_pricing);
                         
                         if($Insert==1){
-                            //here create renewal acc subs
 
                             //here notif
                             $link = $protocollinks.'/administrator/view/view-notification';
@@ -169,7 +168,11 @@
 
                                 $packagename = $check->name;
 
-                                $Insert = $Payment->AdsPOP($userid, $adsimage, $imagepop, $promo_id, $date);
+                                $days = $check->days;
+
+                                $datend = date('Y-m-d', strtotime($date. + $days. 'days')); 
+
+                                $Insert = $Payment->AdsPOP($userid, $adsimage, $imagepop, $promo_id, $date, $datend);
 
                                 if($Insert){
 
@@ -207,5 +210,47 @@
         else{
 
             echo "tokeninvalid";
+        }
+    }
+
+    //delete ads avail
+    elseif(isset($_POST['token_cancelads_manager'])){
+
+        $token = $_POST['token_cancelads_manager'];
+
+        $cancelads_id_s = $_POST['cancelads_id_s'];
+
+        if($Validator->ValidateToken($token)){
+
+            if($Validator->ValidateFields($token, $cancelads_id_s)){
+
+                if($Promotion->CanceleAdsSubsManager($cancelads_id_s, $User::STATUS_PENDING, $userid)){
+
+                    //send notif
+
+                      //here notif
+                      $link = $protocollinks.'/administrator/view/view-notification';
+
+                      $insertnotif = $Notification->Insert($userid, '', $User::USER_TYPE_ADMIN, $link, "Cancel Promo Advertisment");
+                                                      
+                      if($insertnotif==1){
+      
+                          echo "success";
+      
+                      }
+
+                   
+                }else{
+
+                    echo "error -> process failed";
+                }
+            }else{
+
+                echo "error -> process failed";
+            }
+
+        }else{
+
+            echo "error -> process failed";
         }
     }

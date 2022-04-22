@@ -13,7 +13,7 @@
 
      $CountTotalPendingAds = $User->TotalPendingAds($User::STATUS_PENDING);
 
-     $CountTotalActiveAds = $User->TotalPendingAds($User::STATUS_ACTIVE);
+     $CountTotalActiveAds = $User->TotalPendingAds($User::STATUS_ONGOING);
 
 ?>
 <!DOCTYPE html>

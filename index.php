@@ -2,11 +2,17 @@
 <?php
     include_once 'vendor/autoload.php';
 
+    date_default_timezone_set('Asia/Manila');
+
     $Branding = new Branding;
 
     $Logo = new Logo;
 
     $User = new User;
+
+    $Promotion = new Promotion;
+
+    $GetAdsOngoing = $Promotion->GetAdsOngoing($User::STATUS_ONGOING, date("Y-m-d"), date("Y-m-d"));
 
     $GetBranding = $Branding->GetBranding();
 
@@ -25,8 +31,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $GetBranding->name; ?></title>
-    <link rel="stylesheet" href="public/css/default.css?v=37">
-    <link rel="stylesheet" href="public/css/landing.css?v=37">
+    <link rel="stylesheet" href="public/css/default.css?v=38">
+    <link rel="stylesheet" href="public/css/landing.css?v=38">
     <link rel="stylesheet" href="carousel/dist/assets/owl.carousel.css" />
     <link rel="stylesheet" href="carousel/dist/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="carousel/dist/assets/owl.theme.default.css" />
@@ -121,20 +127,22 @@
                 </nav>
         </header>
         <main>
-            <div class="ads-contatiner smallsize">
-                <div class="close-cion">
-                    <i class="fa-solid fa-xmark" id="closeaddbtn"></i>
-                </div>
-                <a href="user/ads-view">
-                    <div class="owl-carousel newcous owl-theme">
-                        <img src="images/ads/625517b8b84058.62736571.220412021000.png" class="imagesads" alt="">
-                        <img src="images/ads/sample1.jpg" class="imagesads" alt="">
-                        <img src="images/ads/sample2.jpg" class="imagesads" alt="">
-                        <img src="images/ads/sample3.jpg" class="imagesads" alt="">
+            <?php if($GetAdsOngoing): ?>
+                <div class="ads-contatiner smallsize">
+                    <div class="close-cion">
+                        <i class="fa-solid fa-xmark" id="closeaddbtn"></i>
                     </div>
-                </a>
-            </div>
+                    <a href="user/ads-view">
+                        <div class="owl-carousel newcous owl-theme">
+                            <?php foreach($GetAdsOngoing as $displayads): ?>
+                                <img src="images/ads/<?php echo $displayads['image']; ?>" class="imagesads" alt="">
+                            <?php endforeach; ?>
+                        </div>
+                    </a>
+                </div>
+            <?php else: ?>
 
+            <?php endif; ?>
             <section class="container-body hre body-cont1" id="home">
                 <div class="container-div container-body1">
                     <div class="center-content">
@@ -183,13 +191,13 @@
                 <div class="footer-header">
                     <ul>
                         <li class="nav-itemss2">
-                            <a href="#funerals" >Host</a>
+                            <a href="#host" >Host</a>
                         </li>
                         <li class="nav-itemss2">
                             <a href="#home" class="nav-linkss" id="footertitle"><?php echo $GetBranding->name; ?></a>
                         </li>
                         <li class="nav-itemss2">
-                            <a href="users/login" >login</a>
+                            <a href="user/login" >login</a>
                         </li>
                     </ul>
                 </div>
