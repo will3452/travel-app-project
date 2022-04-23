@@ -92,6 +92,27 @@ $(document).on('click','#delete',function(){
     $(".deleteadssubs").fadeIn();
     $("#adssub_iddelete").val(ads);
 });
+$(document).on('click','#accept_subs',function(){
+    var accept_subs = $(this).attr("data-id");
+    var name = $('#'+accept_subs).children('td[data-target=name]').text();
+    $(".name_here").text(name);
+    $(".acceptsubs").fadeIn();
+    $("#id_get_subs").val(accept_subs);
+});
+$(document).on('click','#cance_subs',function(){
+    var cance_subs = $(this).attr("data-id");
+    var name = $('#'+cance_subs).children('td[data-target=name]').text();
+    $(".name_here").text(name);
+    $(".deletesubs").fadeIn();
+    $("#id_get_subs_d").val(cance_subs);
+});
+$(document).on('click','#done_subs',function(){
+    var done_subs = $(this).attr("data-id");
+    var name = $('#'+done_subs).children('td[data-target=name]').text();
+    $(".name_here").text(name);
+    $(".donesubs").fadeIn();
+    $("#id_get_subs_done").val(done_subs);
+});
 $(document).on('click','.close_modal',function(){
     $(".name_here").text("");
     $(".acceptadssubs").fadeOut();
@@ -100,6 +121,12 @@ $(document).on('click','.close_modal',function(){
     $("#adssub_iddone").val("");
     $(".deleteadssubs").fadeOut();
     $("#adssub_iddelete").val("");
+    $(".acceptsubs").fadeOut();
+    $("#id_get_subs").val("");
+    $(".deletesubs").fadeOut();
+    $("#id_get_subs_d").val("");
+    $(".donesubs").fadeOut();
+    $("#id_get_subs_done").val("");
 });
 
 $("#submitmodal_ads").on("submit", function(e){
@@ -231,5 +258,137 @@ $("#submitmodal_ads").on("submit", function(e){
                         }
                     });
                 });
+                
+                $("#submitmodal_accpet_sub").on("submit", function(e){
+                    e.preventDefault(e);
+                    var formData = new FormData(this);
+                    $(".center-loading-3").show();
+                    $('.span_modal').hide();
+                    $("#acceptmanager_subs").attr("disabled",true);
+                    $(".close_modal").css({'pointer-events': 'none'});
+                        $.ajax({
+                            url  : "process/_subscription.php",
+                            type : "POST",
+                            cache:false,
+                            data :formData,
+                            contentType : false, // you can also use multipart/form-data replace of false
+                            processData: false,
+                            success:function(d){
+                                if($.trim(d)=='success'){
+                                    $(".center-loading-3").hide();
+                                    $('.span_modal').show();
+                                    $("#acceptmanager_subs").attr("disabled",false);
+                                    $(".close_modal").css({'pointer-events': 'auto'});
+                                    $(".name_here").text("");
+                                    $(".acceptsubs").fadeOut();
+                                    $("#id_get_subs").val("");
+                                    swal("Success!", "", "success", {
+                                        button: "Close",
+                                    });
+                                    setTimeout(function(){
+                                        location.reload();
+                                    }, 1500);
+                                }else{
+                                    swal("Error!", d, "error");
+                                    $(".center-loading-3").hide();
+                                    $('.span_modal').show();
+                                    $("#acceptmanager_subs").attr("disabled",false);
+                                    $(".close_modal").css({'pointer-events': 'auto'});
+                                    $(".name_here").text("");
+                                    $(".acceptsubs").fadeOut();
+                                    $("#id_get_subs").val("");
+                                }
+                            }
+                        });
+                    });
+                    $("#submitmodal_delete_sub").on("submit", function(e){
+                        e.preventDefault(e);
+                        var formData = new FormData(this);
+                        $(".center-loading-3").show();
+                        $('.span_modal').hide();
+                        $("#deletemanager_subs").attr("disabled",true);
+                        $(".close_modal").css({'pointer-events': 'none'});
+                            $.ajax({
+                                url  : "process/_subscription.php",
+                                type : "POST",
+                                cache:false,
+                                data :formData,
+                                contentType : false, // you can also use multipart/form-data replace of false
+                                processData: false,
+                                success:function(d){
+                                    if($.trim(d)=='success'){
+                                        $(".center-loading-3").hide();
+                                        $('.span_modal').show();
+                                        $("#deletemanager_subs").attr("disabled",false);
+                                        $(".close_modal").css({'pointer-events': 'auto'});
+                                        $(".name_here").text("");
+                                        $(".deletesubs").fadeOut();
+                                        $("#id_get_subs_d").val("");
+                                        swal("Success!", "", "success", {
+                                            button: "Close",
+                                        });
+                                        setTimeout(function(){
+                                            location.reload();
+                                        }, 1500);
+                                    }else{
+                                        swal("Error!", d, "error");
+                                        $(".center-loading-3").hide();
+                                        $('.span_modal').show();
+                                        $("#deletemanager_subs").attr("disabled",false);
+                                        $(".close_modal").css({'pointer-events': 'auto'});
+                                        $(".name_here").text("");
+                                        $(".deletesubs").fadeOut();
+                                        $("#id_get_subs_d").val("");
+                                    }
+                                }
+                            });
+                        });
+
+                        $("#submitmodal_done_sub").on("submit", function(e){
+                            e.preventDefault(e);
+                            var formData = new FormData(this);
+                            $(".center-loading-3").show();
+                            $('.span_modal').hide();
+                            $("#deletemanager_subs").attr("disabled",true);
+                            $(".close_modal").css({'pointer-events': 'none'});
+                                $.ajax({
+                                    url  : "process/_subscription.php",
+                                    type : "POST",
+                                    cache:false,
+                                    data :formData,
+                                    contentType : false, // you can also use multipart/form-data replace of false
+                                    processData: false,
+                                    success:function(d){
+                                        if($.trim(d)=='success'){
+                                            $(".center-loading-3").hide();
+                                            $('.span_modal').show();
+                                            $("#donemanager_subs").attr("disabled",false);
+                                            $(".close_modal").css({'pointer-events': 'auto'});
+                                            $(".name_here").text("");
+                                            $(".donesubs").fadeOut();
+                                            $("#id_get_subs_done").val("");
+                                            swal("Success!", "", "success", {
+                                                button: "Close",
+                                            });
+                                            setTimeout(function(){
+                                                location.reload();
+                                            }, 1500);
+                                        }else{
+                                            swal("Error!", d, "error");
+                                            $(".center-loading-3").hide();
+                                            $('.span_modal').show();
+                                            $("#donemanager_subs").attr("disabled",false);
+                                            $(".close_modal").css({'pointer-events': 'auto'});
+                                            $(".name_here").text("");
+                                            $(".donesubs").fadeOut();
+                                            $("#id_get_subs_done").val("");
+                                        }
+                                    }
+                                });
+                            });
+                    
+                
+            
+                
             
         

@@ -3,6 +3,8 @@
 
     include_once '../process/LoginStatus.php';
 
+    date_default_timezone_set('Asia/Manila');
+
     $Validator = new Validator;
 
     $Payment = new Payment;
@@ -65,25 +67,53 @@
                     $ValidateDate = $Validator->ValidateDate($date);
 
                     if($ValidateDate==1){
+                        //check if ongoing pa yong subscription
+                        $check = $User->CheckManageSubsIf($userid, $User::STATUS_PENDING);
 
-                        $Insert = $Payment->ManagerPOP($userid, $pop, $User::ACCOUNT_PAYMENT, $date, $User::STATUS_PENDING, $account_pricing);
-                        
-                        if($Insert==1){
+                        if($check>0){
 
-                            //here notif
-                            $link = $protocollinks.'/administrator/view/view-notification';
+                            echo "error -> you already have pending subscription, wait till accept!";
 
-                            $insertnotif = $Notification->Insert($userid, '', $User::USER_TYPE_ADMIN, $link, "Account Renewal Payment");
-                                                        
-                            if($insertnotif==1){
-        
-                                echo "success";
-        
-                            }
                         }else{
 
-                            echo "error";
+                                
+
+                                //create subs
+                                $InsertAccountSubs = $User->InsertAccountSubs($userid, $date, '', $User::STATUS_PENDING);
+
+                                if($InsertAccountSubs){
+                                    
+                                    $Insert = $Payment->ManagerPOP($userid, $pop, $User::ACCOUNT_PAYMENT, $date, $User::STATUS_PENDING, $account_pricing);
+                        
+                                    if($Insert==1){
+
+                                        $link = $protocollinks.'/administrator/view/view-notification';
+    
+                                        $insertnotif = $Notification->Insert($userid, '', $User::USER_TYPE_ADMIN, $link, "Account Renewal Payment");
+                                                                    
+                                        if($insertnotif==1){
+                    
+                                            echo "success";
+                    
+                                        }
+                                        
+                                    }else{
+
+                                        echo "error -> process failed";
+    
+                                    }
+
+                                }else{
+
+                                    echo "error -> process failed";
+
+                                }
+
+                            
+    
+
                         }
+                       
                     }else{
 
                         echo "invdate";
@@ -252,5 +282,46 @@
         }else{
 
             echo "error -> process failed";
+        }
+    }
+    elseif(isset($_POST['token_delete_manager_subs'])){
+
+        $token = $_POST['token_delete_manager_subs'];
+
+        $id_get_subs_d = $_POST['id_get_subs_d'];
+
+        $ValidateToken = $Validator->ValidateToken($token);
+
+        if($ValidateToken==1){
+
+            $ValidateFields = $Validator->ValidateFields($id_get_subs_d, $token);
+
+            if($ValidateFields==1){
+
+                    $deletetrasn = $Payment->DeleteManagerPOPAdsaftercancelsubs($userid, 0, $User::STATUS_PENDING);
+
+                    $DeleteSubs = $User->DeleteSubs($userid, $id_get_subs_d, $User::STATUS_PENDING);
+
+                    if($DeleteSubs){
+
+ //here notif
+                              $link = $protocollinks.'/administrator/view/view-notification';
+
+                                $insertnotif = $Notification->Insert($userid, '', $User::USER_TYPE_ADMIN, $link, "Cancel Pending Account Subscription!");
+                                 
+                                  if($insertnotif==1){
+
+                                       echo "success";
+
+                                   }
+                    }
+            }else{
+
+                echo "error -> process error";
+            }
+
+        }else{
+
+            echo "error -> process error";
         }
     }

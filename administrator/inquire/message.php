@@ -92,8 +92,7 @@
                 var receiverEmail = $('#receiver').val();
                 var senderEmail = $('#sender').val();
                 $.get(`https://nuwang.tech/api/chat/init?members[0]=${receiverEmail}&members[1]=${senderEmail}`, function (data, status) {
-                    let {id, messages} = data;
-                    console.log(id);
+                    let {id, messages, created_at} = data;
                     $("#chatId").val(id);
                     let mItem = '';
 
@@ -102,7 +101,7 @@
                     if (item.sender != senderEmail) {
                         classItem = 'chat_from';
                     }
-                    mItem += `<div class='${classItem}'> <span>${item.messages}</span> </div>`
+                    mItem += `<div class='${classItem}'> <span>${item.messages}</span> <span id="dateofcreate">${item.created_at}</span> </div>`
                     })
                     $('.chat_content').html(mItem)
                     $(".chat_content").scrollTop( $(".chat_content")[0].scrollHeight);
@@ -133,7 +132,7 @@
             });
             setInterval(function(){
                 myFunction();
-            }, 10000);
+            }, 300000);
     </script>
 </body>
 </html>

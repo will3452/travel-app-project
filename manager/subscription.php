@@ -15,7 +15,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://kit.fontawesome.com/a66db60870.js" crossorigin="anonymous"></script>
-    <title>Manager - Payment History</title>
+    <title>Manager - Subscription</title>
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bgnav shadow-sm p-3 mb-5 rounded">
@@ -35,15 +35,20 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <p class="mt-4 edit-title">Payment History</p>
+                    <p class="mt-4 edit-title">Subscription</p>
+                    <div class="button-add-emp-g">
+                        <a href="create/pay-account-renewal"> <button id="addbtnuser">Pay Account Renewal</button></a>
+                    </div>
                     <?php
-                        include '_TABLE_UI/payment-table.php';
+                        include '_UI/modal.php';
+                        echo $deletesubs;
+                        include '_TABLE_UI/subscription-table.php';
                     ?>
                 </div>
             </main>
         </div>
     </div>
-    <script src="js/payment-history.js"></script>
     <script src="js/notification.js?v=5"></script>
+    <script src="js/subscription.js?v=6"></script>
 </body>
 </html>

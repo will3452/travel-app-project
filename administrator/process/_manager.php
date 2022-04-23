@@ -47,7 +47,7 @@
 
                         $newdate =  date("Y-m-d",$d); 
 
-                        $InsertSub = $User->InsertAccountSubs($id_get, $date, $newdate);
+                        $InsertSub = $User->InsertAccountSubs($id_get, $date, $newdate, $User::STATUS_ONGOING);
 
                         if($InsertSub==1){
 

@@ -119,7 +119,7 @@
                             </div>
                         </div>
                         <div class="button-add-emp">
-                           <a href="../payment-history" id="cancel">Cancel</a>
+                           <a href="../subscription" id="cancel">Cancel</a>
                             <button type="submit" id="buttonss" name="button">
                                 <span id="spansubmit">Pay Renewal</span>
                                 <div class="center-loading-2">
@@ -137,7 +137,6 @@
         </div>
     </div>
     <script src="../js/pay-account-renewal.js?v=2"></script>
-    <script src="../js/notificaiton_2.js?v=10"></script>
     <script src="../js/notificaiton_2.js?v=12"></script>
 </body>
 </html>

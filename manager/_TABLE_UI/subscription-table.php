@@ -1,6 +1,9 @@
-<?php                   
-                        $User = new User;
-                        include '_UI_SORTING_FETCHING/accountsub-fetch.php';
+<?php   
+                      $User = new User;
+                      $email = $_SESSION['manager'];
+                      $GetUserID = $User->GetUserID($email);
+                      $userid = $GetUserID->id;
+                      include '_UI_SORTING_FETCHING/subs-fetch.php';
                     ?>
                     <!-- search -->
                     <span class="clearable">
@@ -17,14 +20,14 @@
                     <!-- table -->
                     <div class="card mb-4">
                         <div class="card-header">
-                            <div>Account Subs Table</div>
+                            <div id="tabs">Subscription Table</div>
                             <div class="dropdown-per-page">
                                 <button class="btn titleperpage-bn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 </button>
                                 <div class="dropdown-menu" id="dropdown" aria-labelledby="dropdownMenuButton1">
                                         <p class="titleperpage">Per Page</p>
                                         <?php 
-                                            include '_UI_SORTING_FETCHING/limit-sort-acc-subs.php';
+                                            include '_UI_SORTING_FETCHING/limit-sort-subs.php';
                                         ?> 
                                 </div>
                             </div>
@@ -44,9 +47,6 @@
                                                 </div>
                                             </div>
                                         </th>
-                                        <th scope="col">Profile</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Name</th>
                                         <th scope="col">
                                             <div class="d-flex">
                                                 <span>Start </span>
@@ -77,9 +77,6 @@
                                                 </div>
                                             </div>
                                         </th>
-                                        <th scope="col">Profile</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Name</th>
                                         <th scope="col">
                                             <div class="d-flex">
                                                 <span>Start </span>
@@ -107,23 +104,12 @@
                                     <?php foreach ($display as $dis): ?>
                                         <tr class="<?php echo $dis['id']; ?>" id="<?php echo $dis['id']; ?>">
                                             <td id="idss"><?php echo sprintf('%06d', $dis['id'])?></td>
-                                            <?php 
-                                                $idmanger = $dis['user_id'];
-                                                $userdata = $User->GetUserData($idmanger, $User::USER_TYPE_MANAGER);
-                                            ?>
-                                            <td>
-                                                <div class="circular--landscape"> 
-                                                    <img id="vievimage" src="../images/users/<?php echo $userdata->image; ?>" alt="">
-                                                </div>
-                                            </td>
-                                            <td><a href="view/manager-data?manager_id=<?php echo $userdata->id; ?>"><?php echo $userdata->email; ?></a></td>
-                                            <td data-target="name"><?php echo $userdata->first_name.' '.$userdata->last_name; ?></td>
                                             <td><?php echo date("Y-m-d", strtotime($dis['start'])); ?></td>
-                                            <td><?php if($dis['expiration']=='0000-00-00 00:00:00'){
-                                                echo '---------';
-                                            }else{
-                                                echo date("Y-m-d", strtotime($dis['expiration']));
-                                            } ?></td>
+                                                <td><?php if($dis['expiration']=='0000-00-00 00:00:00'){
+                                                    echo '---------';
+                                                }else{
+                                                    echo date("Y-m-d", strtotime($dis['expiration']));
+                                                } ?></td>
                                             <td><?php echo $dis['status']; ?></td>
                                             <td id="btn">
                                                 <div class="d-flex">
@@ -132,15 +118,7 @@
                                                             <i class="far fa-trash-alt" id="cance_subs" data-id="<?php echo $dis['id']; ?>"></i>
                                                             <span class="tip_delete">Cancel</span>
                                                         </span>
-                                                        <span class="tip_accept_container">
-                                                            <i class="fas fa-check-circle btns" id="accept_subs" data-id="<?php echo $dis['id']; ?>"></i>
-                                                            <span class="tip_accept">Accept</span>
-                                                        </span>
                                                     <?php elseif($dis['status']==$User::STATUS_ONGOING): ?>
-                                                        <span class="tip_accept_container">
-                                                            <i class="fas fa-check-circle btns" id="done_subs" data-id="<?php echo $dis['id']; ?>"></i>
-                                                            <span class="tip_accept">-Done-</span>
-                                                        </span>
                                                     <?php endif; ?>
                                                 </div>
                                             </td>
@@ -161,12 +139,12 @@
                                     <div class="span3load-table"></div>
                                 </div>
                             </div> 
-                            <div class='bottomtable overflowtables'>
+                        </div>
+                        <div class='bottomtable overflowtables'>
                                 <div class="pre-nex">
                                     <?php 
-                                        include '_UI_SORTING_FETCHING/subs-acc-pagination-fetch.php';    
+                                        include '_UI_SORTING_FETCHING/subs-pagination-fetch.php';    
                                     ?>
                                 </div>
                             </div>
-                        </div>
                     </div>

@@ -91,6 +91,37 @@ class Payment extends User{
             return false;
         }
     }
+    public function DeleteManagerPOPAdsaftercancelsubs($userid, $type_id, $status)
+    {
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM manager_pop WHERE manager_id=? && type_id=? && status=?");
+
+        $executeResult = $stmt->execute([$userid, $type_id, $status]);
+
+        if ($executeResult) {
+
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $img =  $result['img'];
+
+            $olddist2 = "../../images/pop/$img"; //old profile
+
+            unlink($olddist2); //deleting pass profile
+
+            $stmt = $con->prepare("DELETE FROM `manager_pop` WHERE manager_id=? && type_id=? && status=?");
+
+            $true = $stmt->execute([$userid, $type_id, $status]);
+
+            if ($true) {
+
+                return true;
+            }
+
+            return false;
+        }
+    }
     public function AdsPOP($userid, $adsimage, $imagepop, $promo_id, $date, $datend)
     {
         $con = $this->GetConnection();

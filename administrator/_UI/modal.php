@@ -275,3 +275,82 @@ $deletenotif= '<div class="modal deletenotif" id="exampleModal" tabindex="-1" ro
     </div>
   </form>
 </div>';
+
+$acceptsubs = '<div class="modal acceptsubs" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog closemodal" role="document">
+    <form id="submitmodal_accpet_sub" class="modal-content">
+      <input type="hidden" id="token_accept_manager_subs" name="token_accept_manager_subs" value='.password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT).'> 
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Accept Subscription</h5>
+        <p class="close_modal">+</p>
+      </div>
+      <div class="modal-body">
+        <p id="name_title">Manager Name: <span class="name_here"></span></p>
+        <input type="hidden" name="id_get_subs" id="id_get_subs" class="id_get_subs">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" id="acceptmanager_subs" class="colorbtn width_btn">
+            <span class="span_modal">Process</span>
+            <div class="center-loading-3">
+                        <div class="span5load2"></div>
+                        <div class="span6load2"></div>
+                        <div class="span7load2"></div>
+                    </div>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>';
+$deletesubs = '<div class="modal deletesubs" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog closemodal" role="document">
+    <form id="submitmodal_delete_sub" class="modal-content">
+      <input type="hidden" id="token_delete_manager_subs" name="token_delete_manager_subs" value='.password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT).'> 
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cancel Subscription</h5>
+        <p class="close_modal">+</p>
+      </div>
+      <div class="modal-body">
+        <p id="name_title">Manager Name: <span class="name_here"></span></p>
+        <p style="color:red;">Note: <i>After Canceling request also delete the payment record of this transaction!</i></p>
+        <input type="hidden" name="id_get_subs_d" id="id_get_subs_d" class="id_get_subs_d">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" id="deletemanager_subs" class="colorbtn width_btn">
+            <span class="span_modal">Process</span>
+            <div class="center-loading-3">
+                        <div class="span5load2"></div>
+                        <div class="span6load2"></div>
+                        <div class="span7load2"></div>
+                    </div>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>';
+
+$donesubs = '<div class="modal donesubs" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog closemodal" role="document">
+    <form id="submitmodal_done_sub" class="modal-content">
+      <input type="hidden" id="token_done_manager_subs" name="token_done_manager_subs" value='.password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT).'> 
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Done Subscription</h5>
+        <p class="close_modal">+</p>
+      </div>
+      <div class="modal-body">
+        <p id="name_title">Manager Name: <span class="name_here"></span></p>
+        <p style="color:red;">Note: <i>After Subscription Account will be temporary ban!</i></p>
+        <input type="hidden" name="id_get_subs_done" id="id_get_subs_done" class="id_get_subs_done">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" id="donemanager_subs" class="colorbtn width_btn">
+            <span class="span_modal">Process</span>
+            <div class="center-loading-3">
+                        <div class="span5load2"></div>
+                        <div class="span6load2"></div>
+                        <div class="span7load2"></div>
+                    </div>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>';

@@ -29,13 +29,17 @@ $sidebaroutside ='
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-rectangle-ad"></i></div>
                             Advertisement
                         </a>
+                        <a class="nav-link" href="subscription">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-circle-plus"></i></div>
+                            Subscription
+                        </a>
                         <a class="nav-link" href="reviews">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-star"></i></div>
                             Reviews
                         </a>
                         <a class="nav-link" href="admin-inquire">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-message"></i></div>
-                            Help Support:admin
+                            Help Support
                         </a>
                         <div class="sb-sidenav-menu-heading">Setting</div>
                         <a class="nav-link" href="business">
@@ -84,13 +88,17 @@ $sidebarinside ='
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-rectangle-ad"></i></div>
                             Advertisement
                         </a>
+                        <a class="nav-link" href="../subscription">
+                            <div class="sb-nav-link-icon"><i class="fa-solid fa-circle-plus"></i></div>
+                            Subscription
+                        </a>
                         <a class="nav-link" href="../reviews">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-star"></i></div>
                             Reviews
                         </a>
                         <a class="nav-link" href="../admin-inquire">
                             <div class="sb-nav-link-icon"><i class="fa-solid fa-message"></i></div>
-                            Help Support:admin
+                            Help Support
                         </a>
                         <div class="sb-sidenav-menu-heading">Setting</div>
                         <a class="nav-link" href="../business">

@@ -2606,7 +2606,7 @@ width: 100%;
           background-color: #e08e78;
           color:#fff;
           padding:10px;
-          font-size: 14px;
+          font-size: 16px;
           margin-bottom: 10px;
           margin-right:auto;
           border-radius: 10px;
@@ -2618,9 +2618,15 @@ width: 100%;
           color:#fff;
           padding:10px;
           margin-bottom: 10px;
-          font-size: 14px;
+          font-size: 16px;
           margin-left:auto;
           border-radius: 10px;
+         
+        }
+        #dateofcreate{
+          font-size: 10px;
+          color: lightgray;
+          display: block;
         }
         .chat_form{
           width:100%;

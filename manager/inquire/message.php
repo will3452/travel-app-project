@@ -17,8 +17,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/../public/css/default.css?v=30">
-    <link rel="stylesheet" href="/../public/css/user_style.css?v=30">
+    <link rel="stylesheet" href="/../public/css/default.css?v=32">
+    <link rel="stylesheet" href="/../public/css/user_style.css?v=32">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="/../public/js/operate.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -93,8 +93,7 @@
                 var receiverEmail = $('#receiver').val();
                 var senderEmail = $('#sender').val();
                 $.get(`https://nuwang.tech/api/chat/init?members[0]=${receiverEmail}&members[1]=${senderEmail}`, function (data, status) {
-                    let {id, messages} = data;
-                    console.log(id);
+                    let {id, messages, created_at} = data;
                     $("#chatId").val(id);
                     let mItem = '';
 
@@ -103,7 +102,7 @@
                     if (item.sender != senderEmail) {
                         classItem = 'chat_from';
                     }
-                    mItem += `<div class='${classItem}'> <span>${item.messages}</span> </div>`
+                    mItem += `<div class='${classItem}'> <span>${item.messages}</span> <span id="dateofcreate">${item.created_at}</span> </div>`
                     })
                     $('.chat_content').html(mItem)
                     $(".chat_content").scrollTop( $(".chat_content")[0].scrollHeight);
@@ -134,7 +133,7 @@
             });
             setInterval(function(){
                 myFunction();
-            }, 10000);
+            }, 300000);
     </script>
 </body>
 </html>

@@ -1,6 +1,8 @@
 <?php
     include_once '../../vendor/autoload.php';
 
+    include_once '../../PHPmailersetup/mailsetup.php';
+
     $User = new User;
 
     $Validator = new Validator;
@@ -11,7 +13,11 @@
 
     $Notification = new Notification;
 
+    $Mails = new Mail;
+
     $protocollinks = $Notification->ProtocolAndLinks();
+
+    date_default_timezone_set('Asia/Manila');
 
     if(isset($_POST['token_accept_acceptadssubs'])){
 
@@ -227,5 +233,268 @@
         }else{
 
             echo "tokenerror";
+        }
+    }
+    elseif(isset($_POST['token_accept_manager_subs'])){
+
+        $token = $_POST['token_accept_manager_subs'];
+
+        $id_get_subs = $_POST['id_get_subs'];
+
+        $ValidateToken = $Validator->ValidateToken($token);
+
+        if($ValidateToken==1){
+
+            $ValidateFields = $Validator->ValidateFields($id_get_subs, $token);
+
+            if($ValidateFields==1){
+
+                $GetAccSubsDataUsingId = $User->GetAccSubsDataUsingId($id_get_subs);
+
+                if($GetAccSubsDataUsingId){
+
+                    $manageid = $GetAccSubsDataUsingId->user_id;
+
+                    $olddate = $GetAccSubsDataUsingId->start;
+
+                    if($olddate>date("Y-m-d")){
+
+                        $date = $olddate;
+
+                    }else{
+
+                        $date = date("Y-m-d");
+
+                    }
+
+                    $d = strtotime("+1 months",strtotime($date));
+    
+                    $newdate =  date("Y-m-d h:i:s",$d); 
+
+                    //check if meron pang ongoing suybs
+
+                    if($User->CheckManageSubsIf($manageid, $User::STATUS_ONGOING)){
+
+                        echo "error -> user have ongoing subscription, please mark as done first!";
+
+                    }else{
+                        $UpdateSubs = $User->UpdateSubs($id_get_subs, $User::STATUS_ONGOING, $date, $newdate);
+
+                        if($UpdateSubs){
+        
+                            $BanAccount = $User->BanAndUnbanAccount($manageid, $User::BLOCK_STATUS_UNBAN);
+
+                            $updatepayment = $Payment->UpdateManagerPOPAccount($manageid , $User::STATUS_DONE, $id_get_subs);
+        
+                            if($updatepayment){
+
+                                $GetUserData = $User->GetUserData($manageid, $User::USER_TYPE_MANAGER);
+
+                                $emailofrecipient= $GetUserData->email;
+
+                                $mail->addAddress($emailofrecipient);  
+
+                                $mail->Subject = 'Account Status';   
+
+                                $messageemail = 'Your Pending Subscripton Has been Accept <b> Travel Guide for Cebu Province Inc. </b>';
+
+                                $mail->Body = $Mails->SendMailAcceptAccount($protocollinks, 'Account Status', 'Travel Guide for Cebu Province Inc.', $messageemail);
+
+                                if($mail->send()){
+                                    
+                                    $link = $protocollinks.'/manager/view/view-notification';
+
+                                    $insertnotif = $Notification->Insert('', $manageid, $User::USER_TYPE_MANAGER, $link, "Accept your subscription!");
+                                                                
+                                    if($insertnotif==1){
+        
+                                        echo "success";
+        
+                                    }
+
+                                }else{
+
+                                echo "error -> failed send mail";
+                                }
+
+                            }else{
+            
+                                echo "error -> process failed";
+                            }
+
+                        }else{
+        
+                            echo "error -> process failed";
+                        }
+
+                    }
+                }else{
+
+                    echo "error -> process failed";
+                }
+
+
+            }else{
+
+                echo "error -> process failed";
+            }
+
+        }else{
+
+            echo "error -> process failed";
+        }
+    }
+    elseif(isset($_POST['token_delete_manager_subs'])){
+
+        $token = $_POST['token_delete_manager_subs'];
+
+        $id_get_subs_d = $_POST['id_get_subs_d'];
+
+        $ValidateToken = $Validator->ValidateToken($token);
+
+        if($ValidateToken==1){
+
+            $ValidateFields = $Validator->ValidateFields($id_get_subs_d, $token);
+
+            if($ValidateFields==1){
+
+                $GetAccSubsDataUsingId = $User->GetAccSubsDataUsingId($id_get_subs_d);
+
+                if($GetAccSubsDataUsingId){
+
+                    $manageid = $GetAccSubsDataUsingId->user_id;
+
+                    $deletetrasn = $Payment->DeleteManagerPOPAdsaftercancelsubs($manageid, 0, $User::STATUS_PENDING);
+
+                    $DeleteSubs = $User->DeleteSubs($manageid, $id_get_subs_d, $User::STATUS_PENDING);
+
+                    if($DeleteSubs){
+
+                        $GetUserData = $User->GetUserData($manageid, $User::USER_TYPE_MANAGER);
+
+                        $emailofrecipient= $GetUserData->email;
+
+                        $mail->addAddress($emailofrecipient);  
+
+                        $mail->Subject = 'Account Status';   
+
+                        $messageemail = 'Your Pending Subscripton Has been declined <b> Travel Guide for Cebu Province Inc. </b>';
+
+                        $mail->Body = $Mails->SendMailAcceptAccount($protocollinks, 'Account Status', 'Travel Guide for Cebu Province Inc.', $messageemail);
+
+                        if($mail->send()){
+                            
+                            $link = $protocollinks.'/manager/view/view-notification';
+
+                            $insertnotif = $Notification->Insert('', $manageid, $User::USER_TYPE_MANAGER, $link, "Declined your subscription!");
+                                                        
+                            if($insertnotif==1){
+
+                                echo "success";
+
+                            }
+
+                        }else{
+
+                            echo "error -> failed send mail";
+                        }
+                    }else{
+
+                        echo "error -> process failed";
+                    }
+
+                }
+
+            }else{
+
+                echo "error -> process failed";
+            }
+
+        }else{
+
+            echo "error -> process failed";
+        }
+    }
+    elseif(isset($_POST['token_done_manager_subs'])){
+
+        $token = $_POST['token_done_manager_subs'];
+
+        $id_get_subs_done = $_POST['id_get_subs_done'];
+
+        $ValidateToken = $Validator->ValidateToken($token);
+
+        if($ValidateToken==1){
+
+            $ValidateFields = $Validator->ValidateFields($id_get_subs_done, $token);
+
+            if($ValidateFields==1){
+
+                $GetAccSubsDataUsingId = $User->GetAccSubsDataUsingId($id_get_subs_done);
+
+                if($GetAccSubsDataUsingId){
+
+                        $manageid = $GetAccSubsDataUsingId->user_id;
+
+                        $date = $GetAccSubsDataUsingId->start;
+
+                        $newdate = $GetAccSubsDataUsingId->expiration;
+
+                        $UpdateSubs = $User->UpdateSubs($id_get_subs_done, $User::STATUS_DONE, $date, $newdate);
+
+                        if($UpdateSubs){
+
+                            $BanAccount = $User->BanAndUnbanAccount($manageid, $User::BLOCK_STATUS_TEMPORARY);
+
+                            if($BanAccount==1){
+
+                                $GetUserData = $User->GetUserData($manageid, $User::USER_TYPE_MANAGER);
+
+                                $emailofrecipient= $GetUserData->email;
+
+                                $mail->addAddress($emailofrecipient);  
+
+                                $mail->Subject = 'Account Status';   
+
+                                $messageemail = 'Your Subscription is ended and Account has been temporary Ban! Please Renew Your Account! <b> Travel Guide for Cebu Province Inc. </b>';
+
+                                $message_ext = 'Thank You so much.!';
+
+                                $mail->Body = $Mails->SendMailAccDisabling($protocollinks, 'Account Status', 'Travel Guide for Cebu Province Inc.', $messageemail, $message_ext);
+
+                                if($mail->send()){
+                                            
+                                    echo "success";
+
+                                }else{
+
+                                    echo "error -> failed send mail";
+                                }
+
+                            }else{
+                                 
+                                echo "error -> process failed";
+
+                            }
+
+                        }else{
+
+                            echo "error -> process failed";
+                        }
+
+                    
+
+                }else{
+
+                    echo "error -> process failed";
+                }
+                
+            }else{
+
+                echo "error -> process failed";
+            }
+
+        }else{
+
+            echo "error -> process failed";
         }
     }

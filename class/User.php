@@ -533,7 +533,7 @@ class User extends Connection
 
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
-    public function InsertAccountSubs($id, $start, $expiration) {
+    public function InsertAccountSubs($id, $start, $expiration, $status) {
 
         $con = $this->GetConnection();
 
@@ -545,9 +545,9 @@ class User extends Connection
 
         $newdateexpiration = $expiration.' '.$time;
         
-        $prepareStatement  = "INSERT INTO `account_subscription`(`user_id`, `start`, `expiration`) VALUE(?, ?, ?)";
+        $prepareStatement  = "INSERT INTO `account_subscription`(`user_id`, `start`, `expiration`, `status`) VALUE(?, ?, ?, ?)";
 
-        $param = [$id, $newdatestart, $newdateexpiration];
+        $param = [$id, $newdatestart, $newdateexpiration, $status];
 
         $stmt = $con->prepare($prepareStatement);
 
@@ -635,6 +635,51 @@ class User extends Connection
         $stmt->execute([$id]);
 
         return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+    public function CheckManageSubsIf($id, $status)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM account_subscription WHERE user_id=? && status=?");
+
+        $stmt->execute([$id, $status]);
+
+        return $stmt->rowCount();
+    }
+    public function GetAccSubsDataUsingId($id)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM account_subscription WHERE id=?");
+
+        $stmt->execute([$id]);
+
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+    public function UpdateSubs($id, $status, $start, $end)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("UPDATE account_subscription SET status=?, start=?, expiration=? WHERE id=?");
+
+        $result = $stmt->execute([$status, $start, $end, $id]);
+
+        return $result;
+    }
+    public function DeleteSubs($manageid, $id, $status)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("DELETE FROM `account_subscription` WHERE user_id=? && id=? && status=?");
+
+        $true = $stmt->execute([$manageid, $id, $status]);
+
+        if ($true) {
+
+            return true;
+        }
+
+        return false;
     }
     public function AdsSubsPageSort()
     {
@@ -887,5 +932,69 @@ class User extends Connection
                 return $r;
             }
         }
+    }
+    public function SubsManagerPageSort($userid)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM account_subscription WHERE user_id=?");
+
+        $stmt->execute([$userid]);
+
+        return $stmt->rowCount();
+    }
+    public function SubsManagerFetctSort($limit, $start, $namesort, $sortName, $userid)
+    {
+        $con = $this->GetConnection();
+
+        $qs = "SELECT * FROM account_subscription WHERE user_id=? ORDER by $sortName $namesort LIMIT $start, $limit";
+        $stmt = $con->prepare($qs);
+
+        $stmt->execute([$userid]);
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+                
+                return $r;
+
+            }
+        }
+    }
+    public function SubsManagerSearchFetchSort($limit, $start, $namesort, $sortName, $search, $userid)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM account_subscription WHERE
+        user_id=? && start LIKE ? ||
+        user_id=? && expiration LIKE ?
+        ORDER by $sortName $namesort LIMIT $start, $limit");
+
+        $stmt->execute([$userid, "%$search%", $userid, "%$search%"]);       
+
+        $numwors = $stmt->rowCount();
+
+        if ($numwors > 0) {
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+
+            }
+        }
+    }
+    public function SubsManagerSearchPageSort($search, $userid)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM account_subscription WHERE
+        user_id=? && start LIKE ? ||
+        user_id=? && expiration LIKE ?");
+
+        $stmt->execute([$userid, "%$search%", $userid, "%$search%"]);
+
+        return $stmt->rowCount();
     }
 }

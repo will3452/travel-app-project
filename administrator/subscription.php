@@ -69,9 +69,17 @@
                                 echo $deleteadssubs;
                                 include '_TABLE_UI/ads-subs-table.php';
                             }else{
+                                include '_UI/modal.php';
+                                echo $acceptsubs;
+                                echo $deletesubs;
+                                echo $donesubs;
                                 include '_TABLE_UI/account-subs-table.php';
                             }
                         }else{
+                            include '_UI/modal.php';
+                            echo $acceptsubs;
+                            echo $deletesubs;
+                            echo $donesubs;
                             include '_TABLE_UI/account-subs-table.php';
                         }
                     ?>
@@ -79,7 +87,7 @@
             </main>
         </div>
     </div>
-    <script src="js/subscription.js?v=6"></script>
+    <script src="js/subscription.js?v=13"></script>
     <script src="js/notification.js?v=15"></script>
 </body>
 </html>
