@@ -5,7 +5,7 @@
                     <!-- search -->
                     <span class="clearable">
                                             <i class="fas fa-search search_icon"></i>
-                        <input class="form-control mr-sm-2" type="text" id="search" placeholder="Search Date"
+                        <input class="form-control mr-sm-2" type="text" id="search" placeholder="Search Date / Status"
                         value="<?php if(isset($_GET['search'])){echo $_GET['search'];} ?>"
                         aria-label="Search">
                         <?php if(isset($_GET['search'])): ?>

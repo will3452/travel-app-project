@@ -83,6 +83,6 @@
             <br>
         </div>
     </div>
-    <script src="/user/js/login.js?v=7"></script>
+    <script src="/user/js/login.js?v=10"></script>
 </body>
 </html>

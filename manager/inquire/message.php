@@ -73,7 +73,8 @@
                             <div class="chat_form">
                                 <form id="submit_text">
                                     <input type="hidden" id="chatId">
-                                    <input type="hidden" id="messageSender" value="<?php echo $email; ?>">
+                                    <input type="hidden" id="messageReciever" name="messageReciever" value="<?php  echo $data->email; ?>">
+                                    <input type="hidden" id="messageSender" name="messageSender" value="<?php echo $email; ?>">
                                     <input type="text" id="message_" name="message_" class="message_" placeholder="Message Here....">
                                     <button><i class="fas fa-paper-plane"></i></button>
                                 </form> 
@@ -116,17 +117,30 @@
             
                 $('#submit_text').submit(function (e)  {
                     e.preventDefault();
+                    var formData = new FormData(this);
                     $(".loading-icon_message").show();
                     if($("#message_").val()==''){
                         $(".loading-icon_message").hide();
                     }else{
                         $.post('https://nuwang.tech/api/chat/send-message/' + $('#chatId').val(), {messages: $('#message_').val(), sender: $('#messageSender').val()})
                         .done(function (data) {
-                        
-                        $("#message_").val("");
+                            $.ajax({
+                                url  : "../process/_inquire.php",
+                                type : "POST",
+                                cache:false,
+                                data :formData,
+                                contentType : false, // you can also use multipart/form-data replace of false
+                                processData: false,
+                                success:function(d){
 
-                        myFunction();
-                        $(".loading-icon_message").hide();
+                                    $("#message_").val("");
+                                    myFunction();
+                                    $(".loading-icon_message").hide();
+
+                                    console.log(d);
+                                
+                                }
+                            });
                     })
                     }
                 })

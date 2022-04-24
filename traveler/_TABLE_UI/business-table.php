@@ -42,6 +42,6 @@
                             <div class="pre-nex2">
                                 <?php 
                                     include '_UI_SORTING_FETCHING/business-pagination-fetch.php';    
-                                ?>->
+                                ?>
                             </div>
                         </div>

@@ -144,6 +144,16 @@ class User extends Connection
 
         return $stmt->rowCount();
     }
+    public function EmailExistASMAnager($email, $type)
+    { //validate email exist
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT email FROM users WHERE email=? && type=?");
+
+        $stmt->execute([$email, $type]);
+
+        return $stmt->rowCount();
+    }
     public function PhoneExist($phone){ //validate phone exist
 
         $con = $this->GetConnection();
@@ -598,10 +608,11 @@ class User extends Connection
 
         $stmt = $con->prepare("SELECT * FROM account_subscription WHERE
         start LIKE ? ||
-        expiration LIKE ?
+        expiration LIKE ? ||
+        status LIKE ?
         ORDER by $sortName $namesort LIMIT $start, $limit");
 
-        $stmt->execute(["%$search%", "%$search%"]);
+        $stmt->execute(["%$search%", "%$search%", "%$search%"]);
 
         $numwors = $stmt->rowCount();
 
@@ -620,9 +631,10 @@ class User extends Connection
 
         $stmt = $con->prepare("SELECT * FROM account_subscription WHERE
         start LIKE ? ||
-        expiration LIKE ?");
+        expiration LIKE ? ||
+        status LIKE ? ");
 
-        $stmt->execute(["%$search%", "%$search%"]);
+        $stmt->execute(["%$search%", "%$search%", "%$search%"]);
 
         return $stmt->rowCount();
     }
@@ -645,6 +657,18 @@ class User extends Connection
         $stmt->execute([$id, $status]);
 
         return $stmt->rowCount();
+    }
+    public function CheckManagerIfExpInLogin($id, $status, $datein, $dateout){
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM account_subscription WHERE
+        user_id=? && start<=? && expiration>=? && status=?");
+
+        $stmt->execute([$id, $datein, $dateout, $status]);
+
+        return $stmt->rowCount();
+
     }
     public function GetAccSubsDataUsingId($id)
     {

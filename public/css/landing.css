@@ -597,10 +597,7 @@ footer .footer-body .contact-address p{
     font-size:20px;
     text-shadow: 2px 2px 4px #000000;
 }
-.smallsize:hover img{
-    filter: blur(2px);
-    -webkit-filter: blur(2px);
-}
+
 
 .smallsize:hover .close-cion{
     display: inherit;

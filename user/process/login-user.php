@@ -4,7 +4,11 @@ include_once '../../vendor/autoload.php';
 
 $Authentication = new Authentication;
 
+$User = new User;
+
 $Validator = new Validator;
+
+date_default_timezone_set('Asia/Manila');
 
 if(isset($_POST['token_authentication_login'])){
 
@@ -50,7 +54,21 @@ if(isset($_POST['token_authentication_login'])){
                 }
             }elseif($emailact=='temp'){
 
-                echo "TEMP";
+                $getdata = $User->GetUserID($email);
+
+                $iduser = $getdata->id;
+
+                $check = $User->CheckManagerIfExpInLogin($iduser, $User::STATUS_ONGOING, date("Y-m-d"), date("Y-m-d"));
+
+                if($check>0){
+
+                    echo "TEMP";
+
+                }else{
+
+                    echo "TEMPLINK";
+                }
+              
             }elseif($emailact=='perm'){
 
                 echo "PERM";

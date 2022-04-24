@@ -31,8 +31,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $GetBranding->name; ?></title>
-    <link rel="stylesheet" href="public/css/default.css?v=38">
-    <link rel="stylesheet" href="public/css/landing.css?v=38">
+    <link rel="stylesheet" href="public/css/default.css?v=39">
+    <link rel="stylesheet" href="public/css/landing.css?v=39">
     <link rel="stylesheet" href="carousel/dist/assets/owl.carousel.css" />
     <link rel="stylesheet" href="carousel/dist/assets/owl.carousel.min.css" />
     <link rel="stylesheet" href="carousel/dist/assets/owl.theme.default.css" />

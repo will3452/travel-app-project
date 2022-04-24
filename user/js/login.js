@@ -44,6 +44,9 @@ $("#submitForm").on("submit", function(e){
                 $('#span').show();
                 $("#submit").attr("disabled",false);
             }
+            else if($.trim(d)==='TEMPLINK'){
+                window.location.href="pay-renewal-acc";
+            }
             else if($.trim(d)==='administrator'){
                 window.location.href="../administrator/dashboard";
             }

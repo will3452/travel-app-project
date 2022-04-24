@@ -121,45 +121,8 @@ $numofnotif = $Notification->CountUnreadNotifAdmin($User::USER_TYPE_ADMIN, '0000
                 <p id="body-not">No Notification</p>
     </div>
 
- <div class="notif-message">
-        <span class="countnum" id="loadcont">0</span>
-        <i class="fa-solid fa-message" id="mess_btn_open"></i>
-    </div>
-
-    <div class="loading-content-message">
-    <div class="loading-icon-main">
-                        <div class="center">
-                            <div class="span1load"></div>
-                            <div class="span2load"></div>
-                            <div class="span3load"></div>
-                    </div>
-            </div>
-    </div>
-    <div class="dropdown-content-message" id="fetchmessage">
-        <div class="bgserachtitle-notif">
-            <p><i class="fa-solid fa-message" id="mess_btn_open"></i> New / Un-Read Messages</p>
-        </div>
-        <a href="view/message?id_cli='.$iduserun.'" class="loop_link_mess">
-            <div class="mess_loop">
-                <div class="_cont">
-                    <div class="circular--landscape--mess">
-                        <img id="vievimage" src="#" alt="">
-                    </div>
-                    <div class="head_mess">
-                        <span id="name_heres">leo corpuz jr</span>
-                    </div>
-                </div>
-                <div class="_cont">
-                        <span id="notifmessage_mess"> <i class="fas fa-circle"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit, obcaecati.</span>
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="noresult-content-mess">
-                <div class="bgserachtitle-mess">
-                    <p><i class="fa-solid fa-message" id="mess_btn_open"></i> New / Un-Read Message</p>
-                </div>
-                <p id="body-not">No Message</p>
+    <div class="notif-message" style="margin-left:15px;">
+        <a href="manager"><i class="fa-solid fa-message" id="mess_btn_open"></i></a>
     </div>
  <div class="vl"></div>
 <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
