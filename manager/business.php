@@ -236,5 +236,6 @@
     <script src="js/load.js?v=5"></script>
     <script src="js/business.js?v=6"></script>
     <script src="js/notification.js?v=5"></script>
+    <script src="js/global-search.js"></script>
 </body>
 </html>

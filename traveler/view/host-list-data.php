@@ -192,5 +192,6 @@
     <script src="../js/load.js?v=5"></script>
     <script src="../js/host-list-data.js?v=6"></script>
     <script src="../js/notificaiton_2.js?v=15"></script>
+    <script src="../js/global-search_2.js?v=5"></script>
 </body>
 </html>

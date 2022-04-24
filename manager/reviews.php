@@ -49,5 +49,6 @@
     </div>
     <script src="js/notification.js?v=5"></script>
     <script src="js/reviews.js?v=5"></script>
+    <script src="js/global-search.js"></script>
 </body>
 </html>

@@ -81,6 +81,7 @@
         </div>
     </div>
     <script src="js/notification.js?v=5"></script>
+    <script src="js/global-search.js"></script>
     <script>
         function myFunction() {
                 var receiverEmail = $('#receiver').val();

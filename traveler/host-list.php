@@ -91,5 +91,6 @@
     <script src="js/load.js?v=5"></script>
     <script src="js/host-list.js?v=5"></script>
     <script src="js/notification.js?v=5"></script>
+    <script src="js/global-search.js"></script>
 </body>
 </html>

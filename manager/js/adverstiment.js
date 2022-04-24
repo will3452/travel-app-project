@@ -52,6 +52,10 @@ $(document).on('click','.close_modal',function(){
     $(".cancelads").fadeOut();
     $("#cancelads_id_s").val('');
 });
+$(document).on('click','#showinfo',function(){
+    var id = $(this).attr("data-id");
+    window.location.href="view/view-advertisement?ads_id="+id;
+});
 $("#submit_shows_cancelads").on("submit", function(e){
     e.preventDefault(e);
     var formData = new FormData(this);

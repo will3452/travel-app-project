@@ -188,5 +188,6 @@
         </div>
     </div>
     <script src="../js/notificaiton_2.js?v=15"></script>
+    <script src="../js/global-search_2.js?v=5"></script>
 </body>
 </html>

@@ -47,5 +47,6 @@
     </div>
     <script src="js/promotion.js?v=3"></script>
     <script src="js/notification.js?v=5"></script>
+    <script src="js/global-search.js"></script>
 </body>
 </html>

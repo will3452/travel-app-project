@@ -89,5 +89,6 @@
     </div>
     <script src="js/subscription.js?v=13"></script>
     <script src="js/notification.js?v=15"></script>
+    <script src="js/global-search.js?v=5"></script>
 </body>
 </html>

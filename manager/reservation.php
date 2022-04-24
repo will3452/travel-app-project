@@ -174,5 +174,6 @@
     </div>
     <script src="js/reservation.js?v=8"></script>
     <script src="js/notification.js?v=5"></script>
+    <script src="js/global-search.js"></script>
 </body>
 </html>

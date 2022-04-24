@@ -430,4 +430,46 @@ class Payment extends User{
             return false;
         }
     }
+    public function SearchPOPGLOBAL($search, $manager_id){ 
+
+        $con = $this->GetConnection();
+
+        if(empty($manager_id)){
+            
+            $stmt = $con->prepare("SELECT * FROM manager_pop WHERE 
+            date LIKE ?
+            ORDER by date ASC");
+    
+            $stmt->execute(array("%$search%"));
+    
+            $numwors = $stmt->rowCount();
+    
+            if($numwors>0){
+    
+                while($r = $stmt->fetchAll()){
+    
+                    return $r;
+    
+                }
+            }
+            
+        }
+
+        $stmt = $con->prepare("SELECT * FROM manager_pop WHERE 
+        date LIKE ? && manager_id=? 
+        ORDER by date ASC");
+
+        $stmt->execute(array("%$search%", "$manager_id"));
+
+        $numwors = $stmt->rowCount();
+
+        if($numwors>0){
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+
+            }
+        }
+    }
 }

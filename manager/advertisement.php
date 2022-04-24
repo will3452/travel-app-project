@@ -46,8 +46,8 @@
             </main>
         </div>
     </div>
-    <script src="js/adverstiment.js?v=5"></script>
-
+    <script src="js/adverstiment.js?v=7"></script>
+    <script src="js/global-search.js"></script>
     <script src="js/notification.js?v=5"></script>
 </body>
 </html>

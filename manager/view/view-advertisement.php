@@ -1,10 +1,14 @@
 <?php
      include_once '../../vendor/autoload.php';
      include_once '../process/LoginStatus.php';
-     include_once '../process/id_validation_fetch.php';
-     if(!isset($_GET['promo_id'])){
-        header("location:../promotion");
+    include_once '../process/id_validation_fetch.php';
+     if(!isset($_GET['ads_id'])){
+        header("location:../advertisement");
      }
+     $Promotion = new Promotion;
+
+     $GetPromoData = $Promotion->GetPromoData($data->package_id);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +23,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://kit.fontawesome.com/a66db60870.js" crossorigin="anonymous"></script>
-    <title>Manager - Promotion</title>
+    <title>Manager - Ads</title>
 </head>
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bgnav shadow-sm p-3 mb-5 rounded">
@@ -39,8 +43,8 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <p class="mt-4 edit-title">View promotion ads</p>
-                    <a href="../promotion"><button id="backpage_color"><i class="fas fa-arrow-circle-left"></i></button></a>
+                    <p class="mt-4 edit-title">View My Ads</p>
+                    <a href="../advertisement"><button id="backpage_color"><i class="fas fa-arrow-circle-left"></i></button></a>
                     <br>
                     <div class="form-container-user">
                         <div class="rowss">
@@ -48,7 +52,7 @@
                                         <p>ID</p>
                                 </div>
                                 <div id="idcontent">
-                                        <p><?php echo sprintf('%06d',$_GET['promo_id']); ?></p>
+                                        <p><?php echo sprintf('%06d',$_GET['ads_id']); ?></p>
                                 </div>
                         </div>
                         <div class="rowss">
@@ -56,7 +60,7 @@
                                         <p>Package Name</p>
                                 </div>
                                 <div id="idcontent">
-                                        <p><?php echo ucwords($data->name); ?></p>
+                                        <p><?php echo ucwords($GetPromoData->name); ?></p>
                                 </div>
                         </div>
                         <div class="rowss">
@@ -64,33 +68,39 @@
                                         <p>Description</p>
                                 </div>
                                 <div id="idcontent">
-                                    <p><?php echo $data->description; ?></p>
+                                    <p><?php echo $GetPromoData->description; ?></p>
                                 </div>
                         </div>
                         <div class="rowss">
                                 <div id="id_div">
-                                        <p>Price</p>
+                                        <p>Ads Image</p>
                                 </div>
-                                <div id="idcontent">
-                                    <p>₱<?php echo $data->price; ?></p>
+                                <div id="idcontent" class="imgviews">
+                                    <img src="/../images/ads/<?php echo $data->image; ?>" alt="">
                                 </div>
-                        </div>
-                        <div class="rowss">
-                            <div id="id_div">
-                                        <p>Days</p>
-                            </div>
-                            <div id="idcontent">
-                            <p><?php echo $data->days; ?></p>
-                            </div>
                         </div>
                         <div class="rowss">
                                 <div id="id_div">
-                                        <p>Avail</p>
+                                        <p>Schedulate Date</p>
                                 </div>
                                 <div id="idcontent">
-                                    <div class="button-add-emp-2">
-                                        <a href="../create/avail-promo?promo_id=<?php echo $_GET['promo_id']; ?>"> <button id="addbtnuser">Avail Promotion</button></a>
-                                    </div>
+                                    <p><?php echo date("Y-m-d", strtotime($data->schedule_at)); ?></p>
+                                </div>
+                        </div>
+                        <div class="rowss">
+                                <div id="id_div">
+                                        <p>Expiration Date</p>
+                                </div>
+                                <div id="idcontent">
+                                    <p><?php echo date("Y-m-d", strtotime($data->end_at)); ?></p>
+                                </div>
+                        </div>
+                        <div class="rowss">
+                                <div id="id_div">
+                                        <p>Status</p>
+                                </div>
+                                <div id="idcontent">
+                                    <p><?php echo $data->status; ?></p>
                                 </div>
                         </div>
                     </div>

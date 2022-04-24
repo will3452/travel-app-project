@@ -261,6 +261,7 @@
     </div>
     <script src="js/load.js?v=5"></script>
     <script src="js/notification.js?v=12"></script>
+    <script src="js/global-search.js"></script>
     <script>
         $(document).ready(function(){
             setInterval('updateClock()', 1000);

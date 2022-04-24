@@ -97,5 +97,6 @@
     </div>
     <script src="js/booking.js?v=8"></script>
     <script src="js/notification.js?v=5"></script>
+    <script src="js/global-search.js"></script>
 </body>
 </html>

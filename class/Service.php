@@ -737,4 +737,46 @@ class Service extends User{
             }
         }
     }
+    public function SearchSERVICES($search, $businessid){ 
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM services WHERE 
+        name LIKE ? && business_id=?
+        ORDER by name ASC");
+
+        $stmt->execute(array("%$search%", $businessid));
+
+        $numwors = $stmt->rowCount();
+
+        if($numwors>0){
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+
+            }
+        }
+    }
+    public function SearchBUCKETLIST($search, $iduser){ 
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM bucketlist WHERE 
+        date LIKE ? && user_id=?
+        ORDER by date ASC");
+
+        $stmt->execute(array("%$search%", $iduser));
+
+        $numwors = $stmt->rowCount();
+
+        if($numwors>0){
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+
+            }
+        }
+    }
 }

@@ -49,5 +49,6 @@
     <script src="js/package.js?v=2"></script>
     <script src="js/notification.js?v=7"></script>
     <script src="js/notification.js?v=15"></script>
+    <script src="js/global-search.js?v=5"></script>
 </body>
 </html>

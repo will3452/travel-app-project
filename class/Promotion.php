@@ -212,5 +212,56 @@ class Promotion extends User{
 
         }
     }
+    public function SearchPACKAGE($search){ 
 
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM packages WHERE 
+        name LIKE ?
+        ORDER by name ASC");
+
+        $stmt->execute(array("%$search%"));
+
+        $numwors = $stmt->rowCount();
+
+        if($numwors>0){
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+
+            }
+        }
+    }
+    public function GetAdsDatas($id, $manager_id){
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM advertisement WHERE id=? && manager_id=?");
+
+        $stmt->execute([$id, $manager_id]);
+        
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+    public function SearchMYADS($search, $manager_id){ 
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM advertisement WHERE 
+        schedule_at LIKE ? && manager_id=?
+        ORDER by schedule_at ASC");
+
+        $stmt->execute(array("%$search%", $manager_id));
+
+        $numwors = $stmt->rowCount();
+
+        if($numwors>0){
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+
+            }
+        }
+    }
 }

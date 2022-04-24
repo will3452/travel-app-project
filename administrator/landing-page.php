@@ -227,5 +227,6 @@
     <script src="js/load.js"></script>
     <script src="js/notification.js?v=15"></script>
     <script src="js/landing-page.js"></script>
+    <script src="js/global-search.js?v=5"></script>
 </body>
 </html>

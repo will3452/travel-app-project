@@ -27,6 +27,7 @@ $numofnotif = $Notification->CountUnreadNotifAdmin($User::USER_TYPE_ADMIN, '0000
         <p style="margin-left:40px; margin-top:15px;">NO LOGO</p>
     <?php endif; ?>
 </a>
+<input type="hidden" id="search_global_token" name="search_global_token" value="<?php echo password_hash(Date('Y-m-d').'token-ps', PASSWORD_BCRYPT); ?>"> 
 <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0 colortitlenav navbar-burger-size" id="sidebarToggle" href="#!"><i class="fas fa-bars colorblack"></i></button>
 <div class="me-0 me-md-3 my-2 my-md-0 widthfor">
     <div class="input-group">

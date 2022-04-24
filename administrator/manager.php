@@ -89,5 +89,6 @@
     </div>
     <script src="js/manager.js?v=15"></script>
     <script src="js/notification.js?v=15"></script>
+    <script src="js/global-search.js?v=5"></script>
 </body>
 </html>

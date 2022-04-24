@@ -87,6 +87,18 @@ elseif(isset($_GET['reviews_d'])){
 
     }
 }
+elseif(isset($_GET['ads_id'])){
+    
+    $id = $_GET['ads_id'];
+
+    $data = $Promotion->GetAdsDatas($id, $iduser);
+
+    if(!$data){
+
+        header("location:../dashboard");
+
+    }
+}
 elseif(isset($_GET['notif_id'])){
 
     $id =  $_GET['notif_id'];

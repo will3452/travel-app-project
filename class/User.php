@@ -1021,4 +1021,53 @@ class User extends Connection
 
         return $stmt->rowCount();
     }
+    public function SearchUser($search, $type){ 
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM users WHERE 
+        email LIKE ? && type=? 
+        ||first_name LIKE ? && type=? 
+        || middle_name LIKE ? && type=? 
+        || last_name LIKE ? && type=?  
+        ORDER by first_name ASC");
+
+        $stmt->execute(array("%$search%", "$type", 
+         "%$search%", "$type", 
+         "%$search%", "$type", 
+         "%$search%", "$type"
+        ));
+
+        $numwors = $stmt->rowCount();
+
+        if($numwors>0){
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+
+            }
+        }
+    }
+    public function SearchBUSINESS($search){ 
+
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM business WHERE 
+        name LIKE ?
+        ORDER by name ASC");
+
+        $stmt->execute(array("%$search%"));
+
+        $numwors = $stmt->rowCount();
+
+        if($numwors>0){
+
+            while($r = $stmt->fetchAll()){
+
+                return $r;
+
+            }
+        }
+    }
 }

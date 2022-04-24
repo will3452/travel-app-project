@@ -129,5 +129,6 @@
     </div>
     <script src="../js/create-service.js?v=3"></script>
     <script src="../js/notificaiton_2.js?v=12"></script>
+    <script src="../js/global-search_2.js?v=5"></script>
 </body>
 </html>

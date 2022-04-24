@@ -45,5 +45,6 @@
     </div>
     <script src="js/payment-history.js"></script>
     <script src="js/notification.js?v=5"></script>
+    <script src="js/global-search.js"></script>
 </body>
 </html>
