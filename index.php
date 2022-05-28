@@ -1,511 +1,311 @@
-<style>
-    @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:700);
 
-.darkOverlay {
-  background: #333;
-  max-width: 100%;
-  height: 100vh;
-  opacity: .45;
-  z-index: 2;
-}
-body{
-    padding:0;
-    margin:0;
-}
-.over404 {
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
-  background: url("http://xerxesjarquin.com/images/glitch/desk-bgg.jpg") no-repeat center center;
-  background-size: cover;
-  margin: 0 auto;
-  height: 100vh;
-  -webkit-animation: glitch 2s step-end infinite;
-  -moz-animation: glitch 2s step-end infinite;
-  animation: glitch 2s step-end infinite;
-}
+<?php
+    include_once 'vendor/autoload.php';
 
-.over404 header {
-  padding: 0;
-  z-index: 3;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  -o-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
+    date_default_timezone_set('Asia/Manila');
 
-.over404 header h1 {
-  font-size: 6rem;
-  font-weight: 700;
-  font-family: 'Source Sans Pro', sans-serif;
-  margin: 0;
-  color: #fff;
-  letter-spacing: .8px;
-  text-transform: uppercase;
-}
+    $Branding = new Branding;
 
-@media only screen and (min-width: 567px) {
-  .over404 header h1 {
-     font-size: 15rem;
-  }
-}
+    $Logo = new Logo;
 
-.glitch:before,
-.glitch:after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
+    $User = new User;
 
-.glitch::before {
-  left: 2px;
-  text-shadow: -1px 0 red;
-  clip: rect(424px, 450px, 516px, 0);
-  -webkit-animation: glitchText 2s infinite linear alternate-reverse;
-  -moz-animation: glitchText 2s infinite linear alternate-reverse;
-  -o-animation: glitchText 2s infinite linear alternate-reverse;
-  animation: glitchText 2s infinite linear alternate-reverse;
-}
+    $Promotion = new Promotion;
 
-.glitch::after {
-  left: -2px;
-  text-shadow: -1px solid blue;
-  clip: rect(424px, 450px, 526px, 0);
-  -webkit-animation: glitchText2 2s infinite linear alternate-reverse;
-  -moz-animation: glitchText2 2s infinite linear alternate-reverse;
-  -o-animation: glitchText2 2s infinite linear alternate-reverse;
-  animation: glitchText2 2s infinite linear alternate-reverse;   
-}
+    $GetAdsOngoing = $Promotion->GetAdsOngoing($User::STATUS_ONGOING, date("Y-m-d"), date("Y-m-d"));
 
-@-webkit-keyframes glitchText2 {
-  0% {
-   clip: rect(412px, 9999px, 237px, 0);
-  }
-  10% {
-   clip: rect(323px, 9999px, 234px, 0);
-  }
-  20% {
-   clip: rect(8px, 9999px, 811px, 0);
-  }
-  30% {
-   clip: rect(435px, 9999px, 217px, 0);
-  }
-  40% {
-   clip: rect(921px, 9999px, 147px, 0);
-  }
-  50% {
-   clip: rect(274px, 9999px, 284px, 0);
-  }
-  60% {
-   clip: rect(46px, 9999px, 621px, 0);
-  }
-  70% {
-   clip: rect(19px, 9999px, 123px, 0);
-  }
-  80% {
-   clip: rect(629px, 9999px, 432px, 0);
-  }
-  90% {
-   clip: rect(4px, 9999px, 343px, 0);
-  }
-  100% {
-   clip: rect(121px, 9999px, 11px, 0);
-  }
-}
-    
-@-o-keyframes glitchText2 {
-  0% {
-   clip: rect(412px, 9999px, 237px, 0);
-  }
-  10% {
-   clip: rect(323px, 9999px, 234px, 0);
-  }
-  20% {
-   clip: rect(8px, 9999px, 811px, 0);
-  }
-  30% {
-   clip: rect(435px, 9999px, 217px, 0);
-  }
-  40% {
-   clip: rect(921px, 9999px, 147px, 0);
-  }
-  50% {
-   clip: rect(274px, 9999px, 284px, 0);
-  }
-  60% {
-   clip: rect(46px, 9999px, 621px, 0);
-  }
-  70% {
-   clip: rect(19px, 9999px, 123px, 0);
-  }
-  80% {
-  clip: rect(629px, 9999px, 432px, 0);
-  }
-  90% {
-   clip: rect(4px, 9999px, 343px, 0);
-  }
-  100% {
-   clip: rect(121px, 9999px, 11px, 0);
-  }
-}
+    $GetBranding = $Branding->GetBranding();
 
-@keyframes glitchText2 {
-  0% {
-   clip: rect(412px, 9999px, 237px, 0);
-  }
-  10% {
-   clip: rect(323px, 9999px, 234px, 0);
-  }
-  20% {
-   clip: rect(8px, 9999px, 811px, 0);
-  }
-  30% {
-   clip: rect(435px, 9999px, 217px, 0);
-  }
-  40% {
-   clip: rect(921px, 9999px, 147px, 0);
-  }
-  50% {
-   clip: rect(274px, 9999px, 284px, 0);
-  }
-  60% {
-   clip: rect(46px, 9999px, 621px, 0);
-  }
-  70% {
-   clip: rect(19px, 9999px, 123px, 0);
-  }
-  80% {
-   clip: rect(629px, 9999px, 432px, 0);
-  }
-  90% {
-   clip: rect(4px, 9999px, 343px, 0);
-  }
-  100% {
-   clip: rect(121px, 9999px, 11px, 0);
-  }
-}
+    $GetSystemAbout = $Branding->GetSystemAbout();
 
-@-webkit-keyframes glitchText {
-  0% {
-    clip: rect(125px, 9999px, 1px, 0);
-  }
-  10% {
-    clip: rect(120px, 9999px, 322px, 0);
-  }
-  20% {
-    clip: rect(58px, 9999px, 235px, 0);
-  }
-  30% {
-    clip: rect(30px, 9999px, 7px, 0);
-  }
-  40% {
-    clip: rect(126px, 9999px, 528px, 0);
-  }
-  50% {
-    clip: rect(42px, 9999px, 96px, 0);
-  }
-  60% {
-    clip: rect(247px, 9999px, 620px, 0);
-  }
-  70% {
-    clip: rect(728px, 9999px, 517px, 0);
-  }
-  80% {
-    clip: rect(15px, 9999px, 66px, 0);
-  }
-  90% {
-    clip: rect(923px, 9999px, 204px, 0);
-  }
-  100% {
-    clip: rect(62px, 9999px, 6px, 0);
-  }
-}
+    $GetSystemFooter = $Branding->GetSystemFooter();
 
-@-o-keyframes glitchText {
-  0% {
-    clip: rect(125px, 9999px, 1px, 0);
-  }
-  10% {
-    clip: rect(120px, 9999px, 322px, 0);
-  }
-  20% {
-    clip: rect(58px, 9999px, 235px, 0);
-  }
-  30% {
-    clip: rect(30px, 9999px, 7px, 0);
-  }
-  40% {
-    clip: rect(126px, 9999px, 528px, 0);
-  }
-  50% {
-    clip: rect(42px, 9999px, 96px, 0);
-  }
-  60% {
-    clip: rect(247px, 9999px, 620px, 0);
-  }
-  70% {
-    clip: rect(728px, 9999px, 517px, 0);
-  }
-  80% {
-    clip: rect(15px, 9999px, 66px, 0);
-  }
-  90% {
-    clip: rect(923px, 9999px, 204px, 0);
-  }
-  100% {
-    clip: rect(62px, 9999px, 6px, 0);
-  }
-}
+    $GetLogo = $Logo->GetLogo();
 
-@keyframes glitchText {
-  0% {
-    clip: rect(125px, 9999px, 1px, 0);
-  }
-  10% {
-    clip: rect(120px, 9999px, 322px, 0);
-  }
-  20% {
-    clip: rect(58px, 9999px, 235px, 0);
-  }
-  30% {
-    clip: rect(30px, 9999px, 7px, 0);
-  }
-  40% {
-    clip: rect(126px, 9999px, 528px, 0);
-  }
-  50% {
-    clip: rect(42px, 9999px, 96px, 0);
-  }
-  60% {
-    clip: rect(247px, 9999px, 620px, 0);
-  }
-  70% {
-    clip: rect(728px, 9999px, 517px, 0);
-  }
-  80% {
-    clip: rect(15px, 9999px, 66px, 0);
-  }
-  90% {
-    clip: rect(923px, 9999px, 204px, 0);
-  }
-  100% {
-    clip: rect(62px, 9999px, 6px, 0);
-  }
-}
+    $businesslist = $User->BusinessFetctSortInLandingPage();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo $GetBranding->name; ?></title>
+    <link rel="stylesheet" href="public/css/default.css?v=39">
+    <link rel="stylesheet" href="public/css/landing.css?v=39">
+    <link rel="stylesheet" href="carousel/dist/assets/owl.carousel.css" />
+    <link rel="stylesheet" href="carousel/dist/assets/owl.carousel.min.css" />
+    <link rel="stylesheet" href="carousel/dist/assets/owl.theme.default.css" />
+    <link rel="stylesheet" href="carousel/dist/assets/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="carousel/dist/assets/owl.theme.green.min.css" />
+    <link rel="stylesheet" href="carousel/dist/assets/owl.theme.green.min.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://kit.fontawesome.com/a66db60870.js" crossorigin="anonymous"></script>
+    <style>
+        .dropdown {
+            position: relative;
+        }
 
-@-webkit-keyframes glitch {
-    0% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/0.jpg');
-    }
-    7% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/1.jpg');
-    }
-    14% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/2.jpg');
-    }
-    21% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/3.jpg');
-    }
-    28% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/4.jpg');
-    }
-    35% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/5.jpg');
-    }
-    42% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/6.jpg');
-    }
-    49% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/7.jpg');
-    }
-    56% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/8.jpg');
-    }
-    63% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/9.jpg');
-    }
-    70% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/10.jpg');
-    }
-    77% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/11.jpg');
-    }
-    84% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/12.jpg');
-    }
-    89% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/13.jpg');
-    }
-    94% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/15.jpg');
-    }
-    100% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/16.jpg');
-    }
-}
+        .hidden {
+            visibility: hidden;
+        }
 
-@-moz-keyframes glitch {
-    0% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/0.jpg');
-    }
-    7% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/1.jpg');
-    }
-    14% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/2.jpg');
-    }
-    21% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/3.jpg');
-    }
-    28% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/4.jpg');
-    }
-    35% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/5.jpg');
-    }
-    42% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/6.jpg');
-    }
-    49% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/7.jpg');
-    }
-    56% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/8.jpg');
-    }
-    63% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/9.jpg');
-    }
-    70% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/10.jpg');
-    }
-    77% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/11.jpg');
-    }
-    84% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/12.jpg');
-    }
-    89% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/13.jpg');
-    }
-    94% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/15.jpg');
-    }
-    100% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/16.jpg');
-    }
-}
+        .dropdown>.dropdown-items {
+            position: absolute;
+            top: 3.5em;
+            right:3em;
+            width: 30vw;
+            background: #0095A4;
+            padding: 0.5em;
+            text-align:center;
+        }
 
-@-o-keyframes glitch {
-    0% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/0.jpg');
-    }
-    7% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/1.jpg');
-    }
-    14% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/2.jpg');
-    }
-    21% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/3.jpg');
-    }
-    28% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/4.jpg');
-    }
-    35% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/5.jpg');
-    }
-    42% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/6.jpg');
-    }
-    49% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/7.jpg');
-    }
-    56% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/8.jpg');
-    }
-    63% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/9.jpg');
-    }
-    70% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/10.jpg');
-    }
-    77% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/11.jpg');
-    }
-    84% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/12.jpg');
-    }
-    89% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/13.jpg');
-    }
-    94% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/15.jpg');
-    }
-    100% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/16.jpg');
-    }
-}
+        .dropdown>.dropdown-items::before {
+            content:' ';
+            position: absolute;
+            top: -4px;
+            right:2em;
+            display: block;
+            width: 15px;
+            height: 15px;
+            transform: rotate(-45deg);
+            background: #0095A4;
+            z-index: 0;
+        }
 
-@keyframes glitch {
-    0% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/0.jpg');
-    }
-    7% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/1.jpg');
-    }
-    14% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/2.jpg');
-    }
-    21% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/3.jpg');
-    }
-    28% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/4.jpg');
-    }
-    35% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/5.jpg');
-    }
-    42% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/6.jpg');
-    }
-    49% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/7.jpg');
-    }
-    56% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/8.jpg');
-    }
-    63% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/9.jpg');
-    }
-    70% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/10.jpg');
-    }
-    77% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/11.jpg');
-    }
-    84% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/12.jpg');
-    }
-    89% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/13.jpg');
-    }
-    94% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/15.jpg');
-    }
-    100% {
-    background-image: url('http://xerxesjarquin.com/images/glitch/16.jpg');
-    }
-}
-</style>
-<div class="over404">
-  <div class="darkOverlay"></div>
-  <header>
-    <h1 class="glitch" data-text="404">404</h1>
-  </header>
-</div>
+        .dropdown-items>* {
+            display: block;
+            z-index: 4;
+            padding:5px;
+            color: #fff !important;
+            font-size: 14px !important;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="loading-icon-landing">
+        <div class="center">
+             <div class="span1load"></div>
+             <div class="span2load"></div>
+             <div class="span3load"></div>
+        </div>
+    </div>
+    <div class="load-body">
+        <header class="headerssss" id="body-headersss">
+            <nav class="navbarssss">
+                <div class="titles">
+                        <a href="#" class="nav-logos"><img id="logosss" src="user/assets/logo/<?php echo $GetLogo->image; ?>" alt=""> </a>
+                        <a href="#home" id="title-texts"><?php echo $GetBranding->name; ?></a>
+                </div>
+                    <ul class="nav-menussss">
+                        <li class="nav-itemss">
+                            <a href="#host" class="nav-linkss">host</a>
+                        </li>
+                        <li class="nav-itemss">
+                            <a href="#about" class="nav-linkss">about</a>
+                        </li>
+                        <li class="nav-itemss">
+                            <a href="#contact" class="nav-linkss">contact</a>
+                        </li>
+                        <li class="nav-itemss">
+                            <a href="user/login" class="nav-linkss">login</a>
+                        </li>
+                        <li class="nav-itemss dropdown">
+                            <a href="#reg" class="nav-linkss">Register</a>
+                            <div class="dropdown-items hidden">
+                                <a href="user/register_manager">As Manager</a>
+                                <a href="user/register_traveler" >As Traveler</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="hamburger">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                </nav>
+        </header>
+        <main>
+            <?php if($GetAdsOngoing): ?>
+                <div class="ads-contatiner smallsize">
+                    <div class="close-cion">
+                        <i class="fa-solid fa-xmark" id="closeaddbtn"></i>
+                    </div>
+                    <a href="user/ads-view">
+                        <div class="owl-carousel newcous owl-theme">
+                            <?php foreach($GetAdsOngoing as $displayads): ?>
+                                <img src="images/ads/<?php echo $displayads['image']; ?>" class="imagesads" alt="">
+                            <?php endforeach; ?>
+                        </div>
+                    </a>
+                </div>
+            <?php else: ?>
+
+            <?php endif; ?>
+            <section class="container-body hre body-cont1" id="home">
+                <div class="container-div container-body1">
+                    <div class="center-content">
+                        <h1><?php echo $GetBranding->name; ?></h1>
+                        <span><i><?php echo $GetBranding->description; ?></i></span><br>
+                        <br>
+                        <br>
+                        <a href="#host"><i class="fa-solid fa-caret-down"></i></a>
+                    </div>
+                </div>
+            </section>
+            <section class="container-body hre body-cont2" id="host">
+                <div class="container-div container-body2">
+                    <div class="center-content2">
+                    <h1>Host</h1>
+                    <br>
+                    <div class="owl-carousel fistcous owl-theme" id="hidefirst">
+                        <?php if($businesslist): ?>
+
+                            <?php foreach($businesslist as $businesdisplay):  
+                                $businemanager_id = $businesdisplay['manager_id'];
+                                $GetManagerData = $User->GetUserData($businemanager_id, $User::USER_TYPE_MANAGER);    
+                            ?>
+                                <?php if($GetManagerData->block_status == $User::BLOCK_STATUS_TEMPORARY || $GetManagerData->block_status == $User::BLOCK_STATUS_PERMANENTLY):?>
+                                <?php else: ?>
+                                    <a href="user/login"><div class="item"><img src="user/assets/logo/<?php echo $businesdisplay['logo']; ?>" class="imagehost" alt=""></div></a>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+
+                        <?php endif; ?>
+                    </div>
+                    </div>
+            </section>
+            <section class="container-body hre body-cont1" id="about">
+                <div class="container-div container-body1">
+                    <div class="center-content">
+                        <h1><?php echo $GetSystemAbout->title; ?></h1>
+                        <span><i><?php echo $GetSystemAbout->description; ?></i></span><br>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </section>
+            <footer id="contact">
+                <div class="footer-header">
+                    <ul>
+                        <li class="nav-itemss2">
+                            <a href="#host" >Host</a>
+                        </li>
+                        <li class="nav-itemss2">
+                            <a href="#home" class="nav-linkss" id="footertitle"><?php echo $GetBranding->name; ?></a>
+                        </li>
+                        <li class="nav-itemss2">
+                            <a href="user/login" >login</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-body" id="contact">
+                    <h1>contact</h1>
+                    <div class="contact-cont">
+                        <a href="tel:<?php echo $GetSystemFooter->contact; ?>" style="text-decoration:underline;"><?php echo $GetSystemFooter->contact; ?></a>
+                    </div>
+                    <div class="contact-cont">
+                        <a href="<?php echo $GetSystemFooter->facebook; ?>"><i class="fa fa-facebook"></i></a>
+                        <a href="<?php echo $GetSystemFooter->instagram; ?>"><i class="fa fa-instagram"></i></a>
+                        <a href="<?php echo $GetSystemFooter->twitter; ?>"><i class="fa fa-twitter"></i></a>
+                    </div>
+                    <br>
+                    <div class="policy">
+                        <p>&copy; Copyright 2022 <?php echo $GetBranding->name; ?></p>
+                        <a href="view/data-privacy" target='_blank'>PRIVACY POLICY</a>
+                    </div>
+                </div>
+            </footer>
+        </main>
+    </div>
+    <script src="carousel/dist/owl.carousel.js"></script>
+    <script src="carousel/dist/owl.carousel.min.js"></script>
+
+    <script>
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menussss");
+
+        hamburger.addEventListener("click", mobileMenu);
+
+        function mobileMenu() {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        }
+        $(document).on('click','.container-body',function(){
+            $(".nav-menussss").removeClass('active');
+        });
+         window.addEventListener("load", function(){
+            $(".loading-icon-landing").fadeOut();
+
+            setTimeout(function(){
+            $(".load-body").show();
+            }, 1000);
+
+        });
+
+        var scrollnum = 0;
+        window.addEventListener("scroll",function(){
+            var scrolltop = window.pageYOffset || document.documentElement.scrollTop;
+
+            if(scrolltop > scrollnum){
+                $(".nav-menu").removeClass('active');
+            }else{
+                $(".nav-menu").removeClass('active');
+            }
+            scrollnum = scrolltop;
+        });
+        //smoth
+        $(".nav-menu a").on('click',function(e){
+            if(this.hash !==''){
+                e.preventDefault();
+
+                const hash = this.hash;
+
+                $('html, body').animate({
+                    scrollTop: $(hash).offset().top
+                },200
+                );
+            }
+        });
+    </script>
+
+    <script>
+        var _hide = true;
+        $('.dropdown').click(function () {
+            if (_hide) {
+                $(this).children('.dropdown-items').removeClass('hidden');
+            } else {
+                $(this).children('.dropdown-items').addClass('hidden');
+            }
+            _hide = ! _hide;
+        })
+    </script>
+    <script>
+        $('.fistcous').owlCarousel({
+                items:1,
+                margin:10,
+                loop:true,
+                autoHeight:true,
+                autoplay:true,
+                autoplayTimeout:1500,
+                autoplayHoverPause:true
+            });
+            $('.newcous').owlCarousel({
+                items:1,
+                margin:10,
+                loop:true,
+                lazyLoad: true,
+                autoHeight:true,
+                autoplay:true,
+                autoplayTimeout:2000,
+                autoplayHoverPause:true
+            });
+            $(document).on('click','#closeaddbtn',function(){
+                $(".ads-contatiner").hide();
+            });
+        
+    </script>
+</body>
+</html>
