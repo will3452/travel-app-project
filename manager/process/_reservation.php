@@ -547,6 +547,7 @@
                             $update = $Reservation->UpdateReservationCost($rs_id, $User::STATUS_HISTORY, $businessid, $totalprice);
 
                             if($update){
+                                $delete = $Reservation->DeleteReservaBullService($rs_id);
                                 //check packages exit
                                 foreach($packages as $value){
 
@@ -556,17 +557,13 @@
 
                                         $serviceidval = $value;
 
-                                        $delete = $Reservation->DeleteReservationService($rs_id, $serviceidval);
+                                        $insertserviceq = $Reservation->InsertReservationService($rs_id, $serviceidval);
                                         
-
                                     }
                                 }
-                                foreach($packages as $value){
 
-                                    $insertserviceq = $Reservation->InsertReservationService($rs_id, $value);
-
-                                }
-                                 //here notif
+                                
+                                //here notif
                                  $link = $protocollinks.'/traveler/view/view-notification';
             
                                  $message = 'Update Your Book History Data in '. $businessname.' at '.$dateofbook. ' '.date("h:i:A", strtotime($timeofbook));

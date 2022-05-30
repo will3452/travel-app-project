@@ -334,6 +334,21 @@ class Reservation extends Service{
         }
         return false;
     }
+    public function DeleteReservaBullService($reservation_id){
+
+        $con = $this->GetConnection();
+
+        $qs = "DELETE FROM reservation_service WHERE reservation_id=?";
+        $stmt = $con->prepare($qs);
+
+        $true = $stmt->execute([$reservation_id]);
+
+        if($true){
+
+            return true;
+        }
+        return false;
+    }
 
     public function ReservationTravelerPageSortManager($iduser, $status, $traveler_id)
     {
