@@ -166,6 +166,16 @@ class Payment extends User{
 
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
+    public function GetPaymentManagerDataMan($id, $userid)
+    {
+        $con = $this->GetConnection();
+
+        $stmt = $con->prepare("SELECT * FROM manager_pop WHERE id=? && manager_id=?");
+
+        $stmt->execute([$id, $userid]);
+
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
     public function PaymentPageSort($id)
     {
         $con = $this->GetConnection();
