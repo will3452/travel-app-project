@@ -39,3 +39,7 @@ $(document).on('click','.clearable__clear',function(){
     $(".clearable__clear").hide();
     $("#search").val("");
 });
+$(document).on('click','#showinfo',function(){
+    var id = $(this).attr("data-id");
+    window.location.href="view/payment-history?py_id="+id;
+});
