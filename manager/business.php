@@ -16,12 +16,37 @@
      $businessname = '';
 
      $businesslogo = '';
+     
+     $businesscity = '';
+
+     $businessmunicipality = '';
+
+     $businessstreet = '';
+
+     $businessbarangay = '';
+
+     $businesszip_code = '';
+
+     $businesslandmark = '';
 
      if($GetBusinessManager){
 
         $businessname = $GetBusinessManager->name;
 
         $businesslogo = $GetBusinessManager->logo;
+
+        $businesscity = $GetBusinessManager->city;
+        
+        $businessmunicipality = $GetBusinessManager->municipality;
+        
+        $businessstreet = $GetBusinessManager->street;
+        
+        $businessbarangay = $GetBusinessManager->barangay;
+        
+        $businesszip_code = $GetBusinessManager->zip_code;
+        
+        $businesslandmark = $GetBusinessManager->landmark;
+        
 
      }
 ?>
@@ -113,6 +138,54 @@
                                     </div>
                                     <div id="idcontent">
                                         <input type="text" name="businessname" required id="businessname" value="<?php echo $businessname; ?>" placeholder="Business Name" class="focusinput">
+                                    </div>
+                                </div>
+                                <div class="rowss">
+                                    <div id="id_div">
+                                            City
+                                    </div>
+                                    <div id="idcontent">
+                                        <input type="text" name="city" required id="city" value="<?php echo $businesscity;  ?>" placeholder="City" class="focusinput">
+                                    </div>
+                                </div>
+                                <div class="rowss">
+                                    <div id="id_div">
+                                            Municipality
+                                    </div>
+                                    <div id="idcontent">
+                                        <input type="text" name="municipality" required id="municipality" value="<?php echo $businessmunicipality;  ?>" placeholder="Municipality" class="focusinput">
+                                    </div>
+                                </div>
+                                <div class="rowss">
+                                    <div id="id_div">
+                                            Barangay
+                                    </div>
+                                    <div id="idcontent">
+                                        <input type="text" name="barangay" required id="barangay" value="<?php echo $businessbarangay;  ?>" placeholder="Barangay" class="focusinput">
+                                    </div>
+                                </div>
+                                <div class="rowss">
+                                    <div id="id_div">
+                                            Street
+                                    </div>
+                                    <div id="idcontent">
+                                        <input type="text" name="street" required id="street" value="<?php echo $businessstreet;  ?>" placeholder="Street" class="focusinput">
+                                    </div>
+                                </div>
+                                <div class="rowss">
+                                    <div id="id_div">
+                                            Zip-code
+                                    </div>
+                                    <div id="idcontent">
+                                        <input type="text" name="zip_code" required id="zip_code" value="<?php  echo $businesszip_code; ?>" placeholder="Zip-code" class="focusinput">
+                                    </div>
+                                </div>
+                                <div class="rowss">
+                                    <div id="id_div">
+                                            Landmark
+                                    </div>
+                                    <div id="idcontent">
+                                        <input type="text" name="landmark" required id="landmark" value="<?php echo $businesslandmark;  ?>" placeholder="Landmark" class="focusinput">
                                     </div>
                                 </div>
                                 <div class="button-add-emp" id="logo-btn">

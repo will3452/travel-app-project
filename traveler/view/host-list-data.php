@@ -113,6 +113,30 @@
                                         <p><?php echo ucwords($GetManagerData->phone); ?></p>
                                 </div>
                         </div>
+                        <div class="rowss">
+                                <div id="id_div">
+                                        <p>Address</p>
+                                </div>
+                                <div id="idcontent">
+                                        <p><?php echo ucwords($data->municipality. ', ' .$data->city. ', ' .$data->barangay. ', ' .$data->street); ?></p>
+                                </div>
+                        </div>
+                        <div class="rowss">
+                                <div id="id_div">
+                                        <p>Zip-Code</p>
+                                </div>
+                                <div id="idcontent">
+                                        <p><?php echo $data->zip_code;; ?></p>
+                                </div>
+                        </div>
+                        <div class="rowss">
+                                <div id="id_div">
+                                        <p>Landmark</p>
+                                </div>
+                                <div id="idcontent">
+                                        <p><?php echo ucwords($data->landmark); ?></p>
+                                </div>
+                        </div>
                         <div class="rowss-operation">
                                 <div class="button-add-emp-66">
                                         <a href="../create/create-book?host_id=<?php echo $_GET['host_id']; ?>"> <button id="addbtnuser">Book Now</button></a>

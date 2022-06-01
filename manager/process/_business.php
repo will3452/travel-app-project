@@ -25,6 +25,18 @@
 
         $businessname = $_POST['businessname'];
 
+        $city = $_POST['city'];
+
+        $municipality = $_POST['municipality'];
+
+        $street = $_POST['street'];
+
+        $barangay = $_POST['barangay'];
+
+        $zip_code = $_POST['zip_code'];
+
+        $landmark = $_POST['landmark'];
+
         $ValidateToken = $Validator->ValidateToken($token_business_submit);
 
         if($ValidateToken==1){
@@ -49,11 +61,11 @@
                 echo "FOS";
 
             }else{
-                $ValidateFields = $Validator->ValidateFields($businessname, $logofile);
+                $ValidateFields = $Validator->ValidateFields($businessname, $logofile, $city, $municipality, $street, $barangay, $zip_code, $landmark);
 
                 if($ValidateFields==1){
                     
-                    $InsertBusinessManager = $User->InsertBusinessManager($logofile, $businessname, $userid, $businesstype);
+                    $InsertBusinessManager = $User->InsertBusinessManager($logofile, $businessname, $userid, $businesstype, $city, $municipality, $street, $barangay, $zip_code, $landmark);
                     
                     if($InsertBusinessManager==1){
 

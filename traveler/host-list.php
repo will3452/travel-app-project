@@ -54,7 +54,7 @@
                         <div class="search-view-list">
                             <span class="clearable">
                                 <i class="fas fa-search search_icon2"></i>
-                                <input class="form-control mr-sm-2" type="text" id="search_2" placeholder="Search"
+                                <input class="form-control mr-sm-2" type="text" id="search_2" placeholder="Search Name / Address (Municipality / City)"
                                 value="<?php if(isset($_GET['search'])){echo $_GET['search'];} ?>"
                                 aria-label="Search">
                                 <?php if(isset($_GET['search'])): ?>

@@ -355,7 +355,7 @@ class User extends Connection
 
         return $stmt->fetch(PDO::FETCH_OBJ);
     }
-    public function InsertBusinessManager($file, $businessname, $id, $businesstype){
+    public function InsertBusinessManager($file, $businessname, $id, $businesstype, $city, $municipality, $street, $barangay, $zip_code, $landmark){
 
         $con = $this->GetConnection();
 
@@ -377,11 +377,11 @@ class User extends Connection
 
             unlink($olddist); 
 
-            $prepareStatement  = "UPDATE `business` SET `name`=?, `logo`=?, type=? WHERE manager_id=?";
+            $prepareStatement  = "UPDATE `business` SET `name`=?, `logo`=?, `city`=?, `municipality`=?, `street`=?, `barangay`=?, `zip_code`=?, `landmark`=?, type=? WHERE manager_id=?";
 
             $stmt = $con->prepare($prepareStatement);
 
-            $executeResult = $stmt->execute([$businessname, $finlenamenew, $businesstype, $id]);
+            $executeResult = $stmt->execute([$businessname, $finlenamenew, $city, $municipality, $street, $barangay, $zip_code, $landmark, $businesstype, $id]);
 
             if ($executeResult){
 
@@ -392,11 +392,12 @@ class User extends Connection
             }
             return false;
         }
-        $prepareStatement  = "INSERT INTO `business`(`name`, `type`, `manager_id`, `logo`) VALUE(?, ?, ?, ?)";
+        $prepareStatement  = "INSERT INTO `business`(`name`, `type`, `manager_id`, `logo`, `city`, `municipality`, `street`, `barangay`, `zip_code`, `landmark`) 
+        VALUE(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         $stmt = $con->prepare($prepareStatement);
 
-        $executeResult = $stmt->execute([$businessname, $businesstype, $id, $finlenamenew]);
+        $executeResult = $stmt->execute([$businessname, $businesstype, $id, $finlenamenew, $city, $municipality, $street, $barangay, $zip_code, $landmark]);
 
         if ($executeResult){
 
@@ -479,9 +480,9 @@ class User extends Connection
     {
         $con = $this->GetConnection();
 
-        $stmt = $con->prepare("SELECT * FROM business WHERE name LIKE ?");
+        $stmt = $con->prepare("SELECT * FROM business WHERE name LIKE ? || city LIKE ? || municipality LIKE ?");
 
-        $stmt->execute(["%$search%"]);
+        $stmt->execute(["%$search%", "%$search%", "%$search%"]);
 
         return $stmt->rowCount();
     }
@@ -489,10 +490,10 @@ class User extends Connection
     {
         $con = $this->GetConnection();
 
-        $qs = "SELECT * FROM business WHERE name LIKE ? ORDER by $sortName $namesort LIMIT $start, $limit";
+        $qs = "SELECT * FROM business WHERE name LIKE ? || city LIKE ? || municipality LIKE ? ORDER by $sortName $namesort LIMIT $start, $limit";
         $stmt = $con->prepare($qs);
 
-        $stmt->execute(["%$search%"]);
+        $stmt->execute(["%$search%", "%$search%", "%$search%"]);
 
         $numwors = $stmt->rowCount();
 
@@ -508,9 +509,9 @@ class User extends Connection
     {
         $con = $this->GetConnection();
 
-        $stmt = $con->prepare("SELECT * FROM business WHERE name LIKE ? AND type like ?");
+        $stmt = $con->prepare("SELECT * FROM business WHERE name LIKE ? AND type like ? || city LIKE ? AND type like ? || municipality LIKE ? AND type like ?");
 
-        $stmt->execute(["%$search%", "%$category%"]);
+        $stmt->execute(["%$search%", "%$category%", "%$search%", "%$category%", "%$search%", "%$category%"]);
 
         return $stmt->rowCount();
     }
@@ -518,10 +519,10 @@ class User extends Connection
     {
         $con = $this->GetConnection();
 
-        $qs = "SELECT * FROM business WHERE name LIKE ? AND type like  ? ORDER by $sortName $namesort LIMIT $start, $limit";
+        $qs = "SELECT * FROM business WHERE name LIKE ? AND type like  ?  || city LIKE ? AND type like ? || municipality LIKE ? AND type like ? ORDER by $sortName $namesort LIMIT $start, $limit";
         $stmt = $con->prepare($qs);
 
-        $stmt->execute(["%$search%", "%$category%"]);
+        $stmt->execute(["%$search%", "%$category%", "%$search%", "%$category%", "%$search%", "%$category%"]);
 
         $numwors = $stmt->rowCount();
 
